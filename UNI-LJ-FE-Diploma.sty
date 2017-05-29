@@ -1,0 +1,528 @@
+\typeout{}
+\typeout{UNI-LJ-FE-Diploma stilska opcija V.1.0  junij 2013}
+\typeout{Stilska opcija za diplome na Fakulteti za elektrotehniko Univerze v Ljubljani}
+\typeout{Izvedena iz DOKT-STYLE OPTION  V.1.01   9.1.1992}
+
+\typeout{Avtor: Sa?o Toma?i?}
+\typeout{Dopolnil: Jus Kocijan  }
+\typeout{Dopolnil: Ales Hribar  2006}
+\typeout{Dopolnil: Sebastjan Slajpah, 2013}
+\typeout{Dopolnil in pre?istil: Sa?o Toma?i?, 2013}
+\typeout{}
+
+
+
+
+% ----- OPCIJE PCTEX ALI PDFTEX -----------------------------------------------------------
+
+\newif\if@pdftex\@pdftextrue
+\DeclareOption{pctex}{\@pdftexfalse}
+\DeclareOption{pdftex}{\@pdftextrue}
+\ProcessOptions\relax
+
+
+% ----- VKLJU?ENI STILI -----------------------------------------------------------
+\usepackage{amsmath}
+\if@pdftex
+   \usepackage{graphicx,epstopdf}
+   \def\potgrafike#1{
+      \def\dirslike{#1}
+      \graphicspath{#1}
+    }
+\else 
+    \def\potgrafike#1{\def\dirslike{#1}}
+\fi
+
+
+% ----- O?TEVIL?ENJE --------------------------------------------------------------
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% ----- STRANSKE MEJE -------------------------------------------------------------
+\newcommand\zamaknirobsodihstrani[1]{\evensidemargin #1}
+\oddsidemargin  13mm
+\evensidemargin 0mm
+
+% ----- NAVPI?NI PRESLEDKI --------------------------------------------------------
+\topmargin -5mm
+\headheight 6mm
+\headsep 20mm
+
+% ----- DIMENZIJE TEKSTA ----------------------------------------------------------
+\textheight 215mm
+\textwidth 145mm
+
+% ----- RAZMAK MED VRSTICAMI -------------------------------------------------------
+
+\linespread{1.4}
+
+% ----- NASLOVNA STRAN ------------------------------------------------------------
+\newif\ifsomentor@
+\somentor@false
+\def\naslov#1{\gdef\@naslov{#1}}
+\gdef\@naslov{}
+\def\univerza#1{\gdef\@univerza{#1}}
+\gdef\@univerza{}
+\def\fakulteta#1{\gdef\@fakulteta{#1}}
+\gdef\@fakulteta{}
+\def\delo#1{\gdef\@delo{#1}}
+\gdef\@delo{}
+\def\mentor#1{\gdef\@mentor{#1}}
+\gdef\@mentor{}
+\def\somentor#1{\gdef\@somentor{#1} \somentor@true}
+\gdef\@somentor{}
+\def\avtor#1{\gdef\@avtor{#1}}
+\gdef\@avtor{}
+
+\def\maketitle{
+  \newpage
+  \thispagestyle{empty}
+  \begin{center}
+    {\Large \@univerza}
+    \vskip 0.5em
+    {\large \@fakulteta \par}
+    \vskip 7em
+    {\Large \@avtor}
+    \vskip 1em
+    {\Huge {\textbf \@naslov} \par}
+    \vskip 1em
+    {\large \@delo \par}
+    \vskip 3em
+    {\large Mentor: \@mentor \par}
+    \ifsomentor@
+      {\large Somentor: \@somentor }
+    \fi
+    \vfill
+    {\large \@date}
+  \end{center}
+  \newpage
+\praznastran
+}
+
+% ----- ZAHVALA ------------------------------------------------------------------
+\def\zahvala{%
+  \chapter*{Zahvala}
+}
+
+% -----  VSEBINA ------------------------------------------------------------------
+\def\imevsebine{Vsebina} % <---
+\def\tableofcontents{\@restonecolfalse
+  \if@twocolumn\@restonecoltrue\onecolumn\fi
+  \chapter*{\imevsebine }
+  \@mkboth{{\imevsebine}}{{\imevsebine}}
+  \@starttoc{toc}\if@restonecol\twocolumn\fi
+}
+
+% ----- SEZNAM TABEL ---------------------------------------------------------------
+\def\tablesname{Seznam tabel} % <---
+\def\seznamtabel{\@restonecolfalse
+  \if@twocolumn\@restonecoltrue\onecolumn\fi
+  \chapter*{\tablesname}
+  \@mkboth{{\tablesname}}{{\tablesname}}
+  \@starttoc{lot}\if@restonecol\twocolumn\fi
+}
+
+% ----- SEZNAM SLIK ---------------------------------------------------------------
+\def\imeslik{Seznam slik} % <---
+\def\seznamslik{\@restonecolfalse
+  \if@twocolumn\@restonecoltrue\onecolumn\fi
+  \chapter*{\imeslik}
+  \@mkboth{{\imeslik}}{{\imeslik}}
+  \@starttoc{lof}\if@restonecol\twocolumn\fi
+}
+
+
+
+% ----- SEZNAM SIMBOLOV IN SEZNAM kratic-----------------------------------------------------------
+\def\imesimbolov{Seznam uporabljenih simbolov} % <---
+\def\seznamsimbolov{\@restonecolfalse
+  \if@twocolumn\@restonecoltrue\onecolumn\fi
+  \chapter*{\imesimbolov}
+  \@mkboth{{\imesimbolov}}{{\imesimbolov}}
+  \@starttoc{lof}\if@restonecol\twocolumn\fi
+}
+
+\def\imekratic{Seznam uporabljenih kratic} % <---
+\def\seznamkratic{\@restonecolfalse
+  \if@twocolumn\@restonecoltrue\onecolumn\fi
+  \chapter*{\imekratic}
+  \@mkboth{{\imekratic}}{{\imekratic}}
+  \@starttoc{lof}\if@restonecol\twocolumn\fi
+}
+
+%\def\seznamsimbolov{\chapter*{Seznam uporabljenih simbolov}}
+%\def\seznamkratic{\chapter*{Seznam uporabljenih kratic}}
+
+
+% ----- POVZETEK ------------------------------------------------------------------
+%\def\povzetek{%
+%  \chapter*{Povzetek}
+% }
+\def\imepovzetka{Povzetek} % <---
+\def\povzetek{\@restonecolfalse
+  \if@twocolumn\@restonecoltrue\onecolumn\fi
+  \chapter*{\imepovzetka}
+  \@mkboth{{\imepovzetka}}{{\imepovzetka}}
+  \@starttoc{lof}\if@restonecol\twocolumn\fi
+}
+
+\def\kljucnebesede{
+  \vspace{1cm}\noindent
+  \textbf{Ključne besede:}\
+}
+
+% ----- ANGLE?KI POVZETEK ---------------------------------------------------------
+%\def\abstract{%
+%  \chapter*{Abstract}
+%}
+
+\def\imeabstract{Abstract} % <---
+\def\abstract{\@restonecolfalse
+  \if@twocolumn\@restonecoltrue\onecolumn\fi
+  \chapter*{\imeabstract}
+  \@mkboth{{\imeabstract}}{{\imeabstract}}
+  \@starttoc{lof}\if@restonecol\twocolumn\fi
+}
+
+
+
+\def\keywords{
+  \vspace{1cm}\noindent
+  \textbf{Key words:}\
+}
+
+
+% ----- POGLAVJA ------------------------------------------------------------------
+\def\@chapapp{ } % v glavi naj se ne izpisuje beseda poglavje
+\def\@makechapterhead#1{ \vspace*{50pt} { \parindent 0pt \raggedright
+ \ifnum \c@secnumdepth >\m@ne \LARGE\bf \thechapter \ \ #1\par
+ \nobreak \vskip 40pt \thispagestyle{myheadings} \fi } }
+
+\def\@makeschapterhead#1{
+  \vspace*{50pt} {
+    \parindent 0pt \raggedright
+    \Large \bf #1\par
+    \nobreak \vskip 40pt \thispagestyle{myheadings}
+  }
+}
+
+% ----- RAZDELKI IN PODRAZDELKI  ---------------------------------------------------
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus -.2ex}{2.3ex plus .2ex}{\large\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\bf}}
+
+% ----- DODATEK --------------------------------------------------------------------
+
+\def\appendixname{Dodatek}
+\def\appendix{
+  \setcounter{chapter}{0} \setcounter{section}{0}
+  \chapter*{\Huge\appendixname}
+  \markboth{{\appendixname}}{{\appendixname}}
+  \def\@chapapp{ } \def\thechapter{\Alph{chapter}}
+}
+
+% ----- IZJAVA --------------------------------------------------------------------
+\def\izjava{
+\chapter*{}
+\vglue 12cm \thispagestyle{empty}
+\section*{Izjava}
+}
+
+%pri dodajanju dodatkov uporabi funkcijo \dodatek{naslov}
+%\newcommand{\dodatek}[1]{\cleardoublepage \chapter[]{\newline \newline #1}
+\newcommand{\dodatek}[1]{\chapter[]{\newline \newline #1}
+}
+%\markboth{{\appendixname}}{{#1}}}
+
+
+% ----- GLAVA STRANI S ?RTO --------------------------------------------------------
+\def\ps@headings{\let\@mkboth\markboth
+\def\@oddfoot{}
+\def\@evenfoot{}
+\def\@evenhead{\vbox to \headheight{
+  \hbox to \textwidth{\rm \thepage\hfil \sl\leftmark}
+  \vfil\hbox{\vrule height 0.5pt depth 0pt width \textwidth}}
+}
+\def\@oddhead{\vbox to \headheight{
+  \hbox to \textwidth{\hbox{}\sl \rightmark \hfil\rm\thepage}
+  \vfil\hbox{\vrule height 0.5pt depth 0pt width \textwidth}}
+}
+\def\chaptermark##1{\markboth {
+  {\ifnum \c@secnumdepth >\m@ne
+ \@chapapp\ \fi ##1}}{}
+}
+
+\def\sectionmark##1{\markright
+{{\ifnum \c@secnumdepth >\z@
+ \thesection \ \fi ##1}}}
+}
+
+% ----- LITERATURA -----------------------------------------------------------------
+\def\biblioname{Literatura} % <---
+\def\thebibliography#1{
+  \chapter*{\biblioname
+  \markboth{{\biblioname}}{{\biblioname}}}
+ \list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus -.07em}
+ \sloppy \sfcode`\.=1000\relax}
+
+% ----- ?TEVILKA STRANI SPODAJ -----------------------------------------------------
+\def\ps@myheadings{\let\@mkboth\@gobbletwo
+\def\@oddfoot{\hbox{}\hfil\rm\thepage}
+\def\@oddhead{}
+\def\@evenfoot{\rm\thepage}
+\def\@evenhead{}}
+
+% ----- TABELE ---------------------------------------------------------------------
+\def\tablename{Tabela\ }
+\def\fnum@table{\tablename\ \thetable}
+
+% ----- SLIKE ---------------------------------------------------------------------
+\def\figurename{Slika\ }
+\def\fnum@figure{\figurename\ \thefigure}
+
+% ----- EPS slika  ----------------------------------------------------------------
+
+\def\seteps#1#2#3#4{\vskip#3\relax\noindent\hskip#1\relax\special{eps:#4 x=#2, y=#3}}
+\def\centereps#1#2#3{\vskip#2\relax\centerline{\hbox to#1{\special{eps:#3 x=#1, y=#2}\hfil}}}
+
+
+
+\newcommand{\slikaeps}[2]{
+  \begin{figure}[htb]
+    \openin1 \dirslike#2.eps
+    \ifeof1
+      \typeout{Ne najdem datoteke \dirslike#2.eps!}
+      \vskip 1.5cm
+      \begin{center}
+         \dirslike#2.eps ne obstaja
+      \end{center}
+      \vskip 1.5cm
+    \else
+      \closein1
+      \if@pdftex
+         \begin{center}
+           \includegraphics{\dirslike#2.eps}
+         \end{center}
+       \else
+         {\center\leavevmode\epsfbox{\dirslike#2.eps}}
+       \fi
+    \fi
+    \caption{#1}
+    \label{#2}
+  \end{figure}
+}
+
+
+% ----- JPG slika  ----------------------------------------------------------------
+
+\def\setbmp#1#2#3#4{\vskip#3\relax\noindent\hskip#1\relax
+ \special{bmp:#4 x=#2, y=#3}}
+\def\centerbmp#1#2#3{\vskip#2\relax\centerline{\hbox to#1{\special
+  {bmp:#3 x=#1, y=#2}\hfil}}}
+
+\newcommand{\bitnaslika}[4]{\begin{figure}[htb]
+     \openin1 \dirslike#2
+     \ifeof1
+         \typeout{\dirslike#2 ne obstaja!}
+         \vskip 1.5cm
+         \begin{center}
+         \dirslike#2 ne obstaja
+          \end{center}
+         \vskip 1.5cm
+     \else
+       \if@pdftex
+        \closein1
+         \begin{center}
+           \includegraphics[width=#3, height=#4]{\dirslike#2}
+           % \includegraphics[scale=1 ,natwidth=#3,natheight=#4]{\dirslike#2}
+         \end{center}
+       \else
+         \centerbmp{#3}{#4}{\dirslike#2}
+         \immediate\write16{ }
+         \box0
+       \fi
+     \fi
+     \caption{#1}
+     \label{#2}
+\end{figure}}
+
+% ----- PRAZNA STRAN ----------------------------------------------------------------
+\def\praznastran{\newpage \mbox{} \thispagestyle{empty} \newpage}
+
+% ----- URL se izpi?e brez sprememb ----------------------------------------------------------------
+% ?e v url nastopajo posebni zanki TeXa, jih lahko zamenjamo z ustreznimi znaki v datoteki,
+% ki ima enako kon?nico kot TeX datoteka diplome in kon?nico bbl (npr diploma.bbl. To je datoteka, ki jo ustvarimo z BibTeXom
+\def\url#1{#1}
+
+% ----- ZA?ETNE NASTAVITVE ----------------------------------------------------------
+\sloppy
+\parskip 1ex
+\let\WriteBookmarks\relax
+\pagestyle{headings}
+
+
+%*******************************************************************************************************
+%   Epsf stil omogo?a branje bounding boksa eps slik.
+%*******************************************************************************************************
+%
+%   Written by Tomas Rokicki of Radical Eye Software, 29 Mar 1989.
+%   Revised by Don Knuth, 3 Jan 1990.
+%   Revised by Tomas Rokicki to accept bounding boxes with no
+%      space after the colon, 18 Jul 1990.
+%   Revised by Craig Barratt to support psfrag facility (changes should
+%      be upward compatable), 29 Feb 1992.
+%   Priredil za diplome UNI-LJ-FE Sa?o Toma?i? 2013
+
+\newread\epsffilein    % file to \read
+\newif\ifepsffileok    % continue looking for the bounding box?
+\newif\ifepsfbbfound   % success?
+\newif\ifepsfverbose   % report what you're making?
+%
+% ----------- DODANO ZA DOS iz starega -------
+\newdimen\epsfxsize    % horizontal size after scaling
+\newdimen\epsfysize    % vertical size after scaling
+\newdimen\epsftsize    % horizontal size before scaling
+\newdimen\epsfrsize    % vertical size before scaling
+\newdimen\epsftmp      % register for arithmetic manipulation
+\newdimen\pspoints     % conversion factor
+%
+\pspoints=1bp          % Adobe points are `big'
+\epsfxsize=0pt         % Default value, means `use natural size'
+\epsfysize=0pt         % ditto
+%----------------------------------------------
+%
+\newcount\xcelo         %?irina slike v celih in?ah
+\newcount\xdec         %decimalke ?irine slike
+\newcount\xxdec         %decimalke ?irine slike
+\newcount\xxxdec         %decimalke ?irine slike
+\newcount\ycelo         %vi?ina slike v in?ah
+\newcount\ydec         %decimalke vi?ine slike
+\newcount\yydec         %decimalke vi?ine slike
+\newcount\yyydec         %decimalke vi?ine slike
+\newcount\tmpcount      %za?asni ?tevec za ra?unanje
+
+\def\epsfbox#1{\global\def\epsfllx{72}\global\def\epsflly{72}%
+   \global\def\epsfurx{540}\global\def\epsfury{720}%
+   \def\lbracket{[}\def\testit{#1}\ifx\testit\lbracket
+   \let\next=\epsfgetlitbb\else\let\next=\epsfnormal\fi\next{#1}}%
+%
+\def\epsfgetlitbb#1#2 #3 #4 #5]#6{\epsfgrab #2 #3 #4 #5 .\\%
+   \epsfsetgraph{#6}}%
+%
+\def\epsfnormal#1{\epsfgetbb{#1}\epsfsetgraph{#1}}%
+%
+\def\epsfgetbb#1{%
+%
+%   The first thing we need to do is to open the
+%   PostScript file, if possible.
+%
+\openin\epsffilein=#1
+\ifeof\epsffilein\errmessage{I couldn't open #1, will ignore it}\else
+%
+%   Okay, we got it. Now we'll scan lines until we find one that doesn't
+%   start with %. We're looking for the bounding box comment.
+%
+   {\epsffileoktrue \chardef\other=12
+    \def\do##1{\catcode`##1=\other}\dospecials \catcode`\ =10
+    \loop
+       \read\epsffilein to \epsffileline
+       \ifeof\epsffilein\epsffileokfalse\else
+%
+%   We check to see if the first character is a % sign;
+%   if not, we stop reading (unless the line was entirely blank);
+%   if so, we look further and stop only if the line begins with
+%   `%%BoundingBox:'.
+%
+          \expandafter\epsfaux\epsffileline:. \\%
+       \fi
+   \ifepsffileok\repeat
+   \ifepsfbbfound\else
+    \ifepsfverbose\message{No bounding box comment in #1; using defaults}\fi\fi
+   }\closein\epsffilein\fi}%
+
+%
+%   Ra?unanje dimenzij v in?ah
+%
+\def\epsfsetgraph#1{%
+{%
+   \epsfrsize=\epsfury\pspoints
+   \advance\epsfrsize by-\epsflly\pspoints
+   \epsftsize=\epsfurx\pspoints
+   \advance\epsftsize by-\epsfllx\pspoints
+%
+%   If `epsfxsize' is 0, we default to the natural size of the picture.
+%   Otherwise we scale the graph to be \epsfxsize wide.
+%
+   \epsfxsize\epsfsize\epsftsize\epsfrsize
+   \ifnum\epsfxsize=0 \ifnum\epsfysize=0
+      \epsfxsize=\epsftsize \epsfysize=\epsfrsize
+%
+%   We have a sticky problem here:  TeX doesn't do floating point arithmetic!
+%   Our goal is to compute y = rx/t. The following loop does this reasonably
+%   fast, with an error of at most about 16 sp (about 1/4000 pt).
+%
+     \else\epsftmp=\epsftsize \divide\epsftmp\epsfrsize
+       \epsfxsize=\epsfysize \multiply\epsfxsize\epsftmp
+       \multiply\epsftmp\epsfrsize \advance\epsftsize-\epsftmp
+       \epsftmp=\epsfysize
+       \loop \advance\epsftsize\epsftsize \divide\epsftmp 2
+       \ifnum\epsftmp>0
+          \ifnum\epsftsize<\epsfrsize\else
+             \advance\epsftsize-\epsfrsize \advance\epsfxsize\epsftmp \fi
+       \repeat
+     \fi
+   \else\epsftmp=\epsfrsize \divide\epsftmp\epsftsize
+     \epsfysize=\epsfxsize \multiply\epsfysize\epsftmp
+     \multiply\epsftmp\epsftsize \advance\epsfrsize-\epsftmp
+     \epsftmp=\epsfxsize
+     \loop \advance\epsfrsize\epsfrsize \divide\epsftmp 2
+     \ifnum\epsftmp>0
+        \ifnum\epsfrsize<\epsftsize\else
+           \advance\epsfrsize-\epsftsize \advance\epsfysize\epsftmp \fi
+     \repeat
+   \fi
+%
+%  Finally, we make the vbox and stick in a \special that dvips can parse.
+%
+   \ifepsfverbose\message{#1: width=\the\epsfxsize, height=\the\epsfysize}\fi
+   \epsftmp=10\epsfxsize \divide\epsftmp\pspoints
+   \vbox to\epsfysize{\vfil\hbox to\epsfxsize{%
+      \special{PSfile=#1 llx=\epsfllx\space lly=\epsflly\space
+          urx=\epsfurx\space ury=\epsfury\space rwi=\number\epsftmp}%
+      \hfil}}%
+\epsfxsize=0pt\epsfysize=0pt}
+
+}%
+
+%
+%   We still need to define the tricky \epsfaux macro. This requires
+%   a couple of magic constants for comparison purposes.
+%
+{\catcode`\%=12 \global\let\epsfpercent=%\global\def\epsfbblit{%BoundingBox}}%
+%
+%   So we're ready to check for `%BoundingBox:' and to grab the
+%   values if they are found.
+%
+\long\def\epsfaux#1#2:#3\\{\ifx#1\epsfpercent
+   \def\testit{#2}\ifx\testit\epsfbblit
+      \epsfgrab #3 . . . \\%
+      \epsffileokfalse
+      \global\epsfbbfoundtrue
+   \fi\else\ifx#1\par\else\epsffileokfalse\fi\fi}%
+%
+%   Here we grab the values and stuff them in the appropriate definitions.
+%
+\def\epsfgrab #1 #2 #3 #4 #5\\{%
+   \global\def\epsfllx{#1}\ifx\epsfllx\empty
+      \epsfgrab #2 #3 #4 #5 .\\\else
+   \global\def\epsflly{#2}%
+   \global\def\epsfurx{#3}\global\def\epsfury{#4}\fi}%
+%
+%   We default the epsfsize macro.
+%
+\def\epsfsize#1#2{\epsfxsize}
+
+
+\endinput

@@ -1,5 +1,190 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
+% -*- TeX:SI -*-
+% slovene sub-mode for spell check
+% ----------------------------------------------------------------------
+%  Predloga za obliko in navodila za pisanje diplomskih nalog v LaTex-u
+
+%  Univerza v Ljubljani, Fakulteta za elektrotehniko
+
+%  zbral in uredil Roman Kamnik, junij 2013
+
+% ----------------------------------------------------------------------
+
+\documentclass[a4paper,twoside,openright,12pt]{book}
+\usepackage[utf8]{inputenc}  %Kodna stran za Windows okolje, za linux je kodna stran latin2
+%\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}    % pravila za slovensko deljenje besed
+\usepackage[pdftex]{UNI-LJ-FE-Diploma} %Stil za diplome na Fakulteti za elektrotehniko (za pdfTeX v MkiTex)
+%\usepackage[pctex]{UNI-LJ-FE-Diploma} %Stil za diplome na Fakulteti za elektrotehniko  (za pcTex)
+
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%
+% MATEMATIKA IN FIZIKA %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% za matematiko
+\usepackage{amsmath, amsfonts, xfrac, amssymb}
+% za enote
+% \si{enota}
+% \SI{cifra}{enota}
+% \num{cifra}
+% \ang{kot}
+\usepackage{siunitx}
+% Declare new unit
+\DeclareSIUnit{\cal}{cal}
+\DeclareSIUnit{\kcal}{\kilo\cal}
+\DeclareSIUnit{\joul}{J}
+\DeclareSIUnit{\kjoul}{\kilo\joul}
+\sisetup{output-decimal-marker = {,}}
+%\sisetup{per-mode=reciprocal}
+%\sisetup{group-separator = {.}}
+% za uporabljanje decimalne vejice in ne pike
+% pises decimalno piko, vendar ti zgenerira kot decimalno vejico
+% to zato, da ko uporabljas vejico imas za vejico avtomatsko presledek
+\DeclareMathSymbol{.}{\mathord}{letters}{"3B}
+% lahko bi uporabil tudi novo komando
+\newcommand{\vejica}{{,}}
+% lahko pa uporabljas \num{stevilka}, iz paketa siunitx
+
+% za (1-3) pri enačbah
+%\usepackage{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABELE IN SLIKE NASTEVANJE %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% for adding tables that can span across multiple columns
+\usepackage{xtab}
+% za uporabo toprule bottomrule midrule za boljse tabele
+\usepackage{booktabs} 
+\usepackage[]{multirow}
+% za align-annje na decimalni vejici
+\usepackage{dcolumn}
+% USAGE: ...\begin{tabular}{l r c D{separator in tex file}{ separator in output}{decimal places}}
+% ovveride in heading with \multicolumn{1}{..}{..}
+
+% za tabele katerim dolocimo širino in X specifier -> ta naredi stolpec tako
+% dolg, da bo tabela zavzela določeno širino.
+\usepackage{tabularx}
+
+% za dodajanje slik
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Za dodajanje okvirjev okoli slik
+\usepackage[export]{adjustbox}
+% USAGE: 
+% \includegraphics[<other options>, frame]{image}
+% or
+% \includegraphics[<other options>, fbox]{image}
+
+% za tikz slikce
+\usepackage{circuitikz, tikz}
+\newcommand{\blokec}[2]{node[draw, text centered, minimum width=4cm, minimum
+	height=1cm, rounded corners, text width= 3cm, scale=1](#1){#2}}
+% za odštevanje pri listih
+%\usepackage[start=7]{etaremune}
+% za seznam kjer lahko spreminjaš številke
+% dodati moraš [label = nekaj]
+% če hočeš številke dodaš \arabic*
+% če hočeš črke dodaš \alph* ali \Alph*
+% če hočeš rimske številke dodaš \roman* ali \Roman*
+\usepackage{enumitem}
+% za listo v dveh stolpcih
+\usepackage{multicol}
+% za dodajanje besedila iz drugih datotek
+\usepackage{verbatim}
+% za urlje 
+\usepackage[hidelinks]{hyperref}
+
+
+
+
+
+%%%%%%%%%%%%%%%%
+% NOVE KOMANDE %
+%%%%%%%%%%%%%%%%
+\usepackage{xspace} % da latex dojame da mora dat presledke med komandami
+\newcommand{\stopinj}{^\circ}
+\newcommand{\clips}{\uppercase{clips}\xspace}
+\newcommand{\sintaksa}[1]{\xspace``\texttt{#1}''\xspace}
+\newcommand{\modd}{\uppercase{modd}\xspace}
+\newcommand{\ds}{\uppercase{ds}\xspace}
+\newcommand{\bn}{Beier-Neely\xspace}
+\newcommand{\opencv}{OpenCV\xspace}
+\newcommand{\dlib}{Dlib\xspace}
+
+
+
+
+
+
+
+
+
+
+
+%*************************** PRILAGODITVE *****************************
+% mapa s slikami
+\potgrafike{./Slike/}
+%prilagoditev levega roba sodih strani. ?e se pri dvostranskem tisku robovi ne umemajo se lahko pove?a ali pomanj?a
+\zamaknirobsodihstrani{0mm}
+
+%*************************** NASLOVNA STRAN *****************************
+\naslov{Brezkontaktno merjenje telesne aktivnosti in napora}
+\avtor{Gregor Koporec} \univerza{Univerza v Ljubljani}
+\fakulteta{Fakulteta za elektrotehniko}
+\delo{Magistrsko delo}
+%\delo{Diplomsko delo visoko?olskega strokovnega ?tudija}
+\date{Ljubljana, 2017}
+\mentor{doc. dr. Janez Perš}
+%\somentor{prof. dr. Ime Priimek}
 \begin{document}
-(Type your content here.)
+
+%------------------------ ZA?ETNI DEL -----------------------------------
+\frontmatter
+%------------------------------------------------------------------------
+
+
+%************************ NASLOVNA STRAN ********************************
+\maketitle
+
+
+%*************************** ZAHVALA ************************************
+\input{./pogl/001-zahvala.tex}
+
+
+%*************************** VSEBINA *************************************
+\tableofcontents
+
+%*************************** SEZNAM SLIK in TABEL  ***********************
+\seznamslik
+\seznamtabel
+
+%***************************  SEZNAM UPORABLJENIH SIMBOLOV  **************
+\input{./pogl/002-seznam-simbolov.tex}
+
+%------------------------ GLAVNI DEL ------------------------------------
+\mainmatter
+%-------------------------------------------------------------------------
+%********************* POVZETEK V SLOVEN??INI ****************************
+\input{./pogl/003-povzetek-sl.tex}
+
+%*************************** POVZETEK V ANGLE??INI ***********************
+\input{./pogl/004-povzetek-en.tex}
+
+%***************************** UVOD **************************************
+\input{./pogl/01-uvod.tex}
+
+%*********************** OSREDNJA POGLAVJA ********************************
+\input{./pogl/02-metode.tex}
+\input{./pogl/03-eksperimenti-in-rezultati.tex}
+\input{./pogl/04-diskusija.tex}
+
+%**************** LITERATURA ************************
+\bibliographystyle{ieeetrslo}
+\bibliography{./bib/physical-activity,./bib/related-work,./bib/fatigue,./bib/sleep-apnoea,./bib/hr-motion-sensor,./bib/metabolism} 
+
+%**************** PRILOGE ************************
+\appendix
+
 \end{document}
