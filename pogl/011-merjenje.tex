@@ -39,24 +39,23 @@ W_p = & 171.62 + 6.87 \cdot hr + 3.99 \cdot h + 2.3 \cdot m \nonumber \\
 
 Slaba lastnost modela \eqref{eq:charlot} je, da energijsko porabo računamo na urni interval in ne na minutni kot je to običajno. Pri pretvorbi v minutni interval dobimo približek, saj s tem upoštevamo konstantno vrednost energijske porabe na intervalu $1$ ure. 
 
-\subsection{Sensorji gibanja}
+
+
+
+
+\subsection{Sensorji gibanja}\label{sec:senzorji-gibanja}
+
 Za predikcijo energijske porabe iz opazovanja kinematike se večinoma uporabljajo pedometri in pospeškometri \cite{levine2005measurement}. Pedometri zaznajo premike z vsakim korakom, vendar pa imajo probleme z občutljivostjo. Ker  z njimi ne moremo določiti dolžine koraka so zelo slabi prediktorji in se za tovrstna merjenja ne uporabljajo \cite{levine2005measurement}.
 
-Merjenje s pospeškometri je lahko dokaj natančno, saj je pospešek sorazmeren zunanjim silam in zato reflektira intenziteto gibanja \cite{yang2010review}. Pri tem moramo paziti, da uporabimo triosne in ne enoosnih pospeškometrov, saj ti ne dajejo zadovoljivih rezultatov \cite{levine2005measurement}. Pospeškometri se lahko uporabljajo tako za laboratorijske kot terenske raziskave \cite{yang2014sleep}, vendar pa kot pravi Zhang et al \cite{zhang2004improving} je njihova natančnost vprašljiva. Faktorji, ki vplivajo na njihovo natančnost so lokacija in način pritrditve na telo in zunanje vibracije \cite{yang2010review}. Priporočljivo je, da jih pritrdimo na spodnji del hrbta, saj bomo le tako zajeli večino premikov težišča telesa pri aktivnostih. za bolj natačne meritve bi morali pospeškometre pritrditi tudi na druge dele telesa, še posebej na okončine \cite{yang2010review}. To zmanjšuje njihovo praktičnost, saj omejujejo gibanje športnikov in s tem posredno vplivajo na rezultat. Pospeškometri pa imajo še eno slabo lastnost. Njihova natačnost močno upade kadar gibanje ni horizontalno s podlago, kar pomeni, da so neuporabni za hojo ali tek v hrib, plezanje, itd. \cite{yang2010review}. 
+Merjenje s pospeškometri je lahko dokaj natančno, saj je pospešek sorazmeren zunanjim silam in zato reflektira intenziteto gibanja \cite{yang2010review}. Pri tem moramo paziti, da uporabimo triosne in ne enoosnih pospeškometrov, saj ti ne dajejo zadovoljivih rezultatov \cite{levine2005measurement}. Pospeškometri se lahko uporabljajo tako za laboratorijske kot terenske raziskave \cite{yang2014sleep}, vendar pa kot pravi Zhang et al \cite{zhang2004improving} je njihova natančnost vprašljiva. Faktorji, ki vplivajo na njihovo natančnost so lokacija in način pritrditve na telo in zunanje vibracije \cite{yang2010review}. Priporočljivo je, da jih pritrdimo na spodnji del hrbta, saj bomo le tako zajeli večino premikov težišča telesa pri aktivnostih. za bolj natačne meritve bi morali pospeškometre pritrditi tudi na druge dele telesa, še posebej na okončine \cite{yang2010review}. To zmanjšuje njihovo praktičnost, saj omejujejo gibanje športnikov in s tem posredno vplivajo na rezultat. Pospeškometri pa imajo še eno slabo lastnost. Njihova natačnost močno upade kadar gibanje ni horizontalno s podlago, kar pomeni, da so neuporabni za hojo ali tek v hrib, plezanje, itd. \cite{yang2010review}.
+
+
+
 
 \subsection{Brezkontakne metode}
-Zaradi omejitev kontaktnih senzorjev, slabih lastnosti srčnega utripa in drage indirektne kalorimetrije, ki se lahko uporablja samo v laboratoriju so raziskovalci razvili nekontaktne metode estimacije energijske porabe, kjer dominirajo metode analize video posnetkov \cite{botton2011energy,osgnach2010energy,silva2015assessing,peker2004framework,nathan2015estimating}.
 
-Študije brezkontaktnega merjenja aktivnosti so redke, saj večina raziskovalcev uporablja kontaktne merilnike. Kljub temu so nekateri poskušali oceniti energijsko porabo z brezkontaktnimi senzorji gibanja, kot je Kinect \cite{nathan2015estimating}. 
+Zaradi omejitev kontaktnih senzorjev, slabih lastnosti srčnega utripa in drage indirektne kalorimetrije, ki se lahko uporablja samo v laboratoriju so raziskovalci razvili nekontaktne metode estimacije energijske porabe, kjer dominirajo metode analize video posnetkov \cite{botton2011energy,osgnach2010energy,silva2015assessing,peker2004framework,nathan2015estimating}. 
 
-Z estimacijo telesne aktivnosti na podlagi gibanja so se ukvarjali tudi v delih \cite{silva2015assessing,peker2004framework}, vendar pa je bila tu intenzivnost določena po subjektivni lestvici.
+Nobena od zgornjih metod ne izkorišča polja gibanja, ki najbolj kvalitetno opisuje intenzivnost telesne aktivnosti. Zato v tem delu predlagamo novo metodo estimacije intenzivnosti telesne aktivnosti na podlagi značilk iz video posnetkov. Dolgoročni cilj tovrstnega razvoja je metoda, ki bi se uporabila kot popolnoma nemoteč, brezkontakten merilni instrument.
 
-V delu \cite{osgnach2010energy} so avtorji pokazali, da lahko z video analizo v povezavi z metaboličnim modelom ocenimo energijsko zahtevnost igranja nogometa. Video posnetke so obdelali tako, da so sledili igralcem med celotno igro. Na podlagi sledenja so klasificirali gibanje v posamezne kategorije in iz fizioloških značilnosti izračunali porabo energije.
-
-Podoben pristop k merjenju aktivnosti so predstavili v \cite{botton2011energy}. Bistvenim aktivnostim, ki se izvajajo v tenisu, so določili aerobno porabo energije in tako zgradili matematični model metabolizma. Iz video posnetkov so nato določili profil aktivnosti in tako posredno ocenili porabo energije.
-
-Problem v zgornjih dveh pristopih je v modeliranju metaboličnega modela, ki je omejen na določeno vrsto aktivnosti ali športa. Prav tako študiji uporabljata analizo posnetkov, ki je bolj namenjena določitvi porabe energije po koncu igre in ne toliko sprotni ocenitvi tega pomembnega fiziološkega parametra.
-
-Nobena od zgoraj opisanih metod ne izkorišča polja gibanja, ki najbolj kvalitetno opisuje intenzivnost telesne aktivnosti. Zato v tem delu predlagamo novo metodo estimacije intenzivnosti telesne aktivnosti na podlagi značilk iz video posnetkov. Dolgoročni cilj tovrstnega razvoja je metoda, ki bi se uporabila kot popolnoma nemoteč, brezkontakten merilni instrument.
-
-Kljub specifični uporabi predlagane metode za merjenje energijske porabe, bi lahko tako metodo uporabili tudi za druge principe gibanja. Koncept merjenja s pomočjo optičnega toka nam omogoča, da opravljamo meritve z daljših razdalj, dokler nam optični sistem zagotavlja stabilno sliko. Tako smo se za prikaz posplošitve našega sistema odločili, da bomo preizkusili naš sistem kot detektor dihanja, saj dihanje, kot gibanje, ravno tako predstavlja vrsto telesne aktivnosti.
+Kljub specifični uporabi predlagane metode za merjenje energijske porabe, bi lahko tako metodo uporabili tudi za druge principe gibanja. Koncept merjenja s pomočjo optičnega toka nam omogoča, da opravljamo meritve z daljših razdalj, dokler nam optični sistem zagotavlja stabilno sliko. Tako smo se za prikaz posplošitve našega sistema odločili, da bomo preizkusili naš sistem kot detektor dihanja, saj dihanje, kot gibanje, ravno tako predstavlja vrsto telesne aktivnosti. Detekcija dihanja je podrobneje predstavljena v poglavju \ref{sec:detekcija-dihanja}

@@ -16,6 +16,7 @@
 \usepackage[pdftex]{UNI-LJ-FE-Diploma} %Stil za diplome na Fakulteti za elektrotehniko (za pdfTeX v MkiTex)
 %\usepackage[pctex]{UNI-LJ-FE-Diploma} %Stil za diplome na Fakulteti za elektrotehniko  (za pcTex)
 
+% Not working \usepackage{natbib} % for \citeathor \citeyear
 \usepackage{graphicx}
 %%%%%%%%%%%%%%%%%%%%%%%%
 % MATEMATIKA IN FIZIKA %
@@ -60,10 +61,17 @@
 \usepackage{dcolumn}
 % USAGE: ...\begin{tabular}{l r c D{separator in tex file}{ separator in output}{decimal places}}
 % ovveride in heading with \multicolumn{1}{..}{..}
-
+\newcommand{\boldentry}[2]{%
+  \multicolumn{1}{S[table-format=#1,
+                    mode=text,
+                    text-rm=\fontseries{b}\selectfont
+                   ]}{#2}}
 % za tabele katerim dolocimo širino in X specifier -> ta naredi stolpec tako
 % dolg, da bo tabela zavzela določeno širino.
 \usepackage{tabularx}
+% ovveride in heading with \multicolumn{1}{..}{..}
+\usepackage{etoolbox}
+%\robustify\bfseries
 
 % za dodajanje slik
 \usepackage{graphicx}
