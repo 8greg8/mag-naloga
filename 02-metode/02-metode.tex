@@ -2,6 +2,9 @@
 \input{./02-metode/02-model-gibanja.tex}
 \input{./02-metode/03-opticni-tok.tex}
 \input{./02-metode/04-deskriptorji.tex}
+\input{./02-metode/05-matematicni-modeli.tex}
+\input{./02-metode/06-sledilnik.tex}
+\input{./02-metode/08-filtri.tex}
 
 \section{Metode manipulacije video posnetkov}
 % Za testiranje optičnega toka in deskriptorjev, testiranje njihove robustnosti smo naredili več manipulacij, za boljšo predstavo o delovanju
@@ -14,26 +17,13 @@
 \subsection{Združevanje posnetkov}
 \subsection{Obrezovanje posnetkov}
 \subsection{Simulacija vibracij kamere}
+Finally, cameras may shake, if held manually. We simulated this scenario by artificially introducing random small displacements and rotation into the video. Every frame was transformed with random Euclidean transformation, where translation was limited to \SI{4}{\%} of frame size and rotation to \SI{0.13}{rad}.
 
+\subsection{Združevanje slik iz dveh kinektov}
 
-\section{Sledilnik}
-% Zakaj smo uporabili sledilnik
-% Na katere sledilnike smo ciljali 
-% Primerjava sledilnikov
-% Naši eksperimenti kateri je boljši
-% 
-
-\section{Matematični modeli}
-\subsection{Jedra}
-\subsection{rbf}
-\subsection{ghi}
-\subsection{linear}
-\subsection{rbf-nu}
-\subsection{Horizontalno skaliranje}
-\subsection{Vertikalno skaliranje}
-\subsection{Mrežno iskanje parametrov}
 
 \section{Evaluacijske metrike}
+
 
 
 \section{Materiali}
@@ -43,4 +33,3 @@
 \subsection{Sinhornizacija časa}
 
 
-\section{Združevanje slik iz dveh kinektov}

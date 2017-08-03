@@ -17,12 +17,11 @@
 %\usepackage[pctex]{UNI-LJ-FE-Diploma} %Stil za diplome na Fakulteti za elektrotehniko  (za pcTex)
 
 % Not working \usepackage{natbib} % for \citeathor \citeyear
-\usepackage{graphicx}
 %%%%%%%%%%%%%%%%%%%%%%%%
 % MATEMATIKA IN FIZIKA %
 %%%%%%%%%%%%%%%%%%%%%%%%
 % za matematiko
-\usepackage{amsmath, amsfonts, xfrac, amssymb, mathrsfs}
+\usepackage{amsmath, amsfonts, xfrac, amssymb, mathrsfs, amsthm}
 % za enote
 % \si{enota}
 % \SI{cifra}{enota}
@@ -61,11 +60,7 @@
 \usepackage{dcolumn}
 % USAGE: ...\begin{tabular}{l r c D{separator in tex file}{ separator in output}{decimal places}}
 % ovveride in heading with \multicolumn{1}{..}{..}
-\newcommand{\boldentry}[2]{%
-  \multicolumn{1}{S[table-format=#1,
-                    mode=text,
-                    text-rm=\fontseries{b}\selectfont
-                   ]}{#2}}
+
 % za tabele katerim dolocimo širino in X specifier -> ta naredi stolpec tako
 % dolg, da bo tabela zavzela določeno širino.
 \usepackage{tabularx}
@@ -86,9 +81,100 @@
 % \includegraphics[<other options>, fbox]{image}
 
 % za tikz slikce
-\usepackage{circuitikz, tikz}
-\newcommand{\blokec}[2]{node[draw, text centered, minimum width=4cm, minimum
-	height=1cm, rounded corners, text width= 3cm, scale=1](#1){#2}}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepgfplotslibrary{polar}
+\pgfplotsset{plot style/.style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+
+\pgfplotsset{polar plot style/.style = {
+xticklabels={,,
+$\frac{\pi}{6}$, $\frac{\pi}{3}$, $\frac{\pi}{2}$, $\frac{2\pi}{3}$,
+$\frac{5\pi}{6}$, $\pi$, $\frac{7\pi}{6}$, $\frac{4\pi}{3}$,
+$\frac{3\pi}{2}$, $\frac{5\pi}{3}$,$\frac{11\pi}{6}$,}, thick
+}}
+
+\pgfplotsset{hoof plot style/.style = {
+polar plot style,
+xtick={0,30,60,90,120,150,180,210,240,270,300,330},
+xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
+}}
+
+\usepackage{circuitikz, tikz, tikz-3dplot}
+\usetikzlibrary{arrows, shapes, positioning, intersections, calc}
+\newcommand{\blokec}[2]{node[draw, text centered, minimum width=4cm, minimum height=1cm, rounded corners, text width= 3cm, scale=1](#1){#2}}
+    
+\tikzset{dash/.style = {dashed, draw=black!50}}
+\tikzset{dot/.style = {dotted, draw=black!50}}
+\tikzset{base-axis/.style = {very thick}}
+\tikzset{axis/.style = {base-axis, ->, >=stealth}}
+\tikzset{plane/.style = {
+	fill=teal!20, opacity=0.8,
+    draw=teal!50!black!50,
+    solid, thick
+    }}
+      
+\tikzset{vec/.style = {->, >=stealth, solid, thick}}
+
+\tikzset{velocity/.style = { vec, draw=orange!50!black!90}}
+
+
+\tikzset{rect/.style = {
+  rectangle,
+  very thick, solid, rounded corners=1mm,
+  top color=white,
+  text centered,
+  scale = 0.7
+  }}
+  \tikzset{title/.style = {
+  % Rectangle:
+  rect,
+  draw=red!50!black!50,
+  bottom color=red!50!black!20,
+  % Text:
+  text width = 30mm
+  }}
+  \tikzset{block/.style = {
+  % Rectangle:
+  rect,
+  draw=black!50,
+  bottom color=black!20
+  % Text
+  }}
+  \tikzset{input/.style = {
+  % Rectangle:
+  block,
+  draw=green!50!black!50,
+  bottom color=green!50!black!20
+  % Text
+  }}
+  \tikzset{output/.style = {
+  % Rectangle:
+  block,
+  draw=orange!50!black!50,
+  bottom color=orange!50!black!20
+  % Text
+  }}
+  \tikzset{background/.style = {
+  fill=black!10, 
+  rounded corners, 
+  draw=black!50, 
+  dashed
+  }}
+  \tikzset{arrow/.style = {
+  ->,
+  >=stealth,
+  shorten >= 1mm,
+  shorten <= 1mm,
+  very thick,
+  draw=black!50,
+  line width = 1mm
+  }}
+  
+  
+  
+  
+
 % za odštevanje pri listih
 %\usepackage[start=7]{etaremune}
 % za seznam kjer lahko spreminjaš številke
@@ -102,7 +188,7 @@
 % za dodajanje besedila iz drugih datotek
 \usepackage{verbatim}
 % za urlje 
-\usepackage[hidelinks]{hyperref}
+\usepackage[unicode, hidelinks]{hyperref}
 
 
 
@@ -125,9 +211,24 @@
 \newcommand{\vo}{$VO_2$}
 \newcommand{{\T}}{$^{\top}$}
 \newcommand{\Mu}{M}
+\newcommand{\nhoof}{$N_{HOOF}$}
+\newcommand{\nhafa}{$N_{HAFA}$}
 
+
+\newcommand{\boldentry}[2]{%
+  \multicolumn{1}{S[table-format=#1,
+                    mode=text,
+                    text-rm=\fontseries{b}\selectfont
+                   ]}{#2}}
+\newcommand{\thead}[1]{\multicolumn{1}{c}{\textbf{#1}}}
+%\newcommand{\theadm}{1}{\thead{$\mathbf{#1}$}}
+
+\renewcommand{\Xi}{X}
 \renewcommand\vec{\mathbf}
+\newtheorem{definition}{Definicija}
 
+
+%\usepackage{xparse}
 
 
 
@@ -187,12 +288,12 @@
 
 %*********************** OSREDNJA POGLAVJA ********************************
 \input{./02-metode/02-metode.tex}
-\input{./pogl/03-eksperimenti-in-rezultati.tex}
+\input{./03-eksperimenti/01-eksperimenti-in-rezultati.tex}
 \input{./pogl/04-diskusija.tex}
 
 %**************** LITERATURA ************************
 \bibliographystyle{ieeetrslo}
-\bibliography{./bib/physical-activity,./bib/related-work,./bib/fatigue,./bib/sleep-apnoea,./bib/hr-motion-sensor,./bib/metabolism,./bib/methods,./bib/optical-flow,./bib/scene-flow} 
+\bibliography{./bib/physical-activity,./bib/related-work,./bib/fatigue,./bib/sleep-apnoea,./bib/hr-motion-sensor,./bib/metabolism,./bib/methods,./bib/optical-flow,./bib/scene-flow,./bib/svm.bib,./bib/tracking.bib,./bib/filters.bib} 
 
 %**************** PRILOGE ************************
 \appendix

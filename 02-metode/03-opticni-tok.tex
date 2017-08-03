@@ -14,19 +14,32 @@ Za namen razlage upoštevamo perpektivni model kamere, kjer je \cite{trucco1998i
 \item \textbf{Osvetlitev} se ne spreminja.
 \end{itemize}
 
-Sliko delca $\vec{q} = [x~y]^\top$ na slikovni ravnini $\mathit{\Omega} \subset \mathbb{R^2}$, kjer sta $x$ in $y$ slikovni koordinati, lahko predstavimo z enačbo
+Sliko delca $\vec{q} = [x~y]^\top$ na slikovni ravnini $\mathit{\Omega} \subset \mathbb{R}^2$, kjer sta $x$ in $y$ slikovni koordinati, lahko predstavimo z enačbo
 
 \begin{equation}\label{eq:slika-delca}
 	\vec{q} = f \frac{\vec{p}}{Z},
 \end{equation}
 
-kjer je $f$ goriščna razdalja kamere \cite{trucco1998introductory}. S časovnim odvodom enačbe \eqref{eq:slika-delca}, dobimo hitrost delca na slikovni ravnini:
+kjer je $f$ goriščna razdalja kamere \cite{trucco1998introductory}. Delec in njegova slika sta predstavljena na sliki \ref{fig:optical-flow} S časovnim odvodom enačbe \eqref{eq:slika-delca}, dobimo hitrost delca na slikovni ravnini:
 
 \begin{equation}\label{eq:hitrost-slike-delca}
 	\vec{u} = f \frac{Z\vec{v}-v_Z\vec{p}}{Z^2},
 \end{equation}
 
-kjer je $\vec{u} \in \mathcal{U} \subset \mathbb{R^2}$.
+kjer je $\vec{u} \in \mathcal{U} \subset \mathbb{R}^2$.
+
+
+
+
+\begin{figure}
+\centering
+\input{./Slike/opticni-tok.tikz}
+\caption[Preslikava hitrosti delca na slikovno ravnino $\mathit{\Omega}$]{ Preslikava hitrosti delca na slikovno ravnino $\mathit{\Omega}$. Gibajoči delec $\vec{p}$ ima sliko $\vec{q}$. Hitrost delca $\vec{v}$ ima sliko hitrosti $\vec{u}$, ki predstavlja idealni vektor gibanja. Koordinatni sistem predstavlja sistem kamere.}
+\label{fig:optical-flow}
+\end{figure}
+
+
+
 
 Razširjena oblika enačbe \eqref{eq:hitrost-slike-delca}, kjer upoštevamo \eqref{eq:gibanje}, je zapisana z enačbo \eqref{eq:hitrost-slike-delca-raz} \cite{trucco1998introductory}. Prvi člen v posamezni enačbi predstavlja \textbf{translatorni del}, ostali členi pa sodijo v \textbf{rotacijski del}.
 
@@ -37,7 +50,7 @@ Razširjena oblika enačbe \eqref{eq:hitrost-slike-delca}, kjer upoštevamo \eqr
 \end{aligned}
 \end{equation}
 
-Kadar imamo na slikovni ravnini več slik delcev, množico vektorjev hitrosti $\vec{v}$ imenujemo \textbf{polje gibanja} (angl. Motion Field) $\vec{G} : \mathit{\Omega} \to \mathcal{U}$, kjer velja $ \vec{q} \mapsto \vec{u}$ \cite{trucco1998introductory}. Polje gibanja $\vec{G}$ lahko razumemo kot projekcijo polja hitrosti $\vec{H}$ na slikovno ravnino, zato ta predstavlja idealno rekonstrukcijo gibanja. V praksi do polja gibanja ne moremo dostopati, zato se poslužujemo njegovih približkov.  
+Kadar imamo na slikovni ravnini več slik delcev, množico vektorjev hitrosti $\vec{u}$ imenujemo \textbf{polje gibanja} (angl. Motion Field) $\vec{G} : \mathit{\Omega} \to \mathcal{U}$, kjer velja $ \vec{q} \mapsto \vec{u}$ \cite{trucco1998introductory}. Polje gibanja $\vec{G}$ lahko razumemo kot projekcijo polja hitrosti $\vec{H}$ na slikovno ravnino, zato ta predstavlja idealno rekonstrukcijo gibanja. V praksi do polja gibanja ne moremo dostopati, zato se poslužujemo njegovih približkov.  
 
 Video posnetek je sestavljen iz sekvence slik, to pa lahko opišemo kot funkcijo osvetljenosti slikovnega elementa $I(\vec{x},t)$, na poziciji $\vec{x} = [x~y]^\top$ ob času $t$ \cite{wedel2011stereo}. Gibanje oseb opazimo kot premikanje pikslov skozi čas, pri čemer predpostavimo, da osvetljenost posameznega piklsa ostaja konstantnta \cite{trucco1998introductory}. Stacionarnost osvetljenosti slikovnega elementa lahko opišemo z enačbo  
 
@@ -45,19 +58,32 @@ Video posnetek je sestavljen iz sekvence slik, to pa lahko opišemo kot funkcijo
 	\frac{d I(\vec{x}, t)}{dt} = \frac{\partial I}{\partial x} \frac{dx}{dt} + \frac{\partial I}{\partial y} \frac{dy}{dt} + \frac{\partial I}{\partial t} = 0,
 \end{equation}
 
-to pa lahko zapišemo z vektorjem hitrosti slikovnega elementa $\vec{w} \in \mathcal{W} \subset \mathbb{R^2}$ v kompaktnejšo obliko
+to pa lahko zapišemo z vektorjem hitrosti slikovnega elementa $\vec{w} \in \mathcal{W} \subset \mathbb{R}^2$ v kompaktnejšo obliko
 
 \begin{equation}\label{eq:opticni-tok}
 	(\nabla I)^\top \vec{w} + I_t = 0.
 \end{equation}
 
-Enačba \eqref{eq:opticni-tok} predstavlja omejitev \textbf{optičnega toka} \cite{trucco1998introductory}. Če v enačbi \eqref{eq:opticni-tok} normaliziramo prostorski gradient $(\nabla I)$, v enačbi \eqref{eq:aperture-problem} opazimo, da lahko  določimo le hitrost, ki je vzporedna prostorskemu gradientu. Pojav je znan kot problem reže (angl. Aperture problem) \cite{trucco1998introductory}. 
+Enačba \eqref{eq:opticni-tok} predstavlja \textbf{omejitev optičnega toka} \cite{trucco1998introductory}. Če v enačbi \eqref{eq:opticni-tok} normaliziramo prostorski gradient $(\nabla I)$, v enačbi \eqref{eq:aperture-problem} opazimo, da lahko  določimo le hitrost, ki je vzporedna prostorskemu gradientu. Pojav je znan kot problem reže (angl. Aperture problem) \cite{trucco1998introductory}. 
 
 \begin{equation}\label{eq:aperture-problem}
-	\frac{(\nabla I)^\top \vec{w}}{\| \nabla I \|} = - \frac{E_t}{\| \nabla I \|} = w_n
+	\frac{(\nabla I)^\top \vec{w}}{\| \nabla I \|} = - \frac{I_t}{\| \nabla I \|} = w_n
 \end{equation}
 
-Problem reže si lahko razlagamo na način opazovanja gibanja črne daljice na beli podlagi skozi režo tako, da ne vidimo koncev. Zaradi omejene vizualne informacije lahko določimo hitrost le v pravokotni smeri na daljico \cite{trucco1998introductory}. 
+\textbf{Problem reže} si lahko razlagamo na način opazovanja gibanja daljice na beli podlagi skozi režo tako, da ne vidimo koncev. Zaradi omejene vizualne informacije lahko določimo hitrost le v pravokotni smeri na daljico \cite{trucco1998introductory}. Razlaga je predstavljena na sliki \ref{fig:aperture-problem}.
+
+
+
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/problem-reze.tikz}
+\caption[Problem reže]{Problem reže. Ker skozi režo ne vidim koncev daljice, lahko določimo le hitrost v pravokotni smeri na daljico \cite{trucco1998introductory}.}
+\label{fig:aperture-problem}
+\end{figure}
+
+
+
 
 Kadar imamo na slikovni ravnini več premikajočih slikovnih elementov, vektorsko polje hitrosti $\vec{w}$ imenujemo \textbf{optični tok} (angl. Optical flow) $\vec{O}: \mathit{\Omega} \to \mathcal{W}$, kjer velja $ \vec{q} \mapsto \vec{w}$ \cite{trucco1998introductory}. Optični tok je dobra aproksimacija polja gibanja v točkah visokega prostorskega gradienta svetlosti in konstantne osvetlitve.
 
@@ -65,7 +91,7 @@ Kadar imamo na slikovni ravnini več premikajočih slikovnih elementov, vektorsk
 
 \subsection{Metode estimacije optičnega toka}
 
-Metode estimacije optičnega toka $\vec{O}$ v grobem delimo na diferencialne in {ujemalne} metode \cite{trucco1998introductory}. Z \textbf{diferencialnimi metodami} računamo optični tok z uporabo parcialnih diferencialnih enačb ali minimizacijskimi metodami. Z metodami dobimo \textbf{gost optični kot}, kar pomeni, da je optični tok določen za vsak slikovni element \cite{trucco1998introductory}. Te metode zelo natačno opisujejo optični tok in ne proizvajajo vrednosti, ki lokalno odstopajo, zato je optični tok gladek \cite{brox2011large}.  Glavni problem teh metod je, da so računsko zelo zahtevne \cite{trucco1998introductory}.
+Metode estimacije optičnega toka $\vec{O}$ v grobem delimo na diferencialne in {ujemalne} metode \cite{trucco1998introductory}. Z \textbf{diferencialnimi metodami} računamo optični tok z uporabo parcialnih diferencialnih enačb ali minimizacijskimi metodami. Z metodami dobimo \textbf{gost optični tok}, kar pomeni, da je optični tok določen za vsak slikovni element \cite{trucco1998introductory}. Te metode zelo natačno opisujejo optični tok in ne proizvajajo vrednosti, ki lokalno odstopajo, zato je optični tok gladek \cite{brox2011large}.  Glavni problem teh metod je, da so računsko zelo zahtevne \cite{trucco1998introductory}.
 
 Pri \textbf{ujemalnih metodah} računamo optični tok le na značilnih točkah \cite{trucco1998introductory}. Zaradi uporabe značilk so te metode lahko bolj efektivne, saj ne potrebujemo določevanja korespondenc za vse piksle. Prav tako se lahko uporabijo za računanje optičnega toka v realnem času, saj niso računsko zahtevne. Po \cite{trucco1998introductory} je največja težava teh metod, da računajo \textbf{redek optični tok}, saj je ta določen le za slikovne elemete, ki predstavljajo značilne točke. Prav tako delujejo dobro le pri majhnih premikih, ker temeljijo na Taylorjevi aproksimaciji enačbe \eqref{eq:opticni-tok} \cite{wedel2011stereo}. 
 
@@ -122,13 +148,28 @@ Evaluacija algoritma je bila narejena v \cite{Geiger2012CVPR}. Rezultati so povz
 % Katero metodo smo mi uporabili in zakaj
 Optični tok $\vec{O}$ predstavlja aproksimacijo polja gibanja $\vec{G}$, ta pa je projekcija polja hitrosti $\vec{H}$ na slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Če pogledamo z druge perspektive, ni optični tok $\vec{O}$ nič drugega kot projekcija aproksimacije polja hitrosti $\vec{H}$, ki jo po analogiji lahko imenujemo \textbf{prostorski tok} (angl. Scene Flow) \cite{vedula1999three}. 
 
-Za namen razlage upoštevamo enake omejitve kamere, masnega delca in osvetlitve, kot v poglavju \ref{sec:opticni-tok}. Predpostavimo, da imamo v prostoru gibajoč točkovni delec $\vec{p} = \vec{p}(t)$ na slikovni ravnini $\mathit{\Omega}$ pa njegovo sliko $\vec{q}$ \cite{vedula1999three}. Ker je slika projekcija delca na slikovno ravnino $\mathit{\Omega}$, lahko zapišemo $\vec{q} = \vec{q}(\vec{p})$. Hitrost slike določimo po enačbi \eqref{eq:opticni-tok-sf}, ki predstavlja enačbo vektorja optičnega toka $\vec{w}$, kot projekcijo prostorskega toka \cite{vedula1999three}. 
+Za namen razlage upoštevamo enake omejitve kamere, masnega delca in osvetlitve, kot v poglavju \ref{sec:opticni-tok}. Predpostavimo, da imamo v prostoru površino $f(x,y,z) = 0$ na kateri imamo gibajoč točkovni delec $\vec{p} = \vec{p}(t)$. Na slikovni ravnini $\mathit{\Omega}$ imamo njegovo sliko $\vec{q}$ \cite{vedula1999three}. Vizualni prikaz prizora lahko vidimo na sliki \ref{fig:scene-flow}. 
+
+
+
+
+\begin{figure}
+\centering
+\input{./Slike/scene-flow.tikz}
+\caption[Vizualni prikaz vektorja prostorskega toka $\vec{w}$]{Vizualni prikaz vektorja prostorskega toka $\vec{w}$. V prostoru imamo površino $f$ na kateri leži gibajoči točkovni delec $\vec{p}$ \cite{vedula1999three}. Na slikovni ravnini $\mathit{\Omega}$ imamo sliko delca $\vec{q}$ s prostorskim tokom $\vec{w}$.}
+\label{fig:scene-flow}
+\end{figure}
+
+
+
+Ker je slika projekcija delca na slikovno ravnino $\mathit{\Omega}$, lahko zapišemo $\vec{q} = \vec{q}(\vec{p})$. Hitrost slike določimo po enačbi \eqref{eq:opticni-tok-sf}, ki predstavlja enačbo vektorja optičnega toka $\vec{w}$, kot projekcijo prostorskega toka \cite{vedula1999three}. 
+
 
 \begin{equation}\label{eq:opticni-tok-sf}
 	\vec{w} = \frac{d\vec{q}}{dt} = \frac{\partial \vec{q}}{\partial \vec{p}}\frac{d\vec{p}}{dt}
 \end{equation}
 
-Če predpostavimo, da imamo dovoj informacije o sistemu, da lahko določimo inverzno funkcijo $\vec{p} = \vec{p}(\vec{q},t)$, kjer je masni delec $\vec{p}$ projekcija slike $\vec{q}$, lahko določimo njegovo hitrost $\vec{\mu} \in \mathcal{\Mu} \subset \mathbb{R^3}$ z enačbo \eqref{eq:scene-flow}. Slednja je sestavljena iz dveh delov. Prvi člen je projekcija vektorja optičnega toka $\vec{w}$ na tangentno ravnino površine, v točki, kjer se nahaja delec $\vec{p}$ \cite{vedula1999three}. Drugi člen je hitrost spreminjanja oddaljenosti delca od slikovne ravnine $\mathit{\Omega}$, ko slika delca stoji na miru. 
+Če predpostavimo, da imamo dovoj informacije o sistemu, da lahko določimo inverzno funkcijo $\vec{p} = \vec{p}(\vec{q},t)$, kjer je masni delec $\vec{p}$ projekcija slike $\vec{q}$, lahko določimo njegovo hitrost $\vec{\mu} \in \mathcal{\Mu} \subset \mathbb{R}^3$ z enačbo \eqref{eq:scene-flow}. Slednja je sestavljena iz dveh delov. Prvi člen je projekcija vektorja optičnega toka $\vec{w}$ na tangentno ravnino površine $f$, v točki, kjer se nahaja delec $\vec{p}$ \cite{vedula1999three}. Drugi člen je hitrost spreminjanja oddaljenosti delca od slikovne ravnine $\mathit{\Omega}$, ko slika delca stoji na miru. 
 
 \begin{equation}\label{eq:scene-flow}
 	\vec{\mu} = \frac{d\vec{p}}{dt} = \frac{\partial \vec{p}}{\partial \vec{q}} \frac{d\vec{q}}{dt} + \left.\frac{\partial \vec{p}}{\partial t}\right|_\vec{q}

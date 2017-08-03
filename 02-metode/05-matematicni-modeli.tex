@@ -1,0 +1,220 @@
+\section{Matematični modeli}\label{sec:matematicni-modeli}
+Metode strojnega učenja s podpornimi vektorji (SVM) se pogosto uporabljajo za klasifikacijo in regresijo \cite{chang2011a}. Njihova popularnost temelji na visoki uspešnosti generalizacije brez potrebe po predhodnem znanju \cite{chapelle1999support}. Njihova performanca delovanja ni odvisna od števila značilk, saj jih ponavadi uporabljamo v primerih ko ima vhodni prostor značilk $\mathcal{W}^n$ veliko moč $n$. Cilj teh metod je, da generiramo matematični model in ga uporabimo za predikcijo izhoda $y$ \cite{hsu2003practical}. 
+
+
+
+
+
+
+
+
+\subsection{Linearno ločljiva učna množica}
+Imamo učne vzorce $\{ \vec{x}_i, y_i \} \in \mathcal{U}_l$, kjer je $\vec{x}_i \in \mathcal{\Xi}_l \subset \mathbb{R}^n~\forall i = 1, \ldots, l$ vektor značilk oziroma deskriptor in $y_i \in \mathit{\Omega}_l \subset \mathbb{R}~\forall i = 1, \ldots, l$ oznake razredov objektov \cite{chapelle1999support}. Za poenostavitev privzamemo, da imamo samo dva razreda $y_i \in \{-1,1\}$. 
+
+Pri postopku s podpornimi vektorji v splošnem iščemo koeficiente $\vec{w} \in \mathcal{W} \subset \mathbb{R}^m$ ločilnih mej ali \textbf{hiper-ravnin} in prag $b$, ki razmejujejo prostor $\mathbb{R}^n$ tako, da so enako oddaljene od vzorcev $\vec{x}$ iz različnih razredov $\mathcal{C}_i~\forall i= 1, \ldots, p$, kot je prikazano na sliki \ref{fig:svm-locljivo} \cite{chapelle1999support}. Pri tem velja omejitev
+
+\begin{equation}\label{eq:omejitev-ravnine}
+	y_i(\vec{w} \vec{x}_i + b) \geq 1, i=1, \ldots, l.
+\end{equation}
+
+
+
+
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/svm.tikz}
+\caption[Prikaz ločevanja vzorcev na razrede s podpornimi vektorji]{Prikaz ločevanja vzorcev na razrede s podpornimi vektorji. Na sliki je prikazan primer ločevanja na dva razreda.}
+\label{fig:svm-locljivo}
+\end{figure}
+
+
+
+
+Če hiper-ravnina obstaja, pravimo, da je množica $\mathcal{U}_l$ \textbf{linearno ločljiva} \cite{chapelle1999support}. Ker želimo določiti ločilno mejo s čim širšim robom, moramo minimizrati $\|\vec{w}\|^2$, saj je razdalja med mejo in najbližjo točko $\frac{1}{\|\vec{w}\|}$. To naredimo z vpeljavo Lagrangeovih multiplikatorjev $\vec{\alpha} \in \mathcal{A}^i$ in maksimizacijo funkcije \eqref{eq:svm-lagrange} z omejitvijo \eqref{eq:svm-lagrange-omejitev} \cite{chapelle1999support}.
+
+\begin{equation}\label{eq:svm-lagrange}
+	\mathcal{L}(\vec{\alpha}) = \sum_{i=1}^l \alpha_i - \frac{1}{2}\sum_{i,j=1}^l \alpha_i\alpha_j y_i y_j \vec{x}_i^\top\vec{x}_j
+\end{equation}
+
+\begin{equation}\label{eq:svm-lagrange-omejitev}
+	\sum_{i=1}^ly_i\alpha_i = 0, \alpha_i \geq 0; i=1, \ldots, l
+\end{equation}
+
+Z rešitvijo maksimizacijskega problema \eqref{eq:svm-lagrange} $\vec{\alpha}^0$ lahko izračunamo optimalne koeficiente \cite{chapelle1999support}:
+
+\begin{equation}
+	\vec{w}_0 = \sum_{i=1}^l \alpha_i^0 y_i \vec{x}_i.
+\end{equation}
+
+Učnim vzorcem, za katere so $\alpha_i^0 > 0$ pravimo \textbf{podporni vektorji} \cite{chapelle1999support}.
+
+
+
+
+
+
+
+
+
+\subsection{Linearno neločljiva učna množica}
+Pri linearno neločjivi učni množici $\mathcal{U}_l$ uvedemo dodaten vektor spremenljivk $\vec{\xi} \in \mathit{\Lambda}^i$ in rešujemo optimizacijski problem \eqref{eq:svm}, kjer je $C>0$ regularizacijski parameter napake in $b$ prag \cite{chapelle1999support}. Večji $C$ pomeni manjšo dopustnost napak. 
+
+\begin{equation}\label{eq:svm}
+\begin{aligned}
+\min_{\vec{w}, b, \vec{\xi}} &~ \left\{ \frac{1}{2} \vec{w}^\top\vec{w} + C \sum_{i=1}^l\xi_i \right\}\\
+    \mathrm{z~omejitvijo} &~ y_i \left( \vec{w}^\top \vec{x}_i + b \right) \geq 1 - \xi_i,~ 
+    \xi_i \geq 0
+\end{aligned}	
+\end{equation}
+
+
+
+
+
+
+
+
+\subsection{Funkcije jedra}
+V primeru, ko učnih vzorcev ne moremo razmejiti brez napak v linearno hiper-ravnino jih lahko preslikamo v več razsežni prostor z nelinearno preslikavo $\phi: \mathcal{\Xi} \subset \mathbb{R}^n \to \mathcal{\Mu} \subset \mathbb{R}^m, n < m$, kjer lahko postanejo linearno separabilni \cite{chapelle1999support,boughorbel2005generalized}.Tako v enačni \eqref{eq:svm-lagrange} namesto $\vec{x}_i^\top\vec{x}_j$ uporabimo $\phi(\vec{x_i})^\top\phi(\vec{x_j})$ Preslikovanju vzorcev v m-razsežni prostor se lahko znebimo s t.i. \textbf{ukano jedra} (angl. Kernel trick), kjer uporabimo implicitno preslikavo $K: \mathcal{\Xi} \times \mathcal{\Xi} \to \mathbb{R}$ \cite{boughorbel2005generalized}. V skladu z Mercerjevim izrekom mora biti $K(\vec{x}_i,\vec{x}_j)$ simetrična in pozitivna funkcija. Takrat obstaja preslikava $\phi$ tako da velja $K(\vec{x_i}, \vec{x_j}) = \phi(\vec{x}_i)^\top\phi(\vec{x}_j)$.
+
+
+\subsubsection{Jedro radialnih baznih funkcij}{
+Jedro radialnih baznh funckij (RBF) ima naslednjo obliko z enim hiper-parametrom $\gamma$ \cite{hsu2003practical}:
+
+\begin{equation} \label{eq:rbf-kernel}
+		K_{RBF}(\vec{x_i}, \vec{x_j}) = e^{
+        	-\gamma 
+        	\begin{Vmatrix}
+        		\vec{x_i} - \vec{x_j}
+        	\end{Vmatrix}^2
+        }
+\end{equation}
+
+Avtorji v \cite{hsu2003practical} zagovarjajo, da pri učenju najprej poskusim z RBF jedrom. Prvi argument je, da to jedro ne vpliva na kompleksnost modela, saj moramo izbrati le en dodaten parameter $\gamma$. Kot drugo, imamo z njim manj numeričnih težav, saj se njegova vrednost giblje na intervalu $(0, 1]$ \cite{hsu2003practical}. 
+
+
+
+\subsubsection{Jedro preseka generaliziranih histogramov}
+Jedro preseka generaliziranih histogramov (GHI) je uporaben, ko imamo deskriptorje definirane kot histograme. Določen z enačbo \eqref{eq:ghi-kernel}, kjer je hiper-parameter $\beta \geq 0$, $m$ pa je število stolpcev histogramov $\vec{x}$ in $\vec{x}'$ \cite{boughorbel2005generalized}.
+
+\begin{equation}\label{eq:ghi-kernel}
+K_{GHI}(\vec{x}, \vec{x}') = \sum_{i=1}^m min\left\{ \left| x_i \right|^\beta, \left|  x_i' \right| \right\}
+\end{equation}
+
+Po \cite{boughorbel2005generalized} je prednost uporabe GHI jedra ta, da so meje invariantne na skaliranje prostora značilk, zato ne potrebujemo dodatne optimizacije skalirnega hiper-parametra. Optimalna vrednosti hiper-parametra je okoli $\beta=0.25$.
+
+%\subsubsection{linear}
+
+
+
+
+
+
+\subsection{Predprocesiranje}
+\subsubsection{Skaliranje značilk}
+
+Po \cite{hsu2003practical} je skaliranje značilk pred uporabo SVM zelo pomembno. S skaliranjem se znebimo dejstva, da značilke, definirane na večjem intervalu bolj vplivajo na rezultat, kot značilke z manjšim intervalom. Prav tako se s skaliranjem znebimo numeričnih težav med učenjem. Avtorji \cite{hsu2003practical} zato predlagajo skaliranje na intervalih $[-1, 1]$ ali $[0, 1]$.
+
+
+
+
+
+
+
+\subsubsection{Optimizacija SVM parametrov}
+
+Ker a priori ne poznamo najboljših parametrov postopka SVM in hiper-parametrov funkcij jedra, jih moramo optimizirati \cite{hsu2003practical}. S tem zagotovimo najboljše delovanje metode na naših podatkih. Za optimizacijo lahko uporabljamo mrežno iskanje s križno validacijo.  Pri mrežnem iskanju izračunamo predikcije za kombinacijo parametrov in jih evaluiramo s križno validacijo \cite{hsu2003practical}. Izberemo tisto kombinacijo parametrov, s katero smo dobili najboljšo natančnost. 
+
+Dobro je, če kombinacije parametrov izbiramo po eksponentni funkciji z osnovo $2$, saj s tem zagotovimo širok razpon iskanja \cite{hsu2003practical}. Iskanje optimalnih parametrov lahko pohitrimo z uporabo grobega in finega iskanja. Z grobim iskanjem omejimo območje iskanja za fino iskanje \cite{hsu2003practical}. S finim iskanjem pa dejansko optimiziramo parametre.
+
+
+
+
+
+
+\subsection{Postopki SVM}
+\subsection{Razvrščevalnik C-SVC}
+
+Razvrščevalnik rešuje problem \cite{chang2011a}:
+
+\begin{equation}\label{eq:c-svc}
+\begin{aligned}
+\min_{\vec{\alpha}} &~ \left\{ \frac{1}{2} \vec{\alpha}^\top Q \vec{\alpha} - \vec{e}^\top \vec{\alpha} \right\}\\
+    \mathrm{z~omejitvijo} &~ \vec{y}^\top \vec{\alpha} = 0,~ 
+    0 \geq \alpha_i \geq C, i=1, \ldots, l.
+\end{aligned}	
+\end{equation}
+
+$\vec{e}$ je vektor enic. $Q$ je pozitivna semidefinitna matrika s členi $Q_{ij} = y_i y_jK(\vec{x}_i,\vec{x}_j)$, kjer je $K(\vec{x}_i,\vec{x}_j)$ funkcija jedra. $\vec{\alpha}$ so Lagrangeovi multiplikatorji in $C>0$ je regularizacijski parameter \cite{chang2011a}.
+
+
+
+
+
+
+
+
+\subsubsection{Regresija \texorpdfstring{$\epsilon$}{e}-SVR}
+
+Za uporabo SVM pri regresiji uvedemo dodatni vektor spremenljivk $\vec{\xi^+}$. Primarni problem regresije $\epsilon$-SVR je  tako \cite{chang2011a}:
+
+\begin{equation}\label{eq:e-svr-primal}
+\begin{aligned}
+\min_{\vec{w}, b, \vec{\xi}, \vec{\xi}^+} &~ \left\{ \frac{1}{2} \vec{w}^\top\vec{w} + C \sum_{i=1}^l\xi_i + C \sum_{i=1}^l\xi_i^+ \right\}\\
+    \mathrm{z~omejitvijo} &~ y_i \left( \vec{w}^\top \vec{x}_i + b \right) \geq \epsilon - \xi_i,\\
+    &~  y_i \left( \vec{w}^\top \vec{x}_i + b \right) \leq \xi_i^+ - \epsilon, \\
+    &~  \xi_i,\xi_i^+ \geq 0, i=1, \ldots, l,
+\end{aligned}	
+\end{equation}
+
+kjer je $C>0$ regresijski parameter in $\epsilon > 0$ parameter kriterijske funkcije. Z njim določujemo toleranco do napak.
+
+Sekundarni problem se glasi \cite{chang2011a}:
+
+\begin{equation}\label{eq:e-svr-dual}
+\begin{aligned}
+\min_{\vec{\alpha}, \vec{\alpha}^+} &~ \left\{ \frac{1}{2} (\vec{\alpha} - \vec{\alpha^ +})^\top Q (\vec{\alpha} - \vec{\alpha}^+) +\right. \\
+&~ \left.\epsilon \sum_{i=1}^l\left( \alpha_i + \alpha_i^+ \right) + \sum_{i=1}^l y_i\left( \alpha_i - \alpha_i^+ \right) \right\}\\
+    \mathrm{z~omejitvijo} &~ 
+    \vec{e}^\top \left(\vec{\alpha} - \vec{\alpha^+} \right) = 0,\\
+    &~ 0 \geq \alpha_i, \alpha_i^+ \geq C, i=1, \ldots, l.
+\end{aligned}	
+\end{equation}
+
+$Q$ je matrika s z elementi $Q_{ij} = KK(\vec{x}_i,\vec{x}_j)$.
+
+
+
+
+
+\subsubsection{Regresija \texorpdfstring{$\nu$}{nu}-SVR}
+
+Pri regresiji $\nu$-SVR uporabljamo dodatni parameter $\nu \in (0, 1]$, s katerim kontroliramo razmerje števila podpornih vektorjev. Ostali parametri so enaki kot pri $\epsilon$-SVR, le da tu $\epsilon$ postane spremenljivka \cite{chang2011a}. Primarni problem se glasi:
+
+\begin{equation}\label{eq:nu-svr-primal}
+\begin{aligned}
+\min_{\vec{w}, b, \vec{\xi}, \vec{\xi}^+, \epsilon} &~ \left\{ \frac{1}{2} \vec{w}^\top\vec{w} + C (\nu\epsilon + \frac{1}{l}\sum_{i=1}^l\xi_i + \xi_i^+ \right\}\\
+    \mathrm{z~omejitvijo} &~ 
+    y_i \left( \vec{w}^\top \vec{x}_i + b \right) \geq \epsilon - \xi_i,\\
+    &~  y_i \left( \vec{w}^\top \vec{x}_i + b \right) \leq \xi_i^+ - \epsilon, \\
+    &~  \xi_i,\xi_i^+ \geq 0, i=1, \ldots, l, \epsilon \geq 0.
+\end{aligned}	
+\end{equation}
+
+Sekundarni problem opišemo z \cite{chang2011a}:
+
+\begin{equation}\label{eq:nu-svr-dual}
+\begin{aligned}
+\min_{\vec{\alpha}, \vec{\alpha}^+} &~ \left\{ \frac{1}{2} (\vec{\alpha} - \vec{\alpha^ +})^\top Q (\vec{\alpha} - \vec{\alpha}^+) + \vec{y}^\top \left( \alpha_i - \alpha_i^+ \right) \right\}\\
+    \mathrm{z~omejitvijo} &~ 
+    \vec{e}^\top \left(\vec{\alpha} - \vec{\alpha^+} \right) = 0,~ 
+    \vec{e}^\top \left(\vec{\alpha} + \vec{\alpha^+} \right) \leq C\nu,\\
+    &~ 0 \geq \alpha_i, \alpha_i^+ \geq C/l, i=1, \ldots, l.
+\end{aligned}	
+\end{equation}
+
+
+
+
+

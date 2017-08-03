@@ -2,9 +2,20 @@
 % Ponovi teorijo energijske porabe in kako pridemo do gibanja
 % Dokazi, da lahko gibanje opazujemo s kamerami
 % Teorija, da je najboljši približek optični tok
-Da mišice lahko s svojimi kontrakcijami spravijo telo v pogon, potrebujejo energijo, pri tem pa se del energije pretvarja v toploto, ki ji pravimo energijska poraba \cite{scott2005misconceptions}. Energijska poraba nastaja zaradi gibanja telesa, zato jo lahko določimo z opazovanjem kinematike \cite{levine2005measurement}. Zaradi omejitev kontaktnih senzorjev in slabih lastnosti srčnega utripa so v študijah, ki so opisane v poglavju \ref{sec:podobna-dela} dokazali, da lahko z opazovanjem kinematike z računalniškim vidom določimo energijsko porabo. 
+Da mišice lahko s svojimi kontrakcijami spravijo telo v pogon, potrebujejo energijo, pri tem pa se del energije pretvarja v toploto, ki ji pravimo energijska poraba \cite{scott2005misconceptions}. Energijska poraba nastaja zaradi gibanja telesa, zato jo lahko določimo z opazovanjem kinematike \cite{levine2005measurement}. Zaradi omejitev kontaktnih senzorjev in slabih lastnosti srčnega utripa so v študijah, ki so opisane v poglavju \ref{sec:podobna-dela}, dokazali, da lahko z opazovanjem kinematike z računalniškim vidom določimo energijsko porabo. 
 
-Naj bo delec z maso $m$ predstavljen kot točka prizora $\vec{p} = [X~Y~Z]^\top$ , kjer $X$, $Y$ in $Z$ predstavljajo koordinate na posameznih oseh v koordinatnem sistemu kamere \cite{trucco1998introductory}. Gibanje delca $\vec{p}$ lahko predstavimo z vektorjem hitrosti $\vec{v} = [v_X~v_Y~v_Z]^\top, \vec{v} \in \mathcal{V} \subset \mathbb{R^3}$, kjer so $v_X$, $v_Y$ in $v_Z$ hitrosti glede na osi in $\mathcal{V}$ vektorski prostor. Kadar imamo v prostoru več masnih delcev, množico vektorjev hitrosti imenujemo \textbf{polje hitrosti} (angl. Velocity Field) $\mathbf{H}: \mathbb{R^3} \to \mathcal{V}$, kjer velja $\vec{p} \mapsto \vec{v}$ \cite{trucco1998introductory}. 
+Naj bo delec z maso $m$ predstavljen kot točka prizora $\vec{p} = [X~Y~Z]^\top$, na sliki \ref{fig:model-gibanja}. $X$, $Y$ in $Z$ predstavljajo koordinate na posameznih oseh v koordinatnem sistemu kamere \cite{trucco1998introductory}. Gibanje delca $\vec{p}$ lahko predstavimo z vektorjem hitrosti $\vec{v} = [v_X~v_Y~v_Z]^\top$, $\vec{v} \in \mathcal{V} \subset \mathbb{R}^3$, kjer so $v_X$, $v_Y$ in $v_Z$ hitrosti glede na osi in $\mathcal{V}$ vektorski prostor. Kadar imamo v prostoru več masnih delcev, množico vektorjev hitrosti imenujemo \textbf{polje hitrosti} (angl. Velocity Field) $\mathbf{H}: \mathbb{R}^3 \to \mathcal{V}$, kjer velja $\vec{p} \mapsto \vec{v}$ \cite{trucco1998introductory}.
+
+
+\begin{figure}
+\centering
+\input{./Slike/model-gibanja.tikz}
+\caption[Predstavitev delca $\vec{p}$ v koordinatnem sistemu kamere]{Predstavitev delca $\vec{p}$ v koordinatnem sistemu kamere. Delec je predstavljen kot točka prizora z vektorjem hitrosti $\vec{v}$ \cite{trucco1998introductory}.}
+\label{fig:model-gibanja}
+\end{figure}
+
+
+
 
 Relativno gibanje delca $\vec{p}$ glede na koordinatno izhodišče kamere $O$ lahko opišemo kot:
 
@@ -26,9 +37,5 @@ kjer je $\vec{T}$ translatorna hitrost in $\omega$ kotna hitrost \cite{trucco199
     \end{bmatrix}.
 \end{equation}
 
-Gibanje telesa v prostoru torej lahko opišemo s poljem hitrosti gibanja $\vec{H}$.
-
-%Pri najbolj splošni obliki detekcije gibanja iz video posnetkov, moramo izračunati gibanje posameznega slikovnega elementa \cite{szeliski2010computer}, tako imenovani \emph{optični tok}, ki pod določenimi predpostavkami predstavlja dober približek gibanja objekta na sliki. Žal so klasične metode optičnega toka občutljive na šum, diskontinuitete gibanja ter spremembe v osvetljenosti objekta~\cite{brox2011large}, pri novejših pa še vedno obstaja problem pravilne ocene amplitude gibanja zaradi pojava paralakse~\cite{xu2012scale} -- objekti, ki so bolj oddaljeni od kamere imajo manjšo jakost optičnega toka. Zato smo se odločili, da gibanje iz video posnetkov predstavimo s histogrami orientiranega optičnega toka (HOOF) \cite{chaudhry2009histograms}, ki nekoliko izboljšajo robustnost. Povezavo gibanja športnika z značilkami HOOF prikazuje slika, kot sledi.  
-
-%V idealnem primeru lahko gibanje delca z maso $m$ razčlenimo na komponente hitrosti v vertikalni in horizontalni smeri. Gibanje v smeri $\vec{v}_{y+}$ predstavlja največji napor, saj mora mišica opravljati delo, ki kljubuje sili gravitacije. Nasprotno je lahko gibanje v smeri $\vec{v}_{y-}$ relativno nenaporno. Gibanje v smereh $\vec{v}_{x+}$ in $\vec{v}_{x-}$ je po vloženi energiji nekje vmes. Dela, ki pripada gibanju v poljubni smeri, ne znamo točno oceniti, s pomočjo značilk HOOF pa se ga lahko \emph{naučimo}.
+Gibanje telesa v prostoru torej lahko opišemo s poljem hitrosti $\vec{H}$.
 

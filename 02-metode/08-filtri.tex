@@ -1,0 +1,66 @@
+\section{Filtri}\label{sec:filtri}
+\% smith
+digitalni filtri so zelo pomemnbi pri digitalnem procesiranju signalov. filtre uporabljamo za dve stvari: signal separation and signam restoration. Prva se uporablja ko imamo signal ki je kontaminiran z interferenco, šumom ali drugimi signali. 
+
+signal restoration se uporablja ko je bil signal distorted in some way recimo debluring of an image.
+
+vsak filter im a impulze resonse step response in frekvenčni odziv. filter implementiramo tako da uporabmo konvolucijo z vhodnim signalom. 
+
+moving average filters
+optimalen za reducing random noise while retaining a sharp step response. najboljši za signale v časovnem prostoru.  -> gaussov filter -> frekvenčni odziv ravno tako gaussian  
+
+zero phase filter
+je karakterziran z impulznim odzivom ki je simetričen okoli ničelnega vzorca. oblika ni pomembna le da so negativni vzorci zrcalna slika pozitivnih vzorcev. Faza bo v frekvenčnem prostoru 0. Ker imamo negativne indekse ga je težko uporabljati. 
+
+forward and reverse
+vsak rekurzivni filter lahko s tako tehniko pretvorimo v zero phase filter. signal filtriramo normalno potem še reverzno in rezultata spojimo skupaj. 
+
+
+
+
+
+
+
+\subsection{Kalmanov filter}\label{sec:kalmanov-filter}
+\% trucco
+system model
+fizični sistem je modeliran z vektorjem stanj x in z enačbami sistemski model. stanje je odvisno od časa. sistemski model je vektorska enačba ki govori o tem kako se model razvija skozi čas. diskretni čas: tk = t0 + k delta t. delta t mora biti dovolj majhen da zajamemo dinamiko sistema. torej da se ne spremeni za veliko med koraki. zeta je vektor kjer modeliramo sistemski šum. matriko prehanja stanj 
+
+measurement model
+predvidevamo da ob vsakem časovnem trenutku dobimo meritev stanja ki je šumna. 
+kjer je H merilna matrika in ni predstavlja šum. 
+
+oba šuma sta bela brez srednje vrednosti gaussova procesa s kovariančnimi matrikami. 
+
+alogritem
+imamo še kovariančno matriko stanja P, gain matriko K 
+
+
+Modeli so dali pošumljen izhod, zato smo implementirali še Kalmanov filter \cite{forsyth2002computer}. V prostoru stanj je predstavljen z enačbo \eqref{eq:kalman-model}, kjer je $x$ stanje hitrosti $v$ in pospeška $a$ \eqref{eq:stanje}, $A$ matrika prehajanja stanj \eqref{eq:a}, $G$ matrika šuma \eqref{eq:g}, s katero modeliramo neznane vhodne parametre hitrosti $v_n$ in pospeška $a_n$ v vektorju $u$ \eqref{eq:u}. Začetna hitrost in pospešek sta bila $0$. Varianca procesnega šuma je za vse modele znašala \num{0.04}, varianca šuma modela pa \num{456.13}. Zaradi neznanih začetnih vrednosti smo za kovariančno matriko predikcije uporabili varianco \num{456.13}.
+
+\begin{subequations}
+	\begin{align}
+		x(k+1) &= A x(k) + G u(k) \label{eq:kalman-model} \\ 
+        x(k) &= \begin{bmatrix}
+					v(k) & a(k)
+				\end{bmatrix}^\top \label{eq:stanje} \\
+        A &= \begin{bmatrix}
+				1 & 1 \\
+                0 & 1
+			\end{bmatrix} \label{eq:a} \\
+       G &= \begin{bmatrix}
+				1 & 0
+			\end{bmatrix}^\top \label{eq:g} \\
+       u(k) &= \begin{bmatrix}
+					v_{n}(k) & a_n(k)
+				\end{bmatrix}^\top \label{eq:u}
+	\end{align}	
+\end{subequations}
+
+\subsection{Gaussov filter}\label{sec:gaussov-filter}
+
+
+
+\subsection{Optimizacija Gaussovega jedra}
+
+

@@ -10,15 +10,264 @@ Za dobro telesno pripravljenost moramo opravljati \textbf{fizično aktivnost} --
 \end{equation}
 
 
-Avtor v \cite{warburton2006health} tako navaja, da moramo za pozitivne zdravstvene učinke porabiti najmanj \SI{1000}{\kcal} na teden. Seveda bo še večja intenziteta fizične aktivnosti pripomogla k večjim pozitivnim zdravstvenim učinkom.
+Avtor v \cite{warburton2006health} navaja, da moramo za pozitivne zdravstvene učinke porabiti najmanj \SI{1000}{\kcal} na teden. Seveda bo še večja intenziteta fizične aktivnosti pripomogla k večjim pozitivnim zdravstvenim učinkom.
 
-Telesna pripravljenost in aktivnost sta pomembni tudi v športu. Ker morajo športniki premagati drugačne telesne napore, za doseganje vrhunskih rezultatov, tu govorimo o \textbf{športni telesni pripravljenosti} \cite{caspersen1985physical}. Komponente športne pripravljenosti so nekoliko drugačne, saj so tu poleg komponent zdravstene pripravljenosti pomembne še hitrost, moč, koordinacija in reakcijski čas \cite{caspersen1985physical}.
+Telesna pripravljenost in aktivnost sta pomembni tudi v športu. Ker morajo športniki premagati drugačne telesne napore za doseganje vrhunskih rezultatov, tu govorimo o \textbf{športni telesni pripravljenosti} \cite{caspersen1985physical}. Komponente športne pripravljenosti so nekoliko drugačne, saj so tu poleg komponent zdravstene pripravljenosti pomembne še hitrost, moč, koordinacija in reakcijski čas \cite{caspersen1985physical}.
 
 Z merjenjem energijske porabe lahko predvidimo zahteve po količini energije za posamezne športne dejavnosti \cite{botton2011energy,osgnach2010energy}. S primerjavo energijske zahtevnosti športa in telesne pripravljenosti športnika lahko nato indivudualiziramo treninge in tako povečamo njihovo učinkovitost. Prav tako lahko predčasno ukrepamo pri preobremenitvah, ki vodijo v mišično utrujenost \cite{sahlin1998energy,reilly1997energetics}.
 
-\input{./01-uvod/010-energija-v-telesu.tex}
-\input{./01-uvod/011-merjenje.tex}
-\input{./01-uvod/012-podobna-dela.tex}
-\input{./01-uvod/013-detekcija-dihanja.tex}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Energija v človeškem telesu}\label{sec:energija}
+Človeško telo lahko energijo porabi na tri različne načine:
+
+\begin{itemize}
+\item bazalna metabolična stopnja,
+\item termični efekt hrane,
+\item energijska poraba zaradi fizične aktivnosti \cite{levine2005measurement}.
+\end{itemize}
+
+\textbf{Bazalna metabolična stopnja} je uporabljena energija v času mirovanja (zjutraj, ko se zbudimo). Za povprečnega človeka predstavlja okoli \SI{60}{\%} dnevne porabe energije \cite{levine2005measurement}. \textbf{Termični efekt hrane} predstavlja porabo energije, ki je povezana s prebavo in shranjevanjem hrane. Predstavlja okoli \SI{10}{\%} dnevne porabe energije \cite{levine2005measurement}. \textbf{Energijska poraba zaradi fizične aktivnosti} predstavlja energijo, ki jo trošijo mišice. 
+
+Da mišice lahko s svojimi kontrakcijami spravijo telo v pogon, potrebujejo njihove celice energijo, ki je shranjena v obliki molekulskih vezi adenozintrifosfata (ATP) \cite{scott2005misconceptions}. Z razgradnjo ATP, celice dobijo potrebno energijo za kontrakcije, nato pa ponovno sintetizirajo ATP s pomočjo metabolizma iz amino kislin, ogljikovih hidratov in maščobnih kislin \cite{scott2005misconceptions,patel2017aerobic}. Ker sta ATP razgradnja in ponovna sinteza termodinačno ireversibilni reakciji, se del enrgije pretvarja v toploto, to pa imenujemo energijska poraba \cite{scott2005misconceptions}. 
+
+ATP molekule tako predstavljajo energijsko kapaciteto, zato omejitev sinteze ATP dejansko povzroča omejitev energijske porabe in s tem zmogljivost sistema \cite{sahlin1998energy}. 
+
+Za ponovno sintezo ATP molekul, lahko celice uporabljajo aerobni ali anaerobni metabolizem \cite{scott2005misconceptions}. Pri \textbf{aerobnem metabolizmu} formacija ATP poteka preko glikolize in Krebsovega cikla, kjer se porablja kisik $\mathrm{O}_2$. Diagram aerobnega metabolizma je predstavljen na sliki \ref{fig:metabolism}. Ta se pojavlja večinoma pri ponavljajočih ritmičnih gibih in manj intezivni fizični aktivnosti, kot je kolesarjenje, daljši tek, ples, itd. \cite{patel2017aerobic}. Ker se aerobni procesi uporabljajo za dolgotrajnejše dejavnosti, imajo visoko kapaciteto in nizko moč \cite{sahlin1998energy}. Njihovo kapaciteto lahko zmerimo s pomočjo zmogljivosti kardio-respiratornega sistema \cite{patel2017aerobic}. Večja dobava kisika, bo posledično omogočila več aerobnega metabolizma in proizvajanja ATP molekul. Za kriterij aerobne kapacitete se je tako uveljavilo merjenje porabe kisika (${VO}_2$).
+
+\textbf{Anaerobni metabolizem} se pojavi, ko primanjkuje kisika, za produkcijo ATP molekul \cite{patel2017aerobic}. Formacija ATP poteka preko glikolize in fermentacije, kar povzroča nizko raven ATP, sintezo mlečne kisline in akumulacijo laktata v krvi. Diagram anaerobnega metabolizma je predstavljen na sliki \ref{fig:metabolism}. Mlečna kislina zakisa mišice, to pa vodi v mišično utrujenost \cite{sahlin1998energy}. Anaerobni procesi se pojavijo ob intenzivnih aktivnostih, ki trajajo kratek čas (sprint, dviganje uteži...) \cite{patel2017aerobic}. Anaerobni procesi imajo tako veliko moč, vendar nizko kapaciteto \cite{sahlin1998energy}.
+
+
+\begin{figure}[htb]
+\centering
+\resizebox {\columnwidth} {!}{
+\input{./Slike/metabolism.tikz}
+}
+ \caption[Diagram aerobnega in anaerobnega metabolizma]{Diagram aerobnega in anaerobnega metabolizma. Pri aerobnem metabolizmu formacija ATP poteka preko glikolize in Krebsovega cikla, kjer se porablja kisik \cite{scott2005misconceptions}. Pri anaerobnem metabolizmu se ATP formirajo preko glikolize in fermentacije.}
+ \label{fig:metabolism}
+\end{figure}
+
+
+
+
+
+
+\section{Merjenje energijske porabe}\label{sec:merjenje}
+Zhang et al. \cite{zhang2004improving} je izpostavil, da je fizična aktivnost zelo kompleksna, še posebej če upoštevamo različen življenjski slog posameznika. Merjenje energijske porabe zato predstavlja velik metodološki izziv.
+
+Kot smo razložili v poglavju \ref{sec:energija} je energijska poraba pravzaprav toplota, ki izhaja iz energijskih procesov mišičnih celic \cite{scott2005misconceptions}. Energijsko porabo zato lahko določimo z merjenjem toplotnih izgub med subjektom in kalorimetrom \cite{levine2005measurement}. Tovrstno merjenje imenujemo \textbf{direktna kalorimetrija}. Merilne naprave za direktno kalorimetrijo so izjemno drage, ki jih uporabljajo le visoko specializirani laboratoriji \cite{levine2005measurement}. Obstaja več tipov naprav, za vse pa je značilno, da so to komore, ki zagotavljajo toplotno ravnovesje. Odzivni časi so dokaj dolgi in lahko trajajo do \SI{30}{\min}, merilna napaka pa se giblje med \SI{1}{\%} - \SI{2}{\%} \cite{levine2005measurement}.
+
+Toplota v človeškem telesu nastaja zaradi aerobnega ali anaerobnega metabolizma \cite{scott2005misconceptions}. Ker ima anaerobni metabolizem nizko kapaciteto in traja kratek čas \cite{sahlin1998energy}, se je v športu bolj uveljavilo merjenje aerobne kapacitete \cite{scott2005misconceptions,howley1995criteria}. Pri aerobnem metabolizmu se za produkcijo toplote porablja kisik, zato lahko energijsko porabo posredno merimo s porabo kisika (${VO}_2$) \cite{scott2005misconceptions}. Tako merjenje imenujemo \textbf{indirektna kalorimetrija} \cite{levine2005measurement}. Merilne naprave so glede na direktno kalorimetrijo cenejše in manj kompleksne. Večinoma gre za naprave z masko, ki mora biti fiksirana na nos in usta \cite{levine2005measurement}, zato niso primerne za široko uporabo ali izven-laboratorijske preiskave. Z merilnimi napakami pod \SI{3}{\%} in dokaj hitrimi odzivnimi časi prekašajo metode direktne kalorimetrije \cite{levine2005measurement}. 
+
+Za potrebe terenskih preiskav se je razvila tretja skupina merilnih tehnik, t.i. \textbf{nekalorimetrične metode} \cite{levine2005measurement}. Energijska poraba nastaja zaradi gibanja telesa, zato se nekalorimetrične metode osredotočajo na opazovanje kinematike in ostalih fizioloških parametrov, ki sodelujejo pri fizičnih aktivnostih \cite{levine2005measurement}. Sem sodijo meritve srčnega utripa, elektromiografija, uporaba pedometrov in pospeškometrov ter brezkontaktne metode.
+
+\subsection{Srčni utrip}
+Pri zmerni fizični aktivnosti obstaja linearna povezava med srčnim utripom in porabo kisika \cite{keytel2005prediction}. Kar pa težko rečemo za odnos do energijske porabe, saj obstaja velika varianca med posamezniki \cite{levine2005measurement}. Ta je odvisna od fizioloških parametrov, kot so spol, višina, teža, ter telesna pripravljenost. Prav tako na pravilno estimacijo energijske porabe iz srčnega utripa vplivajo emocije in okoljske spremembe \cite{keytel2005prediction}. Srčni utrip, lahko zato uporabimo le v ozkem področju med \SI{90}{bpm} in \SI{150}{bpm}. Vendar še tu lahko dobimo razlike na intervalu $[-20~\% , 25~\%]$ glede na meritve indirektnih metod \cite{keytel2005prediction}. 
+
+Ker je srčni utrip zelo slab posrednik za estimacijo energijske porabe, so raziskovalci predlagali modele, ki upoštevajo dodatne fiziološke parametre \cite{charlot2014improvement}. Najbolj pogosto citirana modela, ki se uporabljata tudi za široko populacijo sta \textbf{Keytelova modela} \cite{keytel2005prediction}. Pri prvem modelu \eqref{eq:keytel1} moramo za izračun energijske porabe $W_p$ (\si{\kcal.\min^{-1}}) poznati spol $s$ ($1$ moški, $0$ ženska), starost $st$ (leto), težo $m$ (\si{\kg}), srčni utrip $hr$ (\si{bpm}) in maksimalno porabo kiska merjenca $VO_{2max}$ (\si{\ml.\kg^{-1}.\min^{-1}}). Korelacijski koeficient $R$ tega modela glede na indirektno kalorimetrijo znaša $0.812$ \cite{charlot2014improvement}.
+
+\begin{align} \label{eq:keytel1}
+W_p = & -59.3954 + s \cdot (-36.3781 + 0.271 \cdot st + 0.394 \cdot m  \nonumber \\
+& + 0.404 \cdot v + 0.634 \cdot hr ) + (1 - s) \nonumber \\
+& \cdot (0.274 \cdot st + 0.103 \cdot m + 0.380 \cdot VO_{2max} + 0.450 \cdot hr)
+\end{align}
+
+Drugi Keytelov model \eqref{eq:keytel2} ne upošteva maksimalne porabe kisika $VO_{2max}$, ki nam pogosto manjka in je zato manj točen \cite{keytel2005prediction}. Njegov korelacijski koeficient $R$ znaša $0.632$ \cite{charlot2014improvement}.
+
+\begin{align}\label{eq:keytel2}
+ W_p = & s \cdot (-55.0969 + 0.6309 \cdot hr + 0.1988 \cdot m + 0.2017 \cdot st) \nonumber \\
+ & + (1 - s) \cdot (-20.4022 + 0.4472 \cdot hr - 0.1263 \cdot m + 0.074 \cdot st)
+\end{align}
+
+Charlot et al. \cite{charlot2014improvement} je z uporabo drugačnih parametrov izboljšala rezultate glede na drugi Keytelov model. Model \eqref{eq:charlot} je tako dosegel korelacijski koeficient $R$ $0.657$. Pri tem modelu moramo za izračun energijske porabe $W_p$ (\si{\kcal.\hour^{-1}})  poznati srčni utrip $hr$ (\si{bpm}), višino $h$ (\si{\cm}), težo $m$ (\si{\kg}), spol $s$ ($1$ moški, $2$ ženski), srčni utrip v mirovanju $hr_r$ (\si{bpm}) in teoretični maksimalni srčni utrip $hr_{tmax}$ (\si{bpm}) \cite{charlot2014improvement}. Srčni utrip v mirovanju je definiran kot srednja vrednost srčnega utripa zadnjih dveh minut pet minutnega mirovanja v ležečem položaju. Teoretični maksimalni srčni utrip lahko izračunamo na več različnih načinov. Najbolj pogosto uporabljena enačba za izračun je \eqref{eq:hrtmax1}, vendar pa obstajajo bolj natačni modeli, kot je enačba \eqref{eq:hrtmax2} \cite{miller1993predicting}. 
+
+\begin{align}\label{eq:charlot}
+W_p = & 171.62 + 6.87 \cdot hr + 3.99 \cdot h + 2.3 \cdot m \nonumber \\
+& - 139.89 \cdot s - 4.26 \cdot hr_r - 4.87 \cdot hr_{tmax}
+\end{align}
+
+\begin{align}
+	hr_{tmax} = & 220 - st \label{eq:hrtmax1}\\ 
+    hr_{tmax} = & 217 - 0.85 \cdot st \label{eq:hrtmax2}
+\end{align}
+
+Slaba lastnost modela \eqref{eq:charlot} je, da energijsko porabo računamo na urni interval in ne na minutni kot je to običajno. Pri pretvorbi v minutni interval dobimo približek, saj s tem upoštevamo konstantno vrednost energijske porabe na intervalu $1$ ure. 
+
+
+
+
+
+\subsection{Senzorji gibanja}\label{sec:senzorji-gibanja}
+
+Za predikcijo energijske porabe iz opazovanja kinematike se večinoma uporabljajo pedometri in pospeškometri \cite{levine2005measurement}. Pedometri zaznajo premike z vsakim korakom, vendar pa imajo probleme z občutljivostjo. Ker  z njimi ne moremo določiti dolžine koraka so zelo slabi prediktorji in se za tovrstna merjenja ne uporabljajo \cite{levine2005measurement}.
+
+Merjenje s pospeškometri je lahko dokaj natančno, saj je pospešek sorazmeren zunanjim silam in zato reflektira intenziteto gibanja \cite{yang2010review}. Pri tem moramo paziti, da uporabimo triosne in ne enoosnih pospeškometrov, saj ti ne dajejo zadovoljivih rezultatov \cite{levine2005measurement}. Pospeškometri se lahko uporabljajo tako za laboratorijske kot terenske raziskave \cite{yang2014sleep}, vendar pa kot pravi Zhang et al \cite{zhang2004improving} je njihova natančnost vprašljiva. Faktorji, ki vplivajo na njihovo natančnost so lokacija in način pritrditve na telo in zunanje vibracije \cite{yang2010review}. Priporočljivo je, da jih pritrdimo na spodnji del hrbta, saj bomo le tako zajeli večino premikov težišča telesa pri aktivnostih. za bolj natačne meritve bi morali pospeškometre pritrditi tudi na druge dele telesa, še posebej na okončine \cite{yang2010review}. To zmanjšuje njihovo praktičnost, saj omejujejo gibanje športnikov in s tem posredno vplivajo na rezultat. Pospeškometri pa imajo še eno slabo lastnost. Njihova natačnost močno upade kadar gibanje ni horizontalno s podlago, kar pomeni, da so neuporabni za hojo ali tek v hrib, plezanje, itd. \cite{yang2010review}.
+
+Za primer študije, ki uporablja kontakne metode lahko navedemo \cite{gjoreski2015context}. V tem delu so avtorji določevali energijsko porabo z regresijskimi modeli. Te so učili na večdimenzionalnih vektorjih značilk iz kontaknih senzorjev.
+
+
+
+
+
+\subsection{Brezkontakne metode}
+
+Zaradi omejitev kontaktnih senzorjev, slabih lastnosti srčnega utripa in drage indirektne kalorimetrije, ki se lahko uporablja samo v laboratoriju so raziskovalci razvili nekontaktne metode estimacije energijske porabe, kjer dominirajo metode analize video posnetkov \cite{botton2011energy,osgnach2010energy,silva2015assessing,peker2004framework,nathan2015estimating}. 
+
+
+
+
+\section{Prispevek dela}
+Nobena od brezkontaknih metod estimacije energijske porabe ne izkorišča polja gibanja, ki najbolj kvalitetno opisuje intenzivnost telesne aktivnosti. Zato v tem delu predlagamo novo metodo estimacije intenzivnosti telesne aktivnosti na podlagi značilk iz video posnetkov. Dolgoročni cilj tovrstnega razvoja je metoda, ki bi se uporabila kot popolnoma nemoteč, brezkontakten merilni instrument.
+
+Kljub specifični uporabi predlagane metode za merjenje energijske porabe, bi lahko tako metodo uporabili tudi za druge principe gibanja. Koncept merjenja s pomočjo optičnega toka nam omogoča, da opravljamo meritve z daljših razdalj, dokler nam optični sistem zagotavlja stabilno sliko. Tako smo se za prikaz posplošitve našega sistema odločili, da bomo preizkusili naš sistem kot detektor dihanja, saj dihanje, kot gibanje, ravno tako predstavlja vrsto telesne aktivnosti. Detekcija dihanja je podrobneje predstavljena v poglavju \ref{sec:detekcija-dihanja}
+
+V poglavju \ref{sec:metode}  predstavljamo metode, ki smo jih uporabili v postopku predikcije dihanja in predikcije energijske porabe. V poglavju \ref{sec:eksperimenti} so opisani eksperimenti in njihovi rezultati. Na koncu sledi še diskusija, kjer ovrednotimo rezultate. 
+
+
+
+\section{Podobna dela}\label{sec:podobna-dela}
+
+
+
+\subsection{Subjektivna primerjava aktivnosti gibanja}\label{sec:subjektivna-primerjava}
+
+Peker et al. \cite{peker2004framework} zagovarja stališče, da je intenziteta aktivnosti pri opazovanju video posnetkov subjektivna meritev. Pri opazovanju gibanja v video posnetkih bo vsaka oseba zaznala drugačno intenziteto. Vsekakor pa bodo vsi prepoznali hojo kot nizko intenziteto, tek pa visoko intenziteto aktivnsti. Na podlagi tega so zato v delu \cite{peker2004framework} predstavili izvedbo psihofizičnega protokola za primerjavo meritev intenzitete aktivnosti s pomočjo subjektivne reference.
+
+Subjektivni zlati standard so v \cite{peker2004framework} določili s 15 merjenci, ki so določevali intenziteto gibanja $294$ video posnetkov dolžine \SI{1.5}{\s} z lestvico od najmanjše do največje intenzitete $0$--$5$. Na podlagi strinjanja o intenziteti gibanja med subjekti, so izračunali mediano in jo uporabili za zlati standard. Glede na standard so avtorji \cite{peker2004framework} primerjali $9$ različnih deskriptorjev izpeljanih iz vektorjev gibanja. Ugotovili so, da je pravilnost estimacije odvisna od razdalje gibajočih oseb od kamere \cite{peker2004framework}. Prav tako na pravilnost vpliva tresenje kamere. Na podlagi primerjave srednje napake med deskriptorji so ugotovili, da so MPEG-7 deskriptorji gibanja primerni za uporabo v tovrstni problematiki \cite{peker2004framework}.
+
+Fiziologija gibanja je v \cite{peker2004framework} popolnoma izključena. Tu gre zgolj za primerjave med deskriptorji in grobo subjetkivno oceno intenzitete aktivnosti, ki ne daje nobenih oprijemljivih informacij. Predstavlja pa dobro usmeritev za uporabo deskriptorjev za namene ocene intenzitete aktivnosti. Ti naj bi temeljili na polju gibanja, ki je tudi najtesneje povezan s fiziologijo. Prav tako opisuje zametke problematike merjenja intezitete aktivnosti, ko opisuje odvisnost estimacije od razdalje oseb od kamere in njeno premikanje.
+
+
+
+
+\subsection{Predikcija tipov fizične aktivnosti z video analizo}
+
+V študiji \cite{silva2015assessing} so evaluirali avtomatski sistem za video analizo. S predikcijo tipov fizične aktivnosti so želeli pokazati, da so metode računalniškega vida ravno tako primerne za določevanje fizične aktivnosti, kot pospeškometri in orodja za ročno označevanje.
+
+Za eksperimente je Silva et al. \cite{silva2015assessing} uporabil 8 košarkašev, ki so igrali \SI{20}{minutno} igro. Košarkaši so imeli okoli pasu pritrjen pospeškometer Actigraph GT3X+, ki je služil za zlati standard. Za ročno označevanje so uporabili orodje SOPLAY, pri čemer so uporabili dva operaterja (SOPLAY 1 in SOPLAY 2) \cite{silva2015assessing}. Video sistem (CAM) je bil sestavljen iz ene kamere Gigabit Ethernet camera DFK 31BG03.H, ki je bila pritrjena na strop igrišča. Uporabili so širokokotno lečo Computar T2Z1816CS z goriščnimi razdaljami \SI{1.8}{\mm}--\SI{3.6}{\mm} \cite{silva2015assessing}. Snemali so z resolucijo $1024$x$768$ in \SI{30}{fps}. S sledenjem igralcev v koordinatnem sistemu igrišča so določili njihove hitrosti \cite{silva2015assessing}. Na podlagi tega so določili tri tipe fizične aktivnosti in sicer:
+
+\begin{itemize}
+\item Lahka fizična aktivnost ($<$\SI{0.9}{m.s^{-1}}),
+\item hoja (\SI{0.9}{m.s^{-1}}--\SI{1.8}{m.s^{-1}}) in
+\item Fizična aktivnost velike intenzitete ($>$\SI{1.8}{m.s^{-1}})
+\end{itemize}
+
+Rezultati dela \cite{silva2015assessing} so prikazani v tabeli \ref{tab:silva}. Raziskovalci so ugotovili, da avtomatski sistem za video analizo deluje bolje od ročnega označevanja.
+
+\begin{table}[!htb]
+	\centering
+    \begin{tabular}{l S[table-format=2.2] S[table-format=1.2]}
+    \toprule
+    \textbf{Metoda} & \multicolumn{1}{c}{$\mathbf{\chi^2}$} & \multicolumn{1}{c}{\textbf{$e$ [\%]}} \\
+    \midrule
+    SOPLAY 1 & 77.60 & 8.68  \\
+    SOPLAY 2 & 93.10 & 9.60 \\
+    \textbf{CAM} & \boldentry{2.2}{36.40} & \boldentry{1.2}{5.32} \\
+    \bottomrule
+    \end{tabular}
+    \caption[Rezultati Silva et al. metod.]{Rezultati ročnega anotiranja prvega operaterja (SOPLAY 1), ročnega anotiranja drugega operaterja (SOPLAY 2) in avtomatskega sistema za video analizo (CAM) iz \cite{silva2015assessing}. Za metriko so uporabili $\chi^2$ in srednjo procentualno napako (e). V tabeli so prikazani samo rezultati primerjave s podatki pospeškometra GT3X. Najboljša metoda je odebeljena.}
+    \label{tab:silva}
+\end{table}
+
+Za razliko od dela v poglavju \ref{sec:subjektivna-primerjava} v \cite{silva2015assessing} že uporabijo objektivne metode, ki ne temeljijo na posameznikovi percepciji intenzivnosti fizične aktivnosti. S stališča fiziologije je hitrost posredno povezana s intenziteto aktivnosti, ampak tu avtorji subjektivno kategorizirajo intenzitete aktivnosti v tri tipe glede na hitrost. V tem pogledu gre spet le za grobo oceno intenzitete. Ta temelji le na premikanju masnega centra, saj tu ne opazujejo celotnega telesa. Za bolj jasno evaluacijo v \cite{silva2015assessing} manjkajo uveljavljeni zlati standardi z indirektno metodo. Tu so zlati standard določili s pospeškometri, ki imajo že sami po sebi probleme pri estimaciji kot smo to opisali v \ref{sec:senzorji-gibanja}.
+
+
+
+
+\subsection{Ocena energijske zahtevnosti igranja nogometa}
+
+V delu \cite{osgnach2010energy} so avtorji pokazali, da lahko z video analizo in fizikalnim modelom ocenimo energijsko zahtevnost igranja nogometa. Nogomet vsebuje tako aerobne kot neaerobne elemente energijske porabe. Kot navaja Osgnach et al. \cite{osgnach2010energy} je obremenitev igralcev na tekmo okoli \SI{70}{\%} maksimalne aerobne kapacitete ($VO_{2max}$). Ti na tekmo porabijo \SI{1200}{\kcal}--\SI{1500}{\kcal}. 
+
+Čeprav so metode, s katerimi so ocenili energijsko porabo in obremenitev v nogometu, zanesljive, ni bilo razvite še nobene, ki bi merila trenutno porabo \cite{osgnach2010energy}. Takšna metoda bi bila bistveno bolj natačna, saj je energijski profil tega športa bistveno bolj razvejan, kot pa standardne meritve konstantega teka na tekalni stezi. Igralci so tako \SI{70}{\%} tekme v nizki intenziteti porabe energije (hitra hoja in lahkoten tek), ostalo pa v visoki intenziteti kamor spada sprint \cite{osgnach2010energy}. 
+
+Osgnach et. al \cite{osgnach2010energy} zagovarja stališče, da največji del metabolične obremenitve nastane pri pospeševanju in zaviranju, zato so razvili fizikalni model, s katerim lahko določijo energijsko porabo glede na hitrost in pospeške \cite{osgnach2010energy}. Model predvideva, da sta konstanten tek v hrib in sprint ekvivalentna, saj se telo v času sprinta nagne za določen kot glede na tla.  
+
+Za izračun energijske porabe igralca v \SI{90}{\min} tekmi, so snemali $56$ tekem, kjer je sodelovalo $399$ igralcev \cite{osgnach2010energy}. Pozicije igralcev v času tekme so določili s polavtomatskim sistemom SICS, ki uporablja štiri \SI{25}{\Hz} kamere. Merilna napaka je bila \SI{1.0}{\%}. Zmogljivost posameznega igralca so določili s tremi parametri, ki so jih razdelili na posamezne kategorije \cite{osgnach2010energy}:
+
+\begin{itemize}
+\item Hitrost ($6$ kategorij),
+\item Pospešek ($8$ kategorij) in
+\item Metabolična moč ($5$ kategorij).
+\end{itemize}
+
+Avtorji so v \cite{osgnach2010energy} določili, da igralec na tekmo porabi $1107 \pm 119$~kcal, kar se sklada z opažanji ostalih raziskovalcev. Ugotovili so, da je energijska poraba pri različnih hitrostih podobna, saj naj bi bila bolj odvisna od pospeševanja in zaviranja. Ker so tu računali energijsko porabo le iz teka, niso upoštevali drugih aktivnosti kot je skakanje, brcanje žoge, itd. Delo ne zajema nobene primerjave modela z referenčnimi podatki energijske porabe, zato ne moremo z zagotovostjo trditi o njegovi pravilnosti. Sama metoda uporabe fizikalnega modela je omejena na tek, zato ga ne moremo uporabiti za vrsto drugih aktivnosti.
+
+
+
+
+
+\subsection{Merjenje aktivnosti v tenisu}
+
+Tako kot nogomet, je tudi tenis kompleksen šport, kjer se uporabljata anaerobni in aerobni metabolizem \cite{botton2011energy}. Obremenite so tu nekoliko manjše, saj dosegajo ravni $<$ \SI{60}{\%}--\SI{70}{\%} \vomax. Tudi v tenisu so estimacije srednje vrednosti energijske porabe neprimerne, saj profil intenzitete fizične aktivnosti ni konstanten. V delu \cite{botton2011energy} so zato razvili metodo estimacije energijske porabe s pomočjo metaboličnih modelov fundamentalnih aktivnostih. 
+
+Maksimalno aerobno kapaciteto igralcev (\vomax) so določili z inkrementalnim testom na sobnem kolesu Monark 824 z 80 rpm in \SI{20}{W.\min^{-1}} povečevanjem, s čimer so dosegli izčrpanost pod \SI{17}{\min} \cite{botton2011energy}. Za referenčno določevanje porabe kisika (\vo) med testi pa so uporabili prenosni system za analizo plinov K4B2. 
+
+Aktivnostni profil tenisa  so v \cite{botton2011energy} razdelili na $5$ fundamentalnih aktivnosti: hoja, tek, sedenje, udarci z loparjem in serviranje. S pomočjo merjenja porabe kisika in linearnim naraščanjem hitrosti hoje in teka ter linearnim naraščenjem frekvence udarcev so določili linearne metabolične modele za posamezno fundamentalno aktivnost. Z njimi so računali metabolično moč. Pri tem so uporabili $8$ teniških igralcev \cite{botton2011energy}. Metabolične modele so uporabili v poenostavljenih matematičnih ASTRABIO modelih, za opisovanje porabe kisika, aerobne in anaerobne porabe energije, glede na čas izvajanja fundamentalne aktivnosti. 
+
+Čas izvanja posameznih fundamentalnih aktivnosti so določili s snemanjem in video analizo tekme z Canon MVI 850i digitalno kamero s Canon A28 širokokotno lečo \cite{botton2011energy}. Kamera je bila postavljena %\SI{6}{m} za igriščem in \SI{5.55}{m} visoko 
+tako, da je pokrivala igrišče do mreže. 
+
+Z merjenjem $16$ iger so dobili za estimacijo porabe aerobne energije korelacijski koeficient $R = 0.93$ \cite{botton2011energy}. Srednja vrednost porabe kisika je za model zanaša $51.7 \pm 10.5$~\% \vomax. Izmerjena srednja vrednost je bila $52.0 \pm 9,1$ \% \vomax. Poleg tega so lahko 
+v \cite{botton2011energy} posebej določili aerobno in anaerobno porabo energije. Ugotovili so, da je bilo anaerobne porabe \SI{30}{\%} celotne energije, v času serviranja in udarcev z loparjem pa se je povečala na \SI{95}{\%}.  
+
+Sama metodologija v \cite{botton2011energy} dokaj natančno določi energijsko porabo za posamezne tipe aktivnosti. Prav tako z različnimi modeli omogoča predikcijo porabe kisika ter anaerobne in aerobne porabe energije. Validacija modelov je trdna, saj so jih avtorji primerjali s standardno indirektno kalorimetrijo. Kljub temu lahko v uporabi metaboličnih modelov opazimo nekaj pomankljivosti. Razvoj metaboličnih modelov ni trivialen in zahteva precej časa. Prav tako je omejen na specifično vrsto športa, ki vsebuje fundamentalne aktivnosti. Te pa so s stališča računalniškega vida težje določljive in otežujejo razvoj avtomatskih metod, kjer ne potrebujemo operaterjev.
+
+
+
+
+\subsection{Ocena energijske porabe s Kinect senzorji}
+
+Nathan et al. \cite{nathan2015estimating} je poskušal oceniti energijsko porabo z Microsoft Xbox Kinect V1. Gre za sistem zajemanja gibanja brez markerjev, kjer se uporablja globinska kamera s strukturirano svetlobo \cite{nathan2015estimating}. Pridobanje podatkov s tako napravo je nevsiljivo, zato se merjenec lahko premika svobodno in naravno. 
+
+V \cite{nathan2015estimating} so napravo uporabili za snemanje skeletnega modela in modeliranja energijske porabe iz mehaničnega dela. Za eksperimente so uporabili $2$ Kinect kameri v razmiku \SI{60}{\stopinj} glede na merjenca. $19$ subjektov je opravljalo $4$ različne vaje najmanj $4$ minute \cite{nathan2015estimating}. Med vajami so merjenci stoje mirovali, dokler se poraba kisika ni umirila na že prej kalibrirano stojno mirovno metabolično stopnjo. Za zlati standard so uporabili Cortex Metamax 3B avtomatski sistem za analizo plina \cite{nathan2015estimating}.
+
+Iz premikov posameznih segmentov skeletnega modela so v \cite{nathan2015estimating} določili različne značilke. Med njimi so določili koncentrične in ekscentrične kontrakcije mišic za masni center, spodnje in zgornje okončine ter faktor drže. Ta je predstavljal količino dela, ki ga porabi telo za ohranitev poze \cite{nathan2015estimating}. Za predikcijo so uporabili Gaussovo regresijo (GPR), lokalno uteženo regresijo K najbljižji sosed (KNNR) in linearno regresijo (LINR). Rezultati modelov v obliki metrik so prikazani v tabeli \ref{tab:nathan}.
+
+\begin{table}[!htb]
+	\centering
+    \begin{tabular}{l 
+    S[table-format=2.3]
+    S[table-format=2.2] 
+    S[table-format=1.3]}
+    \toprule
+    \textbf{Model} & \multicolumn{1}{c}{\textbf{$RMSE$}} & \multicolumn{1}{c}{\textbf{$e$ [\%]}} & \multicolumn{1}{c}{\textbf{$CCC$}} \\
+    \midrule
+    \textbf{GPR} & \boldentry{2.3}{8.384} &  35.64 & \boldentry{1.3}{0.879} \\
+    KNNR & 8.415 & 29.76 & 0.847 \\
+    LINR & 10.229 & \boldentry{2.2}{29.39} & 0.847 \\
+    \bottomrule
+    \end{tabular}
+    \caption[Rezultati Nathan et al. modelov]{Rezultati modela Gaussove regresije (GPR), modela lokalno utežene regresije K-najbljižji sosed (KNNR) in modela linearne regresije (LINR) iz dela \cite{nathan2015estimating}. Avtorji so za prikaz rezultatov uporabili koren srednje kvadratne napake (RMSE), srednjo procentualno napako (e) in konkordančni korelacijski koeficient (CCC). Najboljši rezultati posamezne metrike in modela so odebeljeni. Najbolje se je iskazal GPR model \cite{nathan2015estimating}.}
+    \label{tab:nathan}
+\end{table}
+
+Avtorji \cite{nathan2015estimating} so ugotovili, da z njihovo metodo lahko dobro ocenijo energijsko porabo le za aktivnosti visoke intenzitete, kot je skakanje. To omejuje uporabnost take metode, saj  so aktivnosti visoke intenzitete tudi pomembne in lahko bistveno vplivajo na rezultate \cite{osgnach2010energy}. Prav tako je metoda omejena z opremo, saj moramo imeti senzorje, ki omogočajo razpoznavanje skeleta. Za razliko od prejšnjih del, ki temeljijo na fizičnih in metaboličnih modelih \cite{osgnach2010energy,botton2011energy}, to metodo lahko apliciramo na različne športe. 
+
+
+
+\section{Detekcija dihanja}\label{sec:detekcija-dihanja}
+Detekcija dihanja, je zelo pomembna v medicini, saj je dihanje eno izmed osnovnih življenjskih funkcij. Seveda obstaja že veliko literature in aplikacij na to temo \cite{sathyanarayana2015vision}.
+
+Velik poudarek pri spremljanju dihanja dajejo detekciji  \textbf{sindroma spalne apneje} \cite{sathyanarayana2015vision}. Gre za pogosto in resno zdravstveno stanje \cite{wang2006vision}, kjer prihaja do krajših zastojev dihanja \cite{flemons2002obstructive}. Zastoji dihanja se pojavljajo skozi celo noč in zmanjšujejo kvaliteto spanca. Pomanjkanje spanca pa vpliva na kvaliteto življenja in povečuje nagnjenost k zdravstvenim težavam \cite{malhotra2002obstructive}. Apneja lahko povzroča depresijo in diabetes. Prav tako je povezana s kardiovaskularnimi obolenji \cite{takemura2005respiratory}.
+
+Obstajata dva tipa sindroma spalne apneje. Vzrok \textbf{centralne spalne apneje} je okvara možganskega centra za nadziranje dihanja \cite{javaheri2010central}. Možgani so nezmožni generiranja signalov za ritmično dihanje, kar povzroči pomanjkanje respiratornega gibanja prsnega koša in abdomna. \textbf{Obstruktivno spalno apnejo} pa povzroči kolaps mehkega tkiva v grlu. Tkivo zapre dihalne poti, kar povzroči premikanje prsnega koša in abdomna v nasprotni smeri.
+
+Trenutni klinični standard za diagnozo sindroma spalne apneje je \textbf{polisomnograf} (PSG) \cite{collop2007clinical}, kjer uporabljamo različne kontaktne senzorje za meritve različnih fizioloških parametrov \cite{heinrich2015video}. Ker so senzorji pritrjeni na pacienta, ga zato motijo med spanjem. Kljub problemom kontaktnih senzorjev, so tovrstne meritve dokaj natačne z nizko stopnjo napak. Največji problem polisomnografske meritve je v tem, da je zelo draga in ni primerna za dolgotrajno opazovanje pacientov.
+
+Bolj dostopna alternativa za detekcijo respiratornih motenj je \textbf{pulzna oksimetrija} \cite{netzer2001overnight}. Tu merimo ponavljajoče fluktuacije v nasičenosti kisika v arteriah ($\mathrm{SpO}_{2}$) \cite{levy1996accuracy}. Obstaja kar nekaj kazalnikov za predikcijo sindroma spalne apneje, ki so opisani v \cite{netzer2001overnight, magalang2003prediction}. Najbolj pogosto se uporablja \SI{4}{\%} zmanjšanje nasičenosti glede na delovno točko signala. Na podlagi raznih raziskav \cite{cooper1991value,magalang2003prediction,netzer2001overnight,levy1996accuracy} je natančnost oksimetrije podobna natačnosti PSG, zato se lahko uporablja kot alternativa za diagnozo sindroma spalne apneje.
+
+Po drugi strani danes obstaja že kar nekaj nekontaknih metod na podlagi računalniškega vida, ki ne motijo spanca in s tem ogrožajo razultate. Večinoma se uporabljajo infra-rdeče kamere s sledenjem premikanja prsnega koša \cite{sathyanarayana2015vision}. Nekateri so poskušali tudi z globinskimi kamerami \cite{yang2014sleep}, kamerami s časom preleta \cite{falie2009statistical} in razvojem namenskih senzorjev \cite{takemura2005respiratory}.
+
+Za sledenje premikanja prsnega koša se uporabljajo standardne metode za detekcijo gibanja. Razliko med slikami so uporabili v delu \cite{nakai2000non}, optični tok pa v delu \cite{nakajima2001development}. Ker je dihanje ciklično gibanje in je nagnjeno h okluzijam, avtorji v delu \cite{wang2014unconstrained} zagovarjajo stališče, da te metode niso primerne za to problematiko. V našem preliminarnem delu \cite{koporec2017observation}, smo pokazali, da lahko z uporabo namenskih deskriptorjev naredimo bolj robusten optični tok s katerim smo sposobni detektirati dihanje.
 
 
