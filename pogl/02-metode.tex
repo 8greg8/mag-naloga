@@ -1,0 +1,1173 @@
+\chapter{Metode}\label{sec:metode}
+\section{Model gibanja}\label{sec:model-gibanja}
+% Ponovi teorijo energijske porabe in kako pridemo do gibanja
+% Dokazi, da lahko gibanje opazujemo s kamerami
+% Teorija, da je najboljši približek optični tok
+Da mišice lahko s svojimi kontrakcijami spravijo telo v pogon, potrebujejo energijo, pri tem pa se del energije pretvarja v toploto, ki ji pravimo energijska poraba \cite{scott2005misconceptions}. Energijska poraba nastaja zaradi gibanja telesa, zato jo lahko določimo z opazovanjem kinematike \cite{levine2005measurement}. Zaradi omejitev kontaktnih senzorjev in slabih lastnosti srčnega utripa so v študijah, ki so opisane v poglavju \ref{sec:podobna-dela}, dokazali, da lahko z opazovanjem kinematike z računalniškim vidom določimo energijsko porabo. 
+
+Naj bo delec z maso $m$ predstavljen kot točka prizora $\vec{p} = [X~Y~Z]^\top$, na sliki \ref{fig:model-gibanja}. $X$, $Y$ in $Z$ predstavljajo koordinate na posameznih oseh v koordinatnem sistemu kamere \cite{trucco1998introductory}. Gibanje delca $\vec{p}$ lahko predstavimo z vektorjem hitrosti $\vec{v} = [v_X~v_Y~v_Z]^\top$, $\vec{v} \in \mathcal{V} \subset \mathbb{R}^3$, kjer so $v_X$, $v_Y$ in $v_Z$ hitrosti glede na osi in $\mathcal{V}$ vektorski prostor. Kadar imamo v prostoru več masnih delcev, množico vektorjev hitrosti imenujemo \textbf{polje hitrosti} (angl. Velocity Field) $\mathbf{H}: \mathbb{R}^3 \to \mathcal{V}$, kjer velja $\vec{p} \mapsto \vec{v}$ \cite{trucco1998introductory}.
+
+
+\begin{figure}
+\centering
+\input{./Slike/model-gibanja.tikz}
+\caption[Predstavitev delca $\vec{p}$ v koordinatnem sistemu kamere]{Predstavitev delca $\vec{p}$ v koordinatnem sistemu kamere. Delec je predstavljen kot točka prizora z vektorjem hitrosti $\vec{v}$ \cite{trucco1998introductory}.}
+\label{fig:model-gibanja}
+\end{figure}
+
+
+
+
+Relativno gibanje delca $\vec{p}$ glede na koordinatno izhodišče kamere $O$ lahko opišemo kot:
+
+\begin{equation}
+	\vec{v} = -\vec{T}-\omega\times\vec{p},
+\end{equation}
+
+kjer je $\vec{T}$ translatorna hitrost in $\omega$ kotna hitrost \cite{trucco1998introductory}. Po komponentah lahko gibanje opišemo z enačbo \eqref{eq:gibanje}
+
+\begin{equation} \label{eq:gibanje}
+	\begin{bmatrix}
+	v_X \\ v_Y \\ v_Z
+	\end{bmatrix}
+    =
+    \begin{bmatrix}
+    - T_X - \omega_Y Z + \omega_Z Y \\
+    - T_Y - \omega_Z X + \omega_X Z \\
+    - T_Z - \omega_X Y + \omega_Y X
+    \end{bmatrix}.
+\end{equation}
+
+Gibanje telesa v prostoru torej lahko opišemo s poljem hitrosti $\vec{H}$.
+
+
+
+
+
+
+
+
+
+
+\section{Optični tok} \label{sec:opticni-tok}
+% Teorija optičnega toka
+% vrste optičnega toka
+% Kateri tip smo mi uporabili
+% Zakaj smo tega uporabili
+% Kako smo ga uporabili
+% Problemi naše predpostavke
+% Rešitev s kalibracijo velikosti
+Za namen razlage upoštevamo perpektivni model kamere, kjer je \cite{trucco1998introductory}:
+
+\begin{itemize}
+\item \textbf{optična os} enaka $Z$ osi koordinatnega sistema kamere.
+\item \textbf{Gibajoči masni delec} je predstavljen enako kot v poglavju \ref{sec:model-gibanja}.
+\item \textbf{Osvetlitev} se ne spreminja.
+\end{itemize}
+
+Sliko delca $\vec{q} = [x~y]^\top$ na slikovni ravnini $\mathit{\Omega} \subset \mathbb{R}^2$, kjer sta $x$ in $y$ slikovni koordinati, lahko predstavimo z enačbo
+
+\begin{equation}\label{eq:slika-delca}
+	\vec{q} = f \frac{\vec{p}}{Z},
+\end{equation}
+
+kjer je $f$ goriščna razdalja kamere \cite{trucco1998introductory}. Delec in njegova slika sta predstavljena na sliki \ref{fig:optical-flow} S časovnim odvodom enačbe \eqref{eq:slika-delca}, dobimo hitrost delca na slikovni ravnini:
+
+\begin{equation}\label{eq:hitrost-slike-delca}
+	\vec{u} = f \frac{Z\vec{v}-v_Z\vec{p}}{Z^2},
+\end{equation}
+
+kjer je $\vec{u} \in \mathcal{U} \subset \mathbb{R}^2$.
+
+
+
+
+\begin{figure}
+\centering
+\input{./Slike/opticni-tok.tikz}
+\caption[Preslikava hitrosti delca na slikovno ravnino $\mathit{\Omega}$]{ Preslikava hitrosti delca na slikovno ravnino $\mathit{\Omega}$. Gibajoči delec $\vec{p}$ ima sliko $\vec{q}$. Hitrost delca $\vec{v}$ ima sliko hitrosti $\vec{u}$, ki predstavlja idealni vektor gibanja. Koordinatni sistem predstavlja sistem kamere.}
+\label{fig:optical-flow}
+\end{figure}
+
+
+
+
+Razširjena oblika enačbe \eqref{eq:hitrost-slike-delca}, kjer upoštevamo \eqref{eq:gibanje}, je zapisana z enačbo \eqref{eq:hitrost-slike-delca-raz} \cite{trucco1998introductory}. Prvi člen v posamezni enačbi predstavlja \textbf{translatorni del}, ostali členi pa sodijo v \textbf{rotacijski del}.
+
+\begin{equation}\label{eq:hitrost-slike-delca-raz}
+\begin{aligned}
+	u_x = & \frac{T_Z x - T_X f}{Z} - \omega_Y f + \omega_Z y + \frac{\omega_X x y}{f} - \frac{\omega_Y x^2}{f} \\
+    u_y = & \frac{T_Z y - T_Y f}{Z} - \omega_X f + \omega_Z x + \frac{\omega_Y x y}{f} - \frac{\omega_X y^2}{f}
+\end{aligned}
+\end{equation}
+
+Kadar imamo na slikovni ravnini več slik delcev, množico vektorjev hitrosti $\vec{u}$ imenujemo \textbf{polje gibanja} (angl. Motion Field) $\vec{G} : \mathit{\Omega} \to \mathcal{U}$, kjer velja $ \vec{q} \mapsto \vec{u}$ \cite{trucco1998introductory}. Polje gibanja $\vec{G}$ lahko razumemo kot projekcijo polja hitrosti $\vec{H}$ na slikovno ravnino, zato ta predstavlja idealno rekonstrukcijo gibanja. V praksi do polja gibanja ne moremo dostopati, zato se poslužujemo njegovih približkov.  
+
+Video posnetek je sestavljen iz sekvence slik, to pa lahko opišemo kot funkcijo osvetljenosti slikovnega elementa $I(\vec{x},t)$, na poziciji $\vec{x} = [x~y]^\top$ ob času $t$ \cite{wedel2011stereo}. Gibanje oseb opazimo kot premikanje pikslov skozi čas, pri čemer predpostavimo, da osvetljenost posameznega piklsa ostaja konstantnta \cite{trucco1998introductory}. Stacionarnost osvetljenosti slikovnega elementa lahko opišemo z enačbo  
+
+\begin{equation}
+	\frac{d I(\vec{x}, t)}{dt} = \frac{\partial I}{\partial x} \frac{dx}{dt} + \frac{\partial I}{\partial y} \frac{dy}{dt} + \frac{\partial I}{\partial t} = 0,
+\end{equation}
+
+to pa lahko zapišemo z vektorjem hitrosti slikovnega elementa $\vec{w} \in \mathcal{W} \subset \mathbb{R}^2$ v kompaktnejšo obliko
+
+\begin{equation}\label{eq:opticni-tok}
+	(\nabla I)^\top \vec{w} + I_t = 0.
+\end{equation}
+
+Enačba \eqref{eq:opticni-tok} predstavlja \textbf{omejitev optičnega toka} \cite{trucco1998introductory}. Če v enačbi \eqref{eq:opticni-tok} normaliziramo prostorski gradient $(\nabla I)$, v enačbi \eqref{eq:aperture-problem} opazimo, da lahko  določimo le hitrost, ki je vzporedna prostorskemu gradientu. Pojav je znan kot problem reže (angl. Aperture problem) \cite{trucco1998introductory}. 
+
+\begin{equation}\label{eq:aperture-problem}
+	\frac{(\nabla I)^\top \vec{w}}{\| \nabla I \|} = - \frac{I_t}{\| \nabla I \|} = w_n
+\end{equation}
+
+\textbf{Problem reže} si lahko razlagamo na način opazovanja gibanja daljice na beli podlagi skozi režo tako, da ne vidimo koncev. Zaradi omejene vizualne informacije lahko določimo hitrost le v pravokotni smeri na daljico \cite{trucco1998introductory}. Razlaga je predstavljena na sliki \ref{fig:aperture-problem}.
+
+
+
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/problem-reze.tikz}
+\caption[Problem reže]{Problem reže. Ker skozi režo ne vidim koncev daljice, lahko določimo le hitrost v pravokotni smeri na daljico \cite{trucco1998introductory}.}
+\label{fig:aperture-problem}
+\end{figure}
+
+
+
+
+Kadar imamo na slikovni ravnini več premikajočih slikovnih elementov, vektorsko polje hitrosti $\vec{w}$ imenujemo \textbf{optični tok} (angl. Optical flow) $\vec{O}: \mathit{\Omega} \to \mathcal{W}$, kjer velja $ \vec{q} \mapsto \vec{w}$ \cite{trucco1998introductory}. Optični tok je dobra aproksimacija polja gibanja v točkah visokega prostorskega gradienta svetlosti in konstantne osvetlitve.
+
+
+
+\subsection{Metode estimacije optičnega toka}
+
+Metode estimacije optičnega toka $\vec{O}$ v grobem delimo na diferencialne in {ujemalne} metode \cite{trucco1998introductory}. Z \textbf{diferencialnimi metodami} računamo optični tok z uporabo parcialnih diferencialnih enačb ali minimizacijskimi metodami. Z metodami dobimo \textbf{gost optični tok}, kar pomeni, da je optični tok določen za vsak slikovni element \cite{trucco1998introductory}. Te metode zelo natačno opisujejo optični tok in ne proizvajajo vrednosti, ki lokalno odstopajo, zato je optični tok gladek \cite{brox2011large}.  Glavni problem teh metod je, da so računsko zelo zahtevne \cite{trucco1998introductory}.
+
+Pri \textbf{ujemalnih metodah} računamo optični tok le na značilnih točkah \cite{trucco1998introductory}. Zaradi uporabe značilk so te metode lahko bolj efektivne, saj ne potrebujemo določevanja korespondenc za vse piksle. Prav tako se lahko uporabijo za računanje optičnega toka v realnem času, saj niso računsko zahtevne. Po \cite{trucco1998introductory} je največja težava teh metod, da računajo \textbf{redek optični tok}, saj je ta določen le za slikovne elemete, ki predstavljajo značilne točke. Prav tako delujejo dobro le pri majhnih premikih, ker temeljijo na Taylorjevi aproksimaciji enačbe \eqref{eq:opticni-tok} \cite{wedel2011stereo}. 
+
+Na podlagi zgoraj opisanih lastnosti smo se odločili, da bomo v tem delu uporabili diferencialno metodo. Kljub višji računski zahtevnosti, ki ob današnji tehnologiji ne predstavlja več takega problema, smo želeli računati gost optični tok. Z gostim optičnim tokom tako dobimo natačno aproksimacijo polja gibanja za celotno telo. Prav tako nimamo problemov pri estimaciji energijske porabe za hitre gibe, kot bi bilo to v primeru uporabe ujemlanih metod. Ker je glavni namen uporaba in ne implementacija diferencialne metode, smo se osredotočili na Farneb{\"a}ck algoritem, ki je dostopen v knjižnici OpenCV.
+
+\paragraph{Farneb{\"a}ck algoritem.}
+Alogritem temelji na estimaciji premika z razčlenjevanjem polinoma  po enačbi \eqref{eq:polinom}, kjer je $\vec{A}$ simetrična matrika, $\vec{b}$ vektor in $c$ skalar \cite{farneback2003two}.
+
+\begin{equation}\label{eq:polinom}
+	f(\vec{x}) \sim \vec{x}^\top \vec{A} \vec{x} + \vec{b}^\top \vec{x} + c
+\end{equation}
+
+Ideja temelji na tem, da aproksimiramo okolico piksla s kvadratičnim polinomom, pri čemer želimo najti premik piksla na poziciji $\vec{x}$ z minimizacijo enačbe \eqref{eq:polinom-min} in omejitvijo \eqref{eq:omejitev-polinoma}. $\vec{A}_1(\vec{x})$ in $\vec{b}_1(\vec{x})$ sta razčlenitvena koeficienta za prvo sliko, $\vec{A}_2(\vec{x})$ in $\vec{b}_2(\vec{x})$ koeficienta za drugo sliko in $w(\Delta\vec{x})$ je utežna funkcija za sosedne točke.
+
+\begin{align}
+\vec{A}(\vec{x}) = & \frac{\vec{A}_1(\vec{x} + \vec{A}_2(\vec{x}))}{2} \\
+\Delta\vec{b}(\vec{x}) = & - \frac{1}{2}\left(\vec{b}_2(\vec{x}) - \vec{b}_1(\vec{x})\right) 
+\end{align}
+
+\begin{equation}\label{eq:polinom-min}
+\sum_{\Delta x \in I} w(\Delta\vec{x}) \| \vec{A}(\vec{x} + \Delta\vec{x})\vec{d}(\vec{x}) - \Delta\vec{b}(\vec{x} +\Delta\vec{x}) \|^2
+\end{equation}
+
+\begin{equation}\label{eq:omejitev-polinoma}
+\vec{A}(\vec{x})\vec{d}(\vec{x}) = \Delta\vec{b}(\vec{x})
+\end{equation}
+
+Rešitev minimizacije enačbe \eqref{eq:polinom-min} je enačba \eqref{eq:polinom-resitev}
+
+\begin{equation}\label{eq:polinom-resitev}
+ \vec{d}(\vec{x}) = \left( \sum w \vec{A}^\top \vec{a} \right)^{-1} \sum w \vec{A}^\top \Delta\vec{b}
+\end{equation}
+
+Evaluacija algoritma je bila narejena v \cite{Geiger2012CVPR}. Rezultati so povzeti v tabeli \ref{tab:farneback}. Algoritem so preverjali s procesorjem z 1 jedrom \@ \SI{2.5}{GHz}.
+
+\begin{table}
+	\centering
+    \begin{tabular}{S[table-format=2.2] S[table-format=2.2] S[table-format=2.1] S[table-format=2.1] S[table-format=3.2] S[table-format=1]}
+    \toprule
+    \multicolumn{1}{c}{\textbf{Out-Noc}} & \multicolumn{1}{c}{\textbf{Out-All}} & \multicolumn{1}{c}{\textbf{Avg-Noc}} & \multicolumn{1}{c}{\textbf{Avg-All}} & \multicolumn{1}{c}{\textbf{Gostota}} & \multicolumn{1}{c}{\textbf{Čas izvajanja}} \\
+    \midrule
+    47.59~\% & 54.00~\% & 17.3~px & 25.3~px & 100.00~\% & 1~s\\
+    \bottomrule
+    \end{tabular}
+    \caption[Evaluacija Farneb{\"a}ck algoritma v KITTI Vision Benchmark 2012]{Evaluacija Farneb{\"a}ck algoritma v KITTI Vision Benchmark 2012 \cite{Geiger2012CVPR}. Metrika Out-Noc predstavlja procent pikslov, ki težijo k napakam v območju, kjer ni prekrivnosti. Out-all je procent pikslov, ki težijo k napakam v celoti. Avg-Noc je povprečna napaka disparitete v območjih neprekrivnsoti. Avg-All je povprečna napaka disparitete v celoti. Gostota predstavlja procent pikslov, za katere je metoda določila referenco \cite{Geiger2012CVPR}.}
+    \label{tab:farneback}
+\end{table}
+
+
+
+
+\section{Prostorski tok}
+% Teorija prostorskega toka
+% Katero metodo smo mi uporabili in zakaj
+Optični tok $\vec{O}$ predstavlja aproksimacijo polja gibanja $\vec{G}$, ta pa je projekcija polja hitrosti $\vec{H}$ na slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Če pogledamo z druge perspektive, ni optični tok $\vec{O}$ nič drugega kot projekcija aproksimacije polja hitrosti $\vec{H}$, ki jo po analogiji lahko imenujemo \textbf{prostorski tok} (angl. Scene Flow) \cite{vedula1999three}. 
+
+Za namen razlage upoštevamo enake omejitve kamere, masnega delca in osvetlitve, kot v poglavju \ref{sec:opticni-tok}. Predpostavimo, da imamo v prostoru površino $f(x,y,z) = 0$ na kateri imamo gibajoč točkovni delec $\vec{p} = \vec{p}(t)$. Na slikovni ravnini $\mathit{\Omega}$ imamo njegovo sliko $\vec{q}$ \cite{vedula1999three}. Vizualni prikaz prizora lahko vidimo na sliki \ref{fig:scene-flow}. 
+
+
+
+
+\begin{figure}
+\centering
+\input{./Slike/scene-flow.tikz}
+\caption[Vizualni prikaz vektorja prostorskega toka $\vec{w}$]{Vizualni prikaz vektorja prostorskega toka $\vec{w}$. V prostoru imamo površino $f$ na kateri leži gibajoči točkovni delec $\vec{p}$ \cite{vedula1999three}. Na slikovni ravnini $\mathit{\Omega}$ imamo sliko delca $\vec{q}$ s prostorskim tokom $\vec{w}$.}
+\label{fig:scene-flow}
+\end{figure}
+
+
+
+Ker je slika projekcija delca na slikovno ravnino $\mathit{\Omega}$, lahko zapišemo $\vec{q} = \vec{q}(\vec{p})$. Hitrost slike določimo po enačbi \eqref{eq:opticni-tok-sf}, ki predstavlja enačbo vektorja optičnega toka $\vec{w}$, kot projekcijo prostorskega toka \cite{vedula1999three}. 
+
+
+\begin{equation}\label{eq:opticni-tok-sf}
+	\vec{w} = \frac{d\vec{q}}{dt} = \frac{\partial \vec{q}}{\partial \vec{p}}\frac{d\vec{p}}{dt}
+\end{equation}
+
+Če predpostavimo, da imamo dovoj informacije o sistemu, da lahko določimo inverzno funkcijo $\vec{p} = \vec{p}(\vec{q},t)$, kjer je masni delec $\vec{p}$ projekcija slike $\vec{q}$, lahko določimo njegovo hitrost $\vec{\mu} \in \mathcal{\Mu} \subset \mathbb{R}^3$ z enačbo \eqref{eq:scene-flow}. Slednja je sestavljena iz dveh delov. Prvi člen je projekcija vektorja optičnega toka $\vec{w}$ na tangentno ravnino površine $f$, v točki, kjer se nahaja delec $\vec{p}$ \cite{vedula1999three}. Drugi člen je hitrost spreminjanja oddaljenosti delca od slikovne ravnine $\mathit{\Omega}$, ko slika delca stoji na miru. 
+
+\begin{equation}\label{eq:scene-flow}
+	\vec{\mu} = \frac{d\vec{p}}{dt} = \frac{\partial \vec{p}}{\partial \vec{q}} \frac{d\vec{q}}{dt} + \left.\frac{\partial \vec{p}}{\partial t}\right|_\vec{q}
+\end{equation}
+
+Kadar imamo v prostoru več, med seboj neodvisnih premikajočih masnih delcev, vektorsko polje hitrosti $\vec{\mu}$ imenujemo prostorski tok (angl. Scene Flow) $\vec{S}: \mathcal{W} \times \mathbb{R} \to \mathcal{\Mu}$, kjer velja $(\vec{w}, \dot{Z}) \mapsto \vec{\mu}$ \cite{yan2016scene}. $\dot{Z}$ predstavlja hitrost spreminjanja globine.
+
+\subsection{Metode estimacije prostorskega toka}
+Konvencionalne metode estimacije prostorskega toka so se razvile iz optičnega toka, in dodatne informacije o globini \cite{yan2016scene}. Slednjo lahko pridobimo s parom stereo kamer ali z uporabo sistemov večih kamer \cite{jaimez2015primal}. Vektor hitrosti prostorskega toka lahko v takih sistemih aproksimiramo z $\vec{\mu} = \left[w_x~w_y~\dot{d}\right]^\top$, kjer sta $(w_x, w_y)$ komponenti vektorja optičnega toka $\vec{w}$, $\dot{d}$ pa časovna sprememba disparitete \cite{yan2016scene}.
+
+Z razvojem RGB-D kamer, kjer RGB predstavlja barvno sliko, D pa globinsko sliko, smo dobili cenovno dostopne in natančne sisteme, ki omogočajo implementacijo hitrih algoritmov prostorskega toka \cite{yan2016scene,jaimez2015primal}. Ti večinoma temeljijo na globalni variacijski metodi, kjer rešujemo minimizacijski problem 
+
+\begin{equation}\label{eq:minimizacijski-problem}
+	\min_{\mu}\{E_D(\vec{\mu}) + E_R(\vec{\mu})\}
+\end{equation}
+
+V podatkovnem delu funkcionala \eqref{eq:minimizacijski-problem} $E_D(\vec{\mu})$ \eqref{eq:podatkovni-del} upoštevamo konstantno osvetljenost \eqref{eq:konstantna-osvetljenost} in konsistentnost spreminjana globine \eqref{eq:konsistentnost-globine}, kjer je  $\Psi$ cenilka. Ponavadi je uporabljena $L_2$ norma $\Psi(x) = \| x \|^2$ \cite{yan2016scene}. $\alpha$ v \eqref{eq:podatkovni-del} predstavlja utež.
+
+\begin{equation}\label{eq:konstantna-osvetljenost}
+	E_{KO} = \sum_\Omega \Psi( I(\vec{q} + \vec{w}) - I(\vec{q}))
+\end{equation}
+
+\begin{equation}\label{eq:konsistentnost-globine}
+	E_{KG} = \sum_\Omega \Psi\left( Z(\vec{q} + \Delta \vec{q}) - Z(\vec{q}) - \dot{Z}(\vec{q}))\right)
+\end{equation}
+
+\begin{equation}\label{eq:podatkovni-del}
+	E_D = E_{KO} + \alpha E_{KG}
+\end{equation}
+
+V regularizacijskem delu funkcionala \eqref{eq:minimizacijski-problem} $E_R(\vec{\mu})$ pa uporabimo enačbo \eqref{eq:regularizacijski-del}
+
+\begin{equation}\label{eq:regularizacijski-del}
+	E_R = \sum_\Omega \Psi\left( \nabla w_x \right) + \Psi\left( \nabla w_y \right) + \Psi\left( \nabla \dot{Z} \right)
+\end{equation}
+
+Ker smo v našem delu za računanje prostorskega toka uporabili Kinect senzorje, smo potrebovali metodo, ki temelji na RGB-D podatkih. Ker je glavni namen uporaba in ne implementacija algoritma prostorskega toka, smo se osredotočili na PD-Flow algoritem, ki je javno dostopen \cite{jaimez2015primal}.
+
+\paragraph{PD-Flow algoritem.}
+Algoritem spada pod globalne variacijske metode \cite{jaimez2015primal}. Za cenilko $\Psi$ v \eqref{eq:konstantna-osvetljenost} in \eqref{eq:konsistentnost-globine} avtorji uporabljajo $L_1$ normo. Za utež $\alpha$ v podatkovnem delu funkcionala \eqref{eq:podatkovni-del} se v tem algorimu uporablja funkcija 
+
+\begin{equation}\label{eq:utez}
+ \alpha(x,y) = \frac{\mu_0}{1 + k_\mu \left( \frac{\partial Z^2}{\partial x} + \frac{\partial Z^2}{\partial y} + \frac{\partial Z^2}{\partial t} \right)},
+\end{equation}
+
+kjer sta empirično določena parametra $\mu_0 = 75$ in $k_mu = 1000$. Za izračun podatkovnega dela uporabljajo hierarhično metodo grajenja slikovne piramide, pri tem pa uporabljajo linearizacijo podatkovnega dela \eqref{eq:podatkovni-del} \cite{jaimez2015primal}.
+
+Jaimez et al. v delu \cite{jaimez2015primal} predstavi nov regularizacijski del \eqref{eq:regularizacijski-del-pdflow}, kjer upošteva še geometrijo prizora s faktorjem $\vec{r}$ \eqref{eq:faktor-prizora}. Z njim upošteva, da lahko sosednji slikovni elementi predstavljajo točke v prostoru, ki so si različno oddaljene.
+
+\begin{equation}\label{eq:regularizacijski-del-pdflow}
+E_R = \sum_\Omega \Psi\left( (\nabla w_x)^\top \vec{r} \right) + \Psi\left( (\nabla w_y)^\top \vec{r} \right) + \Psi\left( (\nabla \dot{Z})^\top \vec{r} \right)
+\end{equation}
+
+\begin{equation}\label{eq:faktor-prizora}
+\vec{r} =
+\begin{bmatrix}
+\frac{1}{\sqrt{\frac{\partial X^2}{\partial x} + \frac{\partial Z^2}{\partial x}}} &
+\frac{1}{\sqrt{\frac{\partial Y^2}{\partial y} + \frac{\partial Z^2}{\partial y}}}
+\end{bmatrix}^\top
+\end{equation}
+
+Evaluacija PD-Flow algoritma je prikazana v tabeli \ref{tab:pdflow}. V tabeli so zapisani še rezultati RGB-D flow algoritma, ki za cenilko $\Psi$ ravno tako uporablja $L_1$ normo \cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma.
+
+\begin{table}
+	\centering
+    \begin{tabular}{l S[table-format=1.3] S[table-format=2.3] S[table-format=3.3] S[table-format=3.3]}
+    \toprule
+    \textbf{Algoritem} & \multicolumn{1}{c}{\textbf{NRMS-V}} & \multicolumn{1}{c}{\textbf{AAE}} & \multicolumn{1}{c}{\textbf{Čas izvajanja [s]}} & \multicolumn{1}{c}{\textbf{MAX-V [m]}} \\
+    \midrule
+    \textbf{PD-Flow} & \boldentry{1.3}{0.068} & \boldentry{2.3}{6.653} & \boldentry{3.3}{7.150} & 0.111 \\
+    RGB-D flow & 0.096 & 15.58 & 119.1 & 0.111 \\
+    \bottomrule
+    \end{tabular}
+    \caption[Evaluacija PD-Flow algoritma]{Evaluacija PD-Flow algoritma in primerjava z algoritmom RGB-D flow, ki uporablja enako cenilko $\Psi$ \cite{jaimez2015primal}. Za metrike se uporabljata povprečna kotna napaka (AAE) in normaliziran koren srednje kvadratične napake magnitude hitrosti (NRMS-V), kjer se največja magnituda (MAX-V) uporablja za normalizacijo \cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma. Odebeljene vrednosti predstavljajo najboljšo vrednost.}
+    \label{tab:pdflow}
+\end{table}
+
+
+
+
+
+
+
+
+
+\section{Deskriptorji}
+% Težave optičnega toka in prostorskega toka.
+% Kako bi te težave rešili z deskriptorji
+% Našli specifične deskriptorje
+Klasične metode optičnega toka so občutljive na šum, diskontinuitete gibanja ter spremembe v osvetljenosti objekta~\cite{brox2011large}, pri novejših pa še vedno obstaja problem pravilne ocene amplitude gibanja zaradi \textbf{pojava paralakse}~\cite{xu2012scale} -- objekti, ki so bolj oddaljeni od kamere imajo manjšo jakost optičnega toka. 
+
+
+Ker je prostorski tok projekcija optičnega toka v prostor ima podobne probleme kot optični tok \cite{yan2016scene}. Večja natančnost algoritma zahteva večjo \textbf{računsko zahtevnost}, kar vodi v manjšo učinkovitost. \textbf{Okluzija}, ki se lahko pogostokrat pojavi, krši konsistentnost podatkov skozi čas, in lahko vodi v napačno določitev korespondenc \cite{yan2016scene}. Pri \textbf{hitrem gibanju} večina algoritmov ne deluje, saj temeljijo na predpostavki kratkih premikov na časovno enoto. Zaradi \textbf{sprememb osvetlitve} prizora postane estimacija prostorskega toka neuporabna \cite{yan2016scene}. Prav tako lahko pride do problemov, ko imamo \textbf{pomanjkanje teksture}, saj težje izračunamo gradient.
+
+Surova optični in prostorski tok zaradi vrste problemov nista primerna za opis gibanja, čeprav predstavljata najbolj naravno metodo estimacije energijske porabe. Tudi če zagotovimo idealno okolje (kontinuiteta gibanja, konstantna osvetljenost, počasno gibanje in dobra tekstura) imamo še vedno problem šuma zaradi CCD senzorja \cite{wedel2011stereo}. Ravno tako se ne moremo znebiti paralakse ali zagotoviti neodvisnosti od smeri po $X$ osi koordinatnega sistema kamere \cite{chaudhry2009histograms}. Pri tem moramo tudi opozoriti, da se število slikovnih elementov, ki predstavljajo merjenca, spreminja skozi čas. Vsa dejstva stremijo k temu, da moramo za pravilno merjenje energijske porabe uporabiti deskriptorje, ki izboljšajo robustnost optičnega in prostorskega toka \cite{chaudhry2009histograms}. 
+
+
+
+
+
+
+
+\subsection{Histogrami orientiranega optičnega toka}\label{sec:hoof}
+% Teorija teh deskriptorjev
+% Kako smo jih mi uporabili
+% Težave teh deskriptorjev
+% Dodali nove deskriptorje
+Ko se človek premika se optični tok temporalno spreminja. Lahko rečemo, da se spreminja karakteristični profil optičnega toka \cite{chaudhry2009histograms}. Prva ideja za deskriptor bi bila distribucija optičnega toka. Ker pa se profil spreminja zaradi paralakse, potrebujemo deskriptor, ki je invarianten na skalo in smer gibanja \cite{chaudhry2009histograms}.
+
+Chaudhry et al. \cite{chaudhry2009histograms} predlaga uporabo histogramov orientiranega optičnega toka (HOOF), kjer vsak vektor optičnega toka zložimo v stolpec, glede na njegov kot in ga utežimo z njegovo velikostjo.
+
+Vektorju optičnega toka $\vec{w} = [x~y]^\top$ določimo smer \eqref{eq:smer} in amplitudo \eqref{eq:amplituda} \cite{chaudhry2009histograms}. Interval smeri $\Theta$ je določen z \eqref{eq:interval}. 
+
+\begin{align}
+	\Theta = & \tan^{-1}\left( \frac{y}{x} \right) \label{eq:smer} \\
+    \| \vec{w} \| = & \sqrt{x^2 + y^2} \label{eq:amplituda}
+\end{align}
+
+\begin{equation}\label{eq:interval}
+	-\frac{\pi}{2} + \pi \frac{b - 1}{N_{HOOF}} \leq \Theta < - \frac{\pi}{2} + \pi \frac{b}{N_{HOOF}}
+\end{equation}
+
+Interval smeri \eqref{eq:interval} pomeni, da vektorju $\vec{w}$ določimo stolpec $b$, za katerega velja $1 \leq b \leq N_{HOOF}$, pri čemer je $N_{HOOF}$ celotno število stolpcev histograma, na podlagi smeri $\Theta$ \cite{chaudhry2009histograms}. Pri tem moramo za smer $\Theta$ upoštevati najmanjši predznačen kot med vektorjem $\vec{w}$ in koordinatno osjo $x$ koordinatnega sistema slikovne ravnine $\mathit{\Omega}$. Z drugimi besedami, upoštevamo samo kote na intervalu \eqref{eq:interval-kot}, kote na intervalu \eqref{eq:interval-kot2} pa preslikamo na interval \eqref{eq:interval-kot}. Interval \eqref{eq:interval-kot} razdelimo na $N_{HOOF}$ podintervalov, ki predstavljajo stolpce histograma. 
+
+\begin{equation}\label{eq:interval-kot}
+	\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]
+\end{equation}
+
+\begin{equation}\label{eq:interval-kot2}
+	\left(\frac{\pi}{2},\frac{3\pi}{2}\right)
+\end{equation}
+
+Vsak vektor $\vec{w}$, ki leži v podintervalu ali stolpcu $b$ bo prispeval svojo velikost $\|\vec{w} \|$ k njegovi vsoti \cite{chaudhry2009histograms}. Dobljeni histogram še normaliziramo, tako da je njegova vsota enaka $1$.
+
+
+
+
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/hoof.tikz}
+\caption[Prikaz določitve HOOF histograma glede na kot vektorja]{Prikaz določitve HOOF histograma glede na kot vektorja optičnega toka $\vec{u}$. Slika prikazuje določitev za $6$ stolpcev.}
+\label{fig:hoof-histogram}
+\end{figure}
+
+
+
+
+Preslikava intervala \eqref{eq:interval-kot2} v interval \eqref{eq:interval-kot} omogoča neodvisnost histograma od leve ali desne smeri gibanja \cite{chaudhry2009histograms}. Če se subjekt premika v levo ali desno, bo histogram enak. Z normiranjem histograma dobimo invariantnost na skalo \cite{chaudhry2009histograms}. Če se subjekt premika daleč ali blizu kamere, bo histogram enak. Ker je vsak prispevek vektorja sorazmeren njegovi amplitudi, šumni vektorji nimajo vpliva na obliko histograma \cite{chaudhry2009histograms}. Posledično lahko določimo histogram za celotno sliko in zato ne potrebujemo segmentacije ali subtrakcije gibajoče osebe iz ozadja. 
+
+Edini parameter, ki ga moramo določiti za HOOF značilke je število stolpcev histograma $N_{HOOF}$. Chaudry et al \cite{chaudhry2009histograms} pravi, da moramo za dobro delovanje določiti najmanj $30$ stolpcev. 
+
+Parameter smo določili na podlagi rezultatov evaluacije v tabeli \ref{tab:nhoof} in grafov korelacije med referenčnimi podatki in predikcijo \ref{fig:corr-hoof}. Za evaluacijo smo uporabili učne vzorce hrbtne kamere preliminarnih laboratorijskih testov. Evaluirali smo samo za podatke energijske porabe $W$. Pridobljene značilke deskriptorjev smo normirali na intervalu $[-1,1]$ in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Metode so podrobneje predstavljene v poglavju \ref{sec:matematicni-modeli}. Za določitev optimalnih parametrov, ki so predstavljeni v tabeli \ref{tab:nhoof-param}, smo uporabili optimizacijsko metodo mrežnega iskanja \cite{hsu2003practical}. Rezultate smo filtrirali še s Kalmanovim filtrom, ki je predstavljen v \ref{sec:kalmanov-filter}.
+
+\begin{table}[htb]
+	\centering
+    \begin{tabular}{S[table-format=2.0] S[table-format=2.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
+    \toprule
+    \thead{$\mathbf{N_{HOOF}}$} & \thead{$\mathbf{C}$} & \thead{$\mathbf{\gamma}$} & \thead{$\mathbf{\epsilon}$} & \thead{MSE} \\ 
+    \midrule
+    30 & 8 & 0.707 & 0.812 & 7.903 \\
+    60 & 8 & 0.354 & 0.379 & 7.320 \\
+    120 & 11.314 & 0.177 & 0.536 & 6.998 \\
+    160 & 11.314 & 0.125 & 0.616 & 6.832 \\
+    \bottomrule
+    \end{tabular}
+    \caption[Optimalni parameteri RBF jedra modelov za določitev $N_{HOOF}$]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev $N_{HOOF}$ v HOOF deskriptorju.}
+    \label{tab:nhoof-param}
+\end{table}
+
+V tabeli \ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rezultati bistveno ne razlikujejo. Najbojlši rezultate nam sicer daje $120$ stolpcev, vendar pa smo za potrebe naše metode uporabili $N_{HOOF}=60$, ki je ravno tako dal zadovoljive rezultate. S takim številom smo zagotovili dobro delovanje glede na minimalno vrednost, še vseeno pa ne gre za tako veliko število, ko bi do izraza prišle amplitude šumnih vektorjev.
+
+\begin{table}[htb]
+	\centering
+    \begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
+    \toprule
+    \thead{$N_{HOOF}$} & \thead{$r$} & \thead{RAE} & \thead{RMSE} & \thead{nSV [\%]}\\
+    \midrule%nSV
+    30 & 0.978 & 0.296 & 0.304 & \boldentry{2.2}{62.81}\\%18089
+    \boldentry{2.0}{60} & 0.980 & 0.277 & 0.289 & 81.21\\%23388
+    120 & \boldentry{1.3}{0.983} & \boldentry{1.3}{0.261} & \boldentry{1.3}{0.273} & 74.39\\%21424
+    160 & 0.982 & 0.272 & 0.284 & 71.68\\%20644
+    \bottomrule
+    \end{tabular}
+    \caption[Rezultati evaluacije modelov z različnim $N_{HOOF}$]{Rezultati evaluacije modelov z različnim številom stolpcev $N_{HOOF}$ HOOF deskriptorja. Optimalni rezultati so odebeljeni. Kljub dobrim rezultatom modela z $N_{HOOF}=120$ smo izbrali $N_{HOOF}=60$, ker nanj šum manj vpliva.}
+    \label{tab:nhoof}
+\end{table}
+
+\begin{figure}[htb]
+	\centering
+    \begin{subfigure}[t]{0.45\columnwidth}
+    	\includegraphics[width=\columnwidth]{./Slike/corr-hoof-30.png}
+        \caption{Korelacija $N_{HOOF}=30$.}
+        \label{fig:corr-hoof-30}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/corr-hoof-60.png}
+      \caption{Korelacija $N_{HOOF}=60$.}
+      \label{fig:corr-hoof-60}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/corr-hoof-120.png}
+      \caption{Korelacija $N_{HOOF}=120$.}
+      \label{fig:corr-hoof-120}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/corr-hoof-160.png}
+      \caption{Korelacija $N_{HOOF}=160$.}
+      \label{fig:corr-hoof-160}
+    \end{subfigure}
+    \caption[Grafi korelacij modelov z različnim $N_{HOOF}$]{Grafi korelacij modelov z različnim številom stolpcev $N_{HOOF}$ HOOF deskriptorja. Rezultati so si zelo podobni.}
+    \label{fig:corr-hoof}
+\end{figure}
+
+
+
+
+
+
+
+
+
+\subsection{Histogrami absolutnih tokovnih amplitud}\label{sec:hafa}
+% Opis dodatnih deskriptorjev
+% Kako uporabili nove deskriptorje
+HOOF deskriptor modelira samo smer gibanja. Za modeliranje amplitude gibanja moramo uporabiti drug deskriptor. Idejo deskriptorja za modeliranje amplitude gibanja smo dobili v delu \cite{pers2010histograms}, kjer so avtorji za opis gibanja uporabili histograme optičnega toka (HOF). Gre za histograme v dveh dimenzijah, ki posebej kvantizirata amplitudo in smer optičnega toka v podregijah slike. 
+
+Vektorju optičnega toka $\vec{w}$, ki je opredeljen v poglavju \ref{sec:hoof}, ima amplitudo določeno na intervalu \eqref{eq:interval-amp1}. 
+
+\begin{equation}\label{eq:interval-amp1}
+	[0, \infty)
+\end{equation}
+
+
+Interval \eqref{eq:interval-amp1} lahko kvantiziramo po enačbi \eqref{eq:interval-amp2}. Ta pomeni, da vektorju $\vec{w}$ določimo stolpec $b$, za katerega velja $1 \leq b \leq N_{HAFA}$, pri čemer je $N_{HAFA}$ celotno število stolpcev histograma na podlagi amplitude $\| \vec{w} \|$. S tako kvantizacijo omejimo zgornjo mejo intervala \eqref{eq:interval-amp1} na parameter histograma $N_{HAFA}$. Ko tak histogram normiramo, ga imenujemo histogram absolutnih tokovnih amplitud (HAFA). Določitev HAFA histograma je prikazan na sliki \ref{fig:hafa-histogram}.
+
+\begin{equation}\label{eq:interval-amp2}
+	\frac{b-1}{N_{HAFA}} \leq \| \vec{w} \| < \frac{b}{N_{HAFA}}
+\end{equation}
+
+
+
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/hafa.tikz}
+\caption[Prikaz določitve HAFA histograma glede na velikost vektorja]{Prikaz določitve HAFA histograma glede na velikost vektorja optičnega toka $\vec{u}$. Slika prikazuje določitev za $3$ stolpce.}
+\label{fig:hafa-histogram}
+\end{figure}
+
+
+
+
+
+Parameter $N_{HAFA}$ smo določili na podlagi rezultatov evaluacije v tabeli \ref{tab:nhafa} in grafov korelacije med referenčnimi podatki in predikcijo \ref{fig:corr-hafa}. Za evaluacijo smo uporabili enak eksperimentalni protokol kot za HOOF značilke v poglavju \ref{sec:hoof}, s to razliko, da smo značilke normirali na intervalu $[0, 1]$ in odstranili stolpec z amplitudami $0.5$. S tem smo odstranili šum, ki se je pojavil, ko ni bilo nobenega gibanja. Amplitudo šuma smo določili, kot maksimalno vrednost amplitude, ki še ni predstavljala gibanja. Optimalni parametri evaluacijske metode so predstavljeni v tabeli \ref{tab:nhafa-param}.
+
+
+\begin{table}[htb]
+	\centering
+    \begin{tabular}{S[table-format=2.0] S[table-format=2.3] S[table-format=1.3]  S[table-format=1.3] S[table-format=1.3]}
+    \toprule
+    \thead{$\mathbf{N_{HAFA}}$} & \thead{$\mathbf{C}$} & \thead{$\mathbf{\gamma}$} & \thead{$\mathbf{\epsilon}$} & \thead{MSE} \\ 
+    \midrule
+    30 & 8 & 5.657 & 0.616 & 4.329 \\
+    60 & 8 & 5.657 & 0.616 & 4.327 \\
+    120 & 8 & 5.657 & 0.616 & 4.327 \\
+    160 & 8 & 5.657 & 0.616 & 4.327 \\
+    \bottomrule
+    \end{tabular}
+    \caption[Optimalni parameteri RBF jedra modelov za določitev $N_{HAFA}$]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev $N_{HAFA}$ v HAFA deskriptorju.}
+    \label{tab:nhafa-param}
+\end{table}
+
+V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za našo metodo smo izbrali $N_{HAFA}=60$, kar v grobem predstavlja $60$ različnih hitrosti z maksimalno amplitudo \SI{60}{px.f^{-1}}.
+
+\begin{table}[htb]
+	\centering
+    \begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
+    \toprule
+    \thead{$N_{HAFA}$} & \thead{$r$} & \thead{RAE} & \thead{RMSE} & \thead{nSV [\%]}\\
+    \midrule%nSV
+    30 & 0.984 & 0.213 & 0.231 & 62.08 \\%17879/28799
+    \boldentry{2.0}{60} & \boldentry{1.3}{0.984} & \boldentry{1.3}{0.211} & \boldentry{1.3}{0.228} & \boldentry{2.2}{62.60} \\%18028
+    120 & 0.984 & 0.211 & 0.228 & 62.63 \\%18037
+    160 & 0.984 & 0.211 & 0.228 & 62.63 \\%18037
+    \bottomrule
+    \end{tabular}
+    \caption[Rezultati evaluacije modelov z različnim $N_{HAFA}$]{Rezultati evaluacije modelov z različnim številom stolpcev $N_{HAFA}$ HAFA deskriptorja. Optimalni rezultati so odebeljeni.}
+    \label{tab:nhafa}
+\end{table}
+
+\begin{figure}[htb]
+	\centering
+    \begin{subfigure}[t]{0.45\columnwidth}
+    	\includegraphics[width=\columnwidth]{./Slike/corr-hafa-30.png}
+        \caption{Korelacija $N_{HAFA}=30$.}
+        \label{fig:corr-hafa-30}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/corr-hafa-60.png}
+      \caption{Korelacija $N_{HAFA}=60$.}
+      \label{fig:corr-hafa-60}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/corr-hafa-120.png}
+      \caption{Korelacija $N_{HAFA}=120$.}
+      \label{fig:corr-hafa-120}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/corr-hafa-160.png}
+      \caption{Korelacija $N_{HAFA}=160$.}
+      \label{fig:corr-hafa-160}
+    \end{subfigure}
+    \caption[Grafi korelacij modelov z različnim $N_{HAFA}$]{Grafi korelacij modelov z različnim številom stolpcev $N_{HAFA}$ HAFA deskriptorja. Rezultati so si zelo podobni.}
+    \label{fig:corr-hafa}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\subsection{Izbira deskriptorjev}
+
+Chaudhry et al. \cite{chaudhry2009histograms} predlaga uporabo histogramov orientiranega optičnega toka (HOOF) za estimacijo gibanja. Vendar pa smo v preliminarnih terenskih testiranjih \cite{koporec2017observation} ugotovili, da njihova uporaba v realnih okoliščinah ni zadovoljiva. HOOF deskriptorju smo pripeli HAFA deskriptor in tako dobili razširjeni deskriptor HOOF-HAFA, ki v splošnem daje boljše rezultate, kot lahko vidimo v tabeli \ref{tab:izbira} in na primerjalnih slikah \ref{fig:izbira}.
+
+Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne kamere terenskih testov. Evaluirali smo za podatke srčnega utripa $hr$. Srčni utrip smo za gradnjo modelov pretvorili v energijsko porabo $W$ po enačbi \eqref{eq:charlot}. Pridobljene značilke smo normirali na intervalu [0,1] in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Za določitev optimalnih parametrov, ki so predstavljeni v tabeli \ref{tab:nhoof-param}, smo uporabili optimizacijsko metodo mrežnega iskanja \cite{hsu2003practical}. Rezultate smo filtrirali še s Gaussovim jedrom (predstavljen v \ref{sec:gaussov-filter}) velikosti $6$ in varianco $\sigma=16$. 
+
+\begin{table}[htb]
+	\centering
+    \begin{tabular}{l S[table-format=2.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
+    \toprule
+    \thead{Deskriptor} & \thead{$\mathbf{C}$} & \thead{$\mathbf{\gamma}$} & \thead{$\mathbf{\epsilon}$} & \thead{MSE} \\ 
+    \midrule
+    HOOF & 2.828 & 11.314 & 0.435 & 2.192 \\
+    HOOF-HAFA & 5.657 & 2.828 & 0.154 & 1.781 \\
+    \bottomrule
+    \end{tabular}
+    \caption[Optimalni parameteri RBF jedra modelov za izbiro deskriptorjev]{Optimalni parametri RBF jedra za modele z različnim deskriptorjem.}
+    \label{tab:izbira-param}
+\end{table}
+
+
+\begin{table}[htb]
+	\centering
+    \begin{tabular}{l S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
+    \toprule
+    \thead{Deskriptor} & \thead{$r$} & \thead{RAE} & \thead{RMSE} & \thead{nSV [\%]}\\
+    \midrule%nSV
+    HOOF & 0.992 & 0.336 & 0.317 & \boldentry{2.2}{82.34} \\%2187/2656
+    \textbf{HOOF-HAFA} & \boldentry{1.3}{0.991} & \boldentry{1.3}{0.157} & \boldentry{1.3}{0.205} & 89.53 \\%2378
+    \bottomrule
+    \end{tabular}
+    \caption[Rezultati evaluacije modelov z različnim deskriptorjem]{Rezultati evaluacije modelov z različnim deskriptorjem. Optimalni rezultati so odebeljeni. Vidimo lahko, da se bolje odnese razširjeni deskriptor HOOF-HAFA, čeprav model uporablja več podpornih vektorjev. }
+    \label{tab:izbira}
+\end{table}
+
+
+
+\begin{figure}[htb]
+	\centering
+    \begin{subfigure}[t]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/corr-hoof.png}
+      \caption{Korelacija $N_{HOOF}=60$.}
+      \label{fig:izbira-hoof}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/corr-hoof-hafa.png}
+      \caption{Korelacija $N_{HOOF}=60$,\\$N_{HAFA}=60$.}
+      \label{fig:izbira-hoofhafa}
+    \end{subfigure}
+    \caption[Primerjava modelov s HOOF in HOOF-HAFA deskriptorji]{Primerjava grafov korelacij modelov z različnimi deskriptorji. Model \subref{fig:izbira-hoof}) smo naučili s HOOF deskriptorjem. Model \subref{fig:izbira-hoofhafa}) smo naučili s HOOF in HAFA deskriptorjem. Posamezen vzorec je tako vseboval $120$ značilk. Pri primerjavi korelacije lahko opazimo vidno razliko. Model \subref{fig:izbira-hoofhafa}) dokazuje, da je razširjeni deskriptor boljši.}
+    \label{fig:izbira}
+\end{figure}
+
+
+
+
+
+
+
+
+
+\section{Matematični modeli}\label{sec:matematicni-modeli}
+Metode strojnega učenja s podpornimi vektorji (SVM) se pogosto uporabljajo za klasifikacijo in regresijo \cite{chang2011a}. Njihova popularnost temelji na visoki uspešnosti generalizacije brez potrebe po predhodnem znanju \cite{chapelle1999support}. Njihova performanca delovanja ni odvisna od števila značilk, saj jih ponavadi uporabljamo v primerih ko ima vhodni prostor značilk $\mathcal{W}^n$ veliko moč $n$. Cilj teh metod je, da generiramo matematični model in ga uporabimo za predikcijo izhoda $y$ \cite{hsu2003practical}. 
+
+
+
+
+
+
+
+
+\subsection{Linearno ločljiva učna množica}
+Imamo učne vzorce $\{ \vec{x}_i, y_i \} \in \mathcal{U}_l$, kjer je $\vec{x}_i \in \mathcal{\Xi}_l \subset \mathbb{R}^n~\forall i = 1, \ldots, l$ vektor značilk oziroma deskriptor in $y_i \in \mathit{\Omega}_l \subset \mathbb{R}~\forall i = 1, \ldots, l$ oznake razredov objektov \cite{chapelle1999support}. Za poenostavitev privzamemo, da imamo samo dva razreda $y_i \in \{-1,1\}$. 
+
+Pri postopku s podpornimi vektorji v splošnem iščemo koeficiente $\vec{w} \in \mathcal{W} \subset \mathbb{R}^m$ ločilnih mej ali \textbf{hiper-ravnin} in prag $b$, ki razmejujejo prostor $\mathbb{R}^n$ tako, da so enako oddaljene od vzorcev $\vec{x}$ iz različnih razredov $\mathcal{C}_i~\forall i= 1, \ldots, p$, kot je prikazano na sliki \ref{fig:svm-locljivo} \cite{chapelle1999support}. Pri tem velja omejitev
+
+\begin{equation}\label{eq:omejitev-ravnine}
+	y_i(\vec{w} \vec{x}_i + b) \geq 1, i=1, \ldots, l.
+\end{equation}
+
+
+
+
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/svm.tikz}
+\caption[Prikaz ločevanja vzorcev na razrede s podpornimi vektorji]{Prikaz ločevanja vzorcev na razrede s podpornimi vektorji. Na sliki je prikazan primer ločevanja na dva razreda.}
+\label{fig:svm-locljivo}
+\end{figure}
+
+
+
+
+Če hiper-ravnina obstaja, pravimo, da je množica $\mathcal{U}_l$ \textbf{linearno ločljiva} \cite{chapelle1999support}. Ker želimo določiti ločilno mejo s čim širšim robom, moramo minimizrati $\|\vec{w}\|^2$, saj je razdalja med mejo in najbližjo točko $\frac{1}{\|\vec{w}\|}$. To naredimo z vpeljavo Lagrangeovih multiplikatorjev $\vec{\alpha} \in \mathcal{A}^i$ in maksimizacijo funkcije \eqref{eq:svm-lagrange} z omejitvijo \eqref{eq:svm-lagrange-omejitev} \cite{chapelle1999support}.
+
+\begin{equation}\label{eq:svm-lagrange}
+	\mathcal{L}(\vec{\alpha}) = \sum_{i=1}^l \alpha_i - \frac{1}{2}\sum_{i,j=1}^l \alpha_i\alpha_j y_i y_j \vec{x}_i^\top\vec{x}_j
+\end{equation}
+
+\begin{equation}\label{eq:svm-lagrange-omejitev}
+	\sum_{i=1}^ly_i\alpha_i = 0, \alpha_i \geq 0; i=1, \ldots, l
+\end{equation}
+
+Z rešitvijo maksimizacijskega problema \eqref{eq:svm-lagrange} $\vec{\alpha}^0$ lahko izračunamo optimalne koeficiente \cite{chapelle1999support}:
+
+\begin{equation}
+	\vec{w}_0 = \sum_{i=1}^l \alpha_i^0 y_i \vec{x}_i.
+\end{equation}
+
+Učnim vzorcem, za katere so $\alpha_i^0 > 0$ pravimo \textbf{podporni vektorji} \cite{chapelle1999support}.
+
+
+
+
+
+
+
+
+
+\subsection{Linearno neločljiva učna množica}
+Pri linearno neločjivi učni množici $\mathcal{U}_l$ uvedemo dodaten vektor spremenljivk $\vec{\xi} \in \mathit{\Lambda}^i$ in rešujemo optimizacijski problem \eqref{eq:svm}, kjer je $C>0$ regularizacijski parameter napake in $b$ prag \cite{chapelle1999support}. Večji $C$ pomeni manjšo dopustnost napak. 
+
+\begin{equation}\label{eq:svm}
+\begin{aligned}
+\min_{\vec{w}, b, \vec{\xi}} &~ \left\{ \frac{1}{2} \vec{w}^\top\vec{w} + C \sum_{i=1}^l\xi_i \right\}\\
+    \mathrm{z~omejitvijo} &~ y_i \left( \vec{w}^\top \vec{x}_i + b \right) \geq 1 - \xi_i,~ 
+    \xi_i \geq 0
+\end{aligned}	
+\end{equation}
+
+
+
+
+
+
+
+
+\subsection{Funkcije jedra}
+V primeru, ko učnih vzorcev ne moremo razmejiti brez napak v linearno hiper-ravnino jih lahko preslikamo v več razsežni prostor z nelinearno preslikavo $\phi: \mathcal{\Xi} \subset \mathbb{R}^n \to \mathcal{\Mu} \subset \mathbb{R}^m, n < m$, kjer lahko postanejo linearno separabilni \cite{chapelle1999support,boughorbel2005generalized}.Tako v enačni \eqref{eq:svm-lagrange} namesto $\vec{x}_i^\top\vec{x}_j$ uporabimo $\phi(\vec{x_i})^\top\phi(\vec{x_j})$ Preslikovanju vzorcev v m-razsežni prostor se lahko znebimo s t.i. \textbf{ukano jedra} (angl. Kernel trick), kjer uporabimo implicitno preslikavo $K: \mathcal{\Xi} \times \mathcal{\Xi} \to \mathbb{R}$ \cite{boughorbel2005generalized}. V skladu z Mercerjevim izrekom mora biti $K(\vec{x}_i,\vec{x}_j)$ simetrična in pozitivna funkcija. Takrat obstaja preslikava $\phi$ tako da velja $K(\vec{x_i}, \vec{x_j}) = \phi(\vec{x}_i)^\top\phi(\vec{x}_j)$.
+
+
+\subsubsection{Jedro radialnih baznih funkcij}{
+Jedro radialnih baznh funckij (RBF) ima naslednjo obliko z enim hiper-parametrom $\gamma$ \cite{hsu2003practical}:
+
+\begin{equation} \label{eq:rbf-kernel}
+		K_{RBF}(\vec{x_i}, \vec{x_j}) = e^{
+        	-\gamma 
+        	\begin{Vmatrix}
+        		\vec{x_i} - \vec{x_j}
+        	\end{Vmatrix}^2
+        }
+\end{equation}
+
+Avtorji v \cite{hsu2003practical} zagovarjajo, da pri učenju najprej poskusim z RBF jedrom. Prvi argument je, da to jedro ne vpliva na kompleksnost modela, saj moramo izbrati le en dodaten parameter $\gamma$. Kot drugo, imamo z njim manj numeričnih težav, saj se njegova vrednost giblje na intervalu $(0, 1]$ \cite{hsu2003practical}. 
+
+
+
+\subsubsection{Jedro preseka generaliziranih histogramov}
+Jedro preseka generaliziranih histogramov (GHI) je uporaben, ko imamo deskriptorje definirane kot histograme. Določen z enačbo \eqref{eq:ghi-kernel}, kjer je hiper-parameter $\beta \geq 0$, $m$ pa je število stolpcev histogramov $\vec{x}$ in $\vec{x}'$ \cite{boughorbel2005generalized}.
+
+\begin{equation}\label{eq:ghi-kernel}
+K_{GHI}(\vec{x}, \vec{x}') = \sum_{i=1}^m min\left\{ \left| x_i \right|^\beta, \left|  x_i' \right| \right\}
+\end{equation}
+
+Po \cite{boughorbel2005generalized} je prednost uporabe GHI jedra ta, da so meje invariantne na skaliranje prostora značilk, zato ne potrebujemo dodatne optimizacije skalirnega hiper-parametra. Optimalna vrednosti hiper-parametra je okoli $\beta=0.25$.
+
+%\subsubsection{linear}
+
+
+
+
+
+
+\subsection{Predprocesiranje}
+\subsubsection{Skaliranje značilk}
+
+Po \cite{hsu2003practical} je skaliranje značilk pred uporabo SVM zelo pomembno. S skaliranjem se znebimo dejstva, da značilke, definirane na večjem intervalu bolj vplivajo na rezultat, kot značilke z manjšim intervalom. Prav tako se s skaliranjem znebimo numeričnih težav med učenjem. Avtorji \cite{hsu2003practical} zato predlagajo skaliranje na intervalih $[-1, 1]$ ali $[0, 1]$.
+
+
+
+
+
+
+
+\subsubsection{Optimizacija SVM parametrov}
+
+Ker a priori ne poznamo najboljših parametrov postopka SVM in hiper-parametrov funkcij jedra, jih moramo optimizirati \cite{hsu2003practical}. S tem zagotovimo najboljše delovanje metode na naših podatkih. Za optimizacijo lahko uporabljamo mrežno iskanje s križno validacijo.  Pri mrežnem iskanju izračunamo predikcije za kombinacijo parametrov in jih evaluiramo s križno validacijo \cite{hsu2003practical}. Izberemo tisto kombinacijo parametrov, s katero smo dobili najboljšo natančnost. 
+
+Dobro je, če kombinacije parametrov izbiramo po eksponentni funkciji z osnovo $2$, saj s tem zagotovimo širok razpon iskanja \cite{hsu2003practical}. Iskanje optimalnih parametrov lahko pohitrimo z uporabo grobega in finega iskanja. Z grobim iskanjem omejimo območje iskanja za fino iskanje \cite{hsu2003practical}. S finim iskanjem pa dejansko optimiziramo parametre.
+
+
+
+
+
+
+\subsection{Postopki SVM}
+\subsection{Razvrščevalnik C-SVC}
+
+Razvrščevalnik rešuje problem \cite{chang2011a}:
+
+\begin{equation}\label{eq:c-svc}
+\begin{aligned}
+\min_{\vec{\alpha}} &~ \left\{ \frac{1}{2} \vec{\alpha}^\top Q \vec{\alpha} - \vec{e}^\top \vec{\alpha} \right\}\\
+    \mathrm{z~omejitvijo} &~ \vec{y}^\top \vec{\alpha} = 0,~ 
+    0 \geq \alpha_i \geq C, i=1, \ldots, l.
+\end{aligned}	
+\end{equation}
+
+$\vec{e}$ je vektor enic. $Q$ je pozitivna semidefinitna matrika s členi $Q_{ij} = y_i y_jK(\vec{x}_i,\vec{x}_j)$, kjer je $K(\vec{x}_i,\vec{x}_j)$ funkcija jedra. $\vec{\alpha}$ so Lagrangeovi multiplikatorji in $C>0$ je regularizacijski parameter \cite{chang2011a}.
+
+
+
+
+
+
+
+
+\subsubsection{Regresija \texorpdfstring{$\epsilon$}{e}-SVR}
+
+Za uporabo SVM pri regresiji uvedemo dodatni vektor spremenljivk $\vec{\xi^+}$. Primarni problem regresije $\epsilon$-SVR je  tako \cite{chang2011a}:
+
+\begin{equation}\label{eq:e-svr-primal}
+\begin{aligned}
+\min_{\vec{w}, b, \vec{\xi}, \vec{\xi}^+} &~ \left\{ \frac{1}{2} \vec{w}^\top\vec{w} + C \sum_{i=1}^l\xi_i + C \sum_{i=1}^l\xi_i^+ \right\}\\
+    \mathrm{z~omejitvijo} &~ y_i \left( \vec{w}^\top \vec{x}_i + b \right) \geq \epsilon - \xi_i,\\
+    &~  y_i \left( \vec{w}^\top \vec{x}_i + b \right) \leq \xi_i^+ - \epsilon, \\
+    &~  \xi_i,\xi_i^+ \geq 0, i=1, \ldots, l,
+\end{aligned}	
+\end{equation}
+
+kjer je $C>0$ regresijski parameter in $\epsilon > 0$ parameter kriterijske funkcije. Z njim določujemo toleranco do napak.
+
+Sekundarni problem se glasi \cite{chang2011a}:
+
+\begin{equation}\label{eq:e-svr-dual}
+\begin{aligned}
+\min_{\vec{\alpha}, \vec{\alpha}^+} &~ \left\{ \frac{1}{2} (\vec{\alpha} - \vec{\alpha^ +})^\top Q (\vec{\alpha} - \vec{\alpha}^+) +\right. \\
+&~ \left.\epsilon \sum_{i=1}^l\left( \alpha_i + \alpha_i^+ \right) + \sum_{i=1}^l y_i\left( \alpha_i - \alpha_i^+ \right) \right\}\\
+    \mathrm{z~omejitvijo} &~ 
+    \vec{e}^\top \left(\vec{\alpha} - \vec{\alpha^+} \right) = 0,\\
+    &~ 0 \geq \alpha_i, \alpha_i^+ \geq C, i=1, \ldots, l.
+\end{aligned}	
+\end{equation}
+
+$Q$ je matrika s z elementi $Q_{ij} = KK(\vec{x}_i,\vec{x}_j)$.
+
+
+
+
+
+\subsubsection{Regresija \texorpdfstring{$\nu$}{nu}-SVR}
+
+Pri regresiji $\nu$-SVR uporabljamo dodatni parameter $\nu \in (0, 1]$, s katerim kontroliramo razmerje števila podpornih vektorjev. Ostali parametri so enaki kot pri $\epsilon$-SVR, le da tu $\epsilon$ postane spremenljivka \cite{chang2011a}. Primarni problem se glasi:
+
+\begin{equation}\label{eq:nu-svr-primal}
+\begin{aligned}
+\min_{\vec{w}, b, \vec{\xi}, \vec{\xi}^+, \epsilon} &~ \left\{ \frac{1}{2} \vec{w}^\top\vec{w} + C (\nu\epsilon + \frac{1}{l}\sum_{i=1}^l\xi_i + \xi_i^+ \right\}\\
+    \mathrm{z~omejitvijo} &~ 
+    y_i \left( \vec{w}^\top \vec{x}_i + b \right) \geq \epsilon - \xi_i,\\
+    &~  y_i \left( \vec{w}^\top \vec{x}_i + b \right) \leq \xi_i^+ - \epsilon, \\
+    &~  \xi_i,\xi_i^+ \geq 0, i=1, \ldots, l, \epsilon \geq 0.
+\end{aligned}	
+\end{equation}
+
+Sekundarni problem opišemo z \cite{chang2011a}:
+
+\begin{equation}\label{eq:nu-svr-dual}
+\begin{aligned}
+\min_{\vec{\alpha}, \vec{\alpha}^+} &~ \left\{ \frac{1}{2} (\vec{\alpha} - \vec{\alpha^ +})^\top Q (\vec{\alpha} - \vec{\alpha}^+) + \vec{y}^\top \left( \alpha_i - \alpha_i^+ \right) \right\}\\
+    \mathrm{z~omejitvijo} &~ 
+    \vec{e}^\top \left(\vec{\alpha} - \vec{\alpha^+} \right) = 0,~ 
+    \vec{e}^\top \left(\vec{\alpha} + \vec{\alpha^+} \right) \leq C\nu,\\
+    &~ 0 \geq \alpha_i, \alpha_i^+ \geq C/l, i=1, \ldots, l.
+\end{aligned}	
+\end{equation}
+
+
+
+
+
+
+
+
+\section{Sledilnik}
+% tracker
+% Zakaj smo uporabili sledilnik
+% Na katere sledilnike smo ciljali 
+% Primerjava sledilnikov
+% Naši eksperimenti kateri je boljši
+%
+Gibanje objektov v prostoru zaznamo kot temporalno spreminjanje slike. Ta lastnost nam omogoča izluščenje koristnih informacij, kot je identifikacija objektov na podlagi karakteristike gibanja, določevanje njihove pozicije in ugotavljanje kaj se v sceni dogaja \cite{forsyth2002computer}. Forsyth et. al \cite{forsyth2002computer} sledenje opiše kot postopek, s katerim sklepamo o gibanju objektov glede na zaporedje slik. Problem sledenja v računalniškem vidu še ni v celoti rešljiv, saj obstaja veliko faktorjev, ki otežujejo delo sledilnikov \cite{danelljan2014adaptive}. Med njimi sodijo okluzija objekta, ki mu sledimo, razne geometrijske deformacije in zamegljenost zaradi hitrega gibanja, temporalno spreminjanje osvetljenosti, šum iz ozadja ter variacije v skali. 
+
+Sledlinike delimo v glavnem na dva pristopa: generativne in diskriminativne metode \cite{danelljan2014adaptive}. Pri \textbf{generativnih metodah} iščemo področja, ki so najbolj podobna modelu tarče. \textbf{Diskriminativne metode} predstavljajo binarni problem razvrščanja, saj pri njih želimo določiti mejo med tarčo in ozadjem. Slednjo metodo uporabljamo pri sledenju z detekcijo, ki daje najboljše rezultate \cite{danelljan2014adaptive}. Glavna ideja takega sledenja je sprotno učenje razvrščevalnika s trenutnim vzorcem tarče. Sledi korak detekcije tarče na naslednji sliki zaporedja z razvrščevalnikom in vizualno predstavitvijo tarče, ki smo se jo naučili skozi čas.
+
+
+
+
+
+
+\subsection{Zmanjševanje merilne napake}
+
+V našem delu opazujemo gibajoča telesa, zato je smiselno vpeljati sledilnik v merjenje energijske porabe. Z uporabo sledilnika dobimo realnejšo sliko meritve, saj se znebimo šuma iz ozadja (premikanja slikovnih elementov, ki niso del tarče). Izognemo se napaki merjenja zaradi šuma CCD senzorja in premikanja drugih objektov. To so lahko razni predmeti (žoge, loparji, itd.) ali druge osebe. Brezkontaktnemu merilnemu instrumentu tako dodamo širšo uporabno vrednost, saj ga v nasprotnem primeru ne bi mogli uporabljati v ekipnih športih in športih z žogo. 
+
+Zaradi uporabe optičnega in prostorskega toka pri določevanju modela gibanja nam merilno napako povzroča tudi premikanje kamere. S premikanjem kamere povzročimo relativno premikanje objetkov glede na koordinatni sistem kamere, četudi so ti glede na referenčni koordinatni sistem v prostoru pri miru. Tega problema se lahko znebimo z uporabo sledilnika. 
+
+Predpostavimo, da imamo idealni sledilnik in enako definicijo in omejitve kamere, masnega delca, slike delca in osvetlitve kot v poglavju \ref{sec:opticni-tok}. Idealni sledilnik v vsaki sliki zaporedja najde sliko delca $\vec{q}$ in posamezno sliko v zaporedju obreže tako, da je težišče tarče vedno v centru obrezane slike. Ne glede na gibanje kamere, bo pozicija slike delca $\vec{q}$ vedno v centru slikovne ravnine. Gibanje kamere zato ne bo vplivalo na optični tok $\mathcal{O}$.
+
+
+
+
+
+
+\subsection{Način izbire sledilnikov}\label{sec:pogoji-sledilnikov}
+Pri izbiri sledilnikov smo se osredotočili na pogoje, ki jim morajo sledilniki v največji meri zadostiti.
+
+\paragraph{Način sledenja.} Sledilnik mora dobro slediti osebam, ostali objekti niso pomembni. Sledenje mora biti zanesljivo, saj je od njega odvisna merilna napaka. Pri tem moramo upoštevati delovanje tudi v primerih, kadar tarča izgine iz slike. Sledenje mora delovati čimdaljši čas tako, da ne potrebujemo ponovne inicializacije. Inicializacijo sledilnika moramo opraviti samo na prvi sliki zaporedja, kar pomeni, da mora sledilnik vsebovati indirektno učenje (angl. offline training).
+
+\paragraph{Implementacija.} Zaradi uporabe sledilnika v merilnem instrumentu, mora ta delovati v realnem času oziroma čim hitreje. Ker namen tega dela ni implementacija sledilnika, mora biti ta implementiran v prosto dostopni izvorni kodi.  
+
+
+
+
+
+
+\subsection{Sledilnik za optični tok}
+Na podlagi že prej opisanih pogojev, smo za merilno metodo z optičnim tokom našli sledilnik TLD avtorja Kalal et. al \cite{kalal2012tracking}. Prosto dostopne so tri implementacije sledilnika in sicer v knjižnici ccv (CCV-TLD), v knjižnici OpenCV (OPENCV-TLD) in c++ izvorna koda (NEBEHAY-TLD). Implementaciji iz knjižnic ccv in OpenCV se nekoliko razlikujeta od izvirnega dela \cite{kalal2012tracking}, NEBEHAY-TLD pa je samo prepis matlabove izvorne kode. Ker ni nobena implementacija zadovoljivo delovala na testnih squash posnetkih, smo poskusili še sledilnikom KCF \cite{danelljan2014adaptive} in CORR \cite{danelljan2014accurate}. KCF je implementiran v knjižnici OpenCV, CORR pa v knjižnici Dlib \cite{king2009dlib}. 
+
+
+
+
+\subsubsection{Testiranje sledilnikov}
+Sledilnike smo testirali na sekvencah slik \textit{handball1} in \textit{handball2} podatkovne baze VOT2016 \cite{kristan2016visual}. Sledila je še hitra vizualna ocena delovanja na kratkih izsekih video posnetka \cite{squashtv2014squash}.
+
+Pri testiranju sekvenc slik podatkovne baze VOT2016 smo poenostavili rotirajoča referenčna področja detekcij na nerotirajoča področja. Pri tem smo za zgornji levi kot $T_0(x,y)$ in spodnji desni kot $T_1(x,y)$ uporabili enačbo \eqref{eq:vot-bb}, kjer so $\left( x_i, y_i\right), \forall i=1,\ldots,4$ ogljišča rotirajočega referenčnega področja. 
+
+\begin{equation}
+\begin{aligned}
+	T_0(x,y) &= \left( \min_{i = 1,\ldots,4}\left\{x_i \right\}, 
+    \min_{i=1,\ldots,4}\{y_i \} \right) \\
+    T_1(x,y) &= \left( \max_{i = 1,\ldots,4}\left\{x_i \right\}, 
+    \max_{i=1,\ldots,4}\{y_i \} \right)
+\end{aligned}
+\label{eq:vot-bb}
+\end{equation}
+
+Ker je za naš sledilnik najbolj pomembno zanesljivo delovanje, smo izbrali preprosto mero prekrivanja področja \eqref{eq:region-overlap}, ki je navedena tudi v \cite{vcehovin2016visual}. $\Lambda$ predstavlja opis tarče, $R_t$ je področje tarče ob času $t$, $N$ je število slik v zaporedju, $G$ predstavlja referenco in $T$ tarčo. S prekrivanjem področja dobimo rezultate na intervalu $\left[0,1\right]$. Večje število predstavlja boljši rezultat.
+
+\begin{align}
+	\Lambda &= \left\{R_t\right\}^N_{t=1}, \nonumber \\
+	\Phi(\Lambda^G, \Lambda^T) &= \left\{\phi_t\right\}^N_{t=1}, \nonumber \\
+    \phi_t &= \frac{R_t^G \cap R_t^T }{R_t^G \cup R_t^T} \label{eq:region-overlap}
+\end{align}
+
+
+Video posnetek \cite{squashtv2014squash} smo za potrebe vizualne ocene delovanja na squash posnetkih razdelili na več kratkih izsekov. Pri tem smo uporabili le hrbtne posnetke mirujoče kamere. 
+
+Rezultati testiranja so prikazani v tabeli \ref{tab:region-overlap}. Za izbrane sledilnike smo določili povprečje prekrivanja področja za posamezen posnetek. V tretjem stolpcu je predstavljeno povprečje prekrivanja glede na oba posnetka. Najboljši rezultati so odebeljeni. Po tabeli \ref{tab:region-overlap} se za posnetek \textit{handball1} najbolje izkaže CORR sledilnik. Za posnetek \textit{handball2} smo dobili najboljše rezultate pri sledilniku OPENCV-TLD. V povprečju se najbolje izkaže sledilnik CORR.
+
+
+
+
+\begin{table}[htb]
+	\centering
+    \begin{tabular}{l S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
+    \toprule
+    \thead{Sledilnik} & \thead{handball1} & \thead{handball2} & \thead{Povprečje}  \\
+    \midrule%nSV
+    NEBEHAY-TLD & 0.035 & 0.130 & 0.083 \\
+    CCV-TLD & 0.117 & 0 & 0.117 \\
+    OPENCV-TLD & 0.002 & \boldentry{1.3}{0.178} & 0.09 \\
+    CORR & \boldentry{1.3}{0.214} & 0.160 & \boldentry{1.3}{0.187} \\
+    \textbf{KCF} & {0.161} & {0.166} & {0.164} \\
+    \bottomrule
+    \end{tabular}
+    \caption[Povprečje prekrivanja področja za posamezen sledilnik]{Povprečje prekrivanja področja za posamezen sledilnik in posnetek. V tretjem stolpcu je predstavljeno povprečje prekrivanja glede na oba posnetka. Najboljši rezultati so odebeljeni. Po tabeli \ref{tab:region-overlap} se za posnetek \textit{handball1} najbolje izkaže CORR sledilnik. Za posnetek \textit{handball2} smo dobili najboljše rezultate pri sledilniku OPENCV-TLD. V povprečju se najbolje izkaže sledilnik CORR.}
+    \label{tab:region-overlap}
+\end{table}
+
+
+
+
+\begin{figure}
+\centering
+
+	\begin{subfigure}[t]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/handball1-example.png}
+      \caption{Korelacija $N_{HOOF}=60$.}
+      \label{fig:izbira-hoof}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.45\columnwidth}
+      \includegraphics[width=\columnwidth]{./Slike/handball2-example.png}
+      \caption{Korelacija $N_{HOOF}=60$,\\$N_{HAFA}=60$.}
+      \label{fig:izbira-hoofhafa}
+    \end{subfigure}
+    
+\caption[]{}
+\label{fig:tracker-visual}
+\end{figure}
+
+
+
+
+Čeprav smo z mero določili, da se je najbolje izkazal sledilnik CORR, se je pri hitri vizualni oceni sledenja na izsekih posnetka \cite{squashtv2014squash} izkazalo, da najbolje deluje sledilnik KCF. To je razumljivo, saj prvi testi temeljijo na posnetkih rokometa, drugi pa na squashu, kjer gre za bistveno drugačno igro. Če pogledamo tabelo \ref{tab:region-overlap} ima KCF drugo najboljše povprečje, prav tako pa so si rezultati posameznih posnetkov zelo podobni. 
+
+Glede na podane rezultate smo se odločili, da bomo uporabili sledilnik KCF. Njegova implementacija je opisana v nadaljevanju.
+
+
+
+\subsubsection{KCF sledilnik} 
+Implementacija sledilnika v knjižnici OpenCV temelji na delu \cite{danelljan2014adaptive}, kjer izboljšajo originalni KCF sledilnik iz dela \cite{henriques2012exploiting} z uporabo barvnih značilk. KCF sledilnik sodi med metode sledenja z detekcijo. Njegovo delovanje je prikazano na sliki \ref{fig:diagram-kcf}.
+
+\paragraph{Korak učenja.}
+Na področju tarče $x$ velikosti $M \times N$, vsakemu slikovnemu elementu pripada vrednost Gaussove funkcije $y$. Ob času $p$ poznamo $\mathcal{X}^p = \{x^j: j=1,\ldots,p\}$ področij tarče. Razvrščevalnik učimo z minimizacijo funkcije \eqref{eq:classifier-function}, ki predstavlja uteženo srednjo kvadratično napako čez področja $\mathcal{X}^p$, pri čemer je vsako področje uteženo s konstanto $\beta_j \geq 0$. $\phi$ predstavlja neliearno preslikavo v več rasežni prostor, za katero lahko uporabimo implicitno preslikavo ali funkcijo jedra $K$. V KCF sledilniku se uporablja Gaussovo RBF jedro \eqref{eq:kcf-gauss}. Konstanta $\lambda \geq 0$ je regularizacijski parameter.
+
+\begin{equation}
+\begin{aligned}
+\epsilon &= \sum_{j=1}^p \beta_j \left( 
+	\sum_{m,n} \left| \langle \phi\left(x_{m,n}^j \right), w^j \rangle - y^j(m,n) \right|^2
+    + \lambda \langle w^j, w^j \rangle
+\right), \\
+w^j &= \sum_{k,l} a(k,l) \phi\left(x_{k,l}^j  \right)
+\end{aligned}
+\label{eq:classifier-function}
+\end{equation}
+
+V enačbi \eqref{eq:kcf-gauss} je $\mathcal{F}$ operator diskretne Fourierove transformacije (DFT). Velike začetnice spremenljivk predstavljajo njihove DFT. Tako je $X = \mathcal{F}\{ {x} \}$ DFT področja $x$. $\sigma$ je hiperparameter jedra.
+
+\begin{equation}
+K_{RBF}({x}, {x}') = \mathrm{e}^{-\frac{1}{\sigma^2}\left(
+	||{x}||^2 + ||{x}'||^2 - 2 \mathcal{F}^{-1}\left\{ {X} {X}' \right\}
+\right)}
+\label{eq:kcf-gauss}
+\end{equation}
+
+Funkcijo \eqref{eq:classifier-function} minimiziramo s koeficientom \eqref{eq:classifier-a}.  $Y^p = \mathcal{F}\{y^p\}$ je DFT gaussove funkcije in $U_x^p = \mathcal{F}\{ K(x_{m,n}^p, x^p) \}$ je DFT jedrne funkcije $K$. $\gamma$ je parameter učenja.
+
+\begin{equation}
+A^p = \mathcal{F}\{a^p\} =  \frac{(1- \gamma) A_N^{p-1} + \gamma Y^p U_x^p}
+{(1- \gamma)A_D^{p-1} + \gamma U_x^p\left( U_x^p + \gamma \right)}
+\label{eq:classifier-a}
+\end{equation}
+
+Naučeno vizualno podobo tarče $\hat{x}^p$ ob času $p$ posodobimo z enačbo \eqref{eq:training-target}.
+
+\begin{equation}
+\hat{x}^p = (1 - \gamma) \hat{x}^{p-1} + \gamma x^p
+\label{eq:training-target}
+\end{equation}
+
+
+\paragraph{Korak detekcije.}
+Pri detekciji najprej izrežemo področje $z$ velikosti $M \times N$ na novi sliki. Nato izračunamo rezultate detekcije po enačbi \eqref{eq:detection-score}, kjer je $U_z = \mathcal{F}\left\{ K\left( z_{m,n}, \hat{x}^{p}  \right) \right\}$ DFT izhoda jedrne funkcije področja $z$.
+
+\begin{equation}
+\hat{y}^{p + 1} = \mathcal{F}^{-1}\left\{ A U_z \right\}
+\label{eq:detection-score}
+\end{equation}
+
+Pozicijo tarče nato dobimo s tisto translacijo, ki maksimizira rezultat detekcije $\hat{y}^{p+1}$.
+
+
+
+
+\begin{figure}
+\centering
+\input{./Slike/diagram-kcf.tikz}
+\caption[Diagram KCF sledilnika]{Diagram KCF sledilnika.}
+\label{fig:diagram-kcf}
+\end{figure}
+
+
+
+
+
+
+
+\subsection{Sledilnik za prostorski tok}
+Na podlagi pogojev iz poglavja \ref{sec:pogoji-sledilnikov} smo za merilno metodo s prostorskim tokom našli le DS-KCF sledilnik avtorja Hannuna et. al \cite{hannuna2016ds}. 
+
+Jedro sledilnika temelji na KCF sledilniku za optični tok iz dela \cite{henriques2015high}. Pri tem uporabljajo jedrno funkcijo \eqref{eq:kcf-gauss}. Model tarče je predstavljen z vektorjem značilk, ki je sestavljen iz histograma orientiranih gradientov (HOG) barvne slike in HOG histograma globinske slike. 
+
+V DS-KCF sledilniku Najprej segmentirajo globinsko sliko na področja podobne globine s pomočjo rojenja \cite{hannuna2016ds}. S tem pridobijo relevantne značilke globinske distribucije. 
+
+S pomočjo globinske distribucije izračunajo spremembe v skali glede na začetno srednjo vrednost globine tarče in jih uporabijo za posodobitev modela tarče. Posodobitev poteka, ko dobijo novo estimacijo pozicije tarče. Pri tem uporabljajo interpolacijo ali decimacijo v frekvenčnem prostoru \cite{hannuna2016ds}.
+
+V istem času ko sledilnik računa spremembe v skali se globinska distribucija uporabi tudi za detekcijo okluzij. Kadar sledilnik detektira, da je prišlo do okluzije se model tarče ne posodobi \cite{hannuna2016ds}. Pri določevanju okluzije sledilnik uporablja Kalmanov filter, s katerim sledi centru tarče in objekta, ki povzroča okluzijo. V \cite{hannuna2016ds} uporabljajo linearni model konstantne hitrosti.  
+
+Na koncu sledijo popravki zaradi sprememb oblike objekta. Popravki temeljijo na razmerju stranic začetnega pravokotnika modela tarče \cite{hannuna2016ds}. Sledilnik model tarče popravi vedno tako, da razmerje stranic ostaja konstantno.
+
+
+
+
+\begin{figure}
+\centering
+\input{./Slike/diagram-dskcf.tikz}
+\caption{Diagram DS-KCF sledilnika po \cite{hannuna2016ds}.}
+\label{fig:diagram-dskcf}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Filtri}\label{sec:filtri}
+\% smith
+digitalni filtri so zelo pomemnbi pri digitalnem procesiranju signalov. filtre uporabljamo za dve stvari: signal separation and signam restoration. Prva se uporablja ko imamo signal ki je kontaminiran z interferenco, šumom ali drugimi signali. 
+
+signal restoration se uporablja ko je bil signal distorted in some way recimo debluring of an image.
+
+vsak filter im a impulze resonse step response in frekvenčni odziv. filter implementiramo tako da uporabmo konvolucijo z vhodnim signalom. 
+
+moving average filters
+optimalen za reducing random noise while retaining a sharp step response. najboljši za signale v časovnem prostoru.  -> gaussov filter -> frekvenčni odziv ravno tako gaussian  
+
+zero phase filter
+je karakterziran z impulznim odzivom ki je simetričen okoli ničelnega vzorca. oblika ni pomembna le da so negativni vzorci zrcalna slika pozitivnih vzorcev. Faza bo v frekvenčnem prostoru 0. Ker imamo negativne indekse ga je težko uporabljati. 
+
+forward and reverse
+vsak rekurzivni filter lahko s tako tehniko pretvorimo v zero phase filter. signal filtriramo normalno potem še reverzno in rezultata spojimo skupaj. 
+
+
+
+
+
+
+
+\subsection{Kalmanov filter}\label{sec:kalmanov-filter}
+\% trucco
+system model
+fizični sistem je modeliran z vektorjem stanj x in z enačbami sistemski model. stanje je odvisno od časa. sistemski model je vektorska enačba ki govori o tem kako se model razvija skozi čas. diskretni čas: tk = t0 + k delta t. delta t mora biti dovolj majhen da zajamemo dinamiko sistema. torej da se ne spremeni za veliko med koraki. zeta je vektor kjer modeliramo sistemski šum. matriko prehanja stanj 
+
+measurement model
+predvidevamo da ob vsakem časovnem trenutku dobimo meritev stanja ki je šumna. 
+kjer je H merilna matrika in ni predstavlja šum. 
+
+oba šuma sta bela brez srednje vrednosti gaussova procesa s kovariančnimi matrikami. 
+
+alogritem
+imamo še kovariančno matriko stanja P, gain matriko K 
+
+
+Modeli so dali pošumljen izhod, zato smo implementirali še Kalmanov filter \cite{forsyth2002computer}. V prostoru stanj je predstavljen z enačbo \eqref{eq:kalman-model}, kjer je $x$ stanje hitrosti $v$ in pospeška $a$ \eqref{eq:stanje}, $A$ matrika prehajanja stanj \eqref{eq:a}, $G$ matrika šuma \eqref{eq:g}, s katero modeliramo neznane vhodne parametre hitrosti $v_n$ in pospeška $a_n$ v vektorju $u$ \eqref{eq:u}. Začetna hitrost in pospešek sta bila $0$. Varianca procesnega šuma je za vse modele znašala \num{0.04}, varianca šuma modela pa \num{456.13}. Zaradi neznanih začetnih vrednosti smo za kovariančno matriko predikcije uporabili varianco \num{456.13}.
+
+\begin{subequations}
+	\begin{align}
+		x(k+1) &= A x(k) + G u(k) \label{eq:kalman-model} \\ 
+        x(k) &= \begin{bmatrix}
+					v(k) & a(k)
+				\end{bmatrix}^\top \label{eq:stanje} \\
+        A &= \begin{bmatrix}
+				1 & 1 \\
+                0 & 1
+			\end{bmatrix} \label{eq:a} \\
+       G &= \begin{bmatrix}
+				1 & 0
+			\end{bmatrix}^\top \label{eq:g} \\
+       u(k) &= \begin{bmatrix}
+					v_{n}(k) & a_n(k)
+				\end{bmatrix}^\top \label{eq:u}
+	\end{align}	
+\end{subequations}
+
+\subsection{Gaussov filter}\label{sec:gaussov-filter}
+
+
+
+\subsection{Optimizacija Gaussovega jedra}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Metode manipulacije video posnetkov}
+% Za testiranje optičnega toka in deskriptorjev, testiranje njihove robustnosti smo naredili več manipulacij, za boljšo predstavo o delovanju
+
+% Za vse velja:
+% Zakaj ta manipulacija
+% Opis manipulacije
+\subsection{Skaliranje slike}
+\subsection{Projektivna transformacija}
+\subsection{Združevanje posnetkov}
+\subsection{Obrezovanje posnetkov}
+\subsection{Simulacija vibracij kamere}
+Finally, cameras may shake, if held manually. We simulated this scenario by artificially introducing random small displacements and rotation into the video. Every frame was transformed with random Euclidean transformation, where translation was limited to \SI{4}{\%} of frame size and rotation to \SI{0.13}{rad}.
+
+\subsection{Združevanje slik iz dveh kinektov}
+
+
+\section{Evaluacijske metrike}
+
+
+
+\section{Materiali}
+\subsection{Zlati standard}
+\subsection{Senzorji v lab}
+\subsection{Senzorji na terenu}
+\subsection{Sinhornizacija časa}
+
+
