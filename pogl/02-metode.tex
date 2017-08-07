@@ -140,15 +140,15 @@ Kadar imamo na slikovni ravnini več premikajočih slikovnih elementov, vektorsk
 
 
 
-\subsection{Metode estimacije optičnega toka}
+\subsection{Metode estimacije optičnega toka}\label{sec:metode-of}
 
 Metode estimacije optičnega toka $\vec{O}$ v grobem delimo na diferencialne in {ujemalne} metode \cite{trucco1998introductory}. Z \textbf{diferencialnimi metodami} računamo optični tok z uporabo parcialnih diferencialnih enačb ali minimizacijskimi metodami. Z metodami dobimo \textbf{gost optični tok}, kar pomeni, da je optični tok določen za vsak slikovni element \cite{trucco1998introductory}. Te metode zelo natačno opisujejo optični tok in ne proizvajajo vrednosti, ki lokalno odstopajo, zato je optični tok gladek \cite{brox2011large}.  Glavni problem teh metod je, da so računsko zelo zahtevne \cite{trucco1998introductory}.
 
 Pri \textbf{ujemalnih metodah} računamo optični tok le na značilnih točkah \cite{trucco1998introductory}. Zaradi uporabe značilk so te metode lahko bolj efektivne, saj ne potrebujemo določevanja korespondenc za vse piksle. Prav tako se lahko uporabijo za računanje optičnega toka v realnem času, saj niso računsko zahtevne. Po \cite{trucco1998introductory} je največja težava teh metod, da računajo \textbf{redek optični tok}, saj je ta določen le za slikovne elemete, ki predstavljajo značilne točke. Prav tako delujejo dobro le pri majhnih premikih, ker temeljijo na Taylorjevi aproksimaciji enačbe \eqref{eq:opticni-tok} \cite{wedel2011stereo}. 
 
-Na podlagi zgoraj opisanih lastnosti smo se odločili, da bomo v tem delu uporabili diferencialno metodo. Kljub višji računski zahtevnosti, ki ob današnji tehnologiji ne predstavlja več takega problema, smo želeli računati gost optični tok. Z gostim optičnim tokom tako dobimo natačno aproksimacijo polja gibanja za celotno telo. Prav tako nimamo problemov pri estimaciji energijske porabe za hitre gibe, kot bi bilo to v primeru uporabe ujemlanih metod. Ker je glavni namen uporaba in ne implementacija diferencialne metode, smo se osredotočili na Farneb{\"a}ck algoritem, ki je dostopen v knjižnici OpenCV.
+V nadaljevanju predstavljamo diferencialno metodo Farneb{\"a}ck algoritem.
 
-\paragraph{Farneb{\"a}ck algoritem.}
+\subsubsection{Farneb{\"a}ck algoritem.}
 Alogritem temelji na estimaciji premika z razčlenjevanjem polinoma  po enačbi \eqref{eq:polinom}, kjer je $\vec{A}$ simetrična matrika, $\vec{b}$ vektor in $c$ skalar \cite{farneback2003two}.
 
 \begin{equation}\label{eq:polinom}
@@ -257,9 +257,10 @@ V regularizacijskem delu funkcionala \eqref{eq:minimizacijski-problem} $E_R(\vec
 	E_R = \sum_\Omega \Psi\left( \nabla w_x \right) + \Psi\left( \nabla w_y \right) + \Psi\left( \nabla \dot{Z} \right)
 \end{equation}
 
-Ker smo v našem delu za računanje prostorskega toka uporabili Kinect senzorje, smo potrebovali metodo, ki temelji na RGB-D podatkih. Ker je glavni namen uporaba in ne implementacija algoritma prostorskega toka, smo se osredotočili na PD-Flow algoritem, ki je javno dostopen \cite{jaimez2015primal}.
+V nadaljevanju predstavljamo globalno variacijsko metodo PD-Flow algoritem.
 
-\paragraph{PD-Flow algoritem.}
+
+\subsubsection{PD-Flow algoritem.}\label{sec:pd-flow}
 Algoritem spada pod globalne variacijske metode \cite{jaimez2015primal}. Za cenilko $\Psi$ v \eqref{eq:konstantna-osvetljenost} in \eqref{eq:konsistentnost-globine} avtorji uporabljajo $L_1$ normo. Za utež $\alpha$ v podatkovnem delu funkcionala \eqref{eq:podatkovni-del} se v tem algorimu uporablja funkcija 
 
 \begin{equation}\label{eq:utez}
@@ -373,70 +374,6 @@ Preslikava intervala \eqref{eq:interval-kot2} v interval \eqref{eq:interval-kot}
 
 Edini parameter, ki ga moramo določiti za HOOF značilke je število stolpcev histograma $N_{HOOF}$. Chaudry et al \cite{chaudhry2009histograms} pravi, da moramo za dobro delovanje določiti najmanj $30$ stolpcev. 
 
-Parameter smo določili na podlagi rezultatov evaluacije v tabeli \ref{tab:nhoof} in grafov korelacije med referenčnimi podatki in predikcijo \ref{fig:corr-hoof}. Za evaluacijo smo uporabili učne vzorce hrbtne kamere preliminarnih laboratorijskih testov. Evaluirali smo samo za podatke energijske porabe $W$. Pridobljene značilke deskriptorjev smo normirali na intervalu $[-1,1]$ in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Metode so podrobneje predstavljene v poglavju \ref{sec:matematicni-modeli}. Za določitev optimalnih parametrov, ki so predstavljeni v tabeli \ref{tab:nhoof-param}, smo uporabili optimizacijsko metodo mrežnega iskanja \cite{hsu2003practical}. Rezultate smo filtrirali še s Kalmanovim filtrom, ki je predstavljen v \ref{sec:kalmanov-filter}.
-
-\begin{table}[htb]
-	\centering
-    \begin{tabular}{S[table-format=2.0] S[table-format=2.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
-    \toprule
-    \thead{$\mathbf{N_{HOOF}}$} & \thead{$\mathbf{C}$} & \thead{$\mathbf{\gamma}$} & \thead{$\mathbf{\epsilon}$} & \thead{MSE} \\ 
-    \midrule
-    30 & 8 & 0.707 & 0.812 & 7.903 \\
-    60 & 8 & 0.354 & 0.379 & 7.320 \\
-    120 & 11.314 & 0.177 & 0.536 & 6.998 \\
-    160 & 11.314 & 0.125 & 0.616 & 6.832 \\
-    \bottomrule
-    \end{tabular}
-    \caption[Optimalni parameteri RBF jedra modelov za določitev $N_{HOOF}$]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev $N_{HOOF}$ v HOOF deskriptorju.}
-    \label{tab:nhoof-param}
-\end{table}
-
-V tabeli \ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rezultati bistveno ne razlikujejo. Najbojlši rezultate nam sicer daje $120$ stolpcev, vendar pa smo za potrebe naše metode uporabili $N_{HOOF}=60$, ki je ravno tako dal zadovoljive rezultate. S takim številom smo zagotovili dobro delovanje glede na minimalno vrednost, še vseeno pa ne gre za tako veliko število, ko bi do izraza prišle amplitude šumnih vektorjev.
-
-\begin{table}[htb]
-	\centering
-    \begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
-    \toprule
-    \thead{$N_{HOOF}$} & \thead{$r$} & \thead{RAE} & \thead{RMSE} & \thead{nSV [\%]}\\
-    \midrule%nSV
-    30 & 0.978 & 0.296 & 0.304 & \boldentry{2.2}{62.81}\\%18089
-    \boldentry{2.0}{60} & 0.980 & 0.277 & 0.289 & 81.21\\%23388
-    120 & \boldentry{1.3}{0.983} & \boldentry{1.3}{0.261} & \boldentry{1.3}{0.273} & 74.39\\%21424
-    160 & 0.982 & 0.272 & 0.284 & 71.68\\%20644
-    \bottomrule
-    \end{tabular}
-    \caption[Rezultati evaluacije modelov z različnim $N_{HOOF}$]{Rezultati evaluacije modelov z različnim številom stolpcev $N_{HOOF}$ HOOF deskriptorja. Optimalni rezultati so odebeljeni. Kljub dobrim rezultatom modela z $N_{HOOF}=120$ smo izbrali $N_{HOOF}=60$, ker nanj šum manj vpliva.}
-    \label{tab:nhoof}
-\end{table}
-
-\begin{figure}[htb]
-	\centering
-    \begin{subfigure}[t]{0.45\columnwidth}
-    	\includegraphics[width=\columnwidth]{./Slike/corr-hoof-30.png}
-        \caption{Korelacija $N_{HOOF}=30$.}
-        \label{fig:corr-hoof-30}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[t]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/corr-hoof-60.png}
-      \caption{Korelacija $N_{HOOF}=60$.}
-      \label{fig:corr-hoof-60}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[b]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/corr-hoof-120.png}
-      \caption{Korelacija $N_{HOOF}=120$.}
-      \label{fig:corr-hoof-120}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[b]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/corr-hoof-160.png}
-      \caption{Korelacija $N_{HOOF}=160$.}
-      \label{fig:corr-hoof-160}
-    \end{subfigure}
-    \caption[Grafi korelacij modelov z različnim $N_{HOOF}$]{Grafi korelacij modelov z različnim številom stolpcev $N_{HOOF}$ HOOF deskriptorja. Rezultati so si zelo podobni.}
-    \label{fig:corr-hoof}
-\end{figure}
 
 
 
@@ -478,71 +415,6 @@ Interval \eqref{eq:interval-amp1} lahko kvantiziramo po enačbi \eqref{eq:interv
 
 
 
-Parameter $N_{HAFA}$ smo določili na podlagi rezultatov evaluacije v tabeli \ref{tab:nhafa} in grafov korelacije med referenčnimi podatki in predikcijo \ref{fig:corr-hafa}. Za evaluacijo smo uporabili enak eksperimentalni protokol kot za HOOF značilke v poglavju \ref{sec:hoof}, s to razliko, da smo značilke normirali na intervalu $[0, 1]$ in odstranili stolpec z amplitudami $0.5$. S tem smo odstranili šum, ki se je pojavil, ko ni bilo nobenega gibanja. Amplitudo šuma smo določili, kot maksimalno vrednost amplitude, ki še ni predstavljala gibanja. Optimalni parametri evaluacijske metode so predstavljeni v tabeli \ref{tab:nhafa-param}.
-
-
-\begin{table}[htb]
-	\centering
-    \begin{tabular}{S[table-format=2.0] S[table-format=2.3] S[table-format=1.3]  S[table-format=1.3] S[table-format=1.3]}
-    \toprule
-    \thead{$\mathbf{N_{HAFA}}$} & \thead{$\mathbf{C}$} & \thead{$\mathbf{\gamma}$} & \thead{$\mathbf{\epsilon}$} & \thead{MSE} \\ 
-    \midrule
-    30 & 8 & 5.657 & 0.616 & 4.329 \\
-    60 & 8 & 5.657 & 0.616 & 4.327 \\
-    120 & 8 & 5.657 & 0.616 & 4.327 \\
-    160 & 8 & 5.657 & 0.616 & 4.327 \\
-    \bottomrule
-    \end{tabular}
-    \caption[Optimalni parameteri RBF jedra modelov za določitev $N_{HAFA}$]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev $N_{HAFA}$ v HAFA deskriptorju.}
-    \label{tab:nhafa-param}
-\end{table}
-
-V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za našo metodo smo izbrali $N_{HAFA}=60$, kar v grobem predstavlja $60$ različnih hitrosti z maksimalno amplitudo \SI{60}{px.f^{-1}}.
-
-\begin{table}[htb]
-	\centering
-    \begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
-    \toprule
-    \thead{$N_{HAFA}$} & \thead{$r$} & \thead{RAE} & \thead{RMSE} & \thead{nSV [\%]}\\
-    \midrule%nSV
-    30 & 0.984 & 0.213 & 0.231 & 62.08 \\%17879/28799
-    \boldentry{2.0}{60} & \boldentry{1.3}{0.984} & \boldentry{1.3}{0.211} & \boldentry{1.3}{0.228} & \boldentry{2.2}{62.60} \\%18028
-    120 & 0.984 & 0.211 & 0.228 & 62.63 \\%18037
-    160 & 0.984 & 0.211 & 0.228 & 62.63 \\%18037
-    \bottomrule
-    \end{tabular}
-    \caption[Rezultati evaluacije modelov z različnim $N_{HAFA}$]{Rezultati evaluacije modelov z različnim številom stolpcev $N_{HAFA}$ HAFA deskriptorja. Optimalni rezultati so odebeljeni.}
-    \label{tab:nhafa}
-\end{table}
-
-\begin{figure}[htb]
-	\centering
-    \begin{subfigure}[t]{0.45\columnwidth}
-    	\includegraphics[width=\columnwidth]{./Slike/corr-hafa-30.png}
-        \caption{Korelacija $N_{HAFA}=30$.}
-        \label{fig:corr-hafa-30}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[t]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/corr-hafa-60.png}
-      \caption{Korelacija $N_{HAFA}=60$.}
-      \label{fig:corr-hafa-60}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[b]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/corr-hafa-120.png}
-      \caption{Korelacija $N_{HAFA}=120$.}
-      \label{fig:corr-hafa-120}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[b]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/corr-hafa-160.png}
-      \caption{Korelacija $N_{HAFA}=160$.}
-      \label{fig:corr-hafa-160}
-    \end{subfigure}
-    \caption[Grafi korelacij modelov z različnim $N_{HAFA}$]{Grafi korelacij modelov z različnim številom stolpcev $N_{HAFA}$ HAFA deskriptorja. Rezultati so si zelo podobni.}
-    \label{fig:corr-hafa}
-\end{figure}
 
 
 
@@ -553,59 +425,8 @@ V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za naš
 
 
 
-\subsection{Izbira deskriptorjev}
-
-Chaudhry et al. \cite{chaudhry2009histograms} predlaga uporabo histogramov orientiranega optičnega toka (HOOF) za estimacijo gibanja. Vendar pa smo v preliminarnih terenskih testiranjih \cite{koporec2017observation} ugotovili, da njihova uporaba v realnih okoliščinah ni zadovoljiva. HOOF deskriptorju smo pripeli HAFA deskriptor in tako dobili razširjeni deskriptor HOOF-HAFA, ki v splošnem daje boljše rezultate, kot lahko vidimo v tabeli \ref{tab:izbira} in na primerjalnih slikah \ref{fig:izbira}.
-
-Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne kamere terenskih testov. Evaluirali smo za podatke srčnega utripa $hr$. Srčni utrip smo za gradnjo modelov pretvorili v energijsko porabo $W$ po enačbi \eqref{eq:charlot}. Pridobljene značilke smo normirali na intervalu [0,1] in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Za določitev optimalnih parametrov, ki so predstavljeni v tabeli \ref{tab:nhoof-param}, smo uporabili optimizacijsko metodo mrežnega iskanja \cite{hsu2003practical}. Rezultate smo filtrirali še s Gaussovim jedrom (predstavljen v \ref{sec:gaussov-filter}) velikosti $6$ in varianco $\sigma=16$. 
-
-\begin{table}[htb]
-	\centering
-    \begin{tabular}{l S[table-format=2.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
-    \toprule
-    \thead{Deskriptor} & \thead{$\mathbf{C}$} & \thead{$\mathbf{\gamma}$} & \thead{$\mathbf{\epsilon}$} & \thead{MSE} \\ 
-    \midrule
-    HOOF & 2.828 & 11.314 & 0.435 & 2.192 \\
-    HOOF-HAFA & 5.657 & 2.828 & 0.154 & 1.781 \\
-    \bottomrule
-    \end{tabular}
-    \caption[Optimalni parameteri RBF jedra modelov za izbiro deskriptorjev]{Optimalni parametri RBF jedra za modele z različnim deskriptorjem.}
-    \label{tab:izbira-param}
-\end{table}
 
 
-\begin{table}[htb]
-	\centering
-    \begin{tabular}{l S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
-    \toprule
-    \thead{Deskriptor} & \thead{$r$} & \thead{RAE} & \thead{RMSE} & \thead{nSV [\%]}\\
-    \midrule%nSV
-    HOOF & 0.992 & 0.336 & 0.317 & \boldentry{2.2}{82.34} \\%2187/2656
-    \textbf{HOOF-HAFA} & \boldentry{1.3}{0.991} & \boldentry{1.3}{0.157} & \boldentry{1.3}{0.205} & 89.53 \\%2378
-    \bottomrule
-    \end{tabular}
-    \caption[Rezultati evaluacije modelov z različnim deskriptorjem]{Rezultati evaluacije modelov z različnim deskriptorjem. Optimalni rezultati so odebeljeni. Vidimo lahko, da se bolje odnese razširjeni deskriptor HOOF-HAFA, čeprav model uporablja več podpornih vektorjev. }
-    \label{tab:izbira}
-\end{table}
-
-
-
-\begin{figure}[htb]
-	\centering
-    \begin{subfigure}[t]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/corr-hoof.png}
-      \caption{Korelacija $N_{HOOF}=60$.}
-      \label{fig:izbira-hoof}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[t]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/corr-hoof-hafa.png}
-      \caption{Korelacija $N_{HOOF}=60$,\\$N_{HAFA}=60$.}
-      \label{fig:izbira-hoofhafa}
-    \end{subfigure}
-    \caption[Primerjava modelov s HOOF in HOOF-HAFA deskriptorji]{Primerjava grafov korelacij modelov z različnimi deskriptorji. Model \subref{fig:izbira-hoof}) smo naučili s HOOF deskriptorjem. Model \subref{fig:izbira-hoofhafa}) smo naučili s HOOF in HAFA deskriptorjem. Posamezen vzorec je tako vseboval $120$ značilk. Pri primerjavi korelacije lahko opazimo vidno razliko. Model \subref{fig:izbira-hoofhafa}) dokazuje, da je razširjeni deskriptor boljši.}
-    \label{fig:izbira}
-\end{figure}
 
 
 
@@ -739,7 +560,7 @@ Po \cite{hsu2003practical} je skaliranje značilk pred uporabo SVM zelo pomembno
 
 
 
-\subsubsection{Optimizacija SVM parametrov}
+\subsubsection{Optimizacija SVM parametrov}\label{sec:optimizacija-svm-parametrov}
 
 Ker a priori ne poznamo najboljših parametrov postopka SVM in hiper-parametrov funkcij jedra, jih moramo optimizirati \cite{hsu2003practical}. S tem zagotovimo najboljše delovanje metode na naših podatkih. Za optimizacijo lahko uporabljamo mrežno iskanje s križno validacijo.  Pri mrežnem iskanju izračunamo predikcije za kombinacijo parametrov in jih evaluiramo s križno validacijo \cite{hsu2003practical}. Izberemo tisto kombinacijo parametrov, s katero smo dobili najboljšo natančnost. 
 
@@ -751,7 +572,7 @@ Dobro je, če kombinacije parametrov izbiramo po eksponentni funkciji z osnovo $
 
 
 \subsection{Postopki SVM}
-\subsection{Razvrščevalnik C-SVC}
+\subsubsection{Razvrščevalnik C-SVC}
 
 Razvrščevalnik rešuje problem \cite{chang2011a}:
 
@@ -864,108 +685,8 @@ Predpostavimo, da imamo idealni sledilnik in enako definicijo in omejitve kamere
 
 
 
-
-
-
-\subsection{Način izbire sledilnikov}\label{sec:pogoji-sledilnikov}
-Pri izbiri sledilnikov smo se osredotočili na pogoje, ki jim morajo sledilniki v največji meri zadostiti.
-
-\paragraph{Način sledenja.} Sledilnik mora dobro slediti osebam, ostali objekti niso pomembni. Sledenje mora biti zanesljivo, saj je od njega odvisna merilna napaka. Pri tem moramo upoštevati delovanje tudi v primerih, kadar tarča izgine iz slike. Sledenje mora delovati čimdaljši čas tako, da ne potrebujemo ponovne inicializacije. Inicializacijo sledilnika moramo opraviti samo na prvi sliki zaporedja, kar pomeni, da mora sledilnik vsebovati indirektno učenje (angl. offline training).
-
-\paragraph{Implementacija.} Zaradi uporabe sledilnika v merilnem instrumentu, mora ta delovati v realnem času oziroma čim hitreje. Ker namen tega dela ni implementacija sledilnika, mora biti ta implementiran v prosto dostopni izvorni kodi.  
-
-
-
-
-
-
-\subsection{Sledilnik za optični tok}
-Na podlagi že prej opisanih pogojev, smo za merilno metodo z optičnim tokom našli sledilnik TLD avtorja Kalal et. al \cite{kalal2012tracking}. Prosto dostopne so tri implementacije sledilnika in sicer v knjižnici ccv (CCV-TLD), v knjižnici OpenCV (OPENCV-TLD) in c++ izvorna koda (NEBEHAY-TLD). Implementaciji iz knjižnic ccv in OpenCV se nekoliko razlikujeta od izvirnega dela \cite{kalal2012tracking}, NEBEHAY-TLD pa je samo prepis matlabove izvorne kode. Ker ni nobena implementacija zadovoljivo delovala na testnih squash posnetkih, smo poskusili še sledilnikom KCF \cite{danelljan2014adaptive} in CORR \cite{danelljan2014accurate}. KCF je implementiran v knjižnici OpenCV, CORR pa v knjižnici Dlib \cite{king2009dlib}. 
-
-
-
-
-\subsubsection{Testiranje sledilnikov}
-Sledilnike smo testirali na sekvencah slik \textit{handball1} in \textit{handball2} podatkovne baze VOT2016 \cite{kristan2016visual}. Sledila je še hitra vizualna ocena delovanja na kratkih izsekih video posnetka \cite{squashtv2014squash}.
-
-Pri testiranju sekvenc slik podatkovne baze VOT2016 smo poenostavili rotirajoča referenčna področja detekcij na nerotirajoča področja. Pri tem smo za zgornji levi kot $T_0(x,y)$ in spodnji desni kot $T_1(x,y)$ uporabili enačbo \eqref{eq:vot-bb}, kjer so $\left( x_i, y_i\right), \forall i=1,\ldots,4$ ogljišča rotirajočega referenčnega področja. 
-
-\begin{equation}
-\begin{aligned}
-	T_0(x,y) &= \left( \min_{i = 1,\ldots,4}\left\{x_i \right\}, 
-    \min_{i=1,\ldots,4}\{y_i \} \right) \\
-    T_1(x,y) &= \left( \max_{i = 1,\ldots,4}\left\{x_i \right\}, 
-    \max_{i=1,\ldots,4}\{y_i \} \right)
-\end{aligned}
-\label{eq:vot-bb}
-\end{equation}
-
-Ker je za naš sledilnik najbolj pomembno zanesljivo delovanje, smo izbrali preprosto mero prekrivanja področja \eqref{eq:region-overlap}, ki je navedena tudi v \cite{vcehovin2016visual}. $\Lambda$ predstavlja opis tarče, $R_t$ je področje tarče ob času $t$, $N$ je število slik v zaporedju, $G$ predstavlja referenco in $T$ tarčo. S prekrivanjem področja dobimo rezultate na intervalu $\left[0,1\right]$. Večje število predstavlja boljši rezultat.
-
-\begin{align}
-	\Lambda &= \left\{R_t\right\}^N_{t=1}, \nonumber \\
-	\Phi(\Lambda^G, \Lambda^T) &= \left\{\phi_t\right\}^N_{t=1}, \nonumber \\
-    \phi_t &= \frac{R_t^G \cap R_t^T }{R_t^G \cup R_t^T} \label{eq:region-overlap}
-\end{align}
-
-
-Video posnetek \cite{squashtv2014squash} smo za potrebe vizualne ocene delovanja na squash posnetkih razdelili na več kratkih izsekov. Pri tem smo uporabili le hrbtne posnetke mirujoče kamere. 
-
-Rezultati testiranja so prikazani v tabeli \ref{tab:region-overlap}. Za izbrane sledilnike smo določili povprečje prekrivanja področja za posamezen posnetek. V tretjem stolpcu je predstavljeno povprečje prekrivanja glede na oba posnetka. Najboljši rezultati so odebeljeni. Po tabeli \ref{tab:region-overlap} se za posnetek \textit{handball1} najbolje izkaže CORR sledilnik. Za posnetek \textit{handball2} smo dobili najboljše rezultate pri sledilniku OPENCV-TLD. V povprečju se najbolje izkaže sledilnik CORR.
-
-
-
-
-\begin{table}[htb]
-	\centering
-    \begin{tabular}{l S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
-    \toprule
-    \thead{Sledilnik} & \thead{handball1} & \thead{handball2} & \thead{Povprečje}  \\
-    \midrule%nSV
-    NEBEHAY-TLD & 0.035 & 0.130 & 0.083 \\
-    CCV-TLD & 0.117 & 0 & 0.117 \\
-    OPENCV-TLD & 0.002 & \boldentry{1.3}{0.178} & 0.09 \\
-    CORR & \boldentry{1.3}{0.214} & 0.160 & \boldentry{1.3}{0.187} \\
-    \textbf{KCF} & {0.161} & {0.166} & {0.164} \\
-    \bottomrule
-    \end{tabular}
-    \caption[Povprečje prekrivanja področja za posamezen sledilnik]{Povprečje prekrivanja področja za posamezen sledilnik in posnetek. V tretjem stolpcu je predstavljeno povprečje prekrivanja glede na oba posnetka. Najboljši rezultati so odebeljeni. Po tabeli \ref{tab:region-overlap} se za posnetek \textit{handball1} najbolje izkaže CORR sledilnik. Za posnetek \textit{handball2} smo dobili najboljše rezultate pri sledilniku OPENCV-TLD. V povprečju se najbolje izkaže sledilnik CORR.}
-    \label{tab:region-overlap}
-\end{table}
-
-
-
-
-\begin{figure}
-\centering
-
-	\begin{subfigure}[t]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/handball1-example.png}
-      \caption{Korelacija $N_{HOOF}=60$.}
-      \label{fig:izbira-hoof}
-    \end{subfigure}
-    ~
-    \begin{subfigure}[t]{0.45\columnwidth}
-      \includegraphics[width=\columnwidth]{./Slike/handball2-example.png}
-      \caption{Korelacija $N_{HOOF}=60$,\\$N_{HAFA}=60$.}
-      \label{fig:izbira-hoofhafa}
-    \end{subfigure}
-    
-\caption[]{}
-\label{fig:tracker-visual}
-\end{figure}
-
-
-
-
-Čeprav smo z mero določili, da se je najbolje izkazal sledilnik CORR, se je pri hitri vizualni oceni sledenja na izsekih posnetka \cite{squashtv2014squash} izkazalo, da najbolje deluje sledilnik KCF. To je razumljivo, saj prvi testi temeljijo na posnetkih rokometa, drugi pa na squashu, kjer gre za bistveno drugačno igro. Če pogledamo tabelo \ref{tab:region-overlap} ima KCF drugo najboljše povprečje, prav tako pa so si rezultati posameznih posnetkov zelo podobni. 
-
-Glede na podane rezultate smo se odločili, da bomo uporabili sledilnik KCF. Njegova implementacija je opisana v nadaljevanju.
-
-
-
-\subsubsection{KCF sledilnik} 
-Implementacija sledilnika v knjižnici OpenCV temelji na delu \cite{danelljan2014adaptive}, kjer izboljšajo originalni KCF sledilnik iz dela \cite{henriques2012exploiting} z uporabo barvnih značilk. KCF sledilnik sodi med metode sledenja z detekcijo. Njegovo delovanje je prikazano na sliki \ref{fig:diagram-kcf}.
+\subsection{Sledilnik za optični tok} 
+Sledilnik temelji na delu \cite{danelljan2014adaptive}, kjer izboljšajo originalni KCF sledilnik iz dela \cite{henriques2012exploiting} z uporabo barvnih značilk. KCF sledilnik sodi med metode sledenja z detekcijo. Njegovo delovanje je prikazano na sliki \ref{fig:diagram-kcf}.
 
 \paragraph{Korak učenja.}
 Na področju tarče $x$ velikosti $M \times N$, vsakemu slikovnemu elementu pripada vrednost Gaussove funkcije $y$. Ob času $p$ poznamo $\mathcal{X}^p = \{x^j: j=1,\ldots,p\}$ področij tarče. Razvrščevalnik učimo z minimizacijo funkcije \eqref{eq:classifier-function}, ki predstavlja uteženo srednjo kvadratično napako čez področja $\mathcal{X}^p$, pri čemer je vsako področje uteženo s konstanto $\beta_j \geq 0$. $\phi$ predstavlja neliearno preslikavo v več rasežni prostor, za katero lahko uporabimo implicitno preslikavo ali funkcijo jedra $K$. V KCF sledilniku se uporablja Gaussovo RBF jedro \eqref{eq:kcf-gauss}. Konstanta $\lambda \geq 0$ je regularizacijski parameter.
@@ -1019,7 +740,7 @@ Pozicijo tarče nato dobimo s tisto translacijo, ki maksimizira rezultat detekci
 
 
 
-\begin{figure}
+\begin{figure}[htb]
 \centering
 \input{./Slike/diagram-kcf.tikz}
 \caption[Diagram KCF sledilnika]{Diagram KCF sledilnika.}
@@ -1033,8 +754,6 @@ Pozicijo tarče nato dobimo s tisto translacijo, ki maksimizira rezultat detekci
 
 
 \subsection{Sledilnik za prostorski tok}
-Na podlagi pogojev iz poglavja \ref{sec:pogoji-sledilnikov} smo za merilno metodo s prostorskim tokom našli le DS-KCF sledilnik avtorja Hannuna et. al \cite{hannuna2016ds}. 
-
 Jedro sledilnika temelji na KCF sledilniku za optični tok iz dela \cite{henriques2015high}. Pri tem uporabljajo jedrno funkcijo \eqref{eq:kcf-gauss}. Model tarče je predstavljen z vektorjem značilk, ki je sestavljen iz histograma orientiranih gradientov (HOG) barvne slike in HOG histograma globinske slike. 
 
 V DS-KCF sledilniku Najprej segmentirajo globinsko sliko na področja podobne globine s pomočjo rojenja \cite{hannuna2016ds}. S tem pridobijo relevantne značilke globinske distribucije. 
@@ -1048,7 +767,7 @@ Na koncu sledijo popravki zaradi sprememb oblike objekta. Popravki temeljijo na 
 
 
 
-\begin{figure}
+\begin{figure}[htb]
 \centering
 \input{./Slike/diagram-dskcf.tikz}
 \caption{Diagram DS-KCF sledilnika po \cite{hannuna2016ds}.}
@@ -1067,100 +786,233 @@ Na koncu sledijo popravki zaradi sprememb oblike objekta. Popravki temeljijo na 
 
 
 \section{Filtri}\label{sec:filtri}
-\% smith
-digitalni filtri so zelo pomemnbi pri digitalnem procesiranju signalov. filtre uporabljamo za dve stvari: signal separation and signam restoration. Prva se uporablja ko imamo signal ki je kontaminiran z interferenco, šumom ali drugimi signali. 
+Filtri so zelo pomembni pri procesiranju signalov \cite{smith1997scientist}. V našem delu jih uporabljamo za izločitev šuma izhodnih podatkov razvrščevalnika. Izbrani filtri izhajajo iz družine filtrov tekočega povprečja, saj so ti najbolj optimalni za zmanjševanje šuma \cite{smith1997scientist}. Splošna enačba filtra tekočega povprečja je \eqref{eq:filter-tekocega-povprecja}, kjer je $x(i)$ i-ti vzorec vhodnega signala, $y(i)$ i-ti vzorec izhodnega signala in $M$ število vzorcev, ki jih uporabimo za filtriranje ali drugače, širina jedra filtra \cite{smith1997scientist}.
 
-signal restoration se uporablja ko je bil signal distorted in some way recimo debluring of an image.
+\begin{equation}
+y(i) = \frac{1}{M} \sum_{j=0}^{M-1} x(i + j)
+\label{eq:filter-tekocega-povprecja}
+\end{equation}
 
-vsak filter im a impulze resonse step response in frekvenčni odziv. filter implementiramo tako da uporabmo konvolucijo z vhodnim signalom. 
+V začetni fazi projekta smo uporabili Kalmanov filter, saj je to najbolj pogosta izbira pri podatkih, ki so povezani z gibanjem objekta. Zaradi slabih rezultatov in težko določljivega modela gibanja smo se nato osredotočili na Gaussov filter, ki je dal zadovoljive rezultate. Oba filtra sta podrobneje opisana v nadaljevanju.
 
-moving average filters
-optimalen za reducing random noise while retaining a sharp step response. najboljši za signale v časovnem prostoru.  -> gaussov filter -> frekvenčni odziv ravno tako gaussian  
+%digitalni filtri so zelo pomemnbi pri digitalnem procesiranju signalov. filtre uporabljamo za dve stvari: signal separation and signam restoration. Prva se uporablja ko imamo signal ki je kontaminiran z interferenco, šumom ali drugimi signali. 
 
-zero phase filter
-je karakterziran z impulznim odzivom ki je simetričen okoli ničelnega vzorca. oblika ni pomembna le da so negativni vzorci zrcalna slika pozitivnih vzorcev. Faza bo v frekvenčnem prostoru 0. Ker imamo negativne indekse ga je težko uporabljati. 
+%signal restoration se uporablja ko je bil signal distorted in some way recimo debluring of an image.
 
-forward and reverse
-vsak rekurzivni filter lahko s tako tehniko pretvorimo v zero phase filter. signal filtriramo normalno potem še reverzno in rezultata spojimo skupaj. 
+%vsak filter im a impulze resonse step response in frekvenčni odziv. filter implementiramo tako da uporabmo konvolucijo z vhodnim signalom. 
 
+%moving average filters
+%optimalen za reducing random noise while retaining a sharp step response. najboljši za signale v časovnem prostoru.  -> gaussov filter -> frekvenčni odziv ravno tako gaussian  
 
+\subsection{Digitalni Kalmanov filter}\label{sec:kalmanov-filter}
+Kalmanov filter je sestavljen iz modela gibanja, merilnega modela in algoritma s katerim izračunamo novo stanje modela gibanja \cite{trucco1998introductory}.
 
+\subsubsection{Model gibanja}
+Gibanje modeliramo z vektorjem stanj $\vec{x}(k)$ na koraku $k$ \cite{trucco1998introductory}. Vektor stanj je predstavljen v enačbi \eqref{eq:vektor-stanj}. Za stanja si ponavadi izberemo tiste spremenljivke gibanja $s_i(k) \forall i = 1,2,\ldots \land k = 0, 1,\ldots$, ki jih opazujemo (npr. pozicija, hitrost, pospešek).
 
-
-
-
-\subsection{Kalmanov filter}\label{sec:kalmanov-filter}
-\% trucco
-system model
-fizični sistem je modeliran z vektorjem stanj x in z enačbami sistemski model. stanje je odvisno od časa. sistemski model je vektorska enačba ki govori o tem kako se model razvija skozi čas. diskretni čas: tk = t0 + k delta t. delta t mora biti dovolj majhen da zajamemo dinamiko sistema. torej da se ne spremeni za veliko med koraki. zeta je vektor kjer modeliramo sistemski šum. matriko prehanja stanj 
-
-measurement model
-predvidevamo da ob vsakem časovnem trenutku dobimo meritev stanja ki je šumna. 
-kjer je H merilna matrika in ni predstavlja šum. 
-
-oba šuma sta bela brez srednje vrednosti gaussova procesa s kovariančnimi matrikami. 
-
-alogritem
-imamo še kovariančno matriko stanja P, gain matriko K 
+\begin{equation}
+\vec{x}(k) = \begin{bmatrix}
+					s_1(k) & s_2(k) & \ldots
+\end{bmatrix}^\top
+\label{eq:vektor-stanj} 
+\end{equation}
 
 
-Modeli so dali pošumljen izhod, zato smo implementirali še Kalmanov filter \cite{forsyth2002computer}. V prostoru stanj je predstavljen z enačbo \eqref{eq:kalman-model}, kjer je $x$ stanje hitrosti $v$ in pospeška $a$ \eqref{eq:stanje}, $A$ matrika prehajanja stanj \eqref{eq:a}, $G$ matrika šuma \eqref{eq:g}, s katero modeliramo neznane vhodne parametre hitrosti $v_n$ in pospeška $a_n$ v vektorju $u$ \eqref{eq:u}. Začetna hitrost in pospešek sta bila $0$. Varianca procesnega šuma je za vse modele znašala \num{0.04}, varianca šuma modela pa \num{456.13}. Zaradi neznanih začetnih vrednosti smo za kovariančno matriko predikcije uporabili varianco \num{456.13}.
+Model gibanja je vektorska enačba \eqref{eq:model-gibanja}, ki govori o razvoju modela gibanja skozi diskretni čas $k = 0,1,\ldots$ \cite{trucco1998introductory}. Diskretni čas oziroma koraki morajo biti dovolj majhni, da zajamemo dinamiko sistema. $\vec{A}$ je matrika prehajanja stanj in $\vec{G}$ matrika vhodnih parametrov $\tilde{s}_i \forall i = 1,2,\ldots$ v vektorju $\vec{u}(k)$ \eqref{eq:vhodni-parametri}. 
 
-\begin{subequations}
-	\begin{align}
-		x(k+1) &= A x(k) + G u(k) \label{eq:kalman-model} \\ 
-        x(k) &= \begin{bmatrix}
-					v(k) & a(k)
-				\end{bmatrix}^\top \label{eq:stanje} \\
-        A &= \begin{bmatrix}
-				1 & 1 \\
-                0 & 1
-			\end{bmatrix} \label{eq:a} \\
-       G &= \begin{bmatrix}
-				1 & 0
-			\end{bmatrix}^\top \label{eq:g} \\
-       u(k) &= \begin{bmatrix}
-					v_{n}(k) & a_n(k)
-				\end{bmatrix}^\top \label{eq:u}
-	\end{align}	
-\end{subequations}
+
+
+\begin{equation}
+\vec{x}(k) = \vec{A} \vec{x}(k-1) + \vec{G} \vec{u}(k)
+\label{eq:model-gibanja}
+\end{equation}
+
+\begin{equation}
+\vec{u}(k) = \begin{bmatrix}
+					\tilde{s}_i(k) & \tilde{s}_i(k) & \ldots
+			\end{bmatrix}^\top 
+\label{eq:vhodni-parametri}
+\end{equation}
+
+$\vec{w}(k-1)$ predstavlja gaussov šum $\mathcal{N}$ modela gibanja s srednjo vrednostjo $0$ in kovariančno matriko $\vec{Q}$, kot je prikazano v enačbi \eqref{eq:sum-modela-gibanja} \cite{trucco1998introductory}.
+
+\begin{equation}
+ \vec{w}(k) \sim \mathcal{N}\left(0,\vec{Q}\right)
+ \label{eq:sum-modela-gibanja}
+\end{equation}
+
+Modeliranje šuma je ekvivalentno določevanju uteži upoštevanja modela v Kalmanovem algoritmu. Večji je šum, večja je negotovost modela, zato bo njegov vpliv na določitev novega stanja manjši \cite{trucco1998introductory}.
+
+
+\subsubsection{Merilni model}
+Pri Kalmanovemu filtriranju predvidevamo, da ob vsakem časovnem trenutku dobimo meritev stanja $\vec{z}(k)$, ki je, realno gledano, pošumljena z Gaussovim šumom \cite{trucco1998introductory}. Merilni model lahko predstavimo z vektorsko enačbo \eqref{eq:merilni-model}, kjer je $\vec{H}$ merilna matrika in $\vec{\nu}(k)$ vektor gaussovega šuma $\mathcal{N}$ s srednjo vrednostjo $0$ in kovariančno matriko $\vec{R}$ \eqref{eq:sum-merilnega-modela}.
+
+
+\begin{equation}
+ \vec{z}(k) = \vec{H} \vec{x}(k) + \vec{\nu}(k)
+ \label{eq:merilni-model}
+\end{equation}
+
+\begin{equation}
+\vec{\nu}(k) \sim \mathcal{N} \left( 0, \vec{R} \right)
+\label{eq:sum-merilnega-modela}
+\end{equation}
+
+
+Tako kot pri modelu gibanja, tudi tu z modeliranjem šuma vnašamo določeno stopnjo negotovosti, ki vpliva na upoštevanje modela pri izračunu novega stanja \cite{trucco1998introductory}.
+
+
+\subsubsection{Algoritem}
+S Kalmanovim algoritmom želimo čimbolj natančno določiti naslednjo oceno stanja sistema $\hat{\vec{x}}(k+1)$, pri čemer uporabimo trenutno meritev $\vec{z}(k)$ in trenutno oceno stanja $\hat{\vec{x}}(k)$ \cite{trucco1998introductory}. 
+
+Jedro algoritma Kalmanovega filtra temelji na izračunavanju kovariančne matrike stanja $\vec{P}$ in matrike ojačanja filtra $\vec{K}$ \cite{trucco1998introductory}. Kovariančna matrika stanja predstavlja oceno vnosa napake zaradi šumnih modelov. Predstavlja šum celotnega sistema. Z ojačanjem določimo, kaj bolj vpliva na novo oceno stanja. Ali trenutna ocena stanja, ali trenutna meritev.
+
+Algoritem lahko razdelimo na tri področja, in sicer: predikcijo, inovacijo in korekcijo \cite{trucco1998introductory}.
+
+\paragraph{Predikcija}
+V predikciji določimo trenutno oceno stanja $\hat{\vec{x}}^-(k)$ po enačbi \eqref{eq:ocena-stanja} in a priori kovariančno matriko stanja $\vec{P}^-(k)$ po enačbi \eqref{eq:apriori-p}.
+
+\begin{equation}
+	\hat{\vec{x}}^-(k) = \vec{A} \hat{\vec{x}}(k-1) + \vec{G} \vec{u}(k)
+    \label{eq:ocena-stanja}
+\end{equation}
+
+\begin{equation}
+	\vec{P}^-(k) = \vec{A} \vec{P}(k-1) \vec{A}^\top + \vec{Q}
+    \label{eq:apriori-p}
+\end{equation}
+
+\paragraph{Inovacija}
+V koraku inovacije izberemo trenutno meritev $\vec{z}(k)$ iz nabora meritev. Merilno napako $\vec{e}$ določimo po enačbi \eqref{eq:napaka}, kjer drugi člen predstavlja oceno meritve. Kovariaco inovacije $\vec{S}$ izračunamo po \eqref{eq:kovarianca-inovacije}. Gre za pomožno matriko, ki jo uporabljamo za izračun ojačanja v naslednjem koraku.
+
+\begin{equation}
+	\vec{e}(k) = \vec{z}(k) - \vec{H} \hat{\vec{x}}^-(k)
+    \label{eq:napaka}
+\end{equation}
+
+\begin{equation}
+\vec{S}(k) = \vec{H} \vec{P}^-(k) \vec{H}^\top + \vec{R}
+\label{eq:kovarianca-inovacije}
+\end{equation}
+
+\paragraph{Korekcija}
+V zadnjem koraku najprej izračunamo ojačanje filtra $\vec{K}$ po enačbi \eqref{eq:ojacanje}. Sledi določitev a posteriori ocene stanja $\hat{\vec{x}}(k)$ po \eqref{eq:aposteriori-stanje} in a posteriori kovariančne matrike stanje $\vec{P}(k)$ po \eqref{eq:aposteriori-p}, kjer je $\vec{I}$ identiteta.
+
+\begin{equation}
+\vec{K}(k) = {\vec{P}^-(k) \vec{H}^\top} ~/~ {\vec{S}(k)}
+\label{eq:ojacanje}
+\end{equation}
+
+\begin{equation}
+\hat{\vec{x}}(k) = \hat{\vec{x}}^-(k) + \vec{K}(k) \vec{e}(k)
+\label{eq:aposteriori-stanje}
+\end{equation}
+
+\begin{equation}
+\vec{P}(k) = \left( \vec{I} - \vec{K} \vec{H} \right) \vec{P}^-(k)
+\label{eq:aposteriori-p}
+\end{equation}
+
+
+
+
+
+
+
 
 \subsection{Gaussov filter}\label{sec:gaussov-filter}
+Gaussov filter $g$ je opredeljen z enačbo \eqref{eq:gauss}, kjer je $x$ vzorec in $\sigma$ standardni odklon. 
+
+
+\begin{equation}
+g(x) = \frac{1}{\sqrt{2 \pi} \sigma} \mathrm{e}^{-\frac{x^2}{2 \sigma^2}} 
+\label{eq:gauss}
+\end{equation}
+
+
+Primer filtra s standardnim odklonim $\sigma = 5$ je prikazan na sliki \ref{fig:gauss}.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\columnwidth]{./Slike/gauss-kernel.png}
+\caption{Gaussovo jedro s standardnim odklonom $\sigma=5$. }
+\label{fig:gauss}
+\end{figure}
+
+
+Gaussov filter je vrsta filtra tekočega povprečja, ki je zelo primeren za izločevanje odvečnega šuma \cite{smith1997scientist}. Ker je karakteriziran z impulznim odzivom, ki je simetričen okoli ničelnega vzorca, gre za vrsto filtra z ničelno fazo. To pomeni, da je faza v frekvenčnem prostoru vedno $0$ \cite{smith1997scientist}. Ker imamo pri takih filtrih negativne indekse, ga težje uporabljamo. 
+
+Ponavadi filtre uporabljamo v rekurzivni obliki, saj je računanje hitrejše. Impulzni odziv rekurzivnega filtra ni simetričen, zato ima nelinearno fazo \cite{smith1997scientist}. To pomankljivost lahko odpravimo z uporabo dvosmernega filtriranja.
+
+Pri \textbf{dvosmernem filtriranju} najprej filtriramo iz leve proti desni in nato iz desne proti levi \cite{smith1997scientist}. Dobljena signala združimo in dobimo pravilen rezultat.
 
 
 
-\subsection{Optimizacija Gaussovega jedra}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-\section{Metode manipulacije video posnetkov}
+\section{Transformacija }
 % Za testiranje optičnega toka in deskriptorjev, testiranje njihove robustnosti smo naredili več manipulacij, za boljšo predstavo o delovanju
+\begin{equation}
+\vec{M}_{int} = \begin{bmatrix}
+	f_u & 0 & c_u \\
+    0 & f_v & c_v \\
+    0 & 0 & 1
+\end{bmatrix}
+\label{eq:intrinsic}
+\end{equation}
 
-% Za vse velja:
-% Zakaj ta manipulacija
-% Opis manipulacije
-\subsection{Skaliranje slike}
-\subsection{Projektivna transformacija}
-\subsection{Združevanje posnetkov}
-\subsection{Obrezovanje posnetkov}
-\subsection{Simulacija vibracij kamere}
-Finally, cameras may shake, if held manually. We simulated this scenario by artificially introducing random small displacements and rotation into the video. Every frame was transformed with random Euclidean transformation, where translation was limited to \SI{4}{\%} of frame size and rotation to \SI{0.13}{rad}.
+\begin{equation}
+\vec{R}_\phi = \begin{bmatrix}
+\cos(\phi) & - \sin(\phi) & 0 \\
+\sin(\phi) & \cos(\phi) & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\label{eq:roll}
+\end{equation}
 
-\subsection{Združevanje slik iz dveh kinektov}
+\begin{equation}
+\vec{R}_\theta = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\theta) & - \sin(\theta) \\
+0 & \sin(\theta) & \cos(\theta)
+\end{bmatrix}
+\label{eq:pitch}
+\end{equation}
+
+\begin{equation}
+\vec{R}_\psi = \begin{bmatrix}
+\cos(\psi) & 0 & \sin(\psi) \\
+0 & 1 & 0 \\
+- \sin(\psi) & 0 & \cos(\psi) 
+\end{bmatrix}
+\label{eq:yaw}
+\end{equation}
+
+
+\begin{equation}
+\vec{R} = \vec{R}_\phi \vec{R}_\theta \vec{R}_\psi
+\label{eq:rotation}
+\end{equation}
+
+
+\begin{equation}
+\vec{M}_{ext} = \begin{bmatrix}
+	\vec{R} & \vdots & \vec{t}
+\end{bmatrix}
+\label{eq:extrinsic}
+\end{equation}
+
+
+\begin{equation}
+\vec{H} = \vec{M}_{int} \vec{M}_{ext}
+\label{eq:homography}
+\end{equation}
 
 
 \section{Evaluacijske metrike}
+rmse snr mera prekrivanja področja, rae r 
 
 
 
@@ -1169,5 +1021,6 @@ Finally, cameras may shake, if held manually. We simulated this scenario by arti
 \subsection{Senzorji v lab}
 \subsection{Senzorji na terenu}
 \subsection{Sinhornizacija časa}
+
 
 
