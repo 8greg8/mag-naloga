@@ -1,11 +1,165 @@
 \chapter{Metode}\label{sec:metode}
+\section{Geometrijski model kamere}\label{sec:model-kamere}
+Za geometrijski model kamere uporabimo perspektivni model, ki je predstavljen s sliko \ref{fig:perspektivni-model}. Sestavljen je iz slikovne ravnine, koordinatnega sistema kamere in točke prizora \cite{trucco1998introductory}.
+
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/perspektivni-model.tikz}
+\caption{Perspektivni model kamere.}
+\label{fig:perspektivni-model}
+\end{figure}
+
+
+\textbf{Koordinatni sistem kamere} (KSK) je postavljen tako, da \textbf{optična os} sovpada s $Z$ osjo. Zaradi poenostavitve KSK sovpada z globalnim koordinatnim sistemom.  Središče KSK $\vec{O}$ se imenuje projekcijsko središče, skozi katerega se točka prizora $\vec{p} = \left[ X~Y~Z \right]^\top$ projecira na slikovno ravnino \cite{trucco1998introductory}.
+
+\textbf{Slikovna ravnina} (ang. image plane) je ravnina $\mathit{\Omega} \subset \mathbb{R}^2$, ki leži na razdalji $f$ od projekcijskega središča $O$. Razdalja $f$ se imenuje goriščna razdalja (ang. focal length) \cite{trucco1998introductory}. Točka $\vec{c} = \left[c_x~c_y \right]^\top$ se nahaja na poziciji, kjer optična os prebada slikovno ravnino $\mathit{\Omega}$. Imenuje se optično središče slikovne ravnine (ang. principal point). Točka $\vec{q} = [x~y]^\top$ se nahaja na poziciji, kjer daljica med projekcijskim središčem $\vec{O}$ in točko prizora $\vec{p}$ prebada slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Točka je slika prizora $\vec{q} = [x~y]^\top$, kjer sta $x$ in $y$ slikovni koordinati. Kadar je $\vec{c} = \left[0~0\right]^\top$, lahko sliko $\vec{q}$ na slikovni ravnini $\mathit{\Omega}$ predstavimo z enačbo \eqref{eq:slika-delca}.
+
+\begin{equation}
+	\vec{q} = f \frac{\vec{p}}{Z}.
+    \label{eq:slika-delca}
+\end{equation}
+
+\subsection{Diskretna slikovna ravnina}
+Slikovne koordinate so v resnici diskretne, saj sliko sestavlja polje slikovnih elementov $\vec{\lambda}$ s širino $\lambda_u$ in dolžino $\lambda_v$ \cite{trucco1998introductory}. V splošnem je enačba slikovnih koordinat $x$ in $y$ v metričnih enotah \eqref{eq:slikovne-koordinate}, kjer sta $u$ in $v$ slikovni koordinati v pikslih. Točka $\vec{c} = \left[c_u~c_v \right]^\top$ je optično središče v pikslih.
+
+\begin{subequations}
+\begin{align}
+	x &= \lambda_u (u - c_u) \\
+    y &= \lambda_v (v - c_v)
+\end{align}
+\label{eq:slikovne-koordinate}
+\end{subequations}
+
+Če uporabimo homogene koordinate lahko ob upoštevanju enačb \eqref{eq:slika-delca} in \eqref{eq:slikovne-koordinate} izračunamo diskretne slikovne koordinate slike $\vec{q}' = \left[ u~ v \right]^\top$ po enačbi \eqref{eq:diskretne-slikovne-koordinate} \cite{trucco1998introductory}.
+
+
+\begin{equation}
+	w \begin{bmatrix}
+	u \\ v \\ 1
+	\end{bmatrix} = \vec{M}_{int}
+    \begin{bmatrix}
+    X \\ Y \\ Z \\ 1
+    \end{bmatrix}
+    \label{eq:diskretne-slikovne-koordinate}
+\end{equation}
+
+Matrika $\vec{M}_{int}$ v enačbi \eqref{eq:diskretne-slikovne-koordinate} je intrinsična matrika \cite{trucco1998introductory}. Predstavljena je z enačbo \eqref{eq:intrinsic} in vsebuje intrinzične parametre kamere, kjer sta $f_u$ in $f_v$ določena z enačbo \eqref{eq:focal}.
+
+\begin{equation}
+\vec{M}_{int} = \begin{bmatrix}
+	f_u & 0 & c_u & 0 \\
+    0 & f_v & c_v & 0 \\
+    0 & 0 & 1 & 0
+\end{bmatrix}
+\label{eq:intrinsic}
+\end{equation}
+
+\begin{equation}
+\begin{bmatrix}
+	f_u & f_v
+\end{bmatrix}^\top = \begin{bmatrix}
+	\frac{f}{\lambda_u} & \frac{f}{\lambda_v}
+\end{bmatrix}^\top
+\label{eq:focal}
+\end{equation}
+
+
+\subsection{Premikanje kamere}
+Koordinatni sistem kamere lahko transliramo in rotiramo tako, da ne sovpada več z globalnim koordinatnim sistemom, kot je prikazano na sliki \ref{fig:premikanje-kamere}. 
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/premikanje-kamere.tikz}
+\caption{Koordinatni sistem kamere ne sovpada z globalnim koordinatnim sistemom}
+\label{fig:premikanje-kamere}
+\end{figure}
+
+Translacijo koordinatnega sistema kamere lahko opišemo z vektorjem $\vec{t} = \left[t_x~t_y~t_z\right]^\top$ \cite{trucco1998introductory}. 
+
+Rotacijo koordinatnega sistema kamere lahko opišemo z Eulerjevimi koti $\phi$ $\theta$ in $\psi$ \cite{bajd2011osnove}. S kotom $\phi$ rotiramo okoli $z$ osi (ang. Roll). Rotacija je predstavljena z enačbo \eqref{eq:roll}. Kot $\theta$ predstavlja rotacijo okoli $x$ osi (ang. Pitch). Rotacija je opisana z enačbo \eqref{eq:pitch}. Kot $\psi$ je rotacija okoli $y$ osi (ang. Yaw) in je opisana z enačbo \eqref{eq:yaw}.
+
+\begin{equation}
+\vec{R}_\phi = \begin{bmatrix}
+\cos(\phi) & - \sin(\phi) & 0 \\
+\sin(\phi) & \cos(\phi) & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\label{eq:roll}
+\end{equation}
+
+\begin{equation}
+\vec{R}_\theta = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\theta) & - \sin(\theta) \\
+0 & \sin(\theta) & \cos(\theta)
+\end{bmatrix}
+\label{eq:pitch}
+\end{equation}
+
+\begin{equation}
+\vec{R}_\psi = \begin{bmatrix}
+\cos(\psi) & 0 & \sin(\psi) \\
+0 & 1 & 0 \\
+- \sin(\psi) & 0 & \cos(\psi) 
+\end{bmatrix}
+\label{eq:yaw}
+\end{equation}
+
+
+Kadar opravimo vse rotacije osi glede na fiksni globalni koordinatni sistem po vrstnem redu $\vec{R}_\psi$, $\vec{R}_\theta$ in $\vec{R}_\phi$, lahko rotacijsko matriko $\vec{R}$ opišemo z enačbo \eqref{eq:rotation} \cite{bajd2011osnove}.
+
+
+\begin{equation}
+\vec{R} = \vec{R}_\phi \vec{R}_\theta \vec{R}_\psi
+\label{eq:rotation}
+\end{equation}
+
+
+Translacijo $\vec{t}$ in rotacijo $\vec{R}$ lahko združimo v matriko premika koordinatnega sistema kamere glede na globalni koordinatni sistem, ki jo imenujemo \textbf{ekstrinsična matrika} \cite{trucco1998introductory}. Opisana je z enačbo \eqref{eq:extrinsic}.
+
+\begin{equation}
+\vec{M}_{ext} = \begin{bmatrix}
+	\vec{R} & \vdots & \vec{t}
+\end{bmatrix}
+\label{eq:extrinsic}
+\end{equation}
+
+
+Z upoštevanjem premika kamere lahko enačbo \eqref{eq:diskretne-slikovne-koordinate} zapišemo v obliko \eqref{eq:diskretne-slikovne-koordinate-premik}. Matrika $\vec{M}$ je \textbf{projekcijska matrika} in je opisana v enačbi \eqref{eq:projection-matrix}.
+
+\begin{equation}
+w \begin{bmatrix}
+	u \\ v \\ 1
+	\end{bmatrix} = \vec{M}
+    \begin{bmatrix}
+    X \\ Y \\ Z \\ 1
+    \end{bmatrix}
+\label{eq:diskretne-slikovne-koordinate-premik}
+\end{equation}
+
+
+\begin{equation}
+\vec{M} = \vec{M}_{int} \vec{M}_{ext}
+\label{eq:projection-matrix}
+\end{equation}
+
+
+
+
+
+
+
+
+
 \section{Model gibanja}\label{sec:model-gibanja}
 % Ponovi teorijo energijske porabe in kako pridemo do gibanja
 % Dokazi, da lahko gibanje opazujemo s kamerami
 % Teorija, da je najboljši približek optični tok
 Da mišice lahko s svojimi kontrakcijami spravijo telo v pogon, potrebujejo energijo, pri tem pa se del energije pretvarja v toploto, ki ji pravimo energijska poraba \cite{scott2005misconceptions}. Energijska poraba nastaja zaradi gibanja telesa, zato jo lahko določimo z opazovanjem kinematike \cite{levine2005measurement}. Zaradi omejitev kontaktnih senzorjev in slabih lastnosti srčnega utripa so v študijah, ki so opisane v poglavju \ref{sec:podobna-dela}, dokazali, da lahko z opazovanjem kinematike z računalniškim vidom določimo energijsko porabo. 
 
-Naj bo delec z maso $m$ predstavljen kot točka prizora $\vec{p} = [X~Y~Z]^\top$, na sliki \ref{fig:model-gibanja}. $X$, $Y$ in $Z$ predstavljajo koordinate na posameznih oseh v koordinatnem sistemu kamere \cite{trucco1998introductory}. Gibanje delca $\vec{p}$ lahko predstavimo z vektorjem hitrosti $\vec{v} = [v_X~v_Y~v_Z]^\top$, $\vec{v} \in \mathcal{V} \subset \mathbb{R}^3$, kjer so $v_X$, $v_Y$ in $v_Z$ hitrosti glede na osi in $\mathcal{V}$ vektorski prostor. Kadar imamo v prostoru več masnih delcev, množico vektorjev hitrosti imenujemo \textbf{polje hitrosti} (angl. Velocity Field) $\mathbf{H}: \mathbb{R}^3 \to \mathcal{V}$, kjer velja $\vec{p} \mapsto \vec{v}$ \cite{trucco1998introductory}.
+Predpostavimo perspektivni model kamere, ki je opisan v poglavju \ref{sec:model-kamere}
+Naj bo delec z maso $m$ predstavljen kot točka prizora $\vec{p}$, na sliki \ref{fig:model-gibanja}. Gibanje delca $\vec{p}$ lahko predstavimo z vektorjem hitrosti $\vec{v} = [v_X~v_Y~v_Z]^\top$, $\vec{v} \in \mathcal{V} \subset \mathbb{R}^3$, kjer so $v_X$, $v_Y$ in $v_Z$ hitrosti glede na osi in $\mathcal{V}$ vektorski prostor. Kadar imamo v prostoru več masnih delcev, množico vektorjev hitrosti imenujemo \textbf{polje hitrosti} (angl. Velocity Field) $\mathbf{H}: \mathbb{R}^3 \to \mathcal{V}$, kjer velja $\vec{p} \mapsto \vec{v}$ \cite{trucco1998introductory}.
 
 
 \begin{figure}
@@ -18,7 +172,7 @@ Naj bo delec z maso $m$ predstavljen kot točka prizora $\vec{p} = [X~Y~Z]^\top$
 
 
 
-Relativno gibanje delca $\vec{p}$ glede na koordinatno izhodišče kamere $O$ lahko opišemo kot:
+Relativno gibanje delca $\vec{p}$ glede na koordinatno izhodišče kamere $\vec{O}$ lahko opišemo kot:
 
 \begin{equation}
 	\vec{v} = -\vec{T}-\omega\times\vec{p},
@@ -57,21 +211,9 @@ Gibanje telesa v prostoru torej lahko opišemo s poljem hitrosti $\vec{H}$.
 % Kako smo ga uporabili
 % Problemi naše predpostavke
 % Rešitev s kalibracijo velikosti
-Za namen razlage upoštevamo perpektivni model kamere, kjer je \cite{trucco1998introductory}:
+Za namen razlage upoštevamo perpektivni model kamere iz poglavja \ref{sec:model-kamere} in model gibanja iz poglavja \ref{sec:model-gibanja}. Dodatno upoštevamo da se osvetlitev ne spreminja.
 
-\begin{itemize}
-\item \textbf{optična os} enaka $Z$ osi koordinatnega sistema kamere.
-\item \textbf{Gibajoči masni delec} je predstavljen enako kot v poglavju \ref{sec:model-gibanja}.
-\item \textbf{Osvetlitev} se ne spreminja.
-\end{itemize}
-
-Sliko delca $\vec{q} = [x~y]^\top$ na slikovni ravnini $\mathit{\Omega} \subset \mathbb{R}^2$, kjer sta $x$ in $y$ slikovni koordinati, lahko predstavimo z enačbo
-
-\begin{equation}\label{eq:slika-delca}
-	\vec{q} = f \frac{\vec{p}}{Z},
-\end{equation}
-
-kjer je $f$ goriščna razdalja kamere \cite{trucco1998introductory}. Delec in njegova slika sta predstavljena na sliki \ref{fig:optical-flow} S časovnim odvodom enačbe \eqref{eq:slika-delca}, dobimo hitrost delca na slikovni ravnini:
+$\vec{q}$ je slika delca $\vec{p}$ na slikovni ravnini $\mathit{\Omega}$ Delec in njegova slika sta predstavljena na sliki \ref{fig:optical-flow} S časovnim odvodom enačbe \eqref{eq:slika-delca}, dobimo hitrost delca na slikovni ravnini:
 
 \begin{equation}\label{eq:hitrost-slike-delca}
 	\vec{u} = f \frac{Z\vec{v}-v_Z\vec{p}}{Z^2},
@@ -952,75 +1094,95 @@ Pri \textbf{dvosmernem filtriranju} najprej filtriramo iz leve proti desni in na
 
 
 
-\section{Transformacija }
-% Za testiranje optičnega toka in deskriptorjev, testiranje njihove robustnosti smo naredili več manipulacij, za boljšo predstavo o delovanju
-\begin{equation}
-\vec{M}_{int} = \begin{bmatrix}
-	f_u & 0 & c_u \\
-    0 & f_v & c_v \\
-    0 & 0 & 1
-\end{bmatrix}
-\label{eq:intrinsic}
-\end{equation}
-
-\begin{equation}
-\vec{R}_\phi = \begin{bmatrix}
-\cos(\phi) & - \sin(\phi) & 0 \\
-\sin(\phi) & \cos(\phi) & 0 \\
-0 & 0 & 1
-\end{bmatrix}
-\label{eq:roll}
-\end{equation}
-
-\begin{equation}
-\vec{R}_\theta = \begin{bmatrix}
-1 & 0 & 0 \\
-0 & \cos(\theta) & - \sin(\theta) \\
-0 & \sin(\theta) & \cos(\theta)
-\end{bmatrix}
-\label{eq:pitch}
-\end{equation}
-
-\begin{equation}
-\vec{R}_\psi = \begin{bmatrix}
-\cos(\psi) & 0 & \sin(\psi) \\
-0 & 1 & 0 \\
-- \sin(\psi) & 0 & \cos(\psi) 
-\end{bmatrix}
-\label{eq:yaw}
-\end{equation}
-
-
-\begin{equation}
-\vec{R} = \vec{R}_\phi \vec{R}_\theta \vec{R}_\psi
-\label{eq:rotation}
-\end{equation}
-
-
-\begin{equation}
-\vec{M}_{ext} = \begin{bmatrix}
-	\vec{R} & \vdots & \vec{t}
-\end{bmatrix}
-\label{eq:extrinsic}
-\end{equation}
-
-
-\begin{equation}
-\vec{H} = \vec{M}_{int} \vec{M}_{ext}
-\label{eq:homography}
-\end{equation}
 
 
 \section{Evaluacijske metrike}
-rmse snr mera prekrivanja področja, rae r 
+V predstavljenih enačbah je $N$ število vzorcev, $\hat{y}_i~ \forall i=1,\ldots,N$ so izmerjene vrednosti in $y_i ~\forall i=1,\ldots,N$ so prave vrednosti. Spremenljivke s prečno črto predstavljajo srednjo vrednost, ki jo izračunamo po enačbi \eqref{eq:mean} \cite{witten2005data}.
+
+\begin{equation}
+\overline{y} = \frac{1}{N} \sum_{i=1}^N y_i
+\label{eq:mean}
+\end{equation}
+
+
+\subsection{Koren srednje kvadratične napake}
+Koren srednje kvadratične napake (ang. Root Mean Square Error) (RMSE) opišemo z enačbo \eqref{eq:rmse} \cite{witten2005data}.
+\begin{equation}
+e_{RMS} = \sqrt{\frac{1}{N} \sum_{i=1}^{N}\left( \hat{y}_i - y_i \right)^2}
+\label{eq:rmse}
+\end{equation}
+
+Rezultati se gibljejo na intervalu $e_{RMS} \in [0, \infty)$. Manjša vrednost pomeni boljši rezultat \cite{witten2005data}.
+
+\subsection{Koren relativne kvadratične napake}
+Koren relativne kvadratične napake (ang. Relative Root Squared Error) (RRSE) opišemo z enačbo \eqref{eq:rmse} \cite{witten2005data}. $\overline{y}$ je srednja vrednost pravih vrednosti, ki jo izračunamo po enačbi \eqref{eq:mean}.
+
+\begin{equation}
+e_{RRS} = \sqrt{\frac{\sum_{i=1}^{N} \left ( \hat{y}_i - y_i \right )^2}{\sum_{i=0}^{N} \left( \overline{y} - y_i \right)^2}}
+\label{eq:rrse}
+\end{equation}
+
+Rezultati se gibljejo na intervalu $e_{RRS} \in [0, \infty)$. Manjša vrednost pomeni boljši rezultat \cite{witten2005data}.
+
+Enačbo si lahko razlagamo kot RMSE matematičnega modela, ki je normaliziran na RMSE najenostavnejšega matematičnega modela ali prediktorja \cite{witten2005data}. Najenostavnejši prediktor je tisti, ki nam na izhodu daje srednjo vrednost $\overline{y}$. 
+
+\subsection{Relativna absolutna napaka}
+Relativno absolutno napako (ang. Relative Absolute Error) (RAE) opišemo z enačbo \eqref{eq:rmse} \cite{trucco1998introductory}.
+
+\begin{equation}
+e_{RA} = \frac{\sum_{i=1}^{N} \left | \hat{y}_i - y_i \right |}{\sum_{i=1}^{N} \left| \overline{y} - y_i \right|}
+\label{eq:rae}
+\end{equation}
+
+Rezultati se gibljejo na intervalu $e_{RAE} \in [0, \infty)$. Manjša vrednost pomeni boljši rezultat \cite{witten2005data}.
+
+\subsection{Korelacijski koeficient}
+Korelacijski koeficient $r$ je predstavljen z enačbo \eqref{eq:r} \cite{witten2005data}.
+
+\begin{subequations}
+\begin{align}
+r &= \frac{S_{\hat{y}y}}{\sqrt{S_{\hat{y}} S_y}} \\
+S_{\hat{y}y} &= \frac{\sum_{i=1}^N \left(\hat{y}_i - \overline{\hat{y}}\right)\left(y_i - \overline{y}\right) }{N-1} \\
+S_{\hat{y}} &= \frac{\sum_{i=1}^N \left(\hat{y}_i - \overline{\hat{y}}\right)}{N-1} \\
+S_y &= \frac{\sum_{i=1}^N \left(y_i - \overline{y}\right) }{N-1}
+\end{align}
+\label{eq:r}
+\end{subequations}
+
+Rezultati se gibljejo na intervalu $e_{RAE} \in [-1, 1]$ \cite{witten2005data}. Vrednost $-1$ pomeni da so rezultati popolnoma korelirani s pravimi vrednostmi v nasprotni smeri. Vrednost $0$ pomeni, da ne obstaja nobena korelacija. Vrednost $1$ pomeni, da obstaja popolna korelacija.  
+
+
+\subsection{Razmerje signal in šum}
+Razmerje signal šum (ang. Signal to Noise Ratio) (SNR) je določeno z enačbo \eqref{eq:snr}, kjer je $P_s$ moč signala $y$ in $P_n$ moč šuma $n$ \cite{gonzalez2006digital}. Signal z nizko vsebnostjo šuma ima visok SNR, medtem, ko nizek SNR pomeni veliko šuma v signalu.
+
+\begin{subequations}
+\begin{align}
+SNR_{dB} &= 10 \log_{10}\left(\frac{P_s}{P_n}\right) \\
+P_s &= \frac{1}{N} \sum_{i=1}^{N} y_i^2 \\
+P_n &= \frac{1}{N} \sum_{i=1}^{N} n_i^2
+\end{align}
+\label{eq:snr}
+\end{subequations}
 
 
 
-\section{Materiali}
-\subsection{Zlati standard}
-\subsection{Senzorji v lab}
-\subsection{Senzorji na terenu}
-\subsection{Sinhornizacija časa}
+\subsection{Mera prekrivanja področja}
+Mera prekrivanja področja (ang. Region Overlap), ki je predstavljena z enačbo \ref{eq:region-overlap} se večinoma uporablja za sledilnike \cite{vcehovin2016visual}. $\Lambda$ predstavlja opis tarče, $R_t$ je področje tarče ob času $t$, $N$ je število slik v zaporedju, $G$ predstavlja referenco in $T$ tarčo.
+
+\begin{subequations}
+\begin{align}
+	\Lambda &= \left\{R_t\right\}^N_{t=1}, \nonumber \\
+	\Phi(\Lambda^G, \Lambda^T) &= \left\{\phi_t\right\}^N_{t=1}, \nonumber \\
+    \phi_t &= \frac{R_t^G \cap R_t^T }{R_t^G \cup R_t^T} 
+\end{align}
+\label{eq:region-overlap}
+\end{subequations}
+
+
+S prekrivanjem področja dobimo rezultate na intervalu $\left[0,1\right]$. Večje število predstavlja boljši rezultat.
+
+
+
 
 
 
