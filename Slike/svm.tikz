@@ -1,0 +1,40 @@
+\begin{tikzpicture}[scale=1.0]
+	% Draw axes
+  \draw [axis] (0,0) -- (0,5) node (yaxis) [left] {$y$};
+  \draw [axis] (0,0) -- (5,0) node (xaxis) [below] {$x$};
+  % Draw line
+  \draw (0,-1) -- (5,4); % y=x-1
+  \draw[dashed] (-1,0) -- (4,5); % y=x+1
+  \draw[dashed] (2,-1) -- (6,3); % y=x-3
+  % Draw labels
+  \draw (3.5,3) node[rotate=45,font=\small] 
+        {$\vec{w}\cdot \vec{x} + b = 0$};
+  \draw (2.5,4) node[rotate=45,font=\small] 
+        {$\vec{w}\cdot \vec{x} + b = 1$};
+  \draw (4.5,2) node[rotate=45,font=\small] 
+        {$\vec{w}\cdot \vec{x} + b = -1$};
+  % Draw distance
+  \draw[dotted] (4,5) -- (6,3);
+  \draw (5.25,4.25) node[rotate=-45] {$\frac{2}{\Vert \vec{w} \Vert}$}; 
+  \draw[->] (2,1) -- (1.5,1.5);
+  \draw (1.85,1.35) node[rotate=-45] {$\vec{w}$};
+  % Draw negative dots
+  \fill[orange]   (1.5,2.5)   circle (3pt);
+  \fill[teal] (1,2.5)     circle (3pt);
+  \fill[teal] (0.75,2)    circle (3pt);
+  \fill[teal] (0.6,1.9)   circle (3pt);
+  \fill[teal] (0.77, 2.5) circle (3pt);
+  \fill[teal] (1.5,3)     circle (3pt);
+  \fill[teal] (1.3,3.3)   circle (3pt);
+  \fill[teal] (0.6,3.2)   circle (3pt);
+  % Draw positive dots
+  \draw[orange,thick] (4,1)     circle (3pt); 
+  \draw[orange,thick] (3.3,.3)  circle (3pt); 
+  \draw[teal]     (4.5,1.2) circle (3pt); 
+  \draw[teal]     (4.5,.5)  circle (3pt); 
+  \draw[teal]     (3.9,.7)  circle (3pt); 
+  \draw[teal]     (5,1)     circle (3pt); 
+  \draw[teal]     (3.5,.2)  circle (3pt); 
+  \draw[teal]     (4,.3)    circle (3pt); 
+    
+\end{tikzpicture}

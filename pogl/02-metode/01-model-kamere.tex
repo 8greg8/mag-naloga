@@ -1,0 +1,144 @@
+\section{Geometrijski model kamere}\label{sec:model-kamere}
+Za geometrijski model kamere uporabimo perspektivni model, ki je predstavljen s sliko \ref{fig:perspektivni-model}. Sestavljen je iz slikovne ravnine, koordinatnega sistema kamere in točke prizora \cite{trucco1998introductory}.
+
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/perspektivni-model.tikz}
+\caption{Perspektivni model kamere.}
+\label{fig:perspektivni-model}
+\end{figure}
+
+
+\textbf{Koordinatni sistem kamere} (KSK) je postavljen tako, da \textbf{optična os} sovpada s $Z$ osjo. Zaradi poenostavitve KSK sovpada z globalnim koordinatnim sistemom.  Središče KSK $\vec{O}$ se imenuje projekcijsko središče, skozi katerega se točka prizora $\vec{p} = \left[ X~Y~Z \right]^\top$ projecira na slikovno ravnino \cite{trucco1998introductory}.
+
+\textbf{Slikovna ravnina} (ang. image plane) je ravnina $\mathit{\Omega} \subset \mathbb{R}^2$, ki leži na razdalji $f$ od projekcijskega središča $O$. Razdalja $f$ se imenuje goriščna razdalja (ang. focal length) \cite{trucco1998introductory}. Točka $\vec{c} = \left[c_x~c_y \right]^\top$ se nahaja na poziciji, kjer optična os prebada slikovno ravnino $\mathit{\Omega}$. Imenuje se optično središče slikovne ravnine (ang. principal point). Točka $\vec{q} = [x~y]^\top$ se nahaja na poziciji, kjer daljica med projekcijskim središčem $\vec{O}$ in točko prizora $\vec{p}$ prebada slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Točka je slika prizora $\vec{q} = [x~y]^\top$, kjer sta $x$ in $y$ slikovni koordinati. Kadar je $\vec{c} = \left[0~0\right]^\top$, lahko sliko $\vec{q}$ na slikovni ravnini $\mathit{\Omega}$ predstavimo z enačbo \eqref{eq:slika-delca}.
+
+\begin{equation}
+	\vec{q} = f \frac{\vec{p}}{Z}.
+    \label{eq:slika-delca}
+\end{equation}
+
+\subsection{Diskretna slikovna ravnina}
+Slikovne koordinate so v resnici diskretne, saj sliko sestavlja polje slikovnih elementov $\vec{\lambda}$ s širino $\lambda_u$ in dolžino $\lambda_v$ \cite{trucco1998introductory}. V splošnem je enačba slikovnih koordinat $x$ in $y$ v metričnih enotah \eqref{eq:slikovne-koordinate}, kjer sta $u$ in $v$ slikovni koordinati v pikslih. Točka $\vec{c} = \left[c_u~c_v \right]^\top$ je optično središče v pikslih.
+
+\begin{subequations}
+\begin{align}
+	x &= \lambda_u (u - c_u) \\
+    y &= \lambda_v (v - c_v)
+\end{align}
+\label{eq:slikovne-koordinate}
+\end{subequations}
+
+Če uporabimo homogene koordinate lahko ob upoštevanju enačb \eqref{eq:slika-delca} in \eqref{eq:slikovne-koordinate} izračunamo diskretne slikovne koordinate slike $\vec{q}' = \left[ u~ v \right]^\top$ po enačbi \eqref{eq:diskretne-slikovne-koordinate} \cite{trucco1998introductory}.
+
+
+\begin{equation}
+	w \begin{bmatrix}
+	u \\ v \\ 1
+	\end{bmatrix} = \vec{M}_{int}
+    \begin{bmatrix}
+    X \\ Y \\ Z \\ 1
+    \end{bmatrix}
+    \label{eq:diskretne-slikovne-koordinate}
+\end{equation}
+
+Matrika $\vec{M}_{int}$ v enačbi \eqref{eq:diskretne-slikovne-koordinate} je intrinsična matrika \cite{trucco1998introductory}. Predstavljena je z enačbo \eqref{eq:intrinsic} in vsebuje intrinzične parametre kamere, kjer sta $f_u$ in $f_v$ določena z enačbo \eqref{eq:focal}.
+
+\begin{equation}
+\vec{M}_{int} = \begin{bmatrix}
+	f_u & 0 & c_u & 0 \\
+    0 & f_v & c_v & 0 \\
+    0 & 0 & 1 & 0
+\end{bmatrix}
+\label{eq:intrinsic}
+\end{equation}
+
+\begin{equation}
+\begin{bmatrix}
+	f_u & f_v
+\end{bmatrix}^\top = \begin{bmatrix}
+	\frac{f}{\lambda_u} & \frac{f}{\lambda_v}
+\end{bmatrix}^\top
+\label{eq:focal}
+\end{equation}
+
+
+\subsection{Premikanje kamere}
+Koordinatni sistem kamere lahko transliramo in rotiramo tako, da ne sovpada več z globalnim koordinatnim sistemom, kot je prikazano na sliki \ref{fig:premikanje-kamere}. 
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/premikanje-kamere.tikz}
+\caption{Koordinatni sistem kamere ne sovpada z globalnim koordinatnim sistemom}
+\label{fig:premikanje-kamere}
+\end{figure}
+
+Translacijo koordinatnega sistema kamere lahko opišemo z vektorjem $\vec{t} = \left[t_x~t_y~t_z\right]^\top$ \cite{trucco1998introductory}. 
+
+Rotacijo koordinatnega sistema kamere lahko opišemo z Eulerjevimi koti $\phi$ $\theta$ in $\psi$ \cite{bajd2011osnove}. S kotom $\phi$ rotiramo okoli $z$ osi (ang. Roll). Rotacija je predstavljena z enačbo \eqref{eq:roll}. Kot $\theta$ predstavlja rotacijo okoli $x$ osi (ang. Pitch). Rotacija je opisana z enačbo \eqref{eq:pitch}. Kot $\psi$ je rotacija okoli $y$ osi (ang. Yaw) in je opisana z enačbo \eqref{eq:yaw}.
+
+\begin{equation}
+\vec{R}_\phi = \begin{bmatrix}
+\cos(\phi) & - \sin(\phi) & 0 \\
+\sin(\phi) & \cos(\phi) & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\label{eq:roll}
+\end{equation}
+
+\begin{equation}
+\vec{R}_\theta = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\theta) & - \sin(\theta) \\
+0 & \sin(\theta) & \cos(\theta)
+\end{bmatrix}
+\label{eq:pitch}
+\end{equation}
+
+\begin{equation}
+\vec{R}_\psi = \begin{bmatrix}
+\cos(\psi) & 0 & \sin(\psi) \\
+0 & 1 & 0 \\
+- \sin(\psi) & 0 & \cos(\psi) 
+\end{bmatrix}
+\label{eq:yaw}
+\end{equation}
+
+
+Kadar opravimo vse rotacije osi glede na fiksni globalni koordinatni sistem po vrstnem redu $\vec{R}_\psi$, $\vec{R}_\theta$ in $\vec{R}_\phi$, lahko rotacijsko matriko $\vec{R}$ opišemo z enačbo \eqref{eq:rotation} \cite{bajd2011osnove}.
+
+
+\begin{equation}
+\vec{R} = \vec{R}_\phi \vec{R}_\theta \vec{R}_\psi
+\label{eq:rotation}
+\end{equation}
+
+
+Translacijo $\vec{t}$ in rotacijo $\vec{R}$ lahko združimo v matriko premika koordinatnega sistema kamere glede na globalni koordinatni sistem, ki jo imenujemo \textbf{ekstrinsična matrika} \cite{trucco1998introductory}. Opisana je z enačbo \eqref{eq:extrinsic}.
+
+\begin{equation}
+\vec{M}_{ext} = \begin{bmatrix}
+	\vec{R} & \vdots & \vec{t}
+\end{bmatrix}
+\label{eq:extrinsic}
+\end{equation}
+
+
+Z upoštevanjem premika kamere lahko enačbo \eqref{eq:diskretne-slikovne-koordinate} zapišemo v obliko \eqref{eq:diskretne-slikovne-koordinate-premik}. Matrika $\vec{M}$ je \textbf{projekcijska matrika} in je opisana v enačbi \eqref{eq:projection-matrix}.
+
+\begin{equation}
+w \begin{bmatrix}
+	u \\ v \\ 1
+	\end{bmatrix} = \vec{M}
+    \begin{bmatrix}
+    X \\ Y \\ Z \\ 1
+    \end{bmatrix}
+\label{eq:diskretne-slikovne-koordinate-premik}
+\end{equation}
+
+
+\begin{equation}
+\vec{M} = \vec{M}_{int} \vec{M}_{ext}
+\label{eq:projection-matrix}
+\end{equation}

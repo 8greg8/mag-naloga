@@ -1,0 +1,87 @@
+\section{Evaluacijske metrike}
+V predstavljenih enačbah je $N$ število vzorcev, $\hat{y}_i~ \forall i=1,\ldots,N$ so izmerjene vrednosti in $y_i ~\forall i=1,\ldots,N$ so prave vrednosti. Spremenljivke s prečno črto predstavljajo srednjo vrednost, ki jo izračunamo po enačbi \eqref{eq:mean} \cite{witten2005data}.
+
+\begin{equation}
+\overline{y} = \frac{1}{N} \sum_{i=1}^N y_i
+\label{eq:mean}
+\end{equation}
+
+
+\subsection{Koren srednje kvadratične napake}
+Koren srednje kvadratične napake (ang. Root Mean Square Error) (RMSE) opišemo z enačbo \eqref{eq:rmse} \cite{witten2005data}.
+\begin{equation}
+e_{RMS} = \sqrt{\frac{1}{N} \sum_{i=1}^{N}\left( \hat{y}_i - y_i \right)^2}
+\label{eq:rmse}
+\end{equation}
+
+Rezultati se gibljejo na intervalu $e_{RMS} \in [0, \infty)$. Manjša vrednost pomeni boljši rezultat \cite{witten2005data}.
+
+\subsection{Koren relativne kvadratične napake}
+Koren relativne kvadratične napake (ang. Relative Root Squared Error) (RRSE) opišemo z enačbo \eqref{eq:rmse} \cite{witten2005data}. $\overline{y}$ je srednja vrednost pravih vrednosti, ki jo izračunamo po enačbi \eqref{eq:mean}.
+
+\begin{equation}
+e_{RRS} = \sqrt{\frac{\sum_{i=1}^{N} \left ( \hat{y}_i - y_i \right )^2}{\sum_{i=0}^{N} \left( \overline{y} - y_i \right)^2}}
+\label{eq:rrse}
+\end{equation}
+
+Rezultati se gibljejo na intervalu $e_{RRS} \in [0, \infty)$. Manjša vrednost pomeni boljši rezultat \cite{witten2005data}.
+
+Enačbo si lahko razlagamo kot RMSE matematičnega modela, ki je normaliziran na RMSE najenostavnejšega matematičnega modela ali prediktorja \cite{witten2005data}. Najenostavnejši prediktor je tisti, ki nam na izhodu daje srednjo vrednost $\overline{y}$. 
+
+\subsection{Relativna absolutna napaka}
+Relativno absolutno napako (ang. Relative Absolute Error) (RAE) opišemo z enačbo \eqref{eq:rmse} \cite{trucco1998introductory}.
+
+\begin{equation}
+e_{RA} = \frac{\sum_{i=1}^{N} \left | \hat{y}_i - y_i \right |}{\sum_{i=1}^{N} \left| \overline{y} - y_i \right|}
+\label{eq:rae}
+\end{equation}
+
+Rezultati se gibljejo na intervalu $e_{RAE} \in [0, \infty)$. Manjša vrednost pomeni boljši rezultat \cite{witten2005data}.
+
+\subsection{Korelacijski koeficient}
+Korelacijski koeficient $r$ je predstavljen z enačbo \eqref{eq:r} \cite{witten2005data}.
+
+\begin{subequations}
+\begin{align}
+r &= \frac{S_{\hat{y}y}}{\sqrt{S_{\hat{y}} S_y}} \\
+S_{\hat{y}y} &= \frac{\sum_{i=1}^N \left(\hat{y}_i - \overline{\hat{y}}\right)\left(y_i - \overline{y}\right) }{N-1} \\
+S_{\hat{y}} &= \frac{\sum_{i=1}^N \left(\hat{y}_i - \overline{\hat{y}}\right)}{N-1} \\
+S_y &= \frac{\sum_{i=1}^N \left(y_i - \overline{y}\right) }{N-1}
+\end{align}
+\label{eq:r}
+\end{subequations}
+
+Rezultati se gibljejo na intervalu $e_{RAE} \in [-1, 1]$ \cite{witten2005data}. Vrednost $-1$ pomeni da so rezultati popolnoma korelirani s pravimi vrednostmi v nasprotni smeri. Vrednost $0$ pomeni, da ne obstaja nobena korelacija. Vrednost $1$ pomeni, da obstaja popolna korelacija.  
+
+
+\subsection{Razmerje signal in šum}
+Razmerje signal šum (ang. Signal to Noise Ratio) (SNR) je določeno z enačbo \eqref{eq:snr}, kjer je $P_s$ moč signala $y$ in $P_n$ moč šuma $n$ \cite{gonzalez2006digital}. Signal z nizko vsebnostjo šuma ima visok SNR, medtem, ko nizek SNR pomeni veliko šuma v signalu.
+
+\begin{subequations}
+\begin{align}
+SNR_{dB} &= 10 \log_{10}\left(\frac{P_s}{P_n}\right) \\
+P_s &= \frac{1}{N} \sum_{i=1}^{N} y_i^2 \\
+P_n &= \frac{1}{N} \sum_{i=1}^{N} n_i^2
+\end{align}
+\label{eq:snr}
+\end{subequations}
+
+
+
+\subsection{Mera prekrivanja področja}
+Mera prekrivanja področja (ang. Region Overlap), ki je predstavljena z enačbo \ref{eq:region-overlap} se večinoma uporablja za sledilnike \cite{vcehovin2016visual}. $\Lambda$ predstavlja opis tarče, $R_t$ je področje tarče ob času $t$, $N$ je število slik v zaporedju, $G$ predstavlja referenco in $T$ tarčo.
+
+\begin{subequations}
+\begin{align}
+	\Lambda &= \left\{R_t\right\}^N_{t=1}, \nonumber \\
+	\Phi(\Lambda^G, \Lambda^T) &= \left\{\phi_t\right\}^N_{t=1}, \nonumber \\
+    \phi_t &= \frac{R_t^G \cap R_t^T }{R_t^G \cup R_t^T} 
+\end{align}
+\label{eq:region-overlap}
+\end{subequations}
+
+
+S prekrivanjem področja dobimo rezultate na intervalu $\left[0,1\right]$. Večje število predstavlja boljši rezultat.
+
+
+

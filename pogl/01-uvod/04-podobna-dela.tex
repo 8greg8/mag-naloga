@@ -1,0 +1,118 @@
+\section{Podobna dela}\label{sec:podobna-dela}
+
+
+
+\subsection{Subjektivna primerjava aktivnosti gibanja}\label{sec:subjektivna-primerjava}
+
+Peker et al. \cite{peker2004framework} zagovarja stališče, da je intenziteta aktivnosti pri opazovanju video posnetkov subjektivna meritev. Pri opazovanju gibanja v video posnetkih bo vsaka oseba zaznala drugačno intenziteto. Vsekakor pa bodo vsi prepoznali hojo kot nizko intenziteto, tek pa visoko intenziteto aktivnsti. Na podlagi tega so zato v delu \cite{peker2004framework} predstavili izvedbo psihofizičnega protokola za primerjavo meritev intenzitete aktivnosti s pomočjo subjektivne reference.
+
+Subjektivni zlati standard so v \cite{peker2004framework} določili s 15 merjenci, ki so določevali intenziteto gibanja $294$ video posnetkov dolžine \SI{1.5}{\s} z lestvico od najmanjše do največje intenzitete $0$--$5$. Na podlagi strinjanja o intenziteti gibanja med subjekti, so izračunali mediano in jo uporabili za zlati standard. Glede na standard so avtorji \cite{peker2004framework} primerjali $9$ različnih deskriptorjev izpeljanih iz vektorjev gibanja. Ugotovili so, da je pravilnost estimacije odvisna od razdalje gibajočih oseb od kamere \cite{peker2004framework}. Prav tako na pravilnost vpliva tresenje kamere. Na podlagi primerjave srednje napake med deskriptorji so ugotovili, da so MPEG-7 deskriptorji gibanja primerni za uporabo v tovrstni problematiki \cite{peker2004framework}.
+
+Fiziologija gibanja je v \cite{peker2004framework} popolnoma izključena. Tu gre zgolj za primerjave med deskriptorji in grobo subjetkivno oceno intenzitete aktivnosti, ki ne daje nobenih oprijemljivih informacij. Predstavlja pa dobro usmeritev za uporabo deskriptorjev za namene ocene intenzitete aktivnosti. Ti naj bi temeljili na polju gibanja, ki je tudi najtesneje povezan s fiziologijo. Prav tako opisuje zametke problematike merjenja intezitete aktivnosti, ko opisuje odvisnost estimacije od razdalje oseb od kamere in njeno premikanje.
+
+
+
+
+\subsection{Predikcija tipov fizične aktivnosti z video analizo}
+
+V študiji \cite{silva2015assessing} so evaluirali avtomatski sistem za video analizo. S predikcijo tipov fizične aktivnosti so želeli pokazati, da so metode računalniškega vida ravno tako primerne za določevanje fizične aktivnosti, kot pospeškometri in orodja za ročno označevanje.
+
+Za eksperimente je Silva et al. \cite{silva2015assessing} uporabil 8 košarkašev, ki so igrali \SI{20}{minutno} igro. Košarkaši so imeli okoli pasu pritrjen pospeškometer Actigraph GT3X+, ki je služil za zlati standard. Za ročno označevanje so uporabili orodje SOPLAY, pri čemer so uporabili dva operaterja (SOPLAY 1 in SOPLAY 2) \cite{silva2015assessing}. Video sistem (CAM) je bil sestavljen iz ene kamere Gigabit Ethernet camera DFK 31BG03.H, ki je bila pritrjena na strop igrišča. Uporabili so širokokotno lečo Computar T2Z1816CS z goriščnimi razdaljami \SI{1.8}{\mm}--\SI{3.6}{\mm} \cite{silva2015assessing}. Snemali so z resolucijo $1024$x$768$ in \SI{30}{fps}. S sledenjem igralcev v koordinatnem sistemu igrišča so določili njihove hitrosti \cite{silva2015assessing}. Na podlagi tega so določili tri tipe fizične aktivnosti in sicer:
+
+\begin{itemize}
+\item Lahka fizična aktivnost ($<$\SI{0.9}{m.s^{-1}}),
+\item hoja (\SI{0.9}{m.s^{-1}}--\SI{1.8}{m.s^{-1}}) in
+\item Fizična aktivnost velike intenzitete ($>$\SI{1.8}{m.s^{-1}})
+\end{itemize}
+
+Rezultati dela \cite{silva2015assessing} so prikazani v tabeli \ref{tab:silva}. Raziskovalci so ugotovili, da avtomatski sistem za video analizo deluje bolje od ročnega označevanja.
+
+\begin{table}[!htb]
+	\centering
+    \begin{tabular}{l S[table-format=2.2] S[table-format=1.2]}
+    \toprule
+    \textbf{Metoda} & \multicolumn{1}{c}{$\mathbf{\chi^2}$} & \multicolumn{1}{c}{\textbf{$e$ [\%]}} \\
+    \midrule
+    SOPLAY 1 & 77.60 & 8.68  \\
+    SOPLAY 2 & 93.10 & 9.60 \\
+    \textbf{CAM} & \boldentry{2.2}{36.40} & \boldentry{1.2}{5.32} \\
+    \bottomrule
+    \end{tabular}
+    \caption[Rezultati Silva et al. metod.]{Rezultati ročnega anotiranja prvega operaterja (SOPLAY 1), ročnega anotiranja drugega operaterja (SOPLAY 2) in avtomatskega sistema za video analizo (CAM) iz \cite{silva2015assessing}. Za metriko so uporabili $\chi^2$ in srednjo procentualno napako (e). V tabeli so prikazani samo rezultati primerjave s podatki pospeškometra GT3X. Najboljša metoda je odebeljena.}
+    \label{tab:silva}
+\end{table}
+
+Za razliko od dela v poglavju \ref{sec:subjektivna-primerjava} v \cite{silva2015assessing} že uporabijo objektivne metode, ki ne temeljijo na posameznikovi percepciji intenzivnosti fizične aktivnosti. S stališča fiziologije je hitrost posredno povezana s intenziteto aktivnosti, ampak tu avtorji subjektivno kategorizirajo intenzitete aktivnosti v tri tipe glede na hitrost. V tem pogledu gre spet le za grobo oceno intenzitete. Ta temelji le na premikanju masnega centra, saj tu ne opazujejo celotnega telesa. Za bolj jasno evaluacijo v \cite{silva2015assessing} manjkajo uveljavljeni zlati standardi z indirektno metodo. Tu so zlati standard določili s pospeškometri, ki imajo že sami po sebi probleme pri estimaciji kot smo to opisali v \ref{sec:senzorji-gibanja}.
+
+
+
+
+\subsection{Ocena energijske zahtevnosti igranja nogometa}
+
+V delu \cite{osgnach2010energy} so avtorji pokazali, da lahko z video analizo in fizikalnim modelom ocenimo energijsko zahtevnost igranja nogometa. Nogomet vsebuje tako aerobne kot neaerobne elemente energijske porabe. Kot navaja Osgnach et al. \cite{osgnach2010energy} je obremenitev igralcev na tekmo okoli \SI{70}{\%} maksimalne aerobne kapacitete ($VO_{2max}$). Ti na tekmo porabijo \SI{1200}{\kcal}--\SI{1500}{\kcal}. 
+
+Čeprav so metode, s katerimi so ocenili energijsko porabo in obremenitev v nogometu, zanesljive, ni bilo razvite še nobene, ki bi merila trenutno porabo \cite{osgnach2010energy}. Takšna metoda bi bila bistveno bolj natačna, saj je energijski profil tega športa bistveno bolj razvejan, kot pa standardne meritve konstantega teka na tekalni stezi. Igralci so tako \SI{70}{\%} tekme v nizki intenziteti porabe energije (hitra hoja in lahkoten tek), ostalo pa v visoki intenziteti kamor spada sprint \cite{osgnach2010energy}. 
+
+Osgnach et. al \cite{osgnach2010energy} zagovarja stališče, da največji del metabolične obremenitve nastane pri pospeševanju in zaviranju, zato so razvili fizikalni model, s katerim lahko določijo energijsko porabo glede na hitrost in pospeške \cite{osgnach2010energy}. Model predvideva, da sta konstanten tek v hrib in sprint ekvivalentna, saj se telo v času sprinta nagne za določen kot glede na tla.  
+
+Za izračun energijske porabe igralca v \SI{90}{\min} tekmi, so snemali $56$ tekem, kjer je sodelovalo $399$ igralcev \cite{osgnach2010energy}. Pozicije igralcev v času tekme so določili s polavtomatskim sistemom SICS, ki uporablja štiri \SI{25}{\Hz} kamere. Merilna napaka je bila \SI{1.0}{\%}. Zmogljivost posameznega igralca so določili s tremi parametri, ki so jih razdelili na posamezne kategorije \cite{osgnach2010energy}:
+
+\begin{itemize}
+\item Hitrost ($6$ kategorij),
+\item Pospešek ($8$ kategorij) in
+\item Metabolična moč ($5$ kategorij).
+\end{itemize}
+
+Avtorji so v \cite{osgnach2010energy} določili, da igralec na tekmo porabi $1107 \pm 119$~kcal, kar se sklada z opažanji ostalih raziskovalcev. Ugotovili so, da je energijska poraba pri različnih hitrostih podobna, saj naj bi bila bolj odvisna od pospeševanja in zaviranja. Ker so tu računali energijsko porabo le iz teka, niso upoštevali drugih aktivnosti kot je skakanje, brcanje žoge, itd. Delo ne zajema nobene primerjave modela z referenčnimi podatki energijske porabe, zato ne moremo z zagotovostjo trditi o njegovi pravilnosti. Sama metoda uporabe fizikalnega modela je omejena na tek, zato ga ne moremo uporabiti za vrsto drugih aktivnosti.
+
+
+
+
+
+\subsection{Merjenje aktivnosti v tenisu}
+
+Tako kot nogomet, je tudi tenis kompleksen šport, kjer se uporabljata anaerobni in aerobni metabolizem \cite{botton2011energy}. Obremenite so tu nekoliko manjše, saj dosegajo ravni $<$ \SI{60}{\%}--\SI{70}{\%} \vomax. Tudi v tenisu so estimacije srednje vrednosti energijske porabe neprimerne, saj profil intenzitete fizične aktivnosti ni konstanten. V delu \cite{botton2011energy} so zato razvili metodo estimacije energijske porabe s pomočjo metaboličnih modelov fundamentalnih aktivnostih. 
+
+Maksimalno aerobno kapaciteto igralcev (\vomax) so določili z inkrementalnim testom na sobnem kolesu Monark 824 z 80 rpm in \SI{20}{W.\min^{-1}} povečevanjem, s čimer so dosegli izčrpanost pod \SI{17}{\min} \cite{botton2011energy}. Za referenčno določevanje porabe kisika (\vo) med testi pa so uporabili prenosni system za analizo plinov K4B2. 
+
+Aktivnostni profil tenisa  so v \cite{botton2011energy} razdelili na $5$ fundamentalnih aktivnosti: hoja, tek, sedenje, udarci z loparjem in serviranje. S pomočjo merjenja porabe kisika in linearnim naraščanjem hitrosti hoje in teka ter linearnim naraščenjem frekvence udarcev so določili linearne metabolične modele za posamezno fundamentalno aktivnost. Z njimi so računali metabolično moč. Pri tem so uporabili $8$ teniških igralcev \cite{botton2011energy}. Metabolične modele so uporabili v poenostavljenih matematičnih ASTRABIO modelih, za opisovanje porabe kisika, aerobne in anaerobne porabe energije, glede na čas izvajanja fundamentalne aktivnosti. 
+
+Čas izvanja posameznih fundamentalnih aktivnosti so določili s snemanjem in video analizo tekme z Canon MVI 850i digitalno kamero s Canon A28 širokokotno lečo \cite{botton2011energy}. Kamera je bila postavljena %\SI{6}{m} za igriščem in \SI{5.55}{m} visoko 
+tako, da je pokrivala igrišče do mreže. 
+
+Z merjenjem $16$ iger so dobili za estimacijo porabe aerobne energije korelacijski koeficient $R = 0.93$ \cite{botton2011energy}. Srednja vrednost porabe kisika je za model zanaša $51.7 \pm 10.5$~\% \vomax. Izmerjena srednja vrednost je bila $52.0 \pm 9,1$ \% \vomax. Poleg tega so lahko 
+v \cite{botton2011energy} posebej določili aerobno in anaerobno porabo energije. Ugotovili so, da je bilo anaerobne porabe \SI{30}{\%} celotne energije, v času serviranja in udarcev z loparjem pa se je povečala na \SI{95}{\%}.  
+
+Sama metodologija v \cite{botton2011energy} dokaj natančno določi energijsko porabo za posamezne tipe aktivnosti. Prav tako z različnimi modeli omogoča predikcijo porabe kisika ter anaerobne in aerobne porabe energije. Validacija modelov je trdna, saj so jih avtorji primerjali s standardno indirektno kalorimetrijo. Kljub temu lahko v uporabi metaboličnih modelov opazimo nekaj pomankljivosti. Razvoj metaboličnih modelov ni trivialen in zahteva precej časa. Prav tako je omejen na specifično vrsto športa, ki vsebuje fundamentalne aktivnosti. Te pa so s stališča računalniškega vida težje določljive in otežujejo razvoj avtomatskih metod, kjer ne potrebujemo operaterjev.
+
+
+
+
+\subsection{Ocena energijske porabe s Kinect senzorji}
+
+Nathan et al. \cite{nathan2015estimating} je poskušal oceniti energijsko porabo z Microsoft Xbox Kinect V1. Gre za sistem zajemanja gibanja brez markerjev, kjer se uporablja globinska kamera s strukturirano svetlobo \cite{nathan2015estimating}. Pridobanje podatkov s tako napravo je nevsiljivo, zato se merjenec lahko premika svobodno in naravno. 
+
+V \cite{nathan2015estimating} so napravo uporabili za snemanje skeletnega modela in modeliranja energijske porabe iz mehaničnega dela. Za eksperimente so uporabili $2$ Kinect kameri v razmiku \SI{60}{\stopinj} glede na merjenca. $19$ subjektov je opravljalo $4$ različne vaje najmanj $4$ minute \cite{nathan2015estimating}. Med vajami so merjenci stoje mirovali, dokler se poraba kisika ni umirila na že prej kalibrirano stojno mirovno metabolično stopnjo. Za zlati standard so uporabili Cortex Metamax 3B avtomatski sistem za analizo plina \cite{nathan2015estimating}.
+
+Iz premikov posameznih segmentov skeletnega modela so v \cite{nathan2015estimating} določili različne značilke. Med njimi so določili koncentrične in ekscentrične kontrakcije mišic za masni center, spodnje in zgornje okončine ter faktor drže. Ta je predstavljal količino dela, ki ga porabi telo za ohranitev poze \cite{nathan2015estimating}. Za predikcijo so uporabili Gaussovo regresijo (GPR), lokalno uteženo regresijo K najbljižji sosed (KNNR) in linearno regresijo (LINR). Rezultati modelov v obliki metrik so prikazani v tabeli \ref{tab:nathan}.
+
+\begin{table}[!htb]
+	\centering
+    \begin{tabular}{l 
+    S[table-format=2.3]
+    S[table-format=2.2] 
+    S[table-format=1.3]}
+    \toprule
+    \textbf{Model} & \multicolumn{1}{c}{\textbf{$RMSE$}} & \multicolumn{1}{c}{\textbf{$e$ [\%]}} & \multicolumn{1}{c}{\textbf{$CCC$}} \\
+    \midrule
+    \textbf{GPR} & \boldentry{2.3}{8.384} &  35.64 & \boldentry{1.3}{0.879} \\
+    KNNR & 8.415 & 29.76 & 0.847 \\
+    LINR & 10.229 & \boldentry{2.2}{29.39} & 0.847 \\
+    \bottomrule
+    \end{tabular}
+    \caption[Rezultati Nathan et al. modelov]{Rezultati modela Gaussove regresije (GPR), modela lokalno utežene regresije K-najbljižji sosed (KNNR) in modela linearne regresije (LINR) iz dela \cite{nathan2015estimating}. Avtorji so za prikaz rezultatov uporabili koren srednje kvadratne napake (RMSE), srednjo procentualno napako (e) in konkordančni korelacijski koeficient (CCC). Najboljši rezultati posamezne metrike in modela so odebeljeni. Najbolje se je iskazal GPR model \cite{nathan2015estimating}.}
+    \label{tab:nathan}
+\end{table}
+
+Avtorji \cite{nathan2015estimating} so ugotovili, da z njihovo metodo lahko dobro ocenijo energijsko porabo le za aktivnosti visoke intenzitete, kot je skakanje. To omejuje uporabnost take metode, saj  so aktivnosti visoke intenzitete tudi pomembne in lahko bistveno vplivajo na rezultate \cite{osgnach2010energy}. Prav tako je metoda omejena z opremo, saj moramo imeti senzorje, ki omogočajo razpoznavanje skeleta. Za razliko od prejšnjih del, ki temeljijo na fizičnih in metaboličnih modelih \cite{osgnach2010energy,botton2011energy}, to metodo lahko apliciramo na različne športe. 
+

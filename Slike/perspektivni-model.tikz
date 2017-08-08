@@ -1,0 +1,52 @@
+\begin{tikzpicture}%[tdplot_main_coords, scale=0.5]
+[x={(0.8cm,0.4cm)}, y={(0cm,1cm)}, z={(0.8cm,-0.4cm)}, scale=0.5]
+
+	% Coordinate system
+    \coordinate (O) at (0,0,0);
+    \coordinate (oo) at (0,0,5);
+    \coordinate (y) at (0,5,0);
+    \coordinate (z) at (0,0,15);
+    \coordinate (x) at (10,0,0);
+    \draw [axis] (O) -- (y) node [right] {$y$};
+    \draw [base-axis] (O) -- (oo);
+    \draw [axis] (O) -- (x) node [below] {$x$};
+    \node (izhodisce) [below] at (O) {$\vec{O}$};
+    
+    % Image plane
+    \coordinate (ol) at (-5,0,5);
+    \coordinate (or) at (5,0,5);
+    \coordinate (ot) at (0,3,5);
+    \coordinate (ob) at (0,-3,5);
+    \coordinate (lb) at (-5,-3,5);
+    \coordinate (rb) at (5,-3,5);
+    \coordinate (lt) at (-5,3,5);
+    \coordinate (rt) at (5,3,5);
+    \draw [plane] (lb) -- (lt) -- (rt) -- (rb) -- cycle;
+    \draw [dash] (ol) -- (or);
+    \draw [dash] (ob) -- (ot);
+    \node [xshift=3mm, yshift=5mm] at (lb) {$\mathit{\Omega}$};
+    % Draw the rest of axis
+    \draw [axis] (oo) node [below] {$\vec{c}$} -- (z) node [below] {$z$};
+    
+    % focal length
+    \coordinate (of) at (-5,0,0);
+   	\draw [dash] (O) -- (of);
+    \draw [<->] (of) -- (ol) node [below] at (-5,0,2.5) {$f$};
+    
+    % delec
+    \coordinate (p) at (5,3,10);
+    \draw [fill=black] (p) circle (1.5mm) node [below] {$\vec{p}$};
+    \draw [dash, name path=line 1] (O) -- (p);
+    \draw [dash] (5,0,0) node [above] {$X$} -- (5,0,10);
+    \draw [dash] (0,0,10) node [below] {$Z$} -- (5,0,10);
+    \draw [dash] (5,0,10) -- (p);
+    
+    
+    % slika delca
+    \coordinate (q) at (2.5,1.5,5);
+    \draw [fill=black] (q) circle (1mm) node [below] {$\vec{q}$};
+    \draw [dash] (2.5,0,5) node [below] {$x$} -- (q);
+    \draw [dash] (0,1.5,5) node [left] {$y$} -- (q);
+   
+   
+\end{tikzpicture}

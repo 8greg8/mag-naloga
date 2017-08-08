@@ -1,0 +1,138 @@
+\section{Implementacija metod}
+\subsection{Optični tok}
+Na podlagi opisanih lastnosti metod optičnega toka v poglavju \ref{sec:metode-of} smo se odločili, da bomo v tem delu uporabili diferencialno metodo. Kljub višji računski zahtevnosti, ki ob današnji tehnologiji ne predstavlja več takega problema, smo želeli računati gost optični tok. Z gostim optičnim tokom tako dobimo natačno aproksimacijo polja gibanja za celotno telo. Prav tako nimamo problemov pri estimaciji energijske porabe za hitre gibe, kot bi bilo to v primeru uporabe ujemlanih metod. Ker je glavni namen uporaba in ne implementacija diferencialne metode, smo se osredotočili na Farneb{\"a}ck algoritem, ki je dostopen v knjižnici OpenCV.
+
+\subsection{Prostorski tok}
+Ker smo v našem delu za računanje prostorskega toka uporabili Kinect senzorje, smo potrebovali metodo, ki temelji na RGB-D podatkih. Ker je glavni namen uporaba in ne implementacija algoritma prostorskega toka, smo se osredotočili na PD-Flow algoritem, ki je javno dostopen \cite{jaimez2015primal}. Algoritem je podrobneje opisan v poglavju \ref{sec:pd-flow}.
+
+\subsection{Sledilniki}
+\subsubsection{Način izbire sledilnikov}\label{sec:pogoji-sledilnikov}
+Pri izbiri sledilnikov smo se osredotočili na pogoje, ki jim morajo sledilniki v največji meri zadostiti.
+
+\paragraph{Način sledenja.} Sledilnik mora dobro slediti osebam, ostali objekti niso pomembni. Sledenje mora biti zanesljivo, saj je od njega odvisna merilna napaka. Pri tem moramo upoštevati delovanje tudi v primerih, kadar tarča izgine iz slike. Sledenje mora delovati čimdaljši čas tako, da ne potrebujemo ponovne inicializacije. Inicializacijo sledilnika moramo opraviti samo na prvi sliki zaporedja, kar pomeni, da mora sledilnik vsebovati indirektno učenje (angl. offline training).
+
+\paragraph{Implementacija.} Zaradi uporabe sledilnika v merilnem instrumentu, mora ta delovati v realnem času oziroma čim hitreje. Ker namen tega dela ni implementacija sledilnika, mora biti ta implementiran v prosto dostopni izvorni kodi. 
+
+
+\subsubsection{Sledilnik za optični tok}
+Na podlagi že prej opisanih pogojev, smo za merilno metodo z optičnim tokom našli sledilnik TLD avtorja Kalal et. al \cite{kalal2012tracking}. Prosto dostopne so tri implementacije sledilnika in sicer v knjižnici ccv (CCV-TLD), v knjižnici OpenCV (OPENCV-TLD) in c++ izvorna koda (NEBEHAY-TLD). Implementaciji iz knjižnic ccv in OpenCV se nekoliko razlikujeta od izvirnega dela \cite{kalal2012tracking}, NEBEHAY-TLD pa je samo prepis matlabove izvorne kode. 
+
+Ker ni nobena implementacija zadovoljivo delovala na testnih squash posnetkih, smo poskusili še sledilnikom KCF \cite{danelljan2014adaptive} in CORR \cite{danelljan2014accurate}. KCF je implementiran v knjižnici OpenCV, CORR pa v knjižnici Dlib \cite{king2009dlib}.
+
+Testiranje sledilnikov je opisano v poglavju \ref{sec:testiranje-sledilnikov-za-opticni-tok}, kjer smo ugotovili, da najbolje deluje sledilnik KCF. Tega smo tudi uporabili v naših nadaljnih eksperimentih.
+
+\subsubsection{Sledilnik za prostorski tok}
+Na podlagi pogojev iz poglavja \ref{sec:pogoji-sledilnikov} smo za merilno metodo s prostorskim tokom našli le DS-KCF sledilnik avtorja Hannuna et. al \cite{hannuna2016ds}. 
+
+\subsection{Kalmanov filter}
+Za prostor stanj smo izbrali stanje hitrosti $v$ in pospeška $a$ \eqref{eq:stanje}. 
+
+\begin{equation}
+\vec{x}(k) = \begin{bmatrix}
+					v(k) & a(k)
+				\end{bmatrix}^\top 
+                \label{eq:stanje}
+\end{equation}
+
+Matrika prehajanja stanj je določena z enačbo \eqref{eq:a}.
+
+\begin{equation}
+\vec{A} = \begin{bmatrix}
+				1 & 1 \\
+                0 & 1
+			\end{bmatrix} 
+            \label{eq:a}
+\end{equation}
+
+Za matriko vhodnih stanj $G$ smo izbrali \eqref{eq:g}, s katero modeliramo neznane vhodne parametre hitrosti $v_n$ in pospeška $a_n$ v vektorju $u$ \eqref{eq:u}. 
+
+\begin{equation}
+\vec{G} = \begin{bmatrix}
+				1 & 0
+			\end{bmatrix}^\top 
+            \label{eq:g}
+\end{equation}
+
+\begin{equation}
+\vec{u}(k) = \begin{bmatrix}
+					v_{n}(k) & a_n(k)
+				\end{bmatrix}^\top 
+                \label{eq:u}
+\end{equation}
+
+
+Merilna matrika je predstavljena z enačbo \eqref{eq:h}
+\begin{equation}
+\vec{H} = \begin{bmatrix}
+				1 & 0
+			\end{bmatrix}^\top 
+            \label{eq:h}
+\end{equation}
+
+Za začetno hitrost in pospešek smo izbrali vrednost $0$, ker se naši testi večinoma začnejo v mirovanju. 
+
+Variance šuma modela gibanja, merilnega modela in konvaričane matrike stanja smo določili z uporabo mrežnega iskanja, ki je opisan v poglavju \ref{sec:optimizacija-svm-parametrov}. Pri tem smo uporabili labele učnih vzorcev vseh testov 1. sklopa eksperimentov za referenco, njihove pošumljene ocene pa za meritev. Varianca šuma merilnega modela je tako znašala $\sigma_\vec{z}^2 = 0.04$, varianca šuma modela gibanja pa $\sigma_\vec{x}^2 = 456.13$. Za kovariančno matriko predikcije smo uporabili varianco $\sigma_\vec{P}^2 = 456.13$. Kovariančno matriko modela gibanja smo določili po enačbi \eqref{eq:Q}, kovariančna matrika merilnega modela je bila določena z enačbo \eqref{eq:R} in začetna vrednost kovariančne matrike stanja z \eqref{eq:P}.
+
+\begin{equation}
+\vec{Q} = \vec{G} \vec{G}^\top \sigma_\vec{x}^2
+\label{eq:Q}
+\end{equation}
+
+\begin{equation}
+\vec{R} = \sigma_\vec{z}^2
+\label{eq:R}
+\end{equation}
+
+\begin{equation}
+\vec{P}(0) = \begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix} \sigma_\vec{P}^2
+\label{eq:P}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Implementacija Gaussovega filtra}
+Gaussovo jedro smo implementirali po enačbi \eqref{eq:gauss} in ga nato še normirali. Za filtriranje podatkov smo uporabili Matlabovo funkcijo \texttt{filtfilt}, ki je primerna za hitro računanje s filtri z ničelno fazo, saj uporablja tehniko dvosmernega filtriranja.
+
+
+\subsection{Projektivna transformacija preliminarnih testov}
+Projektivno transformacijo smo izvedli s pomočjo matlabovih funkcij \texttt{fitgeotrans} in \texttt{imwarp}. Za vhodne točke smo izbrali robove posamezne slike zaporedja. Za izhodne točke smo izbrali vrednosti v tabeli \ref{tab:projective}, pri čemer so $h$ dolžina slike $w$ širina slike ter $x$ in $y$ slikovni koordinati.
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{l S[table-format=1.3] S[table-format=1.3] }
+	\toprule
+	\thead{Točka} & \thead{$\mathbf{x~[\times w]}$} & \thead{$\mathbf{y~[\times h]}$} \\
+    \midrule
+	$P_0$ & 0 & 0.25 \\
+    $P_1$ & 1 & 0 \\
+    $P_2$ & 0.125 & 0.75 \\
+    $P_3$ & 0.875 & 0.875 \\
+    \bottomrule
+\end{tabular}
+\caption{}
+\label{tab:projective}
+\end{table}
+
+\subsection{Simulacija vibracij kamere}
+Kadar uporabljamo ročne kamere, pogosto pride do tresenja. Vibracije smo simulirali z majhnimi naključnimi premiki in rotacijo posameznih slik iz video zaporedja. Vsako sliko smo transformirali z Evklidsko transformacijo. Pri tem smo translacijo omejili na \SI{4}{\%} velikosti slike. Rotacija je bila omejena na \SI{0.13}{rad}. 
+
+Translacijo in rotacijo smo filtrirali še s Kalmanovim filtrom, tako da smo dobili bolj realistično simulacijo. Za Kalmanov filter smo uporabili enak model, kot je predstavljen v poglavju \ref{sec:kalmanov-filter}. Začetne variance filtra smo določili empirično tako, da smo dobili čimbolj realistične rezultate. Varianca šuma merilnega modela je znašala $\sigma_\vec{z}^2=1024$, variancal šuma modela gibanja pa $\sigma_\vec{x}^2=2$. Za kovariančno matriko predikcije smo uporabili varianco $\sigma_\vec{P}^2=2$.
+
+
+\subsection{Združevanje slik iz dveh Kinect kamer}
+Zaradi ozkega vidnega polja Kinect kamer smo za pokritje celotne širine igrišča potrebovali dve kameri. Zaporedja slik smo pred nadaljno obdelavo morali združiti v eno zaporedje glede na opazovanega igralca.
+
+Zajem iz posameznih kamer ni bil sinhroniziran, zato smo pred združevanjem sinhronizirali posnetka tako, da smo izbrali slike iz posameznega zaporedja z najbolj podobnimi časovnimi žigi.
+
+Časovno sinhornizirana zaporedja slik smo nato poskušali združiti s tremi različnimi metodami:  združevanje z značilkami, združevanje s kontrolnimi točkami in prilagojeno združevanje. Testiranja teh metod so opisana v poglavju \ref{sec:zdruzevanje}. Kot najbolj usešno metodo smo nato uporabili \textbf{prilagojeno združevanje}.
+

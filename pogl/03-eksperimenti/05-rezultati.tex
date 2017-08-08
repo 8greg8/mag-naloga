@@ -1,0 +1,173 @@
+
+
+
+
+\section{Rezultati}
+All energy consumption and heart rate models were validated on previously described test samples. For comparison between the different models we have chosen validation measures: correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE) \cite{witten2005data}.The higher the value of the CORR the better, with RAE and RRSE is other way around.
+
+% Dodati moram da sem 8 initial modelov potem cross teste delal
+Models were also evaluated with cross testing. This testing was done only by the type of input data---side-view or back-view. \textit{sv} models, that were made with learning samples from side-view camera were first tested with testing samples from side-view camera and then with back-view camera. Hereafter tests with input data from side-view camera are marked with \textit{sv} in brackets and tests with input data from back-view camera are marked with \textit{bv} in brackets.
+
+\subsection{Treadmill results}\label{sec:initial-models}
+As can be seen in the Table \ref{tab:initial-models-validation}, we get relatively poor results in the prediction of heart rate.
+
+\begin{table}[!htb]
+	\centering
+	{\footnotesize
+      \begin{tabular}{l S[table-format=3.2, detect-weight, detect-shape, detect-mode] S[table-format=3.2, detect-weight, detect-shape, detect-mode] S[table-format=3.2, detect-weight, detect-shape, detect-mode]}
+          \toprule
+          \textbf{Model} & \multicolumn{1}{c}{\textbf{CORR}} & \multicolumn{1}{c}	{\textbf{RAE} (\%)} & \multicolumn{1}{c}{\textbf{RRSE} (\%)} \\
+          \midrule
+          hr-sv(sv) & 0.90 & 75.42 & 76.66	\\
+          hr-sv(bv)	&	-0.66	&	104.61	&	110.17	\\
+\bfseries hr-sv-lag(sv)		&	\bfseries 0.93	&	\bfseries 74.37	&	\bfseries 75.51	\\
+          hr-sv-lag(bv)	&	-0.87	&	138.60	&	136.62	\\
+          hr-bv(sv)	&	0.83	&	311.95	&	295.66	\\
+          hr-bv(bv)	 	&	0.88	&	81.07	&	79.27	\\
+          hr-bv-lag(sv)	&	0.49	&	84.71	&	89.40	\\
+          hr-bv-lag(bv) 	&	0.91	&	79.15	&	76.93	\\
+          eem-sv(sv)		&	0.87	&	47.08	&	49.75	\\
+          eem-sv(bv)	&	-0.75	&	109.27	&	117.62	\\
+          \bfseries eem-sv-lag(sv)	&	\bfseries 0.92	&	\bfseries 38.15	&	\bfseries 40.18	\\
+          eem-sv-lag(bv)	&	-0.74	&	121.86	&	121.88	\\
+          eem-bv(sv)	&	0.61	&	94.92	&	95.92	\\
+          eem-bv(bv)		&	0.85	&	44.51	&	56.24	\\
+          eem-bv-lag(sv)	&	0.86	&	56.60	&	68.61	\\
+          eem-bv-lag(bv)	&	0.90	&	45.51	&	49.50	\\
+          \bottomrule        
+      \end{tabular}
+	}
+	\caption{The results of the initial model evaluations with cross testing. For each model, we calculated the correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE).}
+	\label{tab:initial-models-validation}
+\end{table}
+
+In terms of using different view angles, we get best results for side-view. We assume that this is due to the fact that with a back-view camera (without any cropping) we also recorded the movement of the operator, who is not visible in side-view recordings. Despite the fact that the HOOF features get rid of the noise of the optical flow, the movement of the operator is intensive enough to be able to influence the results. Worse results for back-view camera could also indicate that we get less descriptive features from it. 
+%V smislu uporabe različnih zornih kotov, smo dobili najboljše rezultate pri stranskem pogledu. Predvidevamo, da je to posledica dejstva, da smo s kamero pri hrbtnem pogledu snemali tudi gibanje operaterja, česar pa v stranskem pogledu ni. Kljub dejstvu, da se s HOOF značilkami znebimo šuma optičnega toka, je gibanje operaterja dovolj intenzivno, da bi lahko vplivalo na rezultat.
+
+The results of the models, where we assume the delay between excitation and response are better, which indicates that the assumption is justified.
+%Rezultati modelov, kjer smo predpostavili časovni zamik med vzbujanjem in odzivom so boljši, kar nakazuje na to, da je predpostavka upravičena.
+
+Considering cross testing we can see, that all models produce poorer results if we test them with data from different viewing angle.
+
+The best results were obtained in the prediction of the energy expenditure (EEM). Output signals of the best results for the prediction of energy expenditure and heart rate are presented in Figure \ref{fig:rezultat}. The curves of the results have the same form because they are correlated physiological parameters.
+%Najboljši rezultat smo dobili pri predikciji hitrosti porabe energije (EEm). Izhodni signali najboljših rezultatov za predikcijo energijske porabe in srčnega utripa so predstavljeni na sliki \ref{fig:rezultat}.
+
+\begin{figure}[!htb]
+	\centering
+    %\includegraphics[width=0.9\linewidth]{./slike/best-results.eps}
+    \caption{The best results for prediction of energy expenditure and heart rate when validating the models. The figure shows the output of models eem-sv-lag(sv) and hr-sv-lag(sv) and the actual value of energy expenditure and heart rate.}
+    %\caption{Najboljša rezultata za predikcijo porabe energije in srčnega utripa pri validaciji modelov. Slika prikazuje izhod modelov eem-sv-l in hr-sv-l ter dejanske vrednosti hitrosti porabe energije na minuto in srčnega utripa.}
+    \label{fig:rezultat}
+\end{figure}
+
+\subsection{Mixed-view experiments}
+As in \ref{sec:initial-models}, when comparing models with different physiological parameters in Table \ref{tab:mixed-models-validation}, heart rate models produce worse results. Lag models are better than normal models and best result is still produced by lagged model, which predicts energy expenditure.
+
+\begin{table}[!htb]
+	\centering
+	{\footnotesize
+      \begin{tabular}{l  S[table-format=3.2, detect-weight, detect-shape, detect-mode]  S[table-format=3.2, detect-weight, detect-shape, detect-mode]  S[table-format=3.2, detect-weight, detect-shape, detect-mode]}
+          \toprule
+          \textbf{Model} & \multicolumn{1}{c}{\textbf{CORR}} & \multicolumn{1}{c}	{\textbf{RAE} (\%)} & \multicolumn{1}{c}{\textbf{RRSE} (\%)} \\
+          \midrule
+        hr-mixed(sv)	&	0.89	&	67.18	&	68.17	\\
+        hr-mixed(bv)	&	0.88	&	59.84	&	61.89	\\
+        hr-mixed-lag(sv) &	0.92	&	65.24	&	66.44	\\
+        \bfseries hr-mixed-lag(bv) &	\bfseries 0.91	&	\bfseries 57.75	&	\bfseries 60.31	\\
+        eem-mixed(sv)	&	0.85	&	45.90	&	53.89	\\
+        eem-mixed(bv)	&	0.84	&	57.44	&	62.78	\\
+        \bfseries eem-mixed-lag(sv)	&	\bfseries 0.90	&	\bfseries 44.19	&	\bfseries 46.09	\\
+        eem-mixed-lag(bv)	&	0.89	&	56.70	&	55.04	\\
+          \bottomrule        
+      \end{tabular}
+	}
+	\caption{The results of the mixed model evaluations with cross testing. For each model, we calculated the correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE).}
+	\label{tab:mixed-models-validation}
+\end{table}
+
+The main difference in mixed models can be seen, when comparing cross tests. If we compare results from Table \ref{tab:initial-models-validation} and \ref{tab:mixed-models-validation}, we can see that results, when testing models with data from different viewing angle as they were trained, are significantly better. This results indicate that better models could be trained with recordings from different viewing angle.
+
+\subsection{Treadmill with tracking}
+Results of models with enabled tracker are represented in Table \ref{tab:tracker-models-validation}. If we compare them with results of initial models in Table \ref{tab:initial-models-validation}, the mean absolute difference of RRSE between them is \SI{28}{\%}. We can assume that this is due to the fact that tracker does not track selected object perfectly. In some cases it cannot find object, or detects wrong object. It can also track only part of the object. This anomalies can affect calculation of physiological parameters.
+
+\begin{table}[!htb]
+	\centering
+	{\footnotesize
+      \begin{tabular}{l S[table-format=3.2, detect-weight, detect-shape, detect-mode] S[table-format=3.2, detect-weight, detect-shape, detect-mode] S[table-format=3.2, detect-weight, detect-shape, detect-mode]}
+          \toprule
+          \textbf{Model} & \multicolumn{1}{c}{\textbf{CORR}} & \multicolumn{1}{c}	{\textbf{RAE} (\%)} & \multicolumn{1}{c}{\textbf{RRSE} (\%)} \\
+          \midrule
+        hr-sv-tr(sv)	&	0.93	&	90.82	&	86.55	\\
+        hr-sv-tr(bv)	&	-0.18	&	133.17	&	145.74	\\
+        \bfseries hr-sv-lag-tr(sv)	&	\bfseries 0.96	&	\bfseries 91.57	&	\bfseries 86.72	\\
+        hr-sv-lag-tr(bv)	&	-0.11	&	108.99	&	124.40	\\
+        hr-bv-tr(sv)	&	-0.55	&	132.25	&	146.66	\\
+        hr-bv-tr(bv)	&	0.89	&	116.38	&	111.78	\\
+        hr-bv-lag-tr(sv)	&	-0.62	&	131.09	&	140.59	\\
+        hr-bv-lag-tr(bv)	&	0.91	&	118.69	&	113.24	\\
+        eem-sv-tr(sv)	&	0.90	&	41.55	&	45.25	\\
+        eem-sv-tr(bv)	&	-0.34	&	135.25	&	141.63	\\
+        \bfseries eem-sv-lag-tr(sv)	&	\bfseries 0.94	&	\bfseries 31.66	&	\bfseries 37.05	\\
+        eem-sv-lag-tr(bv)	&	0.65	&	126.00	&	130.04	\\
+        eem-bv-tr(sv)	&	-0.44	&	107.47	&	107.91	\\
+        eem-bv-tr(bv)	&	0.91	&	53.21	&	52.92	\\
+        eem-bv-lag-tr(sv)	&	-0.68	&	110.55	&	113.64	\\
+        eem-bv-lag-tr(bv)	&	0.93	&	41.57	&	51.53	\\
+        hr-sv-tr-sh(sv)	&	0.92	&	90.39	&	87.15	\\
+        hr-sv-tr-sh(bv)	&	0.84	&	90.98	&	112.00 \\
+        \bfseries hr-sv-lag-tr-sh(sv)	&	\bfseries 0.95	&	\bfseries 88.86 	&	\bfseries 86.99	\\
+        hr-sv-lag-tr-sh(bv)	&	-0.10	&	111.46	&	118.79	\\
+        hr-bv-tr-sh(sv)	&	0.83	&	286.16	&	268.48	\\
+        hr-bv-tr-sh(bv)	&	0.87	&	113.11	&	111.15	\\
+        hr-bv-lag-tr-sh(sv)	&	0.89	&	293.45	&	275.83	\\
+        hr-bv-lag-tr-sh(bv)	&	0.87	&	114.98	&	113.90	\\
+        eem-sv-tr-sh(sv)	&	0.90	&	50.18	&	59.92	\\
+        eem-sv-tr-sh(bv)	&	0.89	&	119.57	&	128.17	\\
+        eem-sv-lag-tr-sh(sv)	&	0.93	&	51.47	&	56.55	\\
+        eem-sv-lag-tr-sh(bv)	&	-0.08	&	135.85	&	133.27	\\
+        eem-bv-tr-sh(sv)	&	0.75	&	179.11	&	172.30	\\
+        eem-bv-tr-sh(bv)	&	0.90	&	52.85	&	54.43	\\
+        eem-bv-lag-tr-sh(sv)	&	0.91	&	175.29	&	171.63	\\
+        \bfseries eem-bv-lag-tr-sh(bv)	&	\bfseries 0.94	&	\bfseries 50.02	&	\bfseries 48.93	\\
+          \bottomrule        
+      \end{tabular}
+	}
+	\caption{The results of the tracker model evaluations with cross testing. For each model, we calculated the correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE).}
+	\label{tab:tracker-models-validation}
+\end{table}
+
+The mean absolute difference of RRSE between normal tracking models and models with shaking video is about \SI{30}{\%}. Results are worse with videos that incorporate shaking (motion noise), but this is still acceptable, because the selected tracker can stabilize our video and improve results.
+
+\subsection{Squash match experiments}
+If we compare Table \ref{tab:initial-models-validation} and Table \ref{tab:squash-models-validation}, we can see that result for squash model is not far behind one of the best results in initial models, despite the fact that we used different subjects for training and testing. 
+
+\begin{table}[!htb]
+	\centering
+	{\small
+      \begin{tabular}{l D{.}{.}{-1} D{.}{.}{-1} D{.}{.}{-1}}
+          \toprule
+          \textbf{Model} & \multicolumn{1}{c}{\textbf{CORR}} & \multicolumn{1}{c}	{\textbf{RAE} (\%)} & \multicolumn{1}{c}{\textbf{RRSE} (\%)} \\
+          \midrule
+        hr-bv-lag-tr-sq	&	0.45	&	68.65	&	54.24	\\
+          \bottomrule        
+      \end{tabular}
+	}
+	\caption{The results of the squash match evaluation. For model, we calculated the correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE).}
+	\label{tab:squash-models-validation}
+\end{table}
+
+If we further explore our model from realistic data, we can see in Figure \ref{fig:squash-result} that predicted working point is about \SI{7}{bpm} lower. The reason could be that training data is extracted only from one subject. The second reason could be imperfections of used equation from \cite{charlot2014improvement}. Despite these errors a coarse prediction is still possible, even if we don't train the algorithm on the same subject.
+
+% Razlaga rezultatov je, da so vredu, le delovna točka je faljena zaradi majhne variacije učnih vzorcev (učimo namreč le na eni osebi) in pa nenatančnosti same enačbe, ki jo uporabljamo za pretvorbo. Če učimo z eno osebo in probamo na drugi osebi ji lahko napovemo srčni utrip s cca. 7 bpm napake
+
+\begin{figure}[!htb]
+	\centering
+    %\includegraphics[width=0.9\linewidth]{./slike/squash-result.eps}
+    \caption{Result for prediction of heart rate when validating the models. The figure shows the output of model hr-bv-lag-tr-sq and the actual value of heart rate.}
+    \label{fig:squash-result}
+\end{figure}
+
+\subsection{Breathing experiment}
+
+For breathing detection, which was formulated as a classification problem, we used standard metrics for evaluation of two-class classification problems. With ''breathing'' considered the ''true'' value, and ''not breathing'' the ''false'' we get the following results: false positive rate, FPR = \SI{13}{\%}, true positive rate, TPR = \SI{87}{\%}, false negative rate, FNR = \SI{26}{\%}, true negative rate, TNR = \SI{74}{\%}.
+
