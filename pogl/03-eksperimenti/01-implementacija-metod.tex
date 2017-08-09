@@ -2,6 +2,8 @@
 \subsection{Optični tok}
 Na podlagi opisanih lastnosti metod optičnega toka v poglavju \ref{sec:metode-of} smo se odločili, da bomo v tem delu uporabili diferencialno metodo. Kljub višji računski zahtevnosti, ki ob današnji tehnologiji ne predstavlja več takega problema, smo želeli računati gost optični tok. Z gostim optičnim tokom tako dobimo natačno aproksimacijo polja gibanja za celotno telo. Prav tako nimamo problemov pri estimaciji energijske porabe za hitre gibe, kot bi bilo to v primeru uporabe ujemlanih metod. Ker je glavni namen uporaba in ne implementacija diferencialne metode, smo se osredotočili na Farneb{\"a}ck algoritem, ki je dostopen v knjižnici OpenCV.
 
+Za optični tok smo uporabili sledele parametre: piramidna skala \num{0.5}, število piramidnih slojev \num{3}, velikost okna povprečenja \num{15}, število iteracij na vsakem piramidnem sloju \num{3}, velikost okolice slikovnih elementov \num{5} in Gaussov standardni odklon \num{1.2}.
+
 \subsection{Prostorski tok}
 Ker smo v našem delu za računanje prostorskega toka uporabili Kinect senzorje, smo potrebovali metodo, ki temelji na RGB-D podatkih. Ker je glavni namen uporaba in ne implementacija algoritma prostorskega toka, smo se osredotočili na PD-Flow algoritem, ki je javno dostopen \cite{jaimez2015primal}. Algoritem je podrobneje opisan v poglavju \ref{sec:pd-flow}.
 
@@ -24,7 +26,7 @@ Testiranje sledilnikov je opisano v poglavju \ref{sec:testiranje-sledilnikov-za-
 \subsubsection{Sledilnik za prostorski tok}
 Na podlagi pogojev iz poglavja \ref{sec:pogoji-sledilnikov} smo za merilno metodo s prostorskim tokom našli le DS-KCF sledilnik avtorja Hannuna et. al \cite{hannuna2016ds}. 
 
-\subsection{Kalmanov filter}
+\subsection{Kalmanov filter}\label{sec:implementacija-kalman}
 Za prostor stanj smo izbrali stanje hitrosti $v$ in pospeška $a$ \eqref{eq:stanje}. 
 
 \begin{equation}
@@ -100,33 +102,13 @@ Variance šuma modela gibanja, merilnega modela in konvaričane matrike stanja s
 
 
 
-\subsubsection{Implementacija Gaussovega filtra}
-Gaussovo jedro smo implementirali po enačbi \eqref{eq:gauss} in ga nato še normirali. Za filtriranje podatkov smo uporabili Matlabovo funkcijo \texttt{filtfilt}, ki je primerna za hitro računanje s filtri z ničelno fazo, saj uporablja tehniko dvosmernega filtriranja.
+\subsubsection{Implementacija Gaussovega filtra}\ref{sec:implementacija-gauss}
+Gaussov filter smo implementirali po enačbi \eqref{eq:gauss}. za velikost jedra smo določili $3\sigma$, pri čemer je standardni odklon $\sigma$ parameter. Jedro smo nato še normirali. Za filtriranje podatkov smo uporabili Matlabovo funkcijo \texttt{filtfilt}, ki je primerna za hitro računanje s filtri z ničelno fazo, saj uporablja tehniko dvosmernega filtriranja.
 
 
-\subsection{Projektivna transformacija preliminarnih testov}
-Projektivno transformacijo smo izvedli s pomočjo matlabovih funkcij \texttt{fitgeotrans} in \texttt{imwarp}. Za vhodne točke smo izbrali robove posamezne slike zaporedja. Za izhodne točke smo izbrali vrednosti v tabeli \ref{tab:projective}, pri čemer so $h$ dolžina slike $w$ širina slike ter $x$ in $y$ slikovni koordinati.
 
-\begin{table}[htb]
-\centering
-\begin{tabular}{l S[table-format=1.3] S[table-format=1.3] }
-	\toprule
-	\thead{Točka} & \thead{$\mathbf{x~[\times w]}$} & \thead{$\mathbf{y~[\times h]}$} \\
-    \midrule
-	$P_0$ & 0 & 0.25 \\
-    $P_1$ & 1 & 0 \\
-    $P_2$ & 0.125 & 0.75 \\
-    $P_3$ & 0.875 & 0.875 \\
-    \bottomrule
-\end{tabular}
-\caption{}
-\label{tab:projective}
-\end{table}
 
-\subsection{Simulacija vibracij kamere}
-Kadar uporabljamo ročne kamere, pogosto pride do tresenja. Vibracije smo simulirali z majhnimi naključnimi premiki in rotacijo posameznih slik iz video zaporedja. Vsako sliko smo transformirali z Evklidsko transformacijo. Pri tem smo translacijo omejili na \SI{4}{\%} velikosti slike. Rotacija je bila omejena na \SI{0.13}{rad}. 
 
-Translacijo in rotacijo smo filtrirali še s Kalmanovim filtrom, tako da smo dobili bolj realistično simulacijo. Za Kalmanov filter smo uporabili enak model, kot je predstavljen v poglavju \ref{sec:kalmanov-filter}. Začetne variance filtra smo določili empirično tako, da smo dobili čimbolj realistične rezultate. Varianca šuma merilnega modela je znašala $\sigma_\vec{z}^2=1024$, variancal šuma modela gibanja pa $\sigma_\vec{x}^2=2$. Za kovariančno matriko predikcije smo uporabili varianco $\sigma_\vec{P}^2=2$.
 
 
 \subsection{Združevanje slik iz dveh Kinect kamer}

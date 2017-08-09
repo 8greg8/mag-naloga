@@ -8,7 +8,7 @@ Za namen razlage upoštevamo enake omejitve kamere, masnega delca in osvetlitve,
 
 
 
-\begin{figure}
+\begin{figure}[htb]
 \centering
 \input{./Slike/scene-flow.tikz}
 \caption[Vizualni prikaz vektorja prostorskega toka $\vec{w}$]{Vizualni prikaz vektorja prostorskega toka $\vec{w}$. V prostoru imamo površino $f$ na kateri leži gibajoči točkovni delec $\vec{p}$ \cite{vedula1999three}. Na slikovni ravnini $\mathit{\Omega}$ imamo sliko delca $\vec{q}$ s prostorskim tokom $\vec{w}$.}
@@ -89,7 +89,7 @@ E_R = \sum_\Omega \Psi\left( (\nabla w_x)^\top \vec{r} \right) + \Psi\left( (\na
 
 Evaluacija PD-Flow algoritma je prikazana v tabeli \ref{tab:pdflow}. V tabeli so zapisani še rezultati RGB-D flow algoritma, ki za cenilko $\Psi$ ravno tako uporablja $L_1$ normo \cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma.
 
-\begin{table}
+\begin{table}[htb]
 	\centering
     \begin{tabular}{l S[table-format=1.3] S[table-format=2.3] S[table-format=3.3] S[table-format=3.3]}
     \toprule

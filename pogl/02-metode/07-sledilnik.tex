@@ -27,6 +27,14 @@ Predpostavimo, da imamo idealni sledilnik in enako definicijo in omejitve kamere
 \subsection{Sledilnik za optični tok} 
 Sledilnik temelji na delu \cite{danelljan2014adaptive}, kjer izboljšajo originalni KCF sledilnik iz dela \cite{henriques2012exploiting} z uporabo barvnih značilk. KCF sledilnik sodi med metode sledenja z detekcijo. Njegovo delovanje je prikazano na sliki \ref{fig:diagram-kcf}.
 
+\begin{figure}[htb]
+	\centering
+	\input{./Slike/diagram-kcf.tikz}
+	\caption[Diagram KCF sledilnika]{Diagram KCF sledilnika.}
+	\label{fig:diagram-kcf}
+\end{figure}
+
+
 \paragraph{Korak učenja.}
 Na področju tarče $x$ velikosti $M \times N$, vsakemu slikovnemu elementu pripada vrednost Gaussove funkcije $y$. Ob času $p$ poznamo $\mathcal{X}^p = \{x^j: j=1,\ldots,p\}$ področij tarče. Razvrščevalnik učimo z minimizacijo funkcije \eqref{eq:classifier-function}, ki predstavlja uteženo srednjo kvadratično napako čez področja $\mathcal{X}^p$, pri čemer je vsako področje uteženo s konstanto $\beta_j \geq 0$. $\phi$ predstavlja neliearno preslikavo v več rasežni prostor, za katero lahko uporabimo implicitno preslikavo ali funkcijo jedra $K$. V KCF sledilniku se uporablja Gaussovo RBF jedro \eqref{eq:kcf-gauss}. Konstanta $\lambda \geq 0$ je regularizacijski parameter.
 
@@ -79,12 +87,7 @@ Pozicijo tarče nato dobimo s tisto translacijo, ki maksimizira rezultat detekci
 
 
 
-\begin{figure}[htb]
-\centering
-\input{./Slike/diagram-kcf.tikz}
-\caption[Diagram KCF sledilnika]{Diagram KCF sledilnika.}
-\label{fig:diagram-kcf}
-\end{figure}
+
 
 
 
@@ -93,7 +96,14 @@ Pozicijo tarče nato dobimo s tisto translacijo, ki maksimizira rezultat detekci
 
 
 \subsection{Sledilnik za prostorski tok}
-Jedro sledilnika temelji na KCF sledilniku za optični tok iz dela \cite{henriques2015high}. Pri tem uporabljajo jedrno funkcijo \eqref{eq:kcf-gauss}. Model tarče je predstavljen z vektorjem značilk, ki je sestavljen iz histograma orientiranih gradientov (HOG) barvne slike in HOG histograma globinske slike. 
+Jedro sledilnika temelji na KCF sledilniku za optični tok iz dela \cite{henriques2015high}. Pri tem uporabljajo jedrno funkcijo \eqref{eq:kcf-gauss}. Model tarče je predstavljen z vektorjem značilk, ki je sestavljen iz histograma orientiranih gradientov (HOG) barvne slike in HOG histograma globinske slike. Diagram sledilnika je prikazan na sliki \ref{fig:diagram-dskcf}.
+
+\begin{figure}[htb]
+	\centering
+	\input{./Slike/diagram-dskcf.tikz}
+	\caption{Diagram DS-KCF sledilnika po \cite{hannuna2016ds}.}
+	\label{fig:diagram-dskcf}
+\end{figure}
 
 V DS-KCF sledilniku Najprej segmentirajo globinsko sliko na področja podobne globine s pomočjo rojenja \cite{hannuna2016ds}. S tem pridobijo relevantne značilke globinske distribucije. 
 
@@ -106,9 +116,4 @@ Na koncu sledijo popravki zaradi sprememb oblike objekta. Popravki temeljijo na 
 
 
 
-\begin{figure}[htb]
-\centering
-\input{./Slike/diagram-dskcf.tikz}
-\caption{Diagram DS-KCF sledilnika po \cite{hannuna2016ds}.}
-\label{fig:diagram-dskcf}
-\end{figure}
+

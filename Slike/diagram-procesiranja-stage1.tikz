@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+% LAYERS
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+\tikzset{
+    between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    }
+}
+
+% NODES
+\node (slika) [input] at (0,0) {Področje tarče $x^{p}$};
+
+\node (of) [block, right= of slika] {Optični tok};
+\node (hoof) [block, below= of of] {HOOF};
+
+
+\node (ucenje) [block, align=center, right=1cm of hoof] {$\epsilon$-SVR\\RBF jedro};
+\node (kalman) [block, below= of ucenje] {Kalman};
+
+
+\node (rezultat) [output, right= of kalman] {Rezultat};
+
+% arrows
+\draw [arrow] (slika.east) -- (of.west);
+\draw [arrow] (of.south) -- (hoof.north);
+\draw [arrow] (hoof.east) -- (ucenje.west);
+\draw [arrow] (ucenje.south) -- (kalman.north);
+\draw [arrow] (kalman.east) -- (rezultat.west);
+\end{tikzpicture}
