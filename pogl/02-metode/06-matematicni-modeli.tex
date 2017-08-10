@@ -95,7 +95,7 @@ Avtorji v \cite{hsu2003practical} zagovarjajo, da pri učenju najprej poskusim z
 
 
 
-\subsubsection{Jedro preseka generaliziranih histogramov}
+\subsubsection{Jedro preseka generaliziranih histogramov}\label{sec:ghi}
 Jedro preseka generaliziranih histogramov (GHI) je uporaben, ko imamo deskriptorje definirane kot histograme. Določen z enačbo \eqref{eq:ghi-kernel}, kjer je hiper-parameter $\beta \geq 0$, $m$ pa je število stolpcev histogramov $\vec{x}$ in $\vec{x}'$ \cite{boughorbel2005generalized}.
 
 \begin{equation}\label{eq:ghi-kernel}
@@ -129,8 +129,24 @@ Ker a priori ne poznamo najboljših parametrov postopka SVM in hiper-parametrov 
 Dobro je, če kombinacije parametrov izbiramo po eksponentni funkciji z osnovo $2$, saj s tem zagotovimo širok razpon iskanja \cite{hsu2003practical}. Iskanje optimalnih parametrov lahko pohitrimo z uporabo grobega in finega iskanja. Z grobim iskanjem omejimo območje iskanja za fino iskanje \cite{hsu2003practical}. S finim iskanjem pa dejansko optimiziramo parametre.
 
 
+\subsubsection{Optimizacija z mrežnim iskanjem \texorpdfstring{$\nu$}{nu}-RBF}\label{sec:nurbf}
+V mrežnem iskanju \nurbf gre za klasično mrežno iskanje, z dodatno omejitvijo števila podpornih vektorjev in filtriranjem rezultatov pri križni korelaciji.
 
+Tu uporabljamo 5-kratno križno validacijo z regresijo \nusvr in jedrom RBF, kjer računamo srednjo vrednost srednjih kvadratičnih napak $\emse$ posameznih korelacij ter razmerje števila podpornih vektorjev $\fsv$. Regresija \nusvr je predstavljena v poglavju \ref{sec:regresija-nusvr}.
 
+Pri računanju napake MSE upoštevamo filtrirane predikcije, ki jih filtriramo z Gaussovim filtrom s standardnim odklonom $\sigma$. Vrednost parametra $\sigma$ je enaka vrednosti, ki jo uporabljamo za filtriranje končnih rezultatov pri eksperimentiranju. Za pridobitev $\fsv$ naučimo model s parametri trenutne iteracije mrežnega iskanja. Razmerje nato dobimo po enačbi \eqref{eq:fsv}, kjer je $n_{SV}$ število podpornih vektorjev in $n_{D}$ število deskriptorjev.
+
+\begin{equation}
+\fsv = \frac{n_{SV}}{n_{D}}
+\label{eq:fsv}
+\end{equation}
+
+Parametre $\{\emse^{i};\forall i=1,\ldots,N\}$ $N$ iteracij mrežnega iskanja sortiramo od najmanjše do največje napake v množico $\{\emse^{j};\forall j=1,\ldots,N\}$. Nato po vrsti preverimo korespondenčne $\{\fsv^{j};\forall j=1,\ldots,N\}$ tako, da jih primerjamo s parametrom $\numax$. Slednji predstavlja zgornjo omejitev števila podpornih vektorjev. Najboljši parametri izhajajo iz iteracije $j$, za katero velja 
+
+\begin{equation}
+\fsv^{j} \leq \numax.
+\label{eq:numax}
+\end{equation}
 
 
 \subsection{Postopki SVM}
@@ -188,7 +204,7 @@ $Q$ je matrika s z elementi $Q_{ij} = KK(\vec{x}_i,\vec{x}_j)$.
 
 
 
-\subsubsection{Regresija \texorpdfstring{$\nu$}{nu}-SVR}
+\subsubsection{Regresija \texorpdfstring{$\nu$}{nu}-SVR}\label{sec:regresija-nusvr}
 
 Pri regresiji $\nu$-SVR uporabljamo dodatni parameter $\nu \in (0, 1]$, s katerim kontroliramo razmerje števila podpornih vektorjev. Ostali parametri so enaki kot pri $\epsilon$-SVR, le da tu $\epsilon$ postane spremenljivka \cite{chang2011a}. Primarni problem se glasi:
 
