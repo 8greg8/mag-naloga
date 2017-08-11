@@ -1,0 +1,62 @@
+\begin{tikzpicture}
+  % LAYERS
+  \pgfdeclarelayer{bg}
+  \pgfsetlayers{bg,main}
+  % LENGTHS
+  \newlength{\outdistance}
+  \setlength{\outdistance}{4mm}
+  %STYLES
+  
+    
+  %
+  % Specification of nodes
+  %
+  \node (food) [input, text width=35mm] {Amino kisline, ogljikovi hidrati, maščobne kisline};
+  \node (glycolysis) [block, below = of food] {Glikoliza};
+  \node (o2) [input, below = of glycolysis] {O$_2$};
+  
+  \node (aerobic) [title, left = 2cm of glycolysis] {Aerobni metabolizem};
+  \node (krebs) [block, below = of aerobic] {Krebsov cikel};
+  \node (aerobic-atp) [output, below right = \outdistance of krebs] {veliko ATP};
+  \node (h2o) [output, below left = \outdistance of krebs] {H$_2$O};
+  \node (co2) [output, below = \outdistance of krebs] {CO$_2$};
+  
+  \node (anaerobic) [title, right = 2cm of glycolysis] {Anaerobni metabolizem}; 
+  \node (ferment) [block, below = of anaerobic] {Fermentacija};
+  \node (anaerobic-atp) [output, below right = \outdistance of ferment] {malo ATP};
+  \node (acid) [output, below left = \outdistance of ferment] {Mlečna kis.};
+  \node (lactat) [output, below = \outdistance of ferment] {Laktat};
+  
+  %
+  % Specification of lines
+  %
+  \draw [arrow] (food.south) -- (glycolysis.north);
+  \draw [arrow] (glycolysis.south west) -- (krebs.north);
+  \draw [arrow] (glycolysis.south east) -- (ferment.north);
+  \draw [arrow] (o2.west) -- (krebs.east);
+  
+  \draw [arrow] (krebs.south west) -- (h2o.north east);
+  \draw [arrow] (krebs.south) -- (co2.north);
+  \draw [arrow] (krebs.south east) -- (aerobic-atp.north west);
+  
+  \draw [arrow] (ferment.south west) -- (acid.north east);
+  \draw [arrow] (ferment.south) -- (lactat.north);
+  \draw [arrow] (ferment.south east) -- (anaerobic-atp.north west);
+  
+   %
+  % Background
+  %
+  \begin{pgfonlayer}{bg}
+  	\node (ltop) [above = 1mm of aerobic] {};
+    \node (lleft) [left = 1mm of h2o] {};
+  	\node (l0) [] at ( ltop -| lleft) {};
+    \node (l1) [below right = 1mm of aerobic-atp] {};
+    \path[background] (l0) rectangle (l1);
+    
+    \node (rtop) [above = 1mm of anaerobic] {};
+    \node (rright) [right = 1mm of anaerobic-atp] {};
+    \node (r0) [] at (rtop -| rright) {};
+    \node (r1) [below left = 1mm of acid] {};
+    \path [background] (r0) rectangle (r1);
+  \end{pgfonlayer}
+\end{tikzpicture}

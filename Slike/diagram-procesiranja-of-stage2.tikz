@@ -1,0 +1,34 @@
+\begin{tikzpicture}
+% LAYERS
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+\tikzset{
+    between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    }
+}
+
+% NODES
+\node (slika) [input] at (0,0) {Slika $I(x,y)$};
+\node (tracker) [block, right= of slika] {KCF sledilnik};
+\node (tarca) [block, right= of tracker] {Področje tarče $x^{p}$};
+
+\node (of) [block, below= of tarca] {Optični tok};
+\node (hoof) [block, align=center, left= of of] {HOOF-HAFA\\deskriptorji};
+
+
+\node (ucenje) [block, align=center, left=of hoof] {\nurbf};
+\node (kalman) [block, below= of ucenje] {Gaussov filter};
+
+
+\node (rezultat) [output, right= of kalman] {Rezultat};
+
+% arrows
+\draw [arrow] (slika) -- (tracker);
+\draw [arrow] (tracker) -- (tarca);
+\draw [arrow] (tarca) -- (of);
+\draw [arrow] (of) -- (hoof);
+\draw [arrow] (hoof) -- (ucenje);
+\draw [arrow] (ucenje) -- (kalman);
+\draw [arrow] (kalman) -- (rezultat);
+\end{tikzpicture}

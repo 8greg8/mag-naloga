@@ -1,0 +1,20 @@
+# ignore archives
+*.tar
+*.gz
+*.bz
+*.gz2
+*.zip
+
+# latex build files
+*.log
+*.aux
+*.lof
+*.lot
+*.out
+*.toc
+*.bbl
+*.blg
+
+# ignore pdf
+*.pdf
+

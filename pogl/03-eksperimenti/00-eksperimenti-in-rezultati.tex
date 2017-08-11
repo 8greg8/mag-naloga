@@ -1,0 +1,30 @@
+\chapter{Eksperimenti}\label{sec:eksperimenti}
+V tem poglavju predstavljamo eksperimente, ki smo jih izvedli v različnih okoljih. Z njimi smo naslovili energijsko porabo, kot osrednji fiziološki parameter, srčni utrip in dihanje. 
+
+Srčni utrip smo obravnavali kot posrednik (ang. Proxy) za energijsko porabo. Prav tako smo z eksperimenti srčnega utripa želeli preizkusiti teorijo iz poglavja \ref{sec:srcni-utrip} o srčnem utripu kot slabem posredniku.
+
+Z eksperimenti detekcije dihanja smo želeli preizkusiti predlagano metodo za širšo uporabo.
+
+Pri vseh naslovljenih fizioloških parametrih smo s pomočjo strojnega učenja izvajali predikcijo časovnih signalov $eem(t)$ za energijsko porabo, $hr(t)$ za srčni utrip in $dihanje(t)$ za dihanje. Predikcijo smo izvajali iz posamezne slike zaporedja video posnetka. Pri tem smo najprej generirali sliko optičnega ali prostorskega toka in nato določili področje, kjer se nahaja merjenec. Iz izbranega področja smo izračunali vektorje značilk $\vec{x}(t)$, te pa smo uporabili za predikcijo. Rezultat je zelo enostaven, realno-časoven model, ki ga lahko razširimo s temporalnim modeliranjem, če bi se pojavila potreba. Shema generalnega postopka je prikazana na sliki \ref{fig:shema-generalnega-postopka}.
+
+\begin{figure}
+\caption{}
+\label{fig:shema-generalnega-postopka}
+\end{figure}
+
+Eksperimente smo kronološko razdelili na 2 glavna dela:eksperimenti 1. faze in eksperimenti 2. faze.
+
+Z \textbf{eksperimenti 1. faze} smo analizirali observabilnost izbranih fizioloških parametrov. Parameter je observabilen, če obstaja neničelna (pozitivna) korelacija med našo estimacijo iz značilk gibanja in merjenih vrednosti, ki smo jih dobili iz zanesljivih metod pridobivanja fizioloških parametrov. V 1. fazi smo posebej naslovili preliminarne teste, laboratorijske eksperimente tekalne steze, terenske eksperimente squash igre ter eksperimente dihanja. V {preliminarnih testih} opisujemo teste, s katerimi smo določili optimalne vrednosti parametrov. 
+
+
+V \textbf{eksperimentih 2. faze} smo optimizirali segmente generalnega postopka estimacije fizioloških parametrov. Sledi končna preiskava. Končna preiskava je sestavljena iz preliminarnih testov, laboratorijske in terenske preiskave. V preliminarnih testih smo optimizirali dele postopka, s katerim smo v 1. fazi eksperimentov dobili najboljše rezultate. V laboratorijskih in terenskih preiskavah smo uporabili tri različne protokole.
+
+V tem poglavju so na začetku opisane tudi implementacije nekaterih metod, opisanih v poglavju \ref{sec:metode}. Gre za tiste metode, kjer iz teoretične podlage implementacija ni bila točno razvidna. Opisane so tudi metode, ki nimajo teoretične podlage, saj gre samo za specifično implementacijo.
+
+
+\renewcommand{\folder}{./pogl/03-eksperimenti}
+\input{\folder/01-implementacija-metod.tex}
+\input{\folder/02-preliminarni-testi.tex}
+\input{\folder/03-eksperimenti-1-faze.tex}
+\input{\folder/04-eksperimenti-2-faze.tex}
+\input{\folder/05-rezultati.tex}

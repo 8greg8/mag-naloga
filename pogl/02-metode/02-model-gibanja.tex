@@ -1,0 +1,42 @@
+\section{Model gibanja}\label{sec:model-gibanja}
+% Ponovi teorijo energijske porabe in kako pridemo do gibanja
+% Dokazi, da lahko gibanje opazujemo s kamerami
+% Teorija, da je najboljši približek optični tok
+Da mišice lahko s svojimi kontrakcijami spravijo telo v pogon, potrebujejo energijo, pri tem pa se del energije pretvarja v toploto, ki ji pravimo energijska poraba \cite{scott2005misconceptions}. Energijska poraba nastaja zaradi gibanja telesa, zato jo lahko določimo z opazovanjem kinematike \cite{levine2005measurement}. Zaradi omejitev kontaktnih senzorjev in slabih lastnosti srčnega utripa so v študijah, ki so opisane v poglavju \ref{sec:podobna-dela}, dokazali, da lahko z opazovanjem kinematike z računalniškim vidom določimo energijsko porabo. 
+
+Predpostavimo perspektivni model kamere, ki je opisan v poglavju \ref{sec:model-kamere}.
+Naj bo delec z maso $m$ predstavljen kot točka prizora $\vec{p}$, na sliki \ref{fig:model-gibanja}. Gibanje delca $\vec{p}$ lahko predstavimo z vektorjem hitrosti $\vec{v} = [v_X~v_Y~v_Z]^\top$, $\vec{v} \in \mathcal{V} \subset \mathbb{R}^3$, kjer so $v_X$, $v_Y$ in $v_Z$ hitrosti glede na osi in $\mathcal{V}$ vektorski prostor. Kadar imamo v prostoru več masnih delcev, množico vektorjev hitrosti imenujemo \textbf{polje hitrosti} (angl. Velocity Field) $\mathbf{H}: \mathbb{R}^3 \to \mathcal{V}$, kjer velja $\vec{p} \mapsto \vec{v}$ \cite{trucco1998introductory}.
+
+
+\begin{figure}[htb]
+\centering
+\input{./Slike/model-gibanja.tikz}
+\caption[Predstavitev delca $\vec{p}$ v koordinatnem sistemu kamere]{Predstavitev delca $\vec{p}$ v koordinatnem sistemu kamere. Delec je predstavljen kot točka prizora z vektorjem hitrosti $\vec{v}$ \cite{trucco1998introductory}.}
+\label{fig:model-gibanja}
+\end{figure}
+
+
+
+Relativno gibanje delca $\vec{p}$ glede na koordinatno izhodišče kamere $\vec{O}$ lahko opišemo kot:
+
+\begin{equation}
+	\vec{v} = -\vec{T}-\omega\times\vec{p},
+\end{equation}
+
+kjer je $\vec{T}$ translatorna hitrost in $\omega$ kotna hitrost \cite{trucco1998introductory}. Po komponentah lahko gibanje opišemo z enačbo \eqref{eq:gibanje}
+
+\begin{equation} \label{eq:gibanje}
+	\begin{bmatrix}
+	v_X \\ v_Y \\ v_Z
+	\end{bmatrix}
+    =
+    \begin{bmatrix}
+    - T_X - \omega_Y Z + \omega_Z Y \\
+    - T_Y - \omega_Z X + \omega_X Z \\
+    - T_Z - \omega_X Y + \omega_Y X
+    \end{bmatrix}.
+\end{equation}
+
+Gibanje telesa v prostoru torej lahko opišemo s poljem hitrosti $\vec{H}$.
+
+
