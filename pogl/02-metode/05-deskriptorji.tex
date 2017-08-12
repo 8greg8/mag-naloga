@@ -24,16 +24,18 @@ Ko se človek premika se optični tok temporalno spreminja. Lahko rečemo, da se
 
 Chaudhry et al. \cite{chaudhry2009histograms} predlaga uporabo histogramov orientiranega optičnega toka (HOOF), kjer vsak vektor optičnega toka zložimo v stolpec, glede na njegov kot in ga utežimo z njegovo velikostjo.
 
-Vektorju optičnega toka $\vec{w} = [x~y]^\top$ določimo smer \eqref{eq:smer} in amplitudo \eqref{eq:amplituda} \cite{chaudhry2009histograms}. Interval smeri $\Theta$ je določen z \eqref{eq:interval}. 
+Vektorju optičnega toka $\vec{w} = [w_x~w_y]^\top$ določimo smer \eqref{eq:smer} in amplitudo \eqref{eq:amplituda} \cite{chaudhry2009histograms}. Interval smeri $\Theta$ je določen z \eqref{eq:interval}. 
 
 \begin{align}
-	\Theta = & \tan^{-1}\left( \frac{y}{x} \right) \label{eq:smer} \\
-    \| \vec{w} \| = & \sqrt{x^2 + y^2} \label{eq:amplituda}
+	\Theta = & \tan^{-1}\left( \frac{w_y}{w_x} \right) \label{eq:smer} \\
+    \norm{\vec{w}} = & \sqrt{w_x^2 + w_y^2} \label{eq:amplituda}
 \end{align}
+
 
 \begin{equation}\label{eq:interval}
 	-\frac{\pi}{2} + \pi \frac{b - 1}{N_{HOOF}} \leq \Theta < - \frac{\pi}{2} + \pi \frac{b}{N_{HOOF}}
 \end{equation}
+
 
 Interval smeri \eqref{eq:interval} pomeni, da vektorju $\vec{w}$ določimo stolpec $b$, za katerega velja $1 \leq b \leq N_{HOOF}$, pri čemer je $N_{HOOF}$ celotno število stolpcev histograma, na podlagi smeri $\Theta$ \cite{chaudhry2009histograms}. Pri tem moramo za smer $\Theta$ upoštevati najmanjši predznačen kot med vektorjem $\vec{w}$ in koordinatno osjo $x$ koordinatnega sistema slikovne ravnine $\mathit{\Omega}$. Z drugimi besedami, upoštevamo samo kote na intervalu \eqref{eq:interval-kot}, kote na intervalu \eqref{eq:interval-kot2} pa preslikamo na interval \eqref{eq:interval-kot}. Interval \eqref{eq:interval-kot} razdelimo na $N_{HOOF}$ podintervalov, ki predstavljajo stolpce histograma. 
 
@@ -54,7 +56,7 @@ Vsak vektor $\vec{w}$, ki leži v podintervalu ali stolpcu $b$ bo prispeval svoj
 \begin{figure}[htb]
 \centering
 \input{./Slike/hoof.tikz}
-\caption[Prikaz določitve HOOF histograma glede na kot vektorja]{Prikaz določitve HOOF histograma glede na kot vektorja optičnega toka $\vec{u}$. Slika prikazuje določitev za $6$ stolpcev.}
+\caption[Prikaz določitve HOOF histograma glede na kot vektorja]{Prikaz določitve HOOF histograma glede na kot vektorja optičnega toka $\vec{w}$. Slika prikazuje določitev za $6$ stolpcev.}
 \label{fig:hoof-histogram}
 \end{figure}
 
@@ -64,9 +66,6 @@ Vsak vektor $\vec{w}$, ki leži v podintervalu ali stolpcu $b$ bo prispeval svoj
 Preslikava intervala \eqref{eq:interval-kot2} v interval \eqref{eq:interval-kot} omogoča neodvisnost histograma od leve ali desne smeri gibanja \cite{chaudhry2009histograms}. Če se subjekt premika v levo ali desno, bo histogram enak. Z normiranjem histograma dobimo invariantnost na skalo \cite{chaudhry2009histograms}. Če se subjekt premika daleč ali blizu kamere, bo histogram enak. Ker je vsak prispevek vektorja sorazmeren njegovi amplitudi, šumni vektorji nimajo vpliva na obliko histograma \cite{chaudhry2009histograms}. Posledično lahko določimo histogram za celotno sliko in zato ne potrebujemo segmentacije ali subtrakcije gibajoče osebe iz ozadja. 
 
 Edini parameter, ki ga moramo določiti za HOOF značilke je število stolpcev histograma $N_{HOOF}$. Chaudry et al \cite{chaudhry2009histograms} pravi, da moramo za dobro delovanje določiti najmanj $30$ stolpcev. 
-
-
-
 
 
 
@@ -89,7 +88,7 @@ Vektorju optičnega toka $\vec{w}$, ki je opredeljen v poglavju \ref{sec:hoof}, 
 Interval \eqref{eq:interval-amp1} lahko kvantiziramo po enačbi \eqref{eq:interval-amp2}. Ta pomeni, da vektorju $\vec{w}$ določimo stolpec $b$, za katerega velja $1 \leq b \leq N_{HAFA}$, pri čemer je $N_{HAFA}$ celotno število stolpcev histograma na podlagi amplitude $\| \vec{w} \|$. S tako kvantizacijo omejimo zgornjo mejo intervala \eqref{eq:interval-amp1} na parameter histograma $N_{HAFA}$. Ko tak histogram normiramo, ga imenujemo histogram absolutnih tokovnih amplitud (HAFA). Določitev HAFA histograma je prikazan na sliki \ref{fig:hafa-histogram}.
 
 \begin{equation}\label{eq:interval-amp2}
-	\frac{b-1}{N_{HAFA}} \leq \| \vec{w} \| < \frac{b}{N_{HAFA}}
+	\frac{b-1}{N_{HAFA}} \leq \norm{\vec{w}} < \frac{b}{N_{HAFA}}
 \end{equation}
 
 
@@ -98,6 +97,35 @@ Interval \eqref{eq:interval-amp1} lahko kvantiziramo po enačbi \eqref{eq:interv
 \begin{figure}[!htb]
 \centering
 \input{./Slike/hafa.tikz}
-\caption[Prikaz določitve HAFA histograma glede na velikost vektorja]{Prikaz določitve HAFA histograma glede na velikost vektorja optičnega toka $\vec{u}$. Slika prikazuje določitev za $3$ stolpce.}
+\caption[Prikaz določitve HAFA histograma glede na velikost vektorja]{Prikaz določitve HAFA histograma glede na velikost vektorja optičnega toka $\vec{w}$. Slika prikazuje določitev za $3$ stolpce.}
 \label{fig:hafa-histogram}
 \end{figure}
+
+
+
+\subsection{Razširitev histogramov za uporabo s prostorskim tokom}
+HOOF in HAFA histograme lahko uporabimo tudi za tri dimenzionalni prostorski tok $\vec{\mu}$. Enačbo amplitude \eqref{eq:amplituda} lahko zamenjamo z enačbo amplitude \eqref{eq:amplituda-3d} za prostorski tok $\vec{\mu} = \left[\mu_x~\mu_y~\mu_z \right]^\top$.
+
+\begin{equation}
+\norm{\vec{\mu}} = \sqrt{\mu_x^2 + \mu_y^2 + \mu_z^2} 
+\label{eq:amplituda-3d}
+\end{equation}
+
+Smer $\Theta$ določimo s preslikavo vektorja prostorskega toka $\vec{\mu}$ na slikovno ravnino $\mathit{\Omega}$ po enačbi \eqref{eq:smer-3d}, saj velja povezava med prostorskim tokom $\vec{\mu}$ in optičnim tokom $\vec{w}$ \eqref{eq:of-sf}.
+
+
+\begin{equation}
+\Theta = \tan^{-1}\left( \frac{\norm{\vec{w}}}{\norm{\vec{\mu}}} \right)
+\label{eq:smer-3d}
+\end{equation}
+
+Enačbe temeljijo na obrazcih za prehod iz kartezičnih koordinat $(x, y, z)$ na sferične koordinate $(r,~\phi,~\Theta)$ \cite{bronstein1990math}, pri čemer upoštevamo postavitev koordinatnega sistema po perspektivnem modelu kamere iz poglavja \ref{sec:model-kamere}. Slika \ref{fig:sphere} prikazuje sferične koordinate v koordinatnem sistemu kamere, kjer smo zaradi poenostavitve slikovno ravnino postavili v koordinatno izhodišče $\vec{O}$. Za koordinato $r$ velja $r=\norm{\vec{\mu}}$. Za enolično določitev točk prostora še velja, da $\Theta$ leži na intervalu $\left[\frac{-\pi}{2},~\frac{\pi}{2}\right]$, $\phi$ pa na intervalu $\left[0,~2\pi\right)$.
+
+\begin{figure}[htb]
+	\centering
+	\input{./Slike/sfericne-koordinate.tikz}
+	\caption[Sferične koordinate v koordinatnem sistemu kamere]{Sferične koordinat v koordinatnem sistemu kamere. Zaradi nazornosti prikaza je slikovna ravnina postavljena v koordinatno izhodišče $\vec{O}$.}
+	\label{fig:sphere}
+\end{figure}
+
+S tako uporabljenimi enačbami za histograme na prvi pogled izgubimo informacijo o smeri v HOOF histogramu, saj azimutnega kota $\phi$ ne upoštevamo. Informacije v resnici nismo izgubili, saj nam mora histogram omogočati neodvisnost v smeri premikanja od leve proti desni \cite{chaudhry2009histograms}. To pa je ravno azimutni kot $\phi$. Po preslikavi prostorskega kota $\vec{\mu}$ na slikovno ravnino, je določitev histogramov trivialna. 

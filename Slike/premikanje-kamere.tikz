@@ -33,7 +33,7 @@
     
     
     % Coordinate system2
-    \begin{scope}{}
+    \begin{scope}
     \coordinate (O2) at (1,1,8);
     \coordinate (y2) at (6.7,1.4,6.5);
     \coordinate (z2) at (11.8,-5.4,7.5);

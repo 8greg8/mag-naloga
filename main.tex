@@ -21,7 +21,7 @@
 % MATEMATIKA IN FIZIKA %
 %%%%%%%%%%%%%%%%%%%%%%%%
 % za matematiko
-\usepackage{amsmath, amsfonts, xfrac, amssymb, mathrsfs, amsthm}
+\usepackage{amsmath, amsfonts, xfrac, amssymb, mathrsfs, amsthm, bm}
 % za enote
 % \si{enota}
 % \SI{cifra}{enota}
@@ -102,6 +102,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 
 \usepackage{circuitikz, tikz, tikz-3dplot}
 \usetikzlibrary{arrows, shapes, positioning, intersections, calc}
+\usetikzlibrary{3d}
 \newcommand{\blokec}[2]{node[draw, text centered, minimum width=4cm, minimum height=1cm, rounded corners, text width= 3cm, scale=1](#1){#2}}
     
 \tikzset{dash/.style = {dashed, draw=black!50}}
@@ -170,9 +171,14 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
   draw=black!50,
   line width = 1mm
   }}
-  
-  
-  
+  \tikzset{angle/.style={
+	fill=#1!20, opacity=0.8,
+	draw=#1!50!black!50
+	}}
+  \tikzset{zxplane/.style={canvas is zx plane at y=#1}}
+  \tikzset{yxplane/.style={canvas is yx plane at z=#1}}
+  \newcommand{\spherical}[3]{xyz spherical cs:radius=#1,longitude=#3,latitude=#2}
+  \newcommand{\cylindrical}[3]{xyz cylindrical cs:radius=#1,z=#3,angle=#2}
   
 
 % za odštevanje pri listih
@@ -220,6 +226,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 \newcommand{\emse}{\overline{e}_{MSE}}
 \newcommand{\fsv}{f_{SV}}
 \newcommand{\numax}{\nu_{max}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\folder}{./}
 
 
@@ -232,7 +239,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 %\newcommand{\theadm}{1}{\thead{$\mathbf{#1}$}}
 
 \renewcommand{\Xi}{X}
-\renewcommand\vec{\mathbf}
+\renewcommand{\vec}[1]{{\boldsymbol{#1}}}
 \newtheorem{definition}{Definicija}
 
 

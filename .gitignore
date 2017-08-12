@@ -14,7 +14,8 @@
 *.toc
 *.bbl
 *.blg
+*.gz(busy)
 
 # ignore pdf
 *.pdf
-
+*.txss

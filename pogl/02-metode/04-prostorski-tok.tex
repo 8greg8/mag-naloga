@@ -27,10 +27,19 @@ Ker je slika projekcija delca na slikovno ravnino $\mathit{\Omega}$, lahko zapi�
 Če predpostavimo, da imamo dovoj informacije o sistemu, da lahko določimo inverzno funkcijo $\vec{p} = \vec{p}(\vec{q},t)$, kjer je masni delec $\vec{p}$ projekcija slike $\vec{q}$, lahko določimo njegovo hitrost $\vec{\mu} \in \mathcal{\Mu} \subset \mathbb{R}^3$ z enačbo \eqref{eq:scene-flow}. Slednja je sestavljena iz dveh delov. Prvi člen je projekcija vektorja optičnega toka $\vec{w}$ na tangentno ravnino površine $f$, v točki, kjer se nahaja delec $\vec{p}$ \cite{vedula1999three}. Drugi člen je hitrost spreminjanja oddaljenosti delca od slikovne ravnine $\mathit{\Omega}$, ko slika delca stoji na miru. 
 
 \begin{equation}\label{eq:scene-flow}
-	\vec{\mu} = \frac{d\vec{p}}{dt} = \frac{\partial \vec{p}}{\partial \vec{q}} \frac{d\vec{q}}{dt} + \left.\frac{\partial \vec{p}}{\partial t}\right|_\vec{q}
+	\vec{\mu} = \frac{d\vec{p}}{dt} = \frac{\partial \vec{p}}{\partial \vec{q}} \frac{d\vec{q}}{dt} + \left.\frac{\partial \vec{p}}{\partial t}\right|_{\vec{q}}
 \end{equation}
 
-Kadar imamo v prostoru več, med seboj neodvisnih premikajočih masnih delcev, vektorsko polje hitrosti $\vec{\mu}$ imenujemo prostorski tok (angl. Scene Flow) $\vec{S}: \mathcal{W} \times \mathbb{R} \to \mathcal{\Mu}$, kjer velja $(\vec{w}, \dot{Z}) \mapsto \vec{\mu}$ \cite{yan2016scene}. $\dot{Z}$ predstavlja hitrost spreminjanja globine.
+Kadar imamo v prostoru več, med seboj neodvisnih premikajočih masnih delcev, vektorsko polje hitrosti $\vec{\mu}$ imenujemo prostorski tok (angl. Scene Flow) $\vec{S}: \mathcal{W} \times \mathbb{R} \to \mathcal{\Mu}$, kjer velja
+
+\begin{equation}
+(\vec{w}, \dot{Z}) \mapsto \vec{\mu}
+\label{eq:of-sf}
+\end{equation}
+
+
+
+$\dot{Z}$ predstavlja hitrost spreminjanja globine \cite{yan2016scene}.
 
 \subsection{Metode estimacije prostorskega toka}
 Konvencionalne metode estimacije prostorskega toka so se razvile iz optičnega toka, in dodatne informacije o globini \cite{yan2016scene}. Slednjo lahko pridobimo s parom stereo kamer ali z uporabo sistemov večih kamer \cite{jaimez2015primal}. Vektor hitrosti prostorskega toka lahko v takih sistemih aproksimiramo z $\vec{\mu} = \left[w_x~w_y~\dot{d}\right]^\top$, kjer sta $(w_x, w_y)$ komponenti vektorja optičnega toka $\vec{w}$, $\dot{d}$ pa časovna sprememba disparitete \cite{yan2016scene}.

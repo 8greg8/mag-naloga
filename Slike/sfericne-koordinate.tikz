@@ -1,0 +1,43 @@
+\begin{tikzpicture}%[tdplot_main_coords, scale=0.5]
+[x={(0.8cm,0.4cm)}, y={(0cm,1cm)}, z={(0.8cm,-0.4cm)}, scale=0.5]
+
+	% Coordinate system
+    \coordinate (O) at (0,0,0);
+    \coordinate (oo) at (0,0,5);
+    \coordinate (y) at (0,5,0);
+    \coordinate (z) at (0,0,15);
+    \coordinate (x) at (10,0,0);
+    \draw [axis, thick] (O) -- (y) node [right] {$y$};
+    \draw [axis] (O) -- (z) node [below] {$z$};
+    \draw [axis] (O) -- (x) node [below] {$x$};
+    \node (izhodisce) [below] at (O) {$\vec{O}$};
+   
+    
+    % delec
+    \coordinate (p) at (5,3,10);
+    \coordinate (p') at (5,0,10);
+    \draw [vec] (O) -- (p) node (r) [midway] {};
+    \node (mu) [above] at (p) {$\vec{\mu}$};
+    \draw [dash] (5,0,0) node [above] {$X$} -- (p');
+    \draw [dash] (0,0,10) node [below] {$Z$} -- (p');
+    \draw [dash] (p') -- (p);
+    \draw [dash] (O) -- (p') node (pm) [midway] {};
+	
+	% angle1
+	\begin{scope}[canvas is xy plane at z=0]
+	\node at (\spherical{5.5}{60}{80})  {$\Theta$};
+    \path[clip] (p) -- (O) -- (p');
+    \draw[angle=teal] (O) circle (5.5cm);
+	\end{scope}
+	 
+	%angle2
+	\begin{scope}[canvas is xz plane at y=0]
+	\coordinate (Oc) at (0,0);
+	\coordinate (zc) at (0,15);
+	\coordinate (pc) at (5,10);
+	\path[clip] (pc) -- (Oc) -- node (mc){} (zc);
+	\draw[angle=red] (Oc) circle (5cm);
+	\node at (\spherical{5.5}{0}{10})  {$\phi$};
+	\end{scope}
+	    
+\end{tikzpicture}
