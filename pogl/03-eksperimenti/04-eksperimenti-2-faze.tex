@@ -29,7 +29,7 @@ S sledenjem igralca z DS-KCF algoritmom, smo s pomočjo projekcijske matrike \eq
 Prva slika združenega zaporedja je bila slika kamere, kjer se igralec prvič pojavi. Nadaljne slike smo izbirali med zaporedjema kamer glede na pozicijo centra tarče. Ko je šel center tarče skozi upragovljeno mejo, ki je na sliki \ref{fig:zdruzevanje} prikazana z modro linijo smo preklopili na drugo kamero. Razdalja med pragom in sečiščem je znašala \SI{200}{mm}.
 
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\columnwidth]{./Slike/zdruzevanje-example.png}
 	\caption[Določevanje sečišča vidnih polj leve in desne Kinect kamere]{Določevanje sečišča vidnih polj leve in desne Kinect kamere. Na sliki sta prikazani prvi sliki zaporedja leve in desne Kinect kamere 1. seta 2. igre terenskega eksperimenta iz 2. faze. Označen je 4. igralec. Zelena barva koordiat središča tarče predstavlja izbrano kamero. Kamera z rumeno barvo ni izbrana. Sečišče je rdeča linija. Modri liniji sta pragova za preklop med kamerama. Ležita \SI{200}{mm} levo in desno od sečišča.}
@@ -98,14 +98,14 @@ f_A = \frac{\sqrt{w_l^2 + h_l^2}}{\sqrt{w_s^2 + h_s^2}}
 Velikost diagonale na laboratorijskih testih uporabljamo kot referenco. To pa zato, ker je na teh posnetkih stabilna, saj se le malo spreminja. Koncept amplitudnega faktorja smo preizkusili na enakem postopku, kot pri optimizaciji parametra mrežnega iskanja \nurbf. S takim postopkom smo izluščili slabe \textit{squash} modele, ki bi oteževali pravilno evaluacijo rezultatov pri optimizaciji. Naučili smo modele \textit{diag}, kjer smo uporabili amplitudni faktor in referenčne modele \textit{normal} brez uporabe faktorja za primerjavo. Diagonalo na tekalni stezi smo določili po sliki \ref{fig:diag-bbox}, kjer smo za zgornji levi kot $P_0$ in spodnji desni kot $P_1$ izbrali vrednosti v tabeli \ref{tab:diag}. 
 
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.75\columnwidth]{./Slike/diag-bbox.png}
-	\caption[Določitev amplitudnega faktorja]{Določitev amplitudnega faktorja. Amplitudni faktor $f_A$ smo določili kot dolžino diagonale modrega okvirja.}
+	\caption[Določitev amplitudnega faktorja]{Določitev amplitudnega faktorja. Amplitudni faktor $f_A$ smo določili kot dolžino diagonale modrega okvirja. Modri okvir smo določili ročno.}
 	\label{fig:diag-bbox}
 \end{figure}
 
-\begin{table}[htb]
+\begin{table}[!htb]
 	\centering
 	\begin{tabular}{l S[table-format=3] S[table-format=3]}
 		\toprule
@@ -115,7 +115,7 @@ Velikost diagonale na laboratorijskih testih uporabljamo kot referenco. To pa za
 		$P_1$ & 389 & 452 \\
 		\bottomrule
 	\end{tabular}
-	\caption{Tabela izbranih točk okvirja merjenca, s katerimi smo določili amplitudni faktor.}
+	\caption[Tabela izbranih točk okvirja merjenca, s katerimi smo določili amplitudni faktor]{Tabela izbranih točk okvirja merjenca, s katerimi smo določili amplitudni faktor. Točka $P_0$ je zgornji levi kot točka $P_1$ pa spodnji levi kot modrega okvirja na sliki \ref{fig:diag-bbox}}
 	\label{tab:diag}
 \end{table}
 
@@ -142,7 +142,7 @@ Pri testiranju smo uporabili parameter $\numax$ \SI{50}{\%} podpornih vektorjev.
 Merjenci so opravili obremenilni test po protokolu Nowatzky. To je stopnjevani test na tekoči preprogi za merjenje maksimalne porabe kisika in oceno aerobne kapacitete posameznika.
 
 \subsubsection{Pridobivanje podatkov}
-Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del.  Primer hrbtnega in stranskega posnetka je prikazan na sliki \ref{fig:primer-posnetka-stage2}.
+Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Kameri sta bili časovno sinhronizirani po NTP protokolu. Frekvenci vzorčenja na posamezni kameri sta se rahlo spreminjali, zato smo pridobivali tudi časovne štampiljke slik posnetkov. Z njimi smo posnetka dodatno sinhronizirali in se znebili akumulacije časovnega zamika.  Primer hrbtnega in stranskega posnetka je prikazan na sliki \ref{fig:primer-posnetka-stage2}.
 
 \begin{figure}[!htb]
 	\centering
@@ -155,7 +155,7 @@ Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stransk
 		\includegraphics[width=\columnwidth]{./Slike/stage2-lab-bv-tracked.png}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
-	\caption[Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju]{Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju. Sliki sta bili registrirani na korespondečno globinsko sliko. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta. Zeleni okvir je rezultat sledenja s KCF sledilnikom.}
+	\caption[Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju]{Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju. Sliki sta bili registrirani na korespondečni globinski sliki \ref{fig:stage2-lab-of-depth}. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta. Zeleni okvir je rezultat sledenja s KCF sledilnikom.}
 	\label{fig:primer-posnetka-stage2}
 \end{figure}
 
@@ -172,7 +172,7 @@ Snemali smo z dvema Microsoft Xbox Kinect V2 kamerama. Kameri sta bili od tekaln
 		\includegraphics[width=\columnwidth]{./Slike/lab-posnetek-zadaj-corrected.jpg}
 		\caption{Hrbtni pogled.}
 	\end{subfigure}
-	\caption{Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze.}
+	\caption[Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze]{Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze. Na sliki sta vidna podstavka, na katerih so postavljene Kinect kamere. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}.}
 	\label{fig:lab-postavitev-kamer}
 \end{figure}
 
@@ -183,15 +183,17 @@ Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $5
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/stage2-lab-sf-sv-depth.png}
+		\centering
+		\includegraphics[width=1.2\columnwidth]{./Slike/stage2-lab-sf-sv-depth.png}
 		\caption{Stranska slika.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/stage2-lab-sf-bv-depth.png}
+		\centering
+		\includegraphics[width=1.2\columnwidth]{./Slike/stage2-lab-sf-bv-depth.png}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
-	\caption[Stranska in hrbtna globinska slika laboratorijskih eksperimentov]{Stranska in hrbtna globinska slika laboratorijskih eksperimentov. Globinski sliki sta korespondečni RGB slikam \ref{fig:primer-posnetka-stage2}. Barvna skala prikazuje globino v metrih.}
+	\caption[Stranska in hrbtna globinska slika laboratorijskih eksperimentov]{Stranska in hrbtna globinska slika laboratorijskih eksperimentov. Globinski sliki sta korespondečni RGB slikam \ref{fig:primer-posnetka-stage2}. Barvna skala prikazuje globino v metrih. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta.}
 	\label{fig:stage2-lab-of-depth}
 \end{figure}
 
@@ -210,18 +212,21 @@ Tokrat smo modele učili po dveh postopkih. Prvi postopek temelji na optičnem t
 \paragraph{Postopek z optičnim tokom}
 Na slikah posnetkov smo merjencem sledili s sledilnikom KCF. Za tako izbrano področje slike smo izračunali optični tok. Primer dobljenega optičnega toka je prikazan na sliki \ref{fig:opticni-tok-stage2}. Sledilo je generiranje HOOF-HAFA deskriptorjev s parametri $N_{HOOF} = 60$ in $N_{HAFA} = 60$. HAFA deskriptorje smo normalizirali z vrednostmi amplitudnih faktorjev $f_A$, ki so zbrani v tabeli \ref{tab:fa-merjenci}.
 
+
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
 		\includegraphics[width=0.5\columnwidth, frame]{./Slike/stage2-lab-of-sv-flo-corrected.png}
 		\caption{Stranska slika.}
+		\label{fig:stage2-lab-of-sv-flo}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
 		\includegraphics[width=0.5\columnwidth, frame]{./Slike/stage2-lab-of-bv-flo-corrected.png}
 		\caption{Hrbtna slika.}
+		\label{fig:stage2-lab-of-bv-flo}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
@@ -233,7 +238,7 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom KCF. Za tako izbrano pod
 		\includegraphics[width=\columnwidth]{./Slike/stage2-lab-of-bv-hist.png}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
-    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Gre za optična toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. Predstavljata področje merjenca. Njima pripadata izračunana HOOF-HAFA histograma.}
+    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Sliki \subref{fig:stage2-lab-of-sv-flo}) in \subref{fig:stage2-lab-of-bv-flo}) sta optična toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na sliki  \subref{fig:stage2-lab-of-sv-flo}) znašala \SI{7}{ppf} in na \subref{fig:stage2-lab-of-bv-flo})\SI{4}{ppf}. Optičnima tokoma pripadata izračunana HOOF-HAFA histograma.}
 	\label{fig:opticni-tok-stage2}
 \end{figure}
 
@@ -268,20 +273,46 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom KCF. Za tako izbrano pod
 \paragraph{Postopek s prostorskim tokom}
 Na slikah posnetkov smo merjencem sledili s sledilnikom DS-KCF. Za tako izbrano področje slike smo izračunali prostorski tok. Primer dobljenega optičnega toka je prikazan na sliki \ref{fig:prostorski-tok-stage2}. Sledilo je generiranje HOOF-HAFA deskriptorjev s parametri $N_{HOOF} = 60$ in $N_{HAFA} = 60$. HAFA deskriptorjev  nismo normalizirali, ker smo histograme pridobili iz podatkov z metričnimi enotami. 
 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{subfigure}[t]{0.45\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-lab-sf-pdflow-corrected.jpg}
+		\caption{Stranska slika.}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.45\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-lab-sf-pdflow-corrected.jpg}
+		\caption{Hrbtna slika.}
+	\end{subfigure}
+	%~
+	%\begin{subfigure}[t]{0.45\columnwidth}
+	%	\centering
+	%	\input{./Slike/rgb-cube.tikz}
+	%	\caption{Hrbtna slika.}
+	%\end{subfigure}
+	\caption[Stranska in hrbtna slika prostorskega toka laboratorijskih eksperimentov]{Stranska in hrbtna slika prostorskega toka laboratorijskih eksperimentov. Slike smo pridobili s programom \texttt{Scene-Flow-Impair} avtorja \cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2 kamero. Sliki sta 8-bit RGB sliki. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$ kanal G $\mu_y$ ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
+	\label{fig:stage2-lab-sf-pd}
+\end{figure}
+
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
 		\includegraphics[width=0.5\columnwidth, frame]{./Slike/stage2-lab-sf-sv-flo-corrected.png}
 		\caption{stranska slika}
+		\label{fig:stage2-lab-sf-sv-flo}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
 		\includegraphics[width=0.5\columnwidth, frame]{./Slike/stage2-lab-sf-bv-flo-corrected.png}
 		\caption{hrbtna slika}
+		\label{fig:stage2-lab-sf-bv-flo}
 	\end{subfigure}
-	\caption[Stranski in hrbtni prostorski tok]{Stranski in hrbtni prostorski tok. Gre za prostorska toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. Predstavljata področje merjenca.}
+	\caption[Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino]{Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino. Gre za prostorska toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{5.7}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo})\SI{10,3}{\m\per\s}.}
 	\label{fig:prostorski-tok-stage2}
 \end{figure}
 
@@ -350,7 +381,7 @@ Na podlagi slik \ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno mer
 		\caption{Zakasnitev za subjekt 6.}
 		\label{fig:lag-estimation-6-eem}
 	\end{subfigure}
-	\caption{Prikaz določitve zakasnitve za posameznega merjenca.}
+	\caption[Prikaz določitve zakasnitve za posameznega merjenca]{Prikaz določitve zakasnitve za posameznega merjenca. Zakasnitev za posamezno meritev smo določili kot časovni interval od trenutka spremembe hitrosti tekalne steze do trenutka, ko je bila vrednost fiziološkega parametra prvič nad intervalom nedoločenosti. Interval nedoločenosti je prikazan z zelenimi horizontalnimi linijami. Rumeni vzorci so vzorci enominutnega mirovanja. Sledijo modri vzorci pri hoji na tekalni stezi s hitrostjo \SI{5}{\km\per\hour}. Spremenba hitrosti tekalne steze je prikazana z rdečim signalom.}
 	\label{fig:lag-estimation-stage2}
 \end{figure}
 
@@ -371,26 +402,6 @@ Pri terenskih eksperimentih smo postopek z optičnim tokom in postopek s prostor
 \paragraph{Pridobivanje podatkov.}
 Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili oddaljeni ena od druge za približno \SI{2}{m}. Vsaka kamera je pokrivala svojo polovico igrišča. Razdalja od tal je znašala približno \SI{3}{m}. Kameri sta bili tako pozicionirani nad zaščitnim steklom. S tem nismo dobili odbojev laserskih žarkov, ki so namenjeni za pridobivanje globinske slike. Kot $\theta$ (rotacija okoli x osi) je bil približno $30\stopinj$ tako, da so kamere pokrivale prvo polovico igrišča do linije serviranja.
 
-
-\begin{figure}[!htb]
-	\centering
-	\begin{subfigure}[t]{0.45\columnwidth}
-		\centering
-		\includegraphics[width=0.5\columnwidth, frame]{./Slike/stage2-field-of-svbv-flo-corrected.png}
-		\caption{Stranska slika.}
-	\end{subfigure}
-	~
-	\begin{subfigure}[t]{0.45\columnwidth}
-		\centering
-		\includegraphics[width=0.5\columnwidth, frame]{./Slike/stage2-field-sf-svbv-flo-corrected.png}
-		\caption{Hrbtna slika.}
-	\end{subfigure}
-	\caption{Primerjava med prostorskim in optičnim tokom.}
-	\label{fig:stage2-field-sfof}
-\end{figure}
-
-
-
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}{0.45\columnwidth}
@@ -404,8 +415,34 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 		\includegraphics[width=\columnwidth]{./Slike/stage2-field-sf-left-tracked.png}
 		\caption{DS-KCF sledilnik.}
 	\end{subfigure}
-	\caption{Primerjava med KCF in DS-KCF sledilnikom za merjenca SUBJ9.}
+	\caption[Predstavitev delovanja KCF in DS-KCF sledilnikov za terenske eksperimente]{Predstavitev delovanja KCF in DS-KCF sledilnikov za terenske eksperimente. Za primerjavo sledilnikov sta prikazani 120. sliki leve kamere prvega seta 2. igre za merjenca SUBJ9. Zelena okvirja prikazujeta detektirani področji za posamezen sledilnik. Opazimo, da sta področji različni.}
 	\label{fig:stage2-field-tracked}
+\end{figure}
+
+
+
+\begin{figure}[!htb]
+	\centering
+	\begin{subfigure}[t]{0.3\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-of-svbv-flo-corrected.png}
+		\caption{Optični tok.}
+		\label{fig:stage2-field-of}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.3\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-sf-svbv-flo-corrected.png}
+		\caption{Projekcija prostoskega toka.}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.3\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-sf-pd-tr-corrected.jpg}
+		\caption{Prostorski tok.}
+	\end{subfigure}
+	\caption[Optični tok, prostorski tok in njegova projekcija na slikovno ravnino]{Optični tok, prostorski tok in njegova projekcija na slikovno ravnino. V spodnjem levem kotu optičnega tok in projekcije prostorskega toka sta legendi barvnega kodiranja. Uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka na sliki  \subref{fig:stage2-field-of}) je  \SI{10}{ppf}. Maksimalna amplituda projekcije prostorskega toka je \SI{13.7}{\m\per\s}. Sliko prostorskega toka \subref{fig:stage2-field-pd}) smo pridobili s programom \texttt{Scene-Flow-Impair} avtorja \cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2 kamero. Slika je 8-bitna RGB. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$ kanal G $\mu_y$ ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
+	\label{fig:stage2-field-sfof}
 \end{figure}
 
 

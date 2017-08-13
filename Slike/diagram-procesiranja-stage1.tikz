@@ -9,14 +9,14 @@
 }
 
 % NODES
-\node (slika) [input] at (0,0) {Področje tarče $x^{p}$};
+\node (slika) [input] at (0,0) {Področje tarče\\slike $I(x,y)$};
 
-\node (of) [block, right= of slika] {Optični tok};
-\node (hoof) [block, below= of of] {HOOF};
+\node (of) [block, right= of slika] {Optični tok\\$\vec{w}$};
+\node (hoof) [block, below= of of] {HOOF deskriptor\\$\vec{x}(t)$};
 
 
 \node (ucenje) [block, align=center, right=1cm of hoof] {$\epsilon$-SVR\\RBF jedro};
-\node (kalman) [block, below= of ucenje] {Kalman};
+\node (kalman) [block, below= of ucenje] {Kalmanov filter};
 
 
 \node (rezultat) [output, right= of kalman] {Rezultat};

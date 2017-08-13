@@ -101,7 +101,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 }}
 
 \usepackage{circuitikz, tikz, tikz-3dplot}
-\usetikzlibrary{arrows, shapes, positioning, intersections, calc}
+\usetikzlibrary{arrows, shapes, positioning, intersections, calc, shadings}
 \usetikzlibrary{3d}
 \newcommand{\blokec}[2]{node[draw, text centered, minimum width=4cm, minimum height=1cm, rounded corners, text width= 3cm, scale=1](#1){#2}}
     
@@ -124,7 +124,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
   rectangle,
   very thick, solid, rounded corners=1mm,
   top color=white,
-  text centered,
+  text centered, align=center,
   scale = 0.7
   }}
   \tikzset{title/.style = {

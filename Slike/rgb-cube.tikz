@@ -1,0 +1,75 @@
+\begin{tikzpicture}%[tdplot_main_coords, scale=0.5]
+[x={(0.8cm,0.4cm)}, y={(0cm,1cm)}, z={(0.8cm,-0.4cm)}, scale=0.5]
+
+\pgfmathtruncatemacro{\Divisions}{50};
+\pgfmathsetmacro{\Cube}{5};
+%\definecolor{mypurple}{RGB}{255,0,255};
+
+	% Coordinate system
+    \coordinate (O) at (0,0,0);
+    \coordinate (oo) at (0,0,5);
+    \coordinate (y) at (0,5,0);
+    \coordinate (z) at (0,0,15);
+    \coordinate (x) at (10,0,0);
+    \draw [axis, thick] (O) -- (y) node [right] {$y$};
+    \draw [axis] (O) -- (z) node [below] {$z$};
+    \draw [axis] (O) -- (x) node [below] {$x$};
+    \node (izhodisce) [below] at (O) {$\vec{O}$};
+   
+    
+    \begin{scope}[canvas is yz plane at x=-\Cube/2]
+    \shade[lower right=purple, lower left=blue, upper right=white, upper left=cyan] (-1,-1) rectangle (1,1);
+    \clip (-\Cube/2,-\Cube/2) rectangle (\Cube/2,\Cube/2);
+    \colorlet{BL}[RGB]{blue}
+    \colorlet{BR}[RGB]{purple}
+    \colorlet{TL}[RGB]{cyan}
+    \colorlet{TR}[RGB]{white}
+    \foreach \x in {1,...,\Divisions}
+    {   \pgfmathtruncatemacro{\px}{(\x-1)/(\Divisions-1)*100}
+    	\colorlet{B}[RGB]{BR!\px!BL}
+    	\colorlet{T}[RGB]{TR!\px!TL}
+    	\foreach \y in {1,...,\Divisions}
+    	{   \pgfmathtruncatemacro{\py}{(\y-1)/(\Divisions-1)*100}
+    		\fill[T!\py!B] ({-\Cube/2+\Cube*(\x-1)/\Divisions},{-\Cube/2+\Cube*(\y-1)/\Divisions}) rectangle ({-\Cube/2+\Cube*(\x+0.1)/\Divisions},{-\Cube/2+\Cube*(\y+0.1)/\Divisions});
+    	}
+    }
+    \draw[thick] (-\Cube/2,-\Cube/2) rectangle (\Cube/2,\Cube/2);
+    \end{scope}
+    
+    \begin{scope}[canvas is xz plane at y=\Cube/2]
+    \clip (-\Cube/2,-\Cube/2) rectangle (\Cube/2,\Cube/2);
+    \colorlet{BL}[RGB]{purple}
+    \colorlet{BR}[RGB]{red}
+    \colorlet{TL}[RGB]{white}
+    \colorlet{TR}[RGB]{yellow}
+    \foreach \x in {1,...,\Divisions}
+    {   \pgfmathtruncatemacro{\px}{(\x-1)/(\Divisions-1)*100}
+    	\colorlet{B}[RGB]{BR!\px!BL}
+    	\colorlet{T}[RGB]{TR!\px!TL}
+    	\foreach \y in {1,...,\Divisions}
+    	{   \pgfmathtruncatemacro{\py}{(\y-1)/(\Divisions-1)*100}
+    		\fill[T!\py!B] ({-\Cube/2+\Cube*(\x-1)/\Divisions},{-\Cube/2+\Cube*(\y-1)/\Divisions}) rectangle ({-\Cube/2+\Cube*(\x+0.1)/\Divisions},{-\Cube/2+\Cube*(\y+0.1)/\Divisions});
+    	}
+    }
+    \draw[thick] (-\Cube/2,-\Cube/2) rectangle (\Cube/2,\Cube/2);
+    \end{scope}
+    
+    \begin{scope}[canvas is xy plane at z=\Cube/2]
+    \clip (-\Cube/2,-\Cube/2) rectangle (\Cube/2,\Cube/2);
+    \colorlet{BL}[RGB]{cyan}
+    \colorlet{BR}[RGB]{green}
+    \colorlet{TL}[RGB]{white}
+    \colorlet{TR}[RGB]{yellow}
+    \foreach \x in {1,...,\Divisions}
+    {   \pgfmathtruncatemacro{\px}{(\x-1)/(\Divisions-1)*100}
+    	\colorlet{B}[RGB]{BR!\px!BL}
+    	\colorlet{T}[RGB]{TR!\px!TL}
+    	\foreach \y in {1,...,\Divisions}
+    	{   \pgfmathtruncatemacro{\py}{(\y-1)/(\Divisions-1)*100}
+    		\fill[T!\py!B] ({-\Cube/2+\Cube*(\x-1)/\Divisions},{-\Cube/2+\Cube*(\y-1)/\Divisions}) rectangle ({-\Cube/2+\Cube*(\x+0.1)/\Divisions},{-\Cube/2+\Cube*(\y+0.1)/\Divisions});
+    	}
+    }
+    \draw[thick] (-\Cube/2,-\Cube/2) rectangle (\Cube/2,\Cube/2);
+    \end{scope}
+	    
+\end{tikzpicture}

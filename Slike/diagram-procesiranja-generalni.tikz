@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+% LAYERS
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+\tikzset{
+	between/.style args={#1 and #2}{
+		at = ($(#1)!0.5!(#2)$)
+	}
+}
+
+% NODES
+\node (slika) [input, align=center] at (0,0) {Področje tarče\\na sliki $I(x,y)$};
+
+\node (of) [block,align=center, below= of slika] {Optični/Prostorski\\tok};
+\node (hoof) [block, align=center, right= of of] {deskriptorji\\$\vec{x}(t)$};
+
+
+\node (ucenje) [block, align=center, right=of hoof] {Postopel učenja.};
+
+\node (rezultat) [output, below= of ucenje] {Rezultat};
+
+% arrows
+\draw [arrow] (slika) -- (of);
+
+
+\draw [arrow] (of) -- (hoof);
+\draw [arrow] (hoof) -- (ucenje);
+
+\draw [arrow] (ucenje) -- (rezultat);
+\end{tikzpicture}
