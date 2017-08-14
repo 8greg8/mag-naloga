@@ -16,6 +16,6 @@
 *.blg
 *.gz(busy)
 
-# ignore pdf
-*.pdf
+# ignore only main pdf
+main.pdf
 *.txss

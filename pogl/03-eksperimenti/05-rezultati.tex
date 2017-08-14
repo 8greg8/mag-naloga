@@ -32,7 +32,7 @@ Parameter $N_{HOOF}$ smo določili na podlagi rezultatov evaluacije v tabeli \re
 
 V tabeli \ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rezultati bistveno ne razlikujejo. Najbojlši rezultate nam sicer daje $120$ stolpcev, vendar pa smo za potrebe naše metode uporabili $N_{HOOF}=60$, ki je ravno tako dal zadovoljive rezultate. S takim številom smo zagotovili dobro delovanje glede na minimalno vrednost, še vseeno pa ne gre za tako veliko število, ko bi do izraza prišle amplitude šumnih vektorjev.
 
-\begin{table}[htb]
+\begin{table}[!htb]
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
 		\toprule
@@ -48,28 +48,28 @@ V tabeli \ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rez
 	\label{tab:nhoof}
 \end{table}
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hoof-30.png}
+		\includegraphics[width=\columnwidth]{corr-hoof-30-sl}
 		\caption{Korelacija $N_{HOOF}=30$.}
 		\label{fig:corr-hoof-30}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hoof-60.png}
+		\includegraphics[width=\columnwidth]{corr-hoof-60-sl}
 		\caption{Korelacija $N_{HOOF}=60$.}
 		\label{fig:corr-hoof-60}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hoof-120.png}
+		\includegraphics[width=\columnwidth]{corr-hoof-120-sl}
 		\caption{Korelacija $N_{HOOF}=120$.}
 		\label{fig:corr-hoof-120}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hoof-160.png}
+		\includegraphics[width=\columnwidth]{corr-hoof-160-sl}
 		\caption{Korelacija $N_{HOOF}=160$.}
 		\label{fig:corr-hoof-160}
 	\end{subfigure}
@@ -93,7 +93,7 @@ Parameter $N_{HAFA}$ smo določili na podlagi rezultatov evaluacije v tabeli \re
 
 V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za našo metodo smo izbrali $N_{HAFA}=60$, kar v grobem predstavlja $60$ različnih hitrosti z maksimalno amplitudo \SI{60}{px.f^{-1}}.
 
-\begin{table}[htb]
+\begin{table}[!htb]
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
 		\toprule
@@ -109,28 +109,28 @@ V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za naš
 	\label{tab:nhafa}
 \end{table}
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hafa-30.png}
+		\includegraphics[width=\columnwidth]{corr-hafa-30-sl}
 		\caption{Korelacija $N_{HAFA}=30$.}
 		\label{fig:corr-hafa-30}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hafa-60.png}
+		\includegraphics[width=\columnwidth]{corr-hafa-60-sl}
 		\caption{Korelacija $N_{HAFA}=60$.}
 		\label{fig:corr-hafa-60}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hafa-120.png}
+		\includegraphics[width=\columnwidth]{corr-hafa-120-sl}
 		\caption{Korelacija $N_{HAFA}=120$.}
 		\label{fig:corr-hafa-120}
 	\end{subfigure}
 	~
 	\begin{subfigure}[b]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hafa-160.png}
+		\includegraphics[width=\columnwidth]{corr-hafa-160-sl}
 		\caption{Korelacija $N_{HAFA}=160$.}
 		\label{fig:corr-hafa-160}
 	\end{subfigure}
@@ -145,7 +145,7 @@ V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za naš
 
 
 \subsubsection{Rarzširitev HOOF deskriptorja}\label{sec:rezultati-razsiritev-hoof}
-\begin{table}[htb]
+\begin{table}[!htb]
 	\centering
 	\begin{tabular}{l S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
 		\toprule
@@ -164,13 +164,13 @@ V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za naš
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hoof.png}
+		\includegraphics[width=\columnwidth]{corr-hoof-sl}
 		\caption{Korelacija $N_{HOOF}=60$.}
 		\label{fig:izbira-hoof}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/corr-hoof-hafa.png}
+		\includegraphics[width=\columnwidth]{corr-hoof-hafa-sl}
 		\caption{Korelacija $N_{HOOF}=60$,\\$N_{HAFA}=60$.}
 		\label{fig:izbira-hoofhafa}
 	\end{subfigure}
@@ -205,7 +205,7 @@ Rezultati testiranja so prikazani v tabeli \ref{tab:region-overlap}. Za izbrane 
 
 
 
-\begin{table}[htb]
+\begin{table}[!htb]
 	\centering
 	\begin{tabular}{l S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
 		\toprule
@@ -229,13 +229,13 @@ Na sliki \ref{fig:tracker-visual} lahko vidimo primer delovanja sledilnikov za o
 	\centering
 	
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/handball1-example.png}
+		\includegraphics[width=\columnwidth]{handball1-example.png}
 		\caption{15. slika posnetka \textit{handball1}.}
 		\label{fig:handball1}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/handball2-example.png}
+		\includegraphics[width=\columnwidth]{/handball2-example.png}
 		\caption{111. slika posnetka \textit{handball2}.}
 		\label{fig:handball2}
 	\end{subfigure}  
@@ -252,19 +252,9 @@ Na sliki \ref{fig:tracker-visual} lahko vidimo primer delovanja sledilnikov za o
 
 \begin{figure}[!htbp]
 	\centering
-	
-	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/squash-1-kcf-example.png}
-		\caption{41. slika posnetka \cite{squashtv2014squash} s KCF sledilnikom.}
-		\label{fig:squash-1-kcf}
-	\end{subfigure}
-	~
-	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/squash-1-corr-example.png}
-		\caption{41. slika posnetka \cite{squashtv2014squash} s CORR sledilnikom.}
-		\label{fig:squash-1-corr}
-	\end{subfigure}  
-	\caption[Primer delovanja sledilnikov za squash posnetek]{Primer delovanja sledilnikov za squash posnetek. Gre za identični sliki posnetka, pri čemer smo na sliki \ref{fig:squash-1-kcf} uporabili KCF algoritem, na sliki \ref{fig:squash-1-corr} pa CORR algoritem. Sledilnika sta morala slediti igralcu z modro majico.}
+	\includegraphics[width=\columnwidth]{preliminary-tracker-squash.png}
+	\caption{}
+	\caption[Primer delovanja sledilnikov za squash posnetek]{Primer delovanja sledilnikov za squash posnetek. Gre za 41. sliko posnetka \cite{squashtv2014squash}, pri čemer smo uporabili KCF in CORR algoritem. Sledilnika sta morala slediti igralcu z modro majico.}
 	\label{fig:squash-tracker-visual}
 \end{figure}
 
@@ -627,16 +617,16 @@ Združevanje s značilkami se ni obneslo, zato smo to metodo opustili. Primer ne
 
  Rezultat je bil boljši od združevanja z značilkami, vendar še vedno slab, zato smo tudi to metodo opustili. Primer neuspelega poskusa je prikazan na sliki \ref{fig:zdruzevanje-cp}.
  
- \begin{figure}[htb]
+ \begin{figure}[!htb]
  	\centering
  	\begin{subfigure}[t]{0.45\columnwidth}
- 		\includegraphics[width=\columnwidth]{./Slike/matched-points.png}
+ 		\includegraphics[width=\columnwidth]{matched-points.png}
  		\caption{Ujemajoče kontrolne točke}
  		\label{fig:zdruzevanje-ujemajoce-cp}
  	\end{subfigure}
  	~
  	\begin{subfigure}[t]{0.45\columnwidth}
- 		\includegraphics[width=\columnwidth]{./Slike/points-calibration-result.png}
+ 		\includegraphics[width=\columnwidth]{points-calibration-result.png}
  		\caption{Rezultat združevanja s kontrolnimi točkami}
  		\label{fig:zdruzevanje-result-cp}
  	\end{subfigure}
@@ -673,7 +663,7 @@ Rezultati povrprečnih vrednosti uporabljenih metrik so vidni v tabeli \ref{tab:
 
 
 
-\begin{table}[htb]
+\begin{table}[!htb]
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=2.3] S[table-format=2.3]}
 		\toprule
@@ -697,13 +687,13 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/sigma-rmse1-5.png}
+		\includegraphics[width=\columnwidth]{sigma-rmse1-5-sl}
 		\caption{Graf RMSE  učnih vzorcev }
 		\label{fig:sigma-rmse1-5}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/sigma-snr1-5.png}
+		\includegraphics[width=\columnwidth]{sigma-snr1-5-sl}
 		\caption{Graf SNR  učnih vzorcev}
 		\label{fig:sigma-snr1-5}
 	\end{subfigure}
@@ -714,16 +704,16 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 Čeprav pri uporabi $\sigma=51$ dobimo največje filtriranje šuma, lahko na slikah grafov opazimo, da se obe metriki bistveno ne razlikujeta za vrednosti parametra na intervalu $[5,51]$. Kljub dobremu filtriranju želimo zagotoviti čim manjšo napako med referenčnim signalom in predikcijo, zato je logična izbira čim manjši standardni odklon. Ker so na sliki \ref{fig:sigma1-5} med $\sigma=3$ in $\sigma=5$ še opazne razlike, lahko zaključimo, da je $\sigma=5$ optimalna izbira parametra za naš problem. 
 
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/sigma-rmse5-21.png}
+		\includegraphics[width=\columnwidth]{sigma-rmse5-21-sl}
 		\caption{Graf RMSE  učnih vzorcev}
 		\label{fig:sigma-rmse5-21}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/sigma-snr5-21.png}
+		\includegraphics[width=\columnwidth]{sigma-snr5-21-sl}
 		\caption{Graf SNR  učnih vzorcev}
 		\label{fig:sigma-snr5-21}
 	\end{subfigure}
@@ -733,16 +723,16 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 
 
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/sigma-rmse21-51.png}
+		\includegraphics[width=\columnwidth]{sigma-rmse21-51-sl}
 		\caption{Graf RMSE učnih vzorcev}
 		\label{fig:sigma-rmse21-51}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/sigma-snr21-51.png}
+		\includegraphics[width=\columnwidth]{sigma-snr21-51-sl}
 		\caption{Graf SNR  učnih vzorcev}
 		\label{fig:sigma-snr21-51}
 	\end{subfigure}
@@ -757,7 +747,7 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 
 \subsubsection{Normalizacija HAFA deskriptorja}
 
-\begin{table}[htb]
+\begin{table}[!htb]
 	\centering
 	\begin{tabular}{l S[table-format=1.3] S[table-format=2.3] S[table-format=2.3] S[table-format=2.2]}
 		\toprule
@@ -771,16 +761,16 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 	\label{tab:hafa-norm}
 \end{table}
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/diag-normal-corr.png}
+		\includegraphics[width=\columnwidth]{diag-normal-corr-sl}
 		\caption{Korelacija.}
 		\label{fig:corr-diag-normal}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/diag-diag-corr.png}
+		\includegraphics[width=\columnwidth]{diag-diag-corr-sl}
 		\caption{Korelacija.}
 		\label{fig:corr-diag-diag}
 	\end{subfigure}

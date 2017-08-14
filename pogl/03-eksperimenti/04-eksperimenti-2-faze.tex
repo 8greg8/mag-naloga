@@ -31,7 +31,7 @@ Prva slika združenega zaporedja je bila slika kamere, kjer se igralec prvič po
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=\columnwidth]{./Slike/zdruzevanje-example.png}
+	\includegraphics[width=\columnwidth]{zdruzevanje-example.png}
 	\caption[Določevanje sečišča vidnih polj leve in desne Kinect kamere]{Določevanje sečišča vidnih polj leve in desne Kinect kamere. Na sliki sta prikazani prvi sliki zaporedja leve in desne Kinect kamere 1. seta 2. igre terenskega eksperimenta iz 2. faze. Označen je 4. igralec. Zelena barva koordiat središča tarče predstavlja izbrano kamero. Kamera z rumeno barvo ni izbrana. Sečišče je rdeča linija. Modri liniji sta pragova za preklop med kamerama. Ležita \SI{200}{mm} levo in desno od sečišča.}
 	\label{fig:zdruzevanje}
 \end{figure}
@@ -100,7 +100,7 @@ Velikost diagonale na laboratorijskih testih uporabljamo kot referenco. To pa za
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.75\columnwidth]{./Slike/diag-bbox.png}
+	\includegraphics[width=0.75\columnwidth]{diag-bbox.png}
 	\caption[Določitev amplitudnega faktorja]{Določitev amplitudnega faktorja. Amplitudni faktor $f_A$ smo določili kot dolžino diagonale modrega okvirja. Modri okvir smo določili ročno.}
 	\label{fig:diag-bbox}
 \end{figure}
@@ -147,12 +147,12 @@ Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stransk
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/stage2-lab-sv-tracked.png}
+		\includegraphics[width=\columnwidth]{stage2-lab-sv-tracked.png}
 		\caption{Stranska slika.}
 	\end{subfigure}
 	~
 	\begin{subfigure}{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/stage2-lab-bv-tracked.png}
+		\includegraphics[width=\columnwidth]{stage2-lab-bv-tracked.png}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
 	\caption[Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju]{Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju. Sliki sta bili registrirani na korespondečni globinski sliki \ref{fig:stage2-lab-of-depth}. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta. Zeleni okvir je rezultat sledenja s KCF sledilnikom.}
@@ -164,12 +164,12 @@ Snemali smo z dvema Microsoft Xbox Kinect V2 kamerama. Kameri sta bili od tekaln
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lab-posnetek-iz-strani-corrected.jpg}
+		\includegraphics[width=\columnwidth]{lab-posnetek-iz-strani-corrected.jpg}
 		\caption{Stranski pogled.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lab-posnetek-zadaj-corrected.jpg}
+		\includegraphics[width=\columnwidth]{lab-posnetek-zadaj-corrected.jpg}
 		\caption{Hrbtni pogled.}
 	\end{subfigure}
 	\caption[Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze]{Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze. Na sliki sta vidna podstavka, na katerih so postavljene Kinect kamere. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}.}
@@ -184,13 +184,13 @@ Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $5
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=1.2\columnwidth]{./Slike/stage2-lab-sf-sv-depth.png}
+		\includegraphics[width=1.2\columnwidth]{stage2-lab-sv-depth-sl}
 		\caption{Stranska slika.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=1.2\columnwidth]{./Slike/stage2-lab-sf-bv-depth.png}
+		\includegraphics[width=1.2\columnwidth]{stage2-lab-bv-depth-sl}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
 	\caption[Stranska in hrbtna globinska slika laboratorijskih eksperimentov]{Stranska in hrbtna globinska slika laboratorijskih eksperimentov. Globinski sliki sta korespondečni RGB slikam \ref{fig:primer-posnetka-stage2}. Barvna skala prikazuje globino v metrih. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta.}
@@ -217,28 +217,28 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom KCF. Za tako izbrano pod
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=0.5\columnwidth, frame]{./Slike/stage2-lab-of-sv-flo-corrected.png}
+		\includegraphics[width=0.5\columnwidth, frame]{stage2-lab-of-sv-flo-corrected.png}
 		\caption{Stranska slika.}
 		\label{fig:stage2-lab-of-sv-flo}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=0.5\columnwidth, frame]{./Slike/stage2-lab-of-bv-flo-corrected.png}
+		\includegraphics[width=0.5\columnwidth, frame]{stage2-lab-of-bv-flo-corrected.png}
 		\caption{Hrbtna slika.}
 		\label{fig:stage2-lab-of-bv-flo}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/stage2-lab-of-sv-hist.png}
-		\caption{Stranska slika.}
+		\includegraphics[width=\columnwidth]{stage2-lab-sv-of-hist-sl}
+		\caption{Histogram stranske slike.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/stage2-lab-of-bv-hist.png}
-		\caption{Hrbtna slika.}
+		\includegraphics[width=\columnwidth]{stage2-lab-bv-of-hist-sl}
+		\caption{Histogram hrbtne slike.}
 	\end{subfigure}
-    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Sliki \subref{fig:stage2-lab-of-sv-flo}) in \subref{fig:stage2-lab-of-bv-flo}) sta optična toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na sliki  \subref{fig:stage2-lab-of-sv-flo}) znašala \SI{7}{ppf} in na \subref{fig:stage2-lab-of-bv-flo})\SI{4}{ppf}. Optičnima tokoma pripadata izračunana HOOF-HAFA histograma.}
+    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Sliki \subref{fig:stage2-lab-of-sv-flo}) in \subref{fig:stage2-lab-of-bv-flo}) sta optična toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na sliki  \subref{fig:stage2-lab-of-sv-flo}) znašala \SI{6}{ppf} in na \subref{fig:stage2-lab-of-bv-flo}) \SI{6}{ppf}. Optičnima tokoma pripadata izračunana HOOF-HAFA histograma.}
 	\label{fig:opticni-tok-stage2}
 \end{figure}
 
@@ -278,13 +278,13 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom DS-KCF. Za tako izbrano 
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-lab-sf-pdflow-corrected.jpg}
+		\includegraphics[width=\columnwidth, frame]{stage2-lab-sf-pdflow-corrected.jpg}
 		\caption{Stranska slika.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-lab-sf-pdflow-corrected.jpg}
+		\includegraphics[width=\columnwidth, frame]{stage2-lab-sf-bv-pdflow-corrected.jpg}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
 	%~
@@ -312,7 +312,17 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom DS-KCF. Za tako izbrano 
 		\caption{hrbtna slika}
 		\label{fig:stage2-lab-sf-bv-flo}
 	\end{subfigure}
-	\caption[Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino]{Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino. Gre za prostorska toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{5.7}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo})\SI{10,3}{\m\per\s}.}
+	~
+	\begin{subfigure}[t]{0.45\columnwidth}
+		\includegraphics[width=\columnwidth]{stage2-lab-sv-sf-hist-sl}
+		\caption{Histogram stranske slike.}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.45\columnwidth}
+		\includegraphics[width=\columnwidth]{stage2-lab-bv-sf-hist-sl}
+		\caption{Histogram hrbtne slike.}
+	\end{subfigure}
+	\caption[Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino]{Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino. Gre za prostorska toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{5.7}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo})\SI{10,3}{\m\per\s}. Projekcijama prostorskega toka pripadata izračunana HOOF-HAFA histograma.}
 	\label{fig:prostorski-tok-stage2}
 \end{figure}
 
@@ -347,37 +357,37 @@ Na podlagi slik \ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno mer
 \begin{figure}[!htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lag-estimation-1-eem.png}
+		\includegraphics[width=\columnwidth]{stage2-lag-estimation-1-eem-sl}
 		\caption{Zakasnitev za subjekt 1.}
 		\label{fig:lag-estimation-1-eem}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lag-estimation-2-eem.png}
+		\includegraphics[width=\columnwidth]{stage2-lag-estimation-2-eem-sl}
 		\caption{Zakasnitev za subjekt 2.}
 		\label{fig:lag-estimation-2-eem}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lag-estimation-3-eem.png}
+		\includegraphics[width=\columnwidth]{stage2-lag-estimation-3-eem-sl}
 		\caption{Zakasnitev za subjekt 3.}
 		\label{fig:lag-estimation-3-eem}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lag-estimation-4-eem.png}
+		\includegraphics[width=\columnwidth]{stage2-lag-estimation-4-eem-sl}
 		\caption{Zakasnitev za subjekt 4.}
 		\label{fig:lag-estimation-4-eem}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lag-estimation-5-eem.png}
+		\includegraphics[width=\columnwidth]{stage2-lag-estimation-5-eem-sl}
 		\caption{Zakasnitev za subjekt 5.}
 		\label{fig:lag-estimation-5-eem}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lag-estimation-6-eem.png}
+		\includegraphics[width=\columnwidth]{stage2-lag-estimation-6-eem-sl}
 		\caption{Zakasnitev za subjekt 6.}
 		\label{fig:lag-estimation-6-eem}
 	\end{subfigure}
@@ -406,13 +416,13 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 	\centering
 	\begin{subfigure}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth]{./Slike/stage2-field-of-left-tracked.png}
+		\includegraphics[width=\columnwidth]{stage2-field-of-left-tracked.png}
 		\caption{KCF sledilnik}
 	\end{subfigure}
 	~
 	\begin{subfigure}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth]{./Slike/stage2-field-sf-left-tracked.png}
+		\includegraphics[width=\columnwidth]{stage2-field-sf-left-tracked.png}
 		\caption{DS-KCF sledilnik.}
 	\end{subfigure}
 	\caption[Predstavitev delovanja KCF in DS-KCF sledilnikov za terenske eksperimente]{Predstavitev delovanja KCF in DS-KCF sledilnikov za terenske eksperimente. Za primerjavo sledilnikov sta prikazani 120. sliki leve kamere prvega seta 2. igre za merjenca SUBJ9. Zelena okvirja prikazujeta detektirani področji za posamezen sledilnik. Opazimo, da sta področji različni.}
@@ -434,6 +444,7 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 		\centering
 		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-sf-svbv-flo-corrected.png}
 		\caption{Projekcija prostoskega toka.}
+		\label{fig:stage2-field-pd}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.3\columnwidth}
@@ -449,7 +460,24 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 
 \begin{figure}[!htb]
 	\centering
-		\includegraphics[width=0.6\columnwidth]{./Slike/squash-postavitev-corrected.jpg}	
+	\begin{subfigure}[t]{0.45\columnwidth}
+		\includegraphics[width=\columnwidth]{stage2-field-bv-of-hist-sl}
+		\caption{Histogram optičnega toka.}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.45\columnwidth}
+		\includegraphics[width=\columnwidth]{stage2-field-bv-sf-hist-sl}
+		\caption{Histogram prostorskega toka.}
+	\end{subfigure}
+	\caption[Histograma optičnega in projekcije prostorskega toka]{Histograma optičnega in projekcije prostorskega toka. Histogram za optični tok smo dobili iz slike \ref{fig:stage2-field-sfof}\subref{fig:stage2-field-of}). Histogram projekcije prostorskiega toka smo dobili iz slike \ref{fig:stage2-field-sfof}\subref{fig:stage2-field-pd}}
+	\label{fig:stage2-field-hist}
+\end{figure}
+
+
+
+\begin{figure}[!htb]
+	\centering
+		\includegraphics[width=0.6\columnwidth]{squash-postavitev-corrected.jpg}	
 	\caption{Postavitev Kinect kamer pri terenskih testih 2. faze.}
 	\label{fig:field-postavitev-kamer}
 \end{figure}
@@ -461,12 +489,12 @@ Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $5
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/stage2-field-sf-left-depth.png}
+		\includegraphics[width=1.2\columnwidth]{stage2-field-left-depth-sl}
 		\caption{Stranska slika.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/stage2-field-sf-right-depth.png}
+		\includegraphics[width=1.2\columnwidth]{stage2-field-right-depth-sl}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
 	\caption{Stranska in hrbtna globinska slika pri terenskih testih 2. faze.}

@@ -89,13 +89,13 @@ Sledilnike smo testirali na sekvencah slik \textit{handball1} in \textit{handbal
 	\centering
 	
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/handball1-example.png}
+		\includegraphics[width=\columnwidth]{handball1-example.png}
 		\caption{15. slika posnetka \textit{handball1}.}
 		\label{fig:testiranje-handball1}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/handball2-example.png}
+		\includegraphics[width=\columnwidth]{handball2-example.png}
 		\caption{111. slika posnetka \textit{handball2}.}
 		\label{fig:testiranje-handball2}
 	\end{subfigure}  
@@ -107,7 +107,7 @@ Sledilnike smo testirali na sekvencah slik \textit{handball1} in \textit{handbal
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.6\columnwidth]{./Slike/squash-1-kcf-example.png}
+	\includegraphics[width=0.6\columnwidth]{preliminary-squash-no-tracker.png}
 	\caption[Uporaba squash posnetka za vizualno oceno delovanja sledilnikov]{Uporaba squash posnetka za vizualno oceno delovanja sledilnikov. Predstavljena je 41. slika posnetka \cite{squashtv2014squash}, kjer smo preizkušali KCF sledilnik. Sledili smo igralcu v svetlo modri majici. Modri okvir prikazuje področje, ki ga je sledilnik zaznal.}
 	\label{fig:testiranje-squash-1-kcf}
 \end{figure}
@@ -206,7 +206,7 @@ Sledilo je generiranje HOOF deskriptorjev, ki smo jih pred tem optimizirali po p
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.75\columnwidth]{./Slike/histogram.png}
+	\includegraphics[width=0.75\columnwidth]{stage1-lab-sv-hist-sl}
 	\caption[HOOF deskriptor za 150. RGB sliko prve serije]{HOOF deskriptor za 150. RGB sliko prve serije. Deskriptor smo izračunali iz slike \ref{fig:opticni-tok-stage1}.}
 	\label{fig:hoof-znacilke}
 \end{figure}
@@ -232,13 +232,13 @@ Na podlagi slike \ref{fig:lag-estimation-stage1} smo ugotovili, da obstaja zakas
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lag-estimation-train-eem.png}
+		\includegraphics[width=\columnwidth]{stage1-lag-estimation-eem-sl}
 		\caption{Zakasnitev za energijsko porabo.}
 		\label{fig:lag-estimation-train-eem}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/lag-estimation-train-hr.png}
+		\includegraphics[width=\columnwidth]{stage1-lag-estimation-hr-sl}
 		\caption{Zakasnitev za srčni utrip.}
 		\label{fig:lag-estimation-train-hr}
 	\end{subfigure}
@@ -254,13 +254,13 @@ Zakasnitev smo določili, kot časovni interval od trenutka spremembe hitrosti t
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/odziv-train.png}
+		\includegraphics[width=\columnwidth]{odziv1-sl}
 		\caption{Odziv učnih vzorcev.}
 		\label{fig:odziv-ucnih-stage1}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/odziv-test.png}
+		\includegraphics[width=\columnwidth]{odziv2-sl}
 		\caption{Odziv testnih vzorcev.}
 		\label{fig:odziv-testnih-stage1}
 	\end{subfigure}
@@ -322,13 +322,13 @@ Z vnašanjem projektivne transformacije v posnetke smo s \textit{proj} testi pre
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=0.6\columnwidth]{./Slike/projective-sv-150.png}
+		\includegraphics[width=0.6\columnwidth]{projective-sv-150.png}
 		\caption{Stranska slika}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=0.6\columnwidth]{./Slike/projective-bv-150.png}
+		\includegraphics[width=0.6\columnwidth]{projective-bv-150.png}
 		\caption{Hrbtna slika}
 	\end{subfigure}
 	\caption[Primer projektivne transformacije 150. slike posnetka iz prve serije]{Primer projektivne transformacije 150. slike posnetka iz prve serije. Prikazani sta stranska in hrbtna transformirana slika. Transformirali smo slike \ref{fig:primer-posnetka-rgb}.}
@@ -341,7 +341,7 @@ Obstaja veliko ekipnih športov, kjer sodeluje več igralcev. Ker so vsi vidni n
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.6\columnwidth]{./Slike/normal-sv-test-kcf2.png}
+	\includegraphics[width=0.6\columnwidth]{normal-sv-test-kcf2.png}
 	\caption[Sledenje merjencu s KCF na stranski sliki.]{Sledenje merjencu s KCF na stranski sliki. Prikazana je 150. slika RGB posnetka druge serije. Zeleni okvir prikazuje področje, ki ga je detektiral sledilnik.}
 	\label{fig:sledenje}
 \end{figure} 
@@ -361,7 +361,7 @@ S simulacijo vibracij smo naredili obremenitveni test za modele z vključenim sl
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.6\columnwidth]{./Slike/shake-bv-train-kcf2.png}
+	\includegraphics[width=0.6\columnwidth]{shake-bv-train-kcf2.png}
 	\caption[Sledenje merjencu na tresočem posnetku]{Sledenje merjencu na tresočem posnetku. Prikazana je 82. slika hrbtnega RGB posnetka prve serije. Zeleni okvir prikazuje področje, ki ga je detektiral KCF sledilnik.}
 	\label{fig:vibracije}
 \end{figure} 
@@ -383,7 +383,7 @@ Chaudhry et al. \cite{chaudhry2009histograms} predlaga uporabo histogramov orien
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.6\columnwidth]{./Slike/hoof-hafa-squash-276.png}
+	\includegraphics[width=0.6\columnwidth]{stage1-field-bv-of-hist-sl}
 	\caption[HOOF-HAFA deskriptor za 276. sliko učnih vzorcev]{HOOF-HAFA deskriptor za 276. sliko učnih vzorcev. Deskriptor se ujema s sliko \ref{fig:sledenje-squash}.}
 	\label{fig:hoof-hafa}
 \end{figure}
@@ -395,14 +395,14 @@ Za določitev področja posameznega igralca smo uporabili KCF sledilnik. Kadar s
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth]{./Slike/squash-tracked.png}
+		\includegraphics[width=\columnwidth]{squash-tracked.png}
 		\caption{Slika sledenja.}
 	    \label{fig:sledenje-squash}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=0.6\columnwidth, frame]{./Slike/stage1-squash-flo-corrected.png}
+		\includegraphics[width=0.6\columnwidth, frame]{stage1-squash-flo-corrected.png}
 		\caption{Slika optičnega toka.}
 		\label{fig:of-squash}
 	\end{subfigure}
@@ -449,21 +449,21 @@ Za testiranje detekcije dihanja smo posneli video moškega merjenca, starosti 42
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=0.75\columnwidth]{./Slike/breathtest-500.png}
+		\includegraphics[width=0.75\columnwidth]{breathtest-500.png}
 		\caption{IR slika dihanja.}
 		\label{fig:dihanje-orig}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=0.75\columnwidth, frame]{./Slike/breathtest-flow-coding.png}
+		\includegraphics[width=0.75\columnwidth, frame]{breathtest-flow-coding.png}
 		\caption{Optični tok dihanja.}
 		\label{fig:dihanje-of}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth]{./Slike/breathtest-histogram.png}
+		\includegraphics[width=\columnwidth]{stage1-breathtest-hist-en}
 		\caption{HOOF histogram.}
 		\label{fig:dihanje-hist}
 	\end{subfigure}
