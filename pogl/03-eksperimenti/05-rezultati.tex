@@ -32,15 +32,15 @@ Parameter $N_{HOOF}$ smo določili na podlagi rezultatov evaluacije v tabeli \re
 
 V tabeli \ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rezultati bistveno ne razlikujejo. Najbojlši rezultate nam sicer daje $120$ stolpcev, vendar pa smo za potrebe naše metode uporabili $N_{HOOF}=60$, ki je ravno tako dal zadovoljive rezultate. S takim številom smo zagotovili dobro delovanje glede na minimalno vrednost, še vseeno pa ne gre za tako veliko število, ko bi do izraza prišle amplitude šumnih vektorjev.
 
-\begin{table}[!htb]
+\begin{table}[!htbp]
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
 		\toprule
 		\thead{$\mathbf{N_{HOOF}}$} & \thead{$\mathbf{r}$} & \thead{RAE} & \thead{RRSE} & \thead{nSV [\%]}\\
 		\midrule%nSV
-		30 & 0.978 & 0.296 & 0.304 & \boldentry{2.2}{62.81}\\%18089
-		\boldentry{2.0}{60} & 0.980 & 0.277 & 0.289 & 81.21\\%23388
-		120 & \boldentry{1.3}{0.983} & \boldentry{1.3}{0.261} & \boldentry{1.3}{0.273} & 74.39\\%21424
+		30 & 0.978 & 0.296 & 0.304 & \boldentry{2}{2}{62.81}\\%18089
+		\boldentry{2}{0}{60} & 0.980 & 0.277 & 0.289 & 81.21\\%23388
+		120 & \boldentry{1}{2}{0.983} & \boldentry{1}{3}{0.261} & \boldentry{1}{3}{0.273} & 74.39\\%21424
 		160 & 0.982 & 0.272 & 0.284 & 71.68\\%20644
 		\bottomrule
 	\end{tabular}
@@ -48,7 +48,7 @@ V tabeli \ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rez
 	\label{tab:nhoof}
 \end{table}
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\includegraphics[width=\columnwidth]{corr-hoof-30-sl}
@@ -91,16 +91,14 @@ V tabeli \ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rez
 \subsubsection{Optimizacija HAFA deskriptorjev}\label{sec:rezultati-optimizacija-hafa}
 Parameter $N_{HAFA}$ smo določili na podlagi rezultatov evaluacije v tabeli \ref{tab:nhafa} in grafov korelacije med referenčnimi podatki in predikcijo \ref{fig:corr-hafa}.
 
-V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za našo metodo smo izbrali $N_{HAFA}=60$, kar v grobem predstavlja $60$ različnih hitrosti z maksimalno amplitudo \SI{60}{px.f^{-1}}.
-
-\begin{table}[!htb]
+\begin{table}[!htbp]
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
 		\toprule
 		\thead{$\mathbf{N_{HAFA}}$} & \thead{$\mathbf{r}$} & \thead{RAE} & \thead{RRSE} & \thead{nSV [\%]}\\
 		\midrule%nSV
 		30 & 0.984 & 0.213 & 0.231 & 62.08 \\%17879/28799
-		\boldentry{2.0}{60} & \boldentry{1.3}{0.984} & \boldentry{1.3}{0.211} & \boldentry{1.3}{0.228} & \boldentry{2.2}{62.60} \\%18028
+		\boldentry{2}{0}{60} & \boldentry{1}{3}{0.984} & \boldentry{1}{3}{0.211} & \boldentry{1}{3}{0.228} & \boldentry{2}{2}{62.60} \\%18028
 		120 & 0.984 & 0.211 & 0.228 & 62.63 \\%18037
 		160 & 0.984 & 0.211 & 0.228 & 62.63 \\%18037
 		\bottomrule
@@ -109,7 +107,9 @@ V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za naš
 	\label{tab:nhafa}
 \end{table}
 
-\begin{figure}[!htb]
+V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za našo metodo smo izbrali $N_{HAFA}=60$, kar v grobem predstavlja $60$ različnih hitrosti z maksimalno amplitudo \SI{60}{px.f^{-1}}.
+
+\begin{figure}[!htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\includegraphics[width=\columnwidth]{corr-hafa-30-sl}
@@ -144,15 +144,20 @@ V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za naš
 
 
 
-\subsubsection{Rarzširitev HOOF deskriptorja}\label{sec:rezultati-razsiritev-hoof}
-\begin{table}[!htb]
+
+
+
+
+\subsubsection{Razširitev HOOF deskriptorja}\label{sec:rezultati-razsiritev-hoof}
+
+\begin{table}[!htbp]
 	\centering
 	\begin{tabular}{l S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2]}
 		\toprule
 		\textbf{Deskriptor} & \thead{$\mathbf{r}$} & \thead{RAE} & \thead{RRSE} & \thead{nSV [\%]}\\
 		\midrule%nSV
-		HOOF & 0.992 & 0.336 & 0.317 & \boldentry{2.2}{82.34} \\%2187/2656
-		\textbf{HOOF-HAFA} & \boldentry{1.3}{0.991} & \boldentry{1.3}{0.157} & \boldentry{1.3}{0.205} & 89.53 \\%2378
+		HOOF & 0.992 & 0.336 & 0.317 & \boldentry{2}{2}{82.34} \\%2187/2656
+		\textbf{HOOF-HAFA} & \boldentry{1}{3}{0.991} & \boldentry{1}{3}{0.157} & \boldentry{1}{3}{0.205} & 89.53 \\%2378
 		\bottomrule
 	\end{tabular}
 	\caption[Rezultati evaluacije modelov z različnim deskriptorjem]{Rezultati evaluacije modelov z različnim deskriptorjem. Optimalni rezultati so odebeljeni. Vidimo lahko, da se bolje odnese razširjeni deskriptor HOOF-HAFA, čeprav model uporablja več podpornih vektorjev. }
@@ -161,7 +166,7 @@ V tabeli \ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za naš
 
 
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\includegraphics[width=\columnwidth]{corr-hoof-sl}
@@ -205,7 +210,7 @@ Rezultati testiranja so prikazani v tabeli \ref{tab:region-overlap}. Za izbrane 
 
 
 
-\begin{table}[!htb]
+\begin{table}[!htbp]
 	\centering
 	\begin{tabular}{l S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
 		\toprule
@@ -213,8 +218,8 @@ Rezultati testiranja so prikazani v tabeli \ref{tab:region-overlap}. Za izbrane 
 		\midrule%nSV
 		NEBEHAY-TLD & 0.035 & 0.130 & 0.083 \\
 		CCV-TLD & 0.117 & 0 & 0.117 \\
-		OPENCV-TLD & 0.002 & \boldentry{1.3}{0.178} & 0.09 \\
-		CORR & \boldentry{1.3}{0.214} & 0.160 & \boldentry{1.3}{0.187} \\
+		OPENCV-TLD & 0.002 & \boldentry{1}{3}{0.178} & 0.09 \\
+		CORR & \boldentry{1}{3}{0.214} & 0.160 & \boldentry{1}{3}{0.187} \\
 		\textbf{KCF} & {0.161} & {0.166} & {0.164} \\
 		\bottomrule
 	\end{tabular}
@@ -252,7 +257,7 @@ Na sliki \ref{fig:tracker-visual} lahko vidimo primer delovanja sledilnikov za o
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=\columnwidth]{preliminary-tracker-squash.png}
+	\includegraphics[width=0.6\columnwidth]{preliminary-tracker-squash.png}
 	\caption{}
 	\caption[Primer delovanja sledilnikov za squash posnetek]{Primer delovanja sledilnikov za squash posnetek. Gre za 41. sliko posnetka \cite{squashtv2014squash}, pri čemer smo uporabili KCF in CORR algoritem. Sledilnika sta morala slediti igralcu z modro majico.}
 	\label{fig:squash-tracker-visual}
@@ -281,35 +286,70 @@ Boljše delovanje KCF je razumljivo, saj prvi testi temeljijo na posnetkih rokom
 \subsection{Elementarni eksperimenti tekalne steze}
 As can be seen in the Table \ref{tab:initial-models-validation}, we get relatively poor results in the prediction of heart rate.
 
-\begin{table}[!htb]
+
+\begin{table}[!htbp]
 	\centering
-	{\footnotesize
-      \begin{tabular}{l S[table-format=3.2, detect-weight, detect-shape, detect-mode] S[table-format=3.2, detect-weight, detect-shape, detect-mode] S[table-format=3.2, detect-weight, detect-shape, detect-mode]}
-          \toprule
-          \textbf{Model} & \multicolumn{1}{c}{\textbf{CORR}} & \multicolumn{1}{c}	{\textbf{RAE} (\%)} & \multicolumn{1}{c}{\textbf{RRSE} (\%)} \\
-          \midrule
-          hr-sv(sv) & 0.90 & 75.42 & 76.66	\\
-          hr-sv(bv)	&	-0.66	&	104.61	&	110.17	\\
-\bfseries hr-sv-lag(sv)		&	\bfseries 0.93	&	\bfseries 74.37	&	\bfseries 75.51	\\
-          hr-sv-lag(bv)	&	-0.87	&	138.60	&	136.62	\\
-          hr-bv(sv)	&	0.83	&	311.95	&	295.66	\\
-          hr-bv(bv)	 	&	0.88	&	81.07	&	79.27	\\
-          hr-bv-lag(sv)	&	0.49	&	84.71	&	89.40	\\
-          hr-bv-lag(bv) 	&	0.91	&	79.15	&	76.93	\\
-          eem-sv(sv)		&	0.87	&	47.08	&	49.75	\\
-          eem-sv(bv)	&	-0.75	&	109.27	&	117.62	\\
-          \bfseries eem-sv-lag(sv)	&	\bfseries 0.92	&	\bfseries 38.15	&	\bfseries 40.18	\\
-          eem-sv-lag(bv)	&	-0.74	&	121.86	&	121.88	\\
-          eem-bv(sv)	&	0.61	&	94.92	&	95.92	\\
-          eem-bv(bv)		&	0.85	&	44.51	&	56.24	\\
-          eem-bv-lag(sv)	&	0.86	&	56.60	&	68.61	\\
-          eem-bv-lag(bv)	&	0.90	&	45.51	&	49.50	\\
-          \bottomrule        
-      \end{tabular}
-	}
-	\caption{The results of the initial model evaluations with cross testing. For each model, we calculated the correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE).}
-	\label{tab:initial-models-validation}
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{observabilnost}
+		\bottomrule
+	\end{tabular}
+	\caption{Observabilnost posameznih parametrov, izracunano povprečje rezultatov svsv bvbv. Oba sta observabilna eem je bolj}
+	\label{tab:observabilnost}
 \end{table}
+
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{rocni-izrez}
+		\bottomrule
+	\end{tabular}
+	\caption{Crop normal + mixed. Crop rezultati ne dajejo občutno boljših rezultatov. Mogoče premajno kropiranje?. Še vseeno uporabili, ker se teoretično znebimo šuma}
+	\label{tab:rocni-izrez}
+\end{table}
+
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{zorni-kot}
+		\bottomrule
+	\end{tabular}
+	\caption{Crop normal + mixed. Opazi se da mešanje povzroča velike napake in majhne korelacije. }
+	\label{tab:zorni-kot}
+\end{table}
+As in initial models, when comparing models with different physiological parameters in Table \ref{tab:mixed-models-validation}, heart rate models produce worse results. Lag models are better than normal models and best result is still produced by lagged model, which predicts energy expenditure.
+
+The main difference in mixed models can be seen, when comparing cross tests. If we compare results from Table \ref{tab:initial-models-validation} and \ref{tab:mixed-models-validation}, we can see that results, when testing models with data from different viewing angle as they were trained, are significantly better. This results indicate that better models could be trained with recordings from different viewing angle.
+
+
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{crop-ir}
+		\bottomrule
+	\end{tabular}
+	\caption{Crop ir + crop-bv. IR posnetki veliko boljši.}
+	\label{tab:crop-ir}
+\end{table}
+
+
+
+
+
 
 In terms of using different view angles, we get best results for side-view. We assume that this is due to the fact that with a back-view camera (without any cropping) we also recorded the movement of the operator, who is not visible in side-view recordings. Despite the fact that the HOOF features get rid of the noise of the optical flow, the movement of the operator is intensive enough to be able to influence the results. Worse results for back-view camera could also indicate that we get less descriptive features from it. 
 %V smislu uporabe različnih zornih kotov, smo dobili najboljše rezultate pri stranskem pogledu. Predvidevamo, da je to posledica dejstva, da smo s kamero pri hrbtnem pogledu snemali tudi gibanje operaterja, česar pa v stranskem pogledu ni. Kljub dejstvu, da se s HOOF značilkami znebimo šuma optičnega toka, je gibanje operaterja dovolj intenzivno, da bi lahko vplivalo na rezultat.
@@ -322,12 +362,34 @@ Considering cross testing we can see, that all models produce poorer results if 
 The best results were obtained in the prediction of the energy expenditure (EEM). Output signals of the best results for the prediction of energy expenditure and heart rate are presented in Figure \ref{fig:rezultat}. The curves of the results have the same form because they are correlated physiological parameters.
 %Najboljši rezultat smo dobili pri predikciji hitrosti porabe energije (EEm). Izhodni signali najboljših rezultatov za predikcijo energijske porabe in srčnega utripa so predstavljeni na sliki \ref{fig:rezultat}.
 
-\begin{figure}[!htb]
+
+
+
+
+
+
+\subsection{Modeliranje fiziološke zakasnitve}
+\begin{table}[!htbp]
 	\centering
-    %\includegraphics[width=0.9\linewidth]{./slike/best-results.eps}
-    \caption{The best results for prediction of energy expenditure and heart rate when validating the models. The figure shows the output of models eem-sv-lag(sv) and hr-sv-lag(sv) and the actual value of energy expenditure and heart rate.}
-    %\caption{Najboljša rezultata za predikcijo porabe energije in srčnega utripa pri validaciji modelov. Slika prikazuje izhod modelov eem-sv-l in hr-sv-l ter dejanske vrednosti hitrosti porabe energije na minuto in srčnega utripa.}
-    \label{fig:rezultat}
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{crop-lag}
+		\bottomrule
+	\end{tabular}
+	\caption{Crop normal + lag}
+	\label{tab:lag}
+\end{table}
+
+
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=\linewidth]{best-results-crop-normal-infrared-infrared-sl}
+	\caption{Crop lag ir ir !!!The best results for prediction of energy expenditure and heart rate when validating the models. The figure shows the output of models eem-sv-lag(sv) and hr-sv-lag(sv) and the actual value of energy expenditure and heart rate.}
+	%\caption{Najboljša rezultata za predikcijo porabe energije in srčnega utripa pri validaciji modelov. Slika prikazuje izhod modelov eem-sv-l in hr-sv-l ter dejanske vrednosti hitrosti porabe energije na minuto in srčnega utripa.}
+	\label{fig:crop-lag-rezultat}
 \end{figure}
 
 
@@ -339,73 +401,32 @@ The best results were obtained in the prediction of the energy expenditure (EEM)
 
 
 
-
-
-
-
-
-\subsection{Ročna določitev področja zanimanja}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Eksperimenti združenih posnetkov}
-As in initial models, when comparing models with different physiological parameters in Table \ref{tab:mixed-models-validation}, heart rate models produce worse results. Lag models are better than normal models and best result is still produced by lagged model, which predicts energy expenditure.
-
-\begin{table}[!htb]
+\subsection{Obremenitveni testi}
+\begin{table}[!htbp]
 	\centering
-	{\footnotesize
-      \begin{tabular}{l  S[table-format=3.2, detect-weight, detect-shape, detect-mode]  S[table-format=3.2, detect-weight, detect-shape, detect-mode]  S[table-format=3.2, detect-weight, detect-shape, detect-mode]}
-          \toprule
-          \textbf{Model} & \multicolumn{1}{c}{\textbf{CORR}} & \multicolumn{1}{c}	{\textbf{RAE} (\%)} & \multicolumn{1}{c}{\textbf{RRSE} (\%)} \\
-          \midrule
-        hr-mixed(sv)	&	0.89	&	67.18	&	68.17	\\
-        hr-mixed(bv)	&	0.88	&	59.84	&	61.89	\\
-        hr-mixed-lag(sv) &	0.92	&	65.24	&	66.44	\\
-        \bfseries hr-mixed-lag(bv) &	\bfseries 0.91	&	\bfseries 57.75	&	\bfseries 60.31	\\
-        eem-mixed(sv)	&	0.85	&	45.90	&	53.89	\\
-        eem-mixed(bv)	&	0.84	&	57.44	&	62.78	\\
-        \bfseries eem-mixed-lag(sv)	&	\bfseries 0.90	&	\bfseries 44.19	&	\bfseries 46.09	\\
-        eem-mixed-lag(bv)	&	0.89	&	56.70	&	55.04	\\
-          \bottomrule        
-      \end{tabular}
-	}
-	\caption{The results of the mixed model evaluations with cross testing. For each model, we calculated the correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE).}
-	\label{tab:mixed-models-validation}
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{crop-proj}
+		\bottomrule
+	\end{tabular}
+	\caption{Crop proj}
+	\label{tab:crop-proj}
 \end{table}
 
-The main difference in mixed models can be seen, when comparing cross tests. If we compare results from Table \ref{tab:initial-models-validation} and \ref{tab:mixed-models-validation}, we can see that results, when testing models with data from different viewing angle as they were trained, are significantly better. This results indicate that better models could be trained with recordings from different viewing angle.
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Obremenitveni testi}
-
-
-
-
-
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{crop-sc}
+		\bottomrule
+	\end{tabular}
+	\caption{Crop scale}
+	\label{tab:crop-scale}
+\end{table}
 
 
 
@@ -419,69 +440,24 @@ The main difference in mixed models can be seen, when comparing cross tests. If 
 \subsection{Tekalna steza s sledenjem}
 Results of models with enabled tracker are represented in Table \ref{tab:tracker-models-validation}. If we compare them with results of initial models in Table \ref{tab:initial-models-validation}, the mean absolute difference of RRSE between them is \SI{28}{\%}. We can assume that this is due to the fact that tracker does not track selected object perfectly. In some cases it cannot find object, or detects wrong object. It can also track only part of the object. This anomalies can affect calculation of physiological parameters.
 
-\begin{table}[!htb]
-	\centering
-	{\footnotesize
-      \begin{tabular}{l S[table-format=3.2, detect-weight, detect-shape, detect-mode] S[table-format=3.2, detect-weight, detect-shape, detect-mode] S[table-format=3.2, detect-weight, detect-shape, detect-mode]}
-          \toprule
-          \textbf{Model} & \multicolumn{1}{c}{\textbf{CORR}} & \multicolumn{1}{c}	{\textbf{RAE} (\%)} & \multicolumn{1}{c}{\textbf{RRSE} (\%)} \\
-          \midrule
-        hr-sv-tr(sv)	&	0.93	&	90.82	&	86.55	\\
-        hr-sv-tr(bv)	&	-0.18	&	133.17	&	145.74	\\
-        \bfseries hr-sv-lag-tr(sv)	&	\bfseries 0.96	&	\bfseries 91.57	&	\bfseries 86.72	\\
-        hr-sv-lag-tr(bv)	&	-0.11	&	108.99	&	124.40	\\
-        hr-bv-tr(sv)	&	-0.55	&	132.25	&	146.66	\\
-        hr-bv-tr(bv)	&	0.89	&	116.38	&	111.78	\\
-        hr-bv-lag-tr(sv)	&	-0.62	&	131.09	&	140.59	\\
-        hr-bv-lag-tr(bv)	&	0.91	&	118.69	&	113.24	\\
-        eem-sv-tr(sv)	&	0.90	&	41.55	&	45.25	\\
-        eem-sv-tr(bv)	&	-0.34	&	135.25	&	141.63	\\
-        \bfseries eem-sv-lag-tr(sv)	&	\bfseries 0.94	&	\bfseries 31.66	&	\bfseries 37.05	\\
-        eem-sv-lag-tr(bv)	&	0.65	&	126.00	&	130.04	\\
-        eem-bv-tr(sv)	&	-0.44	&	107.47	&	107.91	\\
-        eem-bv-tr(bv)	&	0.91	&	53.21	&	52.92	\\
-        eem-bv-lag-tr(sv)	&	-0.68	&	110.55	&	113.64	\\
-        eem-bv-lag-tr(bv)	&	0.93	&	41.57	&	51.53	\\
-        hr-sv-tr-sh(sv)	&	0.92	&	90.39	&	87.15	\\
-        hr-sv-tr-sh(bv)	&	0.84	&	90.98	&	112.00 \\
-        \bfseries hr-sv-lag-tr-sh(sv)	&	\bfseries 0.95	&	\bfseries 88.86 	&	\bfseries 86.99	\\
-        hr-sv-lag-tr-sh(bv)	&	-0.10	&	111.46	&	118.79	\\
-        hr-bv-tr-sh(sv)	&	0.83	&	286.16	&	268.48	\\
-        hr-bv-tr-sh(bv)	&	0.87	&	113.11	&	111.15	\\
-        hr-bv-lag-tr-sh(sv)	&	0.89	&	293.45	&	275.83	\\
-        hr-bv-lag-tr-sh(bv)	&	0.87	&	114.98	&	113.90	\\
-        eem-sv-tr-sh(sv)	&	0.90	&	50.18	&	59.92	\\
-        eem-sv-tr-sh(bv)	&	0.89	&	119.57	&	128.17	\\
-        eem-sv-lag-tr-sh(sv)	&	0.93	&	51.47	&	56.55	\\
-        eem-sv-lag-tr-sh(bv)	&	-0.08	&	135.85	&	133.27	\\
-        eem-bv-tr-sh(sv)	&	0.75	&	179.11	&	172.30	\\
-        eem-bv-tr-sh(bv)	&	0.90	&	52.85	&	54.43	\\
-        eem-bv-lag-tr-sh(sv)	&	0.91	&	175.29	&	171.63	\\
-        \bfseries eem-bv-lag-tr-sh(bv)	&	\bfseries 0.94	&	\bfseries 50.02	&	\bfseries 48.93	\\
-          \bottomrule        
-      \end{tabular}
-	}
-	\caption{The results of the tracker model evaluations with cross testing. For each model, we calculated the correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE).}
-	\label{tab:tracker-models-validation}
-\end{table}
+
 
 The mean absolute difference of RRSE between normal tracking models and models with shaking video is about \SI{30}{\%}. Results are worse with videos that incorporate shaking (motion noise), but this is still acceptable, because the selected tracker can stabilize our video and improve results.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Simulacija vibracij kamere}
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{shake}
+		\bottomrule
+	\end{tabular}
+	\caption{Tracker normal and tracker shake}
+	\label{tab:shake}
+\end{table}
 
 
 
@@ -497,30 +473,29 @@ The mean absolute difference of RRSE between normal tracking models and models w
 \subsection{Terenski eksperimenti squash igre}
 If we compare Table \ref{tab:initial-models-validation} and Table \ref{tab:squash-models-validation}, we can see that result for squash model is not far behind one of the best results in initial models, despite the fact that we used different subjects for training and testing. 
 
-\begin{table}[!htb]
+\begin{table}[!htbp]
 	\centering
-	{\small
-      \begin{tabular}{l D{.}{.}{-1} D{.}{.}{-1} D{.}{.}{-1}}
-          \toprule
-          \textbf{Model} & \multicolumn{1}{c}{\textbf{CORR}} & \multicolumn{1}{c}	{\textbf{RAE} (\%)} & \multicolumn{1}{c}{\textbf{RRSE} (\%)} \\
-          \midrule
-        hr-bv-lag-tr-sq	&	0.45	&	68.65	&	54.24	\\
-          \bottomrule        
-      \end{tabular}
-	}
-	\caption{The results of the squash match evaluation. For model, we calculated the correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE).}
-	\label{tab:squash-models-validation}
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{squash}
+		\bottomrule
+	\end{tabular}
+	\caption{Squash best result}
+	\label{tab:squash}
 \end{table}
 
 If we further explore our model from realistic data, we can see in Figure \ref{fig:squash-result} that predicted working point is about \SI{7}{bpm} lower. The reason could be that training data is extracted only from one subject. The second reason could be imperfections of used equation from \cite{charlot2014improvement}. Despite these errors a coarse prediction is still possible, even if we don't train the algorithm on the same subject.
 
 % Razlaga rezultatov je, da so vredu, le delovna točka je faljena zaradi majhne variacije učnih vzorcev (učimo namreč le na eni osebi) in pa nenatančnosti same enačbe, ki jo uporabljamo za pretvorbo. Če učimo z eno osebo in probamo na drugi osebi ji lahko napovemo srčni utrip s cca. 7 bpm napake
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 	\centering
-    %\includegraphics[width=0.9\linewidth]{./slike/squash-result.eps}
-    \caption{Result for prediction of heart rate when validating the models. The figure shows the output of model hr-bv-lag-tr-sq and the actual value of heart rate.}
-    \label{fig:squash-result}
+	\includegraphics[width=\linewidth]{best-results-preliminary-squash2-normal-backview-backview-sl}
+	\caption{Crop lag ir ir !!!The best results for prediction of energy expenditure and heart rate when validating the models. The figure shows the output of models eem-sv-lag(sv) and hr-sv-lag(sv) and the actual value of energy expenditure and heart rate.}
+	%\caption{Najboljša rezultata za predikcijo porabe energije in srčnega utripa pri validaciji modelov. Slika prikazuje izhod modelov eem-sv-l in hr-sv-l ter dejanske vrednosti hitrosti porabe energije na minuto in srčnega utripa.}
+	\label{fig:squash-rezultat}
 \end{figure}
 
 
@@ -549,7 +524,21 @@ If we further explore our model from realistic data, we can see in Figure \ref{f
 For breathing detection, which was formulated as a classification problem, we used standard metrics for evaluation of two-class classification problems. With ''breathing'' considered the ''true'' value, and ''not breathing'' the ''false'' we get the following results: false positive rate, FPR = \SI{13}{\%}, true positive rate, TPR = \SI{87}{\%}, false negative rate, FNR = \SI{26}{\%}, true negative rate, TNR = \SI{74}{\%}.
 
 
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.6\linewidth]{breathtest-confusion-sl}
+	\caption{Crop lag ir ir !!!The best results for prediction of energy expenditure and heart rate when validating the models. The figure shows the output of models eem-sv-lag(sv) and hr-sv-lag(sv) and the actual value of energy expenditure and heart rate.}
+	%\caption{Najboljša rezultata za predikcijo porabe energije in srčnega utripa pri validaciji modelov. Slika prikazuje izhod modelov eem-sv-l in hr-sv-l ter dejanske vrednosti hitrosti porabe energije na minuto in srčnega utripa.}
+	\label{fig:breathtest-confusion}
+\end{figure}
 
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.6\linewidth]{breathtest-roc-sl}
+	\caption{Crop lag ir ir !!!The best results for prediction of energy expenditure and heart rate when validating the models. The figure shows the output of models eem-sv-lag(sv) and hr-sv-lag(sv) and the actual value of energy expenditure and heart rate.}
+	%\caption{Najboljša rezultata za predikcijo porabe energije in srčnega utripa pri validaciji modelov. Slika prikazuje izhod modelov eem-sv-l in hr-sv-l ter dejanske vrednosti hitrosti porabe energije na minuto in srčnega utripa.}
+	\label{fig:breathtest-roc}
+\end{figure}
 
 
 
@@ -669,13 +658,13 @@ Rezultati povrprečnih vrednosti uporabljenih metrik so vidni v tabeli \ref{tab:
 		\toprule
 		\thead{$\mathbf{\sigma}$} & \thead{RMSE} & \thead{SNR [dB]}  \\
 		\midrule%nSV
-		1 & \boldentry{2.3}{8.614} & 24.278 \\
+		1 & \boldentry{2}{3}{8.614} & 24.278 \\
 		3 & 11.236 & 25.470 \\
-		\boldentry{2.0}{5} & 11.596 & 25.746 \\
+		\boldentry{2}{0}{5} & 11.596 & 25.746 \\
 		11 & 11.783 & 25.746 \\
 		21 & 11.842 & 25.975 \\
 		31 & 11.871 & 26.194 \\
-		51 & 11.907 & \boldentry{2.3}{26.306} \\
+		51 & 11.907 & \boldentry{2}{3}{26.306} \\
 		\bottomrule
 	\end{tabular}
 	\caption[Povprečne vrednosti RMSE in SNR metrik pri optimizaciji parametra $\sigma$ Gaussovega filtra]{Povprečne vrednosti RMSE in SNR metrik pri optimizaciji parametra $\sigma$ Gaussovega filtra. Najmanjši standardni odklon ima najmanjšo napako, vendar je tudi filtriranje majhno. Pri $\sigma=3$ in $\sigma=5$ so še opazne razlike pri filriranju. Za višje vrednosti ni več opazne razlike, vendar pa se napaka povečuje. $\sigma=5$ je tako optimalna vrednosti parametra.}

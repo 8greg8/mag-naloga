@@ -67,6 +67,7 @@
 % ovveride in heading with \multicolumn{1}{..}{..}
 \usepackage{etoolbox}
 %\robustify\bfseries
+\usepackage{longtable}
 
 % za dodajanje slik
 \usepackage{graphicx}
@@ -232,13 +233,15 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 \newcommand{\folder}{./}
 
 
-\newcommand{\boldentry}[2]{%
-  \multicolumn{1}{S[table-format=#1,
+\newcommand{\boldentry}[3]{%
+  \multicolumn{1}{S[table-format=#1.#2,
+				  	round-mode=places, round-precision=#2,
                     mode=text,
                     text-rm=\fontseries{b}\selectfont
-                   ]}{#2}}
+                   ]}{#3}}
 \newcommand{\thead}[1]{\multicolumn{1}{c}{\textbf{#1}}}
 %\newcommand{\theadm}{1}{\thead{$\mathbf{#1}$}}
+\newcommand{\tdata}[1]{\input{./tab/#1.tex}}
 
 \renewcommand{\Xi}{X}
 \renewcommand{\vec}[1]{{\boldsymbol{#1}}}
