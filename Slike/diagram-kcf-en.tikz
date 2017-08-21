@@ -1,0 +1,58 @@
+\begin{tikzpicture}[]
+% LAYERS
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+\tikzset{
+    between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    }
+}
+
+% NODES
+\node (slika) [input] at (0,0) {Image patch\\$x^{p}$};
+\node (ucenje) [block, right= of slika] {Classifier training};
+\node (tarca) [block, below= of ucenje] {Updating target appearance\\$\hat{x}^p$};
+
+
+\node (podrocje) [block, right=1cm of tarca] {Cropped image area\\$z$};
+\node (razvrscanje) [block, above= of podrocje] {Region classification};
+\node (prcenter) [between=razvrscanje.south and podrocje.north] {};
+\node (iskanje) [block, right=2cm of prcenter] {Target search};
+
+
+\node (center) [between= podrocje.west and iskanje.east] {};
+\node (kd) [title, above=2cm of center] {Detection step};
+
+\coordinate (c) at ( ucenje.center |- kd);
+\node (ku) [title] at (c) {Training step};
+
+
+\node (rezultat) [output, right= of iskanje] {New image patch\\$x^{p+1}$};
+
+% arrows
+\draw [arrow] (slika) -- (ucenje);
+\draw [arrow] (ucenje) -- (tarca);
+\draw [arrow] (tarca) -- (podrocje);
+\draw [arrow] (podrocje) -- (razvrscanje);
+\draw [arrow] (razvrscanje.east) -- (iskanje.north west);
+\draw [arrow] (iskanje.south west) -- (podrocje.north east);
+\draw [arrow] (iskanje) -- (rezultat);
+
+\begin{pgfonlayer}{bg}
+	\node (ltop) [above = 1mm of ku] {};
+    \node (lleft) [left = 1mm of tarca] {};
+    \node (lbottom) [below= 1mm of tarca] {};
+    \node (lright) [right= 1mm of tarca] {};
+  	\node (l0) [] at ( lbottom -| lleft) {};
+    \node (l1) [] at (ltop -| lright) {};
+    \path[background] (l0) rectangle (l1);
+    
+    \node (rtop) [above = 1mm of kd] {};
+    \node (rright) [right = 1mm of iskanje] {};
+    \node (rbottom) [below = 1mm of podrocje] {};
+    \node (rleft) [left = 1mm of podrocje] {};
+    \node (r0) at (rbottom -| rleft) {};
+    \node (r1) at (rtop -| rright) {};
+    \path [background] (r0) rectangle (r1);
+\end{pgfonlayer}
+\end{tikzpicture}

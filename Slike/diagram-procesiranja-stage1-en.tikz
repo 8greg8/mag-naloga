@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+% LAYERS
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+\tikzset{
+    between/.style args={#1 and #2}{
+         at = ($(#1)!0.5!(#2)$)
+    }
+}
+
+% NODES
+\node (slika) [input] at (0,0) {Target area $x^p$\\on image $I(x,y)$};
+
+\node (of) [block, right= of slika] {Optical flow\\$\vec{w}$};
+\node (hoof) [block, right= of of] {HOOF descriptor\\$\vec{x}(t)$};
+
+
+\node (ucenje) [block, align=center, right=1cm of hoof] {\esvr\\RBF kernel};
+\node (kalman) [block, right= of ucenje] {Kalman filter};
+
+
+\node (rezultat) [output, right= of kalman] {Result};
+
+% arrows
+\draw [arrow] (slika) -- (of);
+\draw [arrow] (of) -- (hoof);
+\draw [arrow] (hoof) -- (ucenje);
+\draw [arrow] (ucenje) -- (kalman);
+\draw [arrow] (kalman) -- (rezultat);
+\end{tikzpicture}

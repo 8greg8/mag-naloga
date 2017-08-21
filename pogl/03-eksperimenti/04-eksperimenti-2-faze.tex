@@ -43,45 +43,37 @@ Med evaluacijo eksperimentov 1. faze smo ugotovili, da z regresijo \esvr pogosto
 
 Zaradi tovrstnih problemov smo v našem postopku regresijo \esvr zamenjali z \nusvr. Izkazalo se je, da tudi ta ne deluje, čeprav pri njej uporabljamo dodatni parameter $\nu$, s katerim v teoriji kontroliramo razmerje števila podpornih vektorjev, kot je opisano v poglavju \ref{sec:regresija-nusvr}. Chang et. al nam v delu \cite{chang2002training} parameter $\nu$ bolj natačno opiše kot spodnjo mejo razmerja števila podpornih vektorjev. Parameter $\nu$ tako v resnici ne predstavlja omejitve, s katero bi kaznovali prekomerno učneje modela. V ta namen smo razvili mrežno iskanje \nurbf, ki je predstavljeno v poglavju \ref{sec:nurbf}. 
 
-Razvito mrežno iskanje \nurbf uporablja regresijo \nusvr in jedro RBF, zato smo ju uporabljali tudi za učenje modelov. Celoten postopek krajše imenujemo kar \nurbf.
+Razvito mrežno iskanje uporablja regresijo \nusvr in jedro RBF, zato smo ju uporabljali tudi za učenje modelov. Celoten postopek krajše imenujemo kar \nurbf.
+
 
 \paragraph{Optimizacija parametrov}
 Najprej smo optimizirali parameter $\numax$ oziroma $\numax'$. Slednji predstavlja različico parametra $\numax$, s katerim določimo dejansko število podpornih vektorjev. Za tovrstno optimizacijo smo ponovno naučili \textit{mixed} modele iz 1. faze, pri čemer smo za mrežno iskanje uporabili nov postopek. Modele smo nato uporabili za testiranje na učnih podatkih terenskih eksperimentov 1. faze. S takim postopkom smo izluščili slabe \textit{squash} modele, ki bi oteževali pravilno evaluacijo rezultatov pri optimizaciji.
 
-Za optimizacijo smo uporabili HOOF-HAFA deskriptor in naslednje vrednosti parametrov: začetna vrednost $\nu$ $0.1$ in standardni odklon za Gaussov filter $\sigma=5$. Za $\numax'$ smo uporabili 400, 800 in 1200 podpornih vektorjev. 
+Za optimizacijo smo uporabili HOOF-HAFA deskriptor in naslednje vrednosti parametrov: začetna vrednost $\nu$ $0.1$, skaliranje značilk na intervalu $[-1,~1]$ in standardni odklon za Gaussov filter $\sigma=5$. Za $\numax$ smo uporabili \num{0.2}, \num{0.5} in \num{0.8}. Pri evaluaciji smo uporabili rezultate verifikacije in ne validacije, kot običajno. Pri validaciji smo dobili slabe rezultate iz katerih nismo mogli sklepati o izbiri optimalnega parametra.
 
-Z optimiziranim parametrom $\numax'=400$ smo \nurbf preizkusili še na elementarnih modelih. Tu smo za razliko od eksperimentov iz 1. faze poleg \nurbf uporabili razširjeni HOOF-HAFA deskriptor.
-
-
-
-
-
-
-
-\subsubsection{Jedro GHI}
-V poglavju \ref{sec:ghi} smo opisali, da je jedro GHI primerno za histogramske deskriptorje, zato smo ga tudi preizkusili na elementarnih modelih. Tu smo namesto prvotnega HOOF deskriptorja uporabili HOOF-HAFA deskriptor, ki daje boljše rezultate. Pri uporabi GHI jedra smo značilke skalirali na intervalu $[-1,~1]$ zaradi hitrejšega učenja. Učili smo z \esvr metodo. Rezultate smo filtrirali s prvotnim Kalmanovim filtrom.
-
-Zaradi že prej omenjenih težav s prevelikim številom podpornih vektorjev v modelih, smo pri klasičnem mrežnem iskanju sprva uporabili enostavno mero: faktor števila podpornih vektorjev $f_{nSV}$, ki je opisan z enačbo \eqref{eq:fnsv}. $n_v$ je število vzorcev in $n_{SV}$ je število podpornih vektorjev. S to mero določimo procentualno vrednost vektorjev, ki lahko postanejo podporni. Zaradi tega faktorja optimizacija parametra regresije ni bila potrebna. Pri testiranju smo uporabili vrednost $f_{nSV} = 0.01$.
-
-
-\begin{equation}
-f_{nSV} = \frac{n_v - n_{SV}}{n_v}
-\label{eq:fnsv}
-\end{equation} 
-
-Zgoraj opisana metoda ni delovala zato smo namesto faktorja $f_{nSV}$ uporabili postopek \nughi. Gre za prilagojeno različico postopka \nurbf, kjer smo uporabili GHI jedro. Dodatna razlika je še v tem, da predikcij pri križni validaciji nismo filtrirali, ker smo pri rezultatih uporabili Kalmanov filter. Prav tako smo s tem zagotovili zadovoljiv čas reševanja problema.
-
-
-
+\paragraph{Primerjava z elementarnim postopkom 1. faze}
+Z optimiziranim parametrom $\numax=0.5$, smo \nurbf preizkusili še na elementarnih modelih, pri čemer nismo upoštevali izrezovanja slik. Ostali parametri so enaki kot pri optimizaciji
 
 
 
 \subsubsection{Optimizacija Gaussovega filtra}
 Pri optimizaciji Gaussovega filtra smo določili optimalni standardni odklon $\sigma$ z uporabo dveh metrik, in sicer: koren srednje kvadratične napake (RMSE) in razmerje med signalom in šumom (SNR). Pri RMSE metriki smo določili napako med učnimi vzorci in njihovo predikcijo. Pri SNR metriki smo za signal uporabili referenčne učne vzorce. Za šum smo uporabili rezidualni ali preostali šum. Tega smo dobili z odštevanjem filtriranih vzorcev od referenčnih. SNR metrika tako določa uspešnost izločevanja šuma, RMSE metrika pa pravilnost določevanja kateri podatki spadajo v signal in kateri v šum.
 
+Teste smo izvajali na elementarnih eksperimentih 1. faze brez upoštevanja izrezovanja slik, pre čemer smo uporabili HOOF-HAFA deskriptor. Značilke smo skalirali na intervalu $[0,~1]$, ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za postopek učenja smo izbrali \nurbf z $\numax=0.5$ in $\sigma = 1$. Testirali smo naslednje standardne odklone Gaussovega filtra: $1, 3, 5, 11, 21, 31$ in $51$. 
 
-Teste smo izvajali na vseh eksperimentih 1. sklopa, pri čemer smo uporabili \nurbf mrežno iskanje s \SI{50}{\%} podpornih vektorjev. Za filtriranje pri mrežnem iskanju smo izbrali najmanjši filter s $\sigma = 1$. Testirali smo naslednje standardne odklone Gaussovega filtra: $1, 3, 5, 11, 21, 31$ in $51$. 
 
+
+\subsubsection{Jedro GHI}
+V poglavju \ref{sec:ghi} smo opisali, da je jedro GHI primerno za histogramske deskriptorje, zato smo ga tudi preizkusili na elementarnih modelih brez upoštevanja izrezovanja slik. Namesto prvotnega HOOF deskriptorja smo uporabili HOOF-HAFA deskriptor, ki daje boljše rezultate. Pri uporabi GHI jedra smo značilke skalirali na intervalu $[-1,~1]$ zaradi hitrejšega učenja. Uporabili smo postopek \nughi. Gre za prilagojeno različico postopka \nurbf, kjer smo uporabili GHI jedro. %Dodatna razlika je še v tem, da predikcij pri križni validaciji nismo filtrirali. S tem zagotovili zadovoljiv čas reševanja problema. 
+Pri postopku smo uporabili $\numax=0.5$ in $\sigma=5$. Rezultate smo filtrirali s prvotnim Gaussovim filtrom $\sigma=5$.
+
+%Zaradi že prej omenjenih težav s prevelikim številom podpornih vektorjev v modelih, smo pri klasičnem mrežnem iskanju sprva uporabili enostavno mero: faktor števila podpornih vektorjev $f_{nSV}$, ki je opisan z enačbo \eqref{eq:fnsv}. $n_v$ je število vzorcev in $n_{SV}$ je število podpornih vektorjev. S to mero določimo procentualno vrednost vektorjev, ki lahko postanejo podporni. Zaradi tega faktorja optimizacija parametra regresije ni bila potrebna. Pri testiranju smo uporabili vrednost $f_{nSV} = 0.01$.
+
+
+%\begin{equation}
+%f_{nSV} = \frac{n_v - n_{SV}}{n_v}
+%\label{eq:fnsv}
+%\end{equation} 
 
 
 
@@ -119,7 +111,7 @@ Velikost diagonale na laboratorijskih testih uporabljamo kot referenco. To pa za
 	\label{tab:diag}
 \end{table}
 
-Pri testiranju smo uporabili parameter $\numax$ \SI{50}{\%} podpornih vektorjev. Za Gaussov filter smo uporabili $\sigma=5$. Značilke smo skalirani na intervalu $[0,~1]$. Za modele z diagonalo smo uporabili parameter $f_{A}=381.266$. Pri učenju smo uporabili optimalne vrednosti parametrov, ki so prikazane v tabeli \ref{tab:diag}. Za evaluacijo rezultatov smo uporabili predikcije testnih vzorcev z modeli s zakasnitvijo.
+Pri testiranju smo uporabili parameter $\numax = 0.5$ in $\sigma=5$. Za filtriranje meritev srčnega utripa smo uporabili $\sigma=16$ za rezultate pa optimalno vrednost $\sigma=5$. Značilke smo skalirali na intervalu $[0,~1]$,  ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za modele z diagonalo smo uporabili parameter $f_{A}=381.266$. Pri učenju smo uporabili optimalne vrednosti parametrov, ki so prikazane v tabeli \ref{tab:diag}. Za evaluacijo rezultatov smo uporabili predikcije testnih vzorcev z modeli s zakasnitvijo.
 
 
 
@@ -347,7 +339,7 @@ Za testne vzorce vzamemo vsak 3. vzorec fiziološkega parametra in slike iz posa
 Za učne vzorce izberemo prvih \SI{70}{\%} vzorce in za testne naslednjih \SI{30}{\%}. Rezultate vseh 6 meritev povprečimo.
 
 \paragraph{Protokol 3.}
-Uporabimo protokol 1, pri čemer učimo na prvih štirih meritvah in testiramo na zadnjih dveh. Rezultata povprečimo.
+Uporabimo protokol 1, pri čemer učimo na prvih štirih meritvah in testiramo na zadnjih dveh. Rezultatov ne povprečimo.
 
 \subsubsection{Določitev zakasnitve fiziološkega odziva}
 Določitve zakasnitve fiziološkega odziva smo se, glede na eksperimente 1. faze, tu lotili nekoliko drugače. Na podlagi protokola izvajanja meritev, smo pridobili podatke eno minutnega mirovanja posameznega merjenca z vzorčno frekvenco \SI{0.2}{\hertz}. Kljub temu, da je signal v stacionarnem stanju, je nihajoč zaradi narave fiziologije. Signal mirovanja smo interpolirali na vzorčno frekvenco \SI{1}{\hertz}. Določili smo mu srednjo vrednost in vrednost treh standardnih odklonov. S tem smo dobili interval nedoločenosti, v katerem ne moremo določiti ali je pri spremembi amplitude signala prišlo zaradi fizioloških dejavnikov ali zaradi dejanskega odziva na vzbujalni signal. 

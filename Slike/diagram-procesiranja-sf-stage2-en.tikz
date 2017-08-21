@@ -1,0 +1,34 @@
+\begin{tikzpicture}
+% LAYERS
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+\tikzset{
+	between/.style args={#1 and #2}{
+		at = ($(#1)!0.5!(#2)$)
+	}
+}
+
+% NODES
+\node (slika) [input] at (0,0) {Image\\$I(x,y)$};
+\node (tracker) [block, right= of slika] {DS-KCF\\tracker};
+%\node (tarca) [block, right= of tracker] {Target area\\$x^{p}$};
+
+\node (of) [block, right= of tracker] {Scene flow\\$\vec{\mu}$};
+\node (hoof) [block, right= of of] {HOOF-HAFA\\descriptors\\$\vec{x}(t)$};
+
+
+\node (ucenje) [block, right=of hoof] {\nurbf};
+\node (kalman) [block, right= of ucenje] {Gaussian\\filter};
+
+
+\node (rezultat) [output, right= of kalman] {Results};
+
+% arrows
+\draw [arrow] (slika) -- (tracker);
+\draw [arrow] (tracker) -- (of);
+%\draw [arrow] (tarca) -- (of);
+\draw [arrow] (of) -- (hoof);
+\draw [arrow] (hoof) -- (ucenje);
+\draw [arrow] (ucenje) -- (kalman);
+\draw [arrow] (kalman) -- (rezultat);
+\end{tikzpicture}

@@ -1,0 +1,28 @@
+\begin{tikzpicture}
+\node (depth) [input] at (0,0) {Depth image};
+\node (rgb) [input, below= of depth] {RGB image};
+\node (segment) [block, minimum width=1cm, right= of depth] {Depth image segmentation};
+\node (feature) [block, below= of segment] {Feature extraction};
+\node (kcf) [block, minimum width=4cm, minimum height=2cm, right=2cm of feature] {KCF};
+\node (scale) [block, above left=5mm of kcf.north] {Scale analysis};
+\node (shape) [block, above right=5mm of kcf.north] {Shape analysis};
+\node (occlusion) [block, below left=5mm of kcf.south] {Occlusion analysis};
+\node (kalman) [block, below right=5mm of kcf.south] {Kalman filter};
+
+% arrows
+\draw [vec] (depth) -- (segment);
+\draw [vec] (rgb) -- (feature);
+\draw [vec] (depth.south east) -- (feature.north west);
+
+\draw [vec] (segment) -- (scale);
+\draw [vec] (segment.north east) to[out=45, in=90] (shape.north);
+\draw [vec] (segment.south east) -- (occlusion);
+
+\draw [vec] (feature) -- (kcf);
+
+\draw [vec, <->] (scale) -- (kcf);
+\draw [vec, <->] (shape) -- (kcf);
+\draw [vec, <->] (occlusion) -- (kcf);
+\draw [vec, <->] (kalman) -- (kcf);
+\draw [vec, <->] (occlusion) -- (kalman);
+\end{tikzpicture}

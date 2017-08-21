@@ -310,7 +310,7 @@ As can be seen in the Table \ref{tab:initial-models-validation}, we get relative
 		\tdata{rocni-izrez}
 		\bottomrule
 	\end{tabular}
-	\caption{Crop normal + mixed. Crop rezultati ne dajejo občutno boljših rezultatov. Mogoče premajno kropiranje?. Še vseeno uporabili, ker se teoretično znebimo šuma}
+	\caption{Average crop and average normal!. Crop rezultati ne dajejo občutno boljših rezultatov. Mogoče premajno kropiranje?. Še vseeno uporabili, ker se teoretično znebimo šuma}
 	\label{tab:rocni-izrez}
 \end{table}
 
@@ -629,20 +629,6 @@ Združevanje s značilkami se ni obneslo, zato smo to metodo opustili. Primer ne
 
 
 
-\subsubsection{Optimizacija mrežnega iskanja \texorpdfstring{$\nu$}{nu}-RBF}
-
-
-
-
-
-\subsubsection{Test mrežnega iskanja \texorpdfstring{$\nu$}{nu}-RBF}
-
-
-
-
-
-\subsubsection{Jedro GHI}
-
 
 
 
@@ -730,24 +716,77 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 \end{figure}
 
 
+\subsubsection{Optimizacija mrežnega iskanja \texorpdfstring{$\nu$}{nu}-RBF}
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{nu-max}
+		\bottomrule
+	\end{tabular}
+	\caption{Nu max Verifikacija!!!! -> Mixed je iz cropped sestavljen}
+	\label{tab:nu-max}
+\end{table}
 
+
+
+
+\subsubsection{Test mrežnega iskanja \texorpdfstring{$\nu$}{nu}-RBF}
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{rbf-nu}
+		\bottomrule
+	\end{tabular}
+	\caption{Test na normal, ki ni croppan!}
+	\label{tab:rbf-nu}
+\end{table}
+
+
+
+
+
+\subsubsection{Jedro GHI}
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{ghi}
+		\bottomrule
+	\end{tabular}
+	\caption{Ghi vmax800}
+	\label{tab:ghi}
+\end{table}
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.6\linewidth]{best-results-ghikernel-scale-nu800-normal-sideview-sideview-sl}
+	\caption{Ghi best - eem-sv-lag(sv)}
+	\label{fig:ghi}
+\end{figure}
 
 
 
 \subsubsection{Normalizacija HAFA deskriptorja}
 
-\begin{table}[!htb]
+\begin{table}[!htbp]
 	\centering
-	\begin{tabular}{l S[table-format=1.3] S[table-format=2.3] S[table-format=2.3] S[table-format=2.2]}
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\thead{$\mathbf{Model}$} & \thead{$\mathbf{r}$} & \thead{RAE} & \thead{RRSE} & \thead{nSV [\%]}\\
-		\midrule%nSV
-		NORMAL & 0.001 & 30.887 & 28.416 & 14.31 \\
-		DIAG & -0.151 & 11.217 & 11.380 & 14.31 \\
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{diag}
 		\bottomrule
 	\end{tabular}
-	\caption[]{}
-	\label{tab:hafa-norm}
+	\caption{Normal vs diag}
+	\label{tab:norm-hafa}
 \end{table}
 
 \begin{figure}[!htb]
@@ -769,16 +808,19 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 
 
 \subsection{Laboratorijski eksperiementi}
-
-
-
-
-
-
-
-
-
 \subsubsection{Protokol 1}
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{stage2-lab-1-mean}
+		\bottomrule
+	\end{tabular}
+	\caption{Ghi vmax800}
+	\label{tab:stage2-lab-1-mean}
+\end{table}
 
 
 
@@ -791,7 +833,18 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 
 
 \subsubsection{Protokol 2}
-
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
+		\toprule
+		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
+		\midrule
+		\tdata{stage2-lab-2-mean}
+		\bottomrule
+	\end{tabular}
+	\caption{Ghi vmax800}
+	\label{tab:stage2-lab-2-mean}
+\end{table}
 
 
 
