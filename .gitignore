@@ -19,3 +19,4 @@
 # ignore only main pdf
 main.pdf
 *.txss
+*.orig
