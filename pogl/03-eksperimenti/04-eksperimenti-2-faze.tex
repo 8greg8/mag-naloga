@@ -1,7 +1,7 @@
 \section{Eksperimenti 2. faze}
 Z laboratorijskimi eksperimenti v 1. fazi smo dobili zadovoljive rezultate, težave pa so nastale pri uporabi postopka na terenu. Zato smo v 2. fazi optimizirali posamezne segmente elementarnega postopka estimacije fizioloških parametrov. Te smo tudi uporabili v končni preiskavi. V preliminarnih testih so opisani tudi drugi postopki, ki smo jih potrebovali zaradi uporabe Kinect kamer.
 
-Za statistično bolj oprijemljive rezultate smo v laboratorijskih in terenskih eksperimentih 2. faze uporabili 7 različnih merjencev z oznakami: SUBJ1, SUBJ2, SUBJ4, SUBJ7, SUBJ8, SUBJ9, SUBJ10. 
+Za statistično bolj oprijemljive rezultate smo v laboratorijskih in terenskih eksperimentih 2. faze uporabili 7 različnih merjencev  ($srednja vrednost \pm SD$: starost $16.29 \pm 2.29$ let, velikost $175.37 \pm 11.60$ \si{\cm}, teža $59.36 \pm 12.08$ \si{\kg}, spol moški, $hr_{max}$ $203.71 \pm 2.29$ \si{bpm}, $VO_2max$ $3144 \pm 629.27$ \si{\ml\per\min} ) z oznakami: SUBJ1, SUBJ2, SUBJ4, SUBJ7, SUBJ8, SUBJ9, SUBJ10. 
 
 Merjenca SUBJ4 smo uporabili samo v laboratorijskih eksperimentih, ker pri terenskih eksperimentih ni bil prisoten. Namesto njega smo v terenskih eksperimentih uporabili merjenca SUBJ10. V laboratorijskih eksperimentih merjenca SUBJ10 nismo upoštevali zaradi napak pri zajemu meritev.
 
@@ -325,7 +325,7 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom DS-KCF. Za tako izbrano 
 	\label{fig:diagram-procesiranja-sf-stage2}
 \end{figure}
  
-Modele obeh postopkov smo učili s postopkom \nurbf, kjer smo za Gaussov filter uporabili $\sigma=5$ in za največje število podpornih vektorjev $\numax =0.5$ (\SI{50}{\%} podpornih vektorjev). Podobno kot v eksperimentih 1. faze smo tudi tu naučili \num{6} elementarnih modelov, in sicer: \textit{eem} modele, ki predvidevajo porabo energije v \si{\kcal\per\min}, \textit{sv} modele za stransko kamero in \textit{bv} modele za hrbtno kamero ter \textit{lag} modele z upoštevanjem časovne zakasnitve.
+Modele obeh postopkov smo učili s postopkom \nurbf, kjer smo za Gaussov filter uporabili $\sigma=5$ in za največje število podpornih vektorjev $\numax =0.5$ (\SI{50}{\%} podpornih vektorjev). Podobno kot v eksperimentih 1. faze smo tudi tu naučili \num{6} elementarnih modelov, in sicer: \textit{eem} modele, ki predvidevajo porabo energije v \si{\kcal\per\min}, \textit{sv} modele za stransko kamero in \textit{bv} modele za hrbtno kamero. %ter \textit{lag} modele z upoštevanjem časovne zakasnitve.
 
 Vse tipe eksperimentov smo križno testirali glede na enak tip eksperimenta, le z drugim zornim kotom kamere. Uporabljen zorni kot kamere za križno testiranje je v imenih modelov zapisan v oklepajih.  Rezultate smo filtrirali z Gaussovim jedrom $\sigma=5$. 
 
@@ -341,6 +341,7 @@ Za učne vzorce izberemo prvih \SI{70}{\%} vzorce in za testne naslednjih \SI{30
 \paragraph{Protokol 3.}
 Uporabimo protokol 1, pri čemer učimo na prvih štirih meritvah in testiramo na zadnjih dveh. Rezultatov ne povprečimo.
 
+\begin{comment}
 \subsubsection{Določitev zakasnitve fiziološkega odziva}
 Določitve zakasnitve fiziološkega odziva smo se, glede na eksperimente 1. faze, tu lotili nekoliko drugače. Na podlagi protokola izvajanja meritev, smo pridobili podatke eno minutnega mirovanja posameznega merjenca z vzorčno frekvenco \SI{0.2}{\hertz}. Kljub temu, da je signal v stacionarnem stanju, je nihajoč zaradi narave fiziologije. Signal mirovanja smo interpolirali na vzorčno frekvenco \SI{1}{\hertz}. Določili smo mu srednjo vrednost in vrednost treh standardnih odklonov. S tem smo dobili interval nedoločenosti, v katerem ne moremo določiti ali je pri spremembi amplitude signala prišlo zaradi fizioloških dejavnikov ali zaradi dejanskega odziva na vzbujalni signal. 
 
@@ -386,7 +387,7 @@ Na podlagi slik \ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno mer
 	\caption[Prikaz določitve zakasnitve za posameznega merjenca]{Prikaz določitve zakasnitve za posameznega merjenca. Zakasnitev za posamezno meritev smo določili kot časovni interval od trenutka spremembe hitrosti tekalne steze do trenutka, ko je bila vrednost fiziološkega parametra prvič nad intervalom nedoločenosti. Interval nedoločenosti je prikazan z zelenimi horizontalnimi linijami. Rumeni vzorci so vzorci enominutnega mirovanja. Sledijo modri vzorci pri hoji na tekalni stezi s hitrostjo \SI{5}{\km\per\hour}. Spremenba hitrosti tekalne steze je prikazana z rdečim signalom.}
 	\label{fig:lag-estimation-stage2}
 \end{figure}
-
+\end{comment}
 
 
 
