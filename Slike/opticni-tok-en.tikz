@@ -24,7 +24,7 @@
     \draw [plane] (lb) -- (lt) -- (rt) -- (rb) -- cycle;
     \draw [dash] (ol) -- (or);
     \draw [dash] (ob) -- (ot);
-    \node [xshift=3mm, yshift=5mm] at (lb) {$\mathit{\Omega}$};
+    \node [xshift=3mm, yshift=5mm] at (lb) {$\varOmega$};
     % Draw the rest of axis
     \draw [axis] (oo) -- (z) node [below] {$z$};
     
