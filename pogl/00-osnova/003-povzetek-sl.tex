@@ -1,11 +1,9 @@
 \povzetek
+Merilne naprave indirektne kalorimetrije so dokaj drage naprave z masko, ki mora biti fiksirana na nos in usta, zato niso primerne za široko uporabo. Za potrebe terenskih preiskav so se razvile nekalorimetrične metode, ki se osredotočajo na opazovanje kinematike. Mednje sodijo kontakne in brezkontakne metode. Kontakne metode so dokaj nenatančne, prav tako pa omejujejo gibanje in s tem posredno vplivajo na rezultat. Pri brezkontaktnih metodah dominirajo metode analize video posnetkov in gradnja metaboličnih modelov. Te so zapletene in dolgotrajne. Prav tako so omejene na specifično gibanje. Nobena od brezkontaktnih metod estimacije energijske porabe ne izkorišča polja gibanja in njenih približkov, ki najbolj optimalno opisuje kinematiko gibanja.
+
+V tem delu smo raziskali novo brezkontakno metodo za estimacijo fizioloških parameterov iz gibanja. Za določitev parametrov smo uporabljali algoritme optičnega in prostorskega toka, ki smo jih kombinirali s kombinacijami HOOF in HAFA deskriptorjev. S tem smo zagotovili robustnost algoritmov. Za predikcijo energijske porabe in srčnega utripa smo uporabili SVM regresijo, pri tem pa smo razvili \nurbf postopek mrežnega iskanja za optimizacijo. Za izločevanje šuma iz ozadja in gibanja neopazovanih objektov smo uporabljali sledilnike ter Kalmanov in Gaussov filter.
+
+Rezultati kažejo na to, da so izbrani fiziološki parametri \emph{observabilni}. Predlagano metodo lahko uporabimo z različnimi sistemi za vizualno zaznavanje z različnih zornih kotov. Boljše rezultate lahko dobimo z uporabo posnetkov iz večih zornih kotov. Elementarni modeli iz prve faze eksperimentov niso primerni za terensko uporabo. Pri učenju modelov moramo biti pozorni na akumulacijo utrujenosti. Za laboratorijske preiskave je bolje, če uporabimo metode z optičnim tokom. Na terenu dobimo najboljše rezultate z uporabo prostorskega toka.
 
 
-
-Povzetek se naj pri?ne z opisom in definicijo problema. Nadaljuje se
-naj z opisom uporabljenih metod in postopkov, ki so privedli do
-re?itve. Na koncu naj bodo opisani rezultati dela in glavni zaklju?ki, ki iz rezultatov
-izhajajo.
-
-
-\kljucnebesede beseda1, beseda2, beseda3
+\kljucnebesede intenzivnost fizične aktivnosti, energijska poraba, srčni utrip, optični tok, prostorski tok, strojno učenje z metodo podpornih vektorjev, RBF jedro, KCF sledilnik, Kinect senzor, squash

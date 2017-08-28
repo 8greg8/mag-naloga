@@ -62,7 +62,7 @@ Pri optimizaciji Gaussovega filtra smo določili optimalni standardni odklon $\s
 Teste smo izvajali na elementarnih eksperimentih 1. faze brez upoštevanja izrezovanja slik, pre čemer smo uporabili HOOF-HAFA deskriptor. Značilke smo skalirali na intervalu $[0,~1]$, ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za postopek učenja smo izbrali \nurbf z $\numax=0.5$ in $\sigma = 1$. Testirali smo naslednje standardne odklone Gaussovega filtra: $1, 3, 5, 11, 21, 31$ in $51$. 
 
 
-
+\begin{comment}
 \subsubsection{Jedro GHI}
 V poglavju \ref{sec:ghi} smo opisali, da je jedro GHI primerno za histogramske deskriptorje, zato smo ga tudi preizkusili na elementarnih modelih brez upoštevanja izrezovanja slik. Namesto prvotnega HOOF deskriptorja smo uporabili HOOF-HAFA deskriptor, ki daje boljše rezultate. Pri uporabi GHI jedra smo značilke skalirali na intervalu $[-1,~1]$ zaradi hitrejšega učenja. Uporabili smo postopek \nughi. Gre za prilagojeno različico postopka \nurbf, kjer smo uporabili GHI jedro. %Dodatna razlika je še v tem, da predikcij pri križni validaciji nismo filtrirali. S tem zagotovili zadovoljiv čas reševanja problema. 
 Pri postopku smo uporabili $\numax=0.5$ in $\sigma=5$. Rezultate smo filtrirali s prvotnim Gaussovim filtrom $\sigma=5$.
@@ -74,7 +74,7 @@ Pri postopku smo uporabili $\numax=0.5$ in $\sigma=5$. Rezultate smo filtrirali 
 %f_{nSV} = \frac{n_v - n_{SV}}{n_v}
 %\label{eq:fnsv}
 %\end{equation} 
-
+\end{comment}
 
 
 \subsubsection{Normalizacija HAFA deskriptorjev}
