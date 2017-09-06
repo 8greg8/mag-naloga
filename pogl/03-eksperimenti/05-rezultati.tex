@@ -634,13 +634,13 @@ Rezultati povrprečnih vrednosti uporabljenih metrik so vidni v tabeli \ref{tab:
 		\toprule
 		\thead{$\mathbf{\sigma}$} & \thead{RMSE} & \thead{SNR [dB]}  \\
 		\midrule
-		1 & 4.8215 & 25.2001 \\
-		3 & 6.3773 & 26.594 \\
-		5 & 6.6076 & 26.9396 \\
-		11 & 6.7148 & 27.243\\
-		21 & 6.7486 & 27.4297\\
-		31 & 6.7634 & 27.5411\\
-		51 & 6.7812 & 27.7062\\
+		1 & 4.7764 & 24.1892\\
+		3 & 6.3162 & 25.5183\\
+		5 & 6.5385 & 25.8459\\
+		11 & 6.6457 & 26.1244\\
+		21 & 6.6794 & 26.2933\\
+		31 & 6.6951 & 26.3922\\
+		51 & 6.7155 & 26.5345\\
 		\bottomrule
 	\end{tabular}
 	\caption[Povprečne vrednosti RMSE in SNR metrik pri optimizaciji parametra $\sigma$ Gaussovega filtra]{Povprečne vrednosti RMSE in SNR metrik pri optimizaciji parametra $\sigma$ Gaussovega filtra. Najmanjši standardni odklon ima najmanjšo napako, vendar je tudi filtriranje majhno. Pri $\sigma=3$ in $\sigma=5$ so še opazne razlike pri filriranju. Za višje vrednosti ni več opazne razlike, vendar pa se napaka povečuje. $\sigma=5$ je tako optimalna vrednosti parametra.}
@@ -707,7 +707,7 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 
 
 \subsubsection{Rezultati mrežnega iskanja \texorpdfstring{$\nu$}{nu}-RBF}
-Rezultati optimizacije parametra $\numax$ so predstavljeni v tabeli \ref{tab:nu-max}. Pri validaciji ni opaznih sprememb med različnim parametrom $\numax$ zaradi slabih modelov, zato smo preverili verifikacijo. Pri verifikaciji lahko opazimo, da se s povečevanjem parametra povečuje število podpornih vektorjev, vendar nSV nikoli ne doseže željene vrednosti $\numax$. Kljub podoptimalnosti modelov, z višjimi vrednostmi $\numax$ dobimo boljše rezultate. Razlike med $\numax=0.5$ in $\numax0.8$ so minimalne zato lahko zaključimo, da potrebujemo za dobro delovanje vsaj $\numax=0.5$. 
+Rezultati optimizacije parametra $\numax$ so predstavljeni v tabeli \ref{tab:nu-max}. Pri validaciji ni opaznih sprememb med različnim parametrom $\numax$ zaradi slabih modelov, zato smo preverili verifikacijo. Pri verifikaciji lahko opazimo, da se s povečevanjem parametra povečuje število podpornih vektorjev, vendar nSV nikoli ne doseže željene vrednosti $\numax$. Kljub podoptimalnosti modelov, z višjimi vrednostmi $\numax$ dobimo boljše rezultate. Razlike med $\numax=0.5$ in $\numax=0.8$ so minimalne zato lahko zaključimo, da potrebujemo za dobro delovanje vsaj $\numax=0.5$. 
 
 \begin{table}[!htbp]
 	\centering
@@ -841,7 +841,7 @@ S protokolom 3 smo želeli preveriti, če lahko uporabimo generaliziran model za
 		\toprule
 		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
 		\midrule
-		\tdata{stage2-lab-3}
+		%\tdata{stage2-lab-3}
 		\bottomrule
 	\end{tabular}
 	\caption{Validacijske metrike za protokol 3 druge faze laboratorijskih eksperimentov.}
@@ -853,13 +853,13 @@ Najboljši rezultati za optični in prostoski tok, so predstavljeni na sliki \re
 \begin{figure}[!htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{best-results-stage3-lab-of-3-subj6-sideview-sideview-normal-sl}
+		%\includegraphics[width=\columnwidth]{best-results-stage3-lab-of-3-subj6-sideview-sideview-normal-sl}
 		\caption{Rezultati eem-sv-of-subj9(sv) z optičnim tokom}
 		\label{fig:lab-of-3}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{best-results-stage3-lab-sf-3-subj6-sideview-sideview-normal-sl}
+		%\includegraphics[width=\columnwidth]{best-results-stage3-lab-sf-3-subj6-sideview-sideview-normal-sl}
 		\caption{Rezultati eem-sv-sf-subj9(sv) s prostorskim tokom}
 		\label{fig:lab-sf-3}
 	\end{subfigure}
@@ -918,13 +918,13 @@ S protokolom 3 smo želeli preveriti, če lahko uporabimo generaliziran model za
 \begin{figure}[!htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{best-results-stage3-field-of-3-subj6-backview-backview-normal-sl}
+		\includegraphics[width=\columnwidth]{best-results-stage3-final-field-of-3-subj6-backview-backview-normal-val-sl}
 		\caption{Rezultati eem-bv-of-subj9(bf) z optičnim tokom}
 		\label{fig:field-of-3}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{best-results-stage3-field-sf-3-subj6-backview-backview-normal-sl}
+		\includegraphics[width=\columnwidth]{best-results-stage3-final-field-sf-3-subj6-backview-backview-normal-val-sl}
 		\caption{Rezultati flow eem-bv-sf-subj9(bv) s prostorskim tokom}
 		\label{fig:field-sf-3}
 	\end{subfigure}
