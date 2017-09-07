@@ -9,16 +9,16 @@
 }
 
 % NODES
-\node (slika) [input] at (0,0) {Slika $I(x,y)$};
-\node (tracker) [block, align=center, right= of slika] {DS-KCF\\sledilnik};
-\node (tarca) [block, right= of tracker] {Področje tarče $x^{p}$};
+\node (slika) [input] at (0,0) {Slika\\$I(x,y)$};
+\node (tracker) [block, right= of slika] {DS-KCF\\sledilnik};
+\node (tarca) [block, right= of tracker] {Področje\\ tarče $x^{p}$};
 
-\node (of) [block, below= of tarca] {Prostorski tok};
-\node (hoof) [block, align=center, left= of of] {HOOF-HAFA\\deskriptorji};
+\node (of) [block, right= of tarca] {Prostorski\\ tok};
+\node (hoof) [block, right= of of] {HOOF-HAFA\\deskriptorji};
 
 
-\node (ucenje) [block, align=center, left=of hoof] {\nurbf};
-\node (kalman) [block, below= of ucenje] {Gaussov filter};
+\node (ucenje) [block, right=of hoof] {\nurbf};
+\node (kalman) [block, right= of ucenje] {Gaussov\\ filter};
 
 
 \node (rezultat) [output, right= of kalman] {Rezultat};

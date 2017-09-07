@@ -1,9 +1,7 @@
 \chapter{Rezultati}\label{sec:rezultati}
-All energy consumption and heart rate models were validated on previously described test samples. For comparison between the different models we have chosen validation measures: correlation coefficient (CORR), relative absolute error (RAE) and root relative square error (RRSE) \cite{witten2005data}. We have also added ratio between number of support vectors and number of training data (nSV). The higher the value of the CORR the better, with RAE, RRSE and nSV is other way around.
+Vse modele energijske porabe in srčnega utripa smo validirali na predhodno opisanih testnih vzorcih. Za primerjavo med različnimi modeli smo izbrali validacijske metrike: korelacijski koeficient (CORR), relativna absolutna napaka (RAE) in koren relativne kvadratne napake (RRSE) \cite{witten2005data}. Dodali smo tudi razmerje med številom podpornih vektorjev in številom učnih vzorcev (nSV). Višja je vrednost CORR predstavlja boljši rezultat, z RAE, RRSE in nSV pa je ravno obratno.
 
-Models were also evaluated with cross testing. This testing was done only by the type of input data (side-view or back-view). \textit{sv} models, that were made with learning samples from side-view camera were first tested with testing samples from side-view camera and then with back-view camera. Hereafter tests with input data from side-view camera are marked with \textit{sv} in brackets and tests with input data from back-view camera are marked with \textit{bv} in brackets.
-
-
+Modele smo ovrednotili tudi z navzkrižnim testiranjem. Testiranje je bilo opravljeno za stranski ali hrbtni pogled. \textit{sv} modeli, ki smo jih izdelali z učnimi vzorci iz stranske kamere, smo najprej preizkusili z učnimi vzorce iz stranske kamere in nato z vzorci iz hrbtne kamere. Navzkrižni testi imajo v oklepajih določen tip kamere, ki smo ga uporabili za vhodne podatke pri testiranju.
 
 
 
@@ -28,7 +26,7 @@ Models were also evaluated with cross testing. This testing was done only by the
 \subsubsection{Optimizacija HOOF deskriptorjev}\label{sec:rezultati-optimizacija-hoof}
 Parameter $N_{HOOF}$ smo določili na podlagi rezultatov evaluacije v tabeli \ref{tab:nhoof} in grafov korelacije med referenčnimi podatki in predikcijo \ref{fig:corr-hoof}.
 
-V tabeli \ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rezultati bistveno ne razlikujejo. Najbojlši rezultate nam sicer daje $120$ stolpcev, vendar pa smo za potrebe naše metode uporabili $N_{HOOF}=60$, ki je ravno tako dal zadovoljive rezultate. S takim številom smo zagotovili dobro delovanje glede na minimalno vrednost, še vseeno pa ne gre za tako veliko število, ko bi do izraza prišle amplitude šumnih vektorjev.
+V tabeli \ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rezultati bistveno ne razlikujejo. Najboljše rezultate nam sicer daje $120$ stolpcev, vendar pa smo za potrebe naše metode uporabili $N_{HOOF}=60$, ki je ravno tako dal zadovoljive rezultate. S takim številom smo zagotovili dobro delovanje glede na minimalno vrednost, še vseeno pa ne gre za tako veliko število, ko bi do izraza prišle amplitude šumnih vektorjev.
 
 \begin{table}[!htbp]
 	\centering
@@ -229,8 +227,7 @@ Rezultati testiranja so prikazani v tabeli \ref{tab:region-overlap}. Za izbrane 
 Na sliki \ref{fig:tracker-visual} lahko vidimo primer delovanja sledilnikov za oba posnetka. Referenčni igralec, ki mu morajo slediti ima rumeno majico. Za posnetek \textit{handball1} je predstavljena 15. slika, za posnetek \textit{handball2} pa 111. slika. Rezultati v tabeli \ref{tab:region-overlap} se skladajo z opažanji na sliki \ref{fig:tracker-visual}.
 
 \begin{figure}[!htbp]
-	\centering
-	
+	\centering	
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\includegraphics[width=\columnwidth]{handball1-example.png}
 		\caption{15. slika posnetka \textit{handball1}.}
@@ -256,8 +253,7 @@ Na sliki \ref{fig:tracker-visual} lahko vidimo primer delovanja sledilnikov za o
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.6\columnwidth]{preliminary-tracker-squash.png}
-	\caption{}
-	\caption[Primer delovanja sledilnikov za squash posnetek]{Primer delovanja sledilnikov za squash posnetek. Gre za 41. sliko posnetka \cite{squashtv2014squash}, pri čemer smo uporabili KCF in CORR algoritem. Sledilnika sta morala slediti igralcu z modro majico.}
+	\caption[Primer delovanja sledilnikov za \textit{squash} posnetek]{Primer delovanja sledilnikov za \textit{squash} posnetek. Gre za 41. sliko posnetka \cite{squashtv2014squash}, pri čemer smo uporabili KCF in CORR algoritem. Sledilnika sta morala slediti igralcu z modro majico.}
 	\label{fig:squash-tracker-visual}
 \end{figure}
 
@@ -282,7 +278,7 @@ Boljše delovanje KCF je razumljivo, saj prvi testi temeljijo na posnetkih rokom
 
 
 \subsection{Observabilnost}
-Rezultate observabilnosti lahko vidimo v tabeli \ref{tab:observabilnost}. Validacijske metrike so povprečne vrednosti \textit{sv} in \textit{bv} modelov, brez križnega testiranja.  Personov korelacijski koeficient smo povprečili s Fisherjevo $z$ transformacijo. Tako energijska poraba kot srčni utrip, imata visoko pozitivno korelacijo, kar pomeni, da sta oba parametra observabilna. \textit{hr} modeli se po CORR rezultatih bolje ujemajo z referenco, vendar moramo pri tem upoštevati tudi nSV razmerje, ki je tu večje. Če primerjamo metrike napak, \textit{eem} modeli prekašajo \textit{hr} modele. S tem lahko potrdimo, da srčni utrip ni dober fiziološki parameter za določevanje fizične aktivnosti. Najboljši rezultati predikcije energijske porabe in srčnega utripa so prikazani na sliki \ref{fig:stage1-observability}.
+Rezultate observabilnosti lahko vidimo v tabeli \ref{tab:observabilnost}. Validacijske metrike so povprečne vrednosti \textit{sv} in \textit{bv} modelov, brez križnega testiranja.  Pearsonov korelacijski koeficient smo povprečili s Fisherjevo $z$ transformacijo. Tako energijska poraba kot srčni utrip, imata visoko pozitivno korelacijo, kar pomeni, da sta oba parametra observabilna. \textit{hr} modeli se po CORR rezultatih bolje ujemajo z referenco, vendar moramo pri tem upoštevati tudi nSV razmerje, ki je tu večje. Če primerjamo metrike napak, \textit{eem} modeli prekašajo \textit{hr} modele. S tem lahko potrdimo, da srčni utrip ni dober fiziološki parameter za določevanje fizične aktivnosti. Najboljši rezultati predikcije energijske porabe in srčnega utripa so prikazani na sliki \ref{fig:stage1-observability}.
 
 \begin{table}[!htbp]
 \centering
@@ -293,20 +289,20 @@ Rezultate observabilnosti lahko vidimo v tabeli \ref{tab:observabilnost}. Valida
 		\tdata{observabilnost}
 		\bottomrule
 		\end{tabular}
-		\caption{Validacijske metrike testa observabilnosti. Gre za povprečne vrednosti \textit{sv} in \textit{bv} modelov. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
+		\caption[Validacijske metrike testa observabilnosti]{Validacijske metrike testa observabilnosti. Gre za povprečne vrednosti \textit{sv} in \textit{bv} modelov. Pearsonov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
 	\label{tab:observabilnost}
 	\end{table}
 	
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.5\columnwidth]{best-results-normal--sideview-sideview-normal-sl}
-\caption{Najboljši reultati predikcije energijske porabe in srčnega utripa. Slika prikazuje izhode eem-sv(sv) in hr-sv(sv) modelov ter izmerjene vrednosti energijske porabe in srčnega utripa.}
+\caption[Najboljši reultati predikcije energijske porabe in srčnega utripa]{Najboljši reultati predikcije energijske porabe in srčnega utripa. Slika prikazuje izhode eem-sv(sv) in hr-sv(sv) modelov ter izmerjene vrednosti energijske porabe in srčnega utripa.}
 	\label{fig:stage1-observability}
 	\end{figure}
 
 
 \subsection{Ročni izrez}
-Tabela \ref{tab:rocni-izrez} prikazuje rezultate ročnega izreza. Prikazani so tudi rezultati observabilnosti za primerjavo. Validacijske metrike so povprečne vrednosti \textit{sv} in \textit{bv} modelov, brez križnega testiranja.  Personov korelacijski koeficient smo povprečili s Fisherjevo $z$ transformacijo. Rezultati modelov z ročnim izrezovanjem so za malenkost slabši. Še vseeno smo jih uporabili v nadaljnih testih, ker se z njimi teoretično znebimo šuma ozadja.
+Tabela \ref{tab:rocni-izrez} prikazuje rezultate ročnega izreza. Prikazani so tudi rezultati observabilnosti za primerjavo. Validacijske metrike so povprečne vrednosti \textit{sv} in \textit{bv} modelov, brez križnega testiranja.  Pearsonov korelacijski koeficient smo povprečili s Fisherjevo $z$ transformacijo. Rezultati modelov z ročnim izrezovanjem so za malenkost slabši. Še vseeno smo jih uporabili v nadaljnjih testih, ker se z njimi teoretično znebimo šuma ozadja.
 
 \begin{table}[!htbp]
 	\centering
@@ -317,7 +313,7 @@ Tabela \ref{tab:rocni-izrez} prikazuje rezultate ročnega izreza. Prikazani so t
 		\tdata{rocni-izrez}
 		\bottomrule
 	\end{tabular}
-	\caption{Validacijske metrike testov ročnega izreza. Gre za povprečne vrednosti \textit{sv} in \textit{bv} modelov. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
+	\caption[Validacijske metrike testov ročnega izreza]{Validacijske metrike testov ročnega izreza. Gre za povprečne vrednosti \textit{sv} in \textit{bv} modelov. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
 	\label{tab:rocni-izrez}
 \end{table}
 		
@@ -333,7 +329,7 @@ Rezultati posameznega pogleda kamere so vidni v tabeli \ref{tab:zorni-kot}. Slik
 \tdata{zorni-kot}
 	\bottomrule
 	\end{tabular}
-		\caption{Rezultati modalitete zornega kota kamere.}
+		\caption[Rezultati modalitete zornega kota kamere]{Rezultati modalitete zornega kota kamere.}
 		\label{tab:zorni-kot}
 		\end{table}
 		
@@ -350,7 +346,7 @@ Rezultati različne modalitete glede na tip slike so prikazani v tabeli \ref{tab
 \tdata{crop-ir}
 	\bottomrule
 	\end{tabular}
-		\caption{Validacijske metrike za različne modalitete glede na tip slike (BGR ali IR).}
+		\caption[Validacijske metrike glede na tip slike]{Validacijske metrike za različne modalitete glede na tip slike (BGR ali IR).}
 		\label{tab:crop-ir}
 		\end{table}
 	
@@ -373,7 +369,7 @@ Rezultati različne modalitete glede na tip slike so prikazani v tabeli \ref{tab
 
 
 \subsection{Modeliranje dodatne zakasnitve}
-Modeli z dodatno zakasnitvijo so v tabeli \ref{tab:lag} označeni z \textit{lag}. Opazimo lahko, da so vsi rezultati s zakasnitvijo, ne glede na modaliteto, boljši. Z \textit{lag} modeli smo potrdili predpostavko o zakasnitvi \SI{55}{\s} za energijsko porabo in \SI{15}{\s} za srčni utrip. Ker smo z njimi rešili probleme sinhronizacije, smo jih uporabili v nadaljnih raziskavah. 
+Modeli z dodatno zakasnitvijo so v tabeli \ref{tab:lag} označeni z \textit{lag}. Opazimo lahko, da so vsi rezultati s zakasnitvijo, ne glede na modaliteto, boljši. Z \textit{lag} modeli smo potrdili predpostavko o zakasnitvi \SI{55}{\s} za energijsko porabo in \SI{15}{\s} za srčni utrip. Ker smo z njimi rešili probleme sinhronizacije, smo jih uporabili v nadaljnjih raziskavah. 
 
 \begin{table}[!htbp]
 	\centering
@@ -384,7 +380,7 @@ Modeli z dodatno zakasnitvijo so v tabeli \ref{tab:lag} označeni z \textit{lag}
 		\tdata{crop-lag}
 		\bottomrule
 	\end{tabular}
-	\caption{Primerjava rezultatov med modeli z dodatno zakasnitvijo in brez.}
+	\caption[Primerjava rezultatov med modeli s zakasnitvijo in brez]{Primerjava rezultatov med modeli z dodatno zakasnitvijo in brez.}
 	\label{tab:lag}
 \end{table}
 
@@ -393,7 +389,7 @@ Modeli z dodatno zakasnitvijo so v tabeli \ref{tab:lag} označeni z \textit{lag}
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.5\columnwidth]{best-results-crop-normal-infrared-infrared-lag-sl}
-	\caption{Najboljši reultati predikcije energijske porabe in srčnega utripa z upoštevanjem dodatne zakasnitve. Slika prikazuje izhode eem-ir-lag(ir) in hr-ir-lag(ir) modelov ter izmerjene vrednosti energijske porabe in srčnega utripa.}
+	\caption[Najboljši rezultati predikcije energijske porabe in srčnega utripa s zakasnitvijo]{Najboljši rezultati predikcije energijske porabe in srčnega utripa z upoštevanjem dodatne zakasnitve. Slika prikazuje izhode eem-ir-lag(ir) in hr-ir-lag(ir) modelov ter izmerjene vrednosti energijske porabe in srčnega utripa.}
 	\label{fig:crop-lag-rezultat}
 \end{figure}
 
@@ -414,7 +410,7 @@ Modeli z dodatno zakasnitvijo so v tabeli \ref{tab:lag} označeni z \textit{lag}
 
 
 \subsection{Obremenitveni testi}
-Rezultati obremenitvenih testov so prikazani v tabelah \ref{tab:crop-proj} in \ref{tab:crop-scale}. Opazimo lahko, da dobimo pri uporabi IR posnetkov slabše rezultate glede na tabelo \ref{tab:lag}. IR posnetki tako niso primerni za terenske raziskave, saj tam pri snemanju nimamo nikoli idelanih pogojev.
+Rezultati obremenitvenih testov so prikazani v tabelah \ref{tab:crop-proj} in \ref{tab:crop-scale}. Opazimo lahko, da dobimo pri uporabi IR posnetkov slabše rezultate glede na tabelo \ref{tab:lag}. IR posnetki tako niso primerni za terenske raziskave, saj tam pri snemanju nimamo nikoli idealnih pogojev.
 
 \begin{table}[!htbp]
 	\centering
@@ -425,7 +421,7 @@ Rezultati obremenitvenih testov so prikazani v tabelah \ref{tab:crop-proj} in \r
 		\tdata{crop-proj}
 		\bottomrule
 	\end{tabular}
-	\caption{Validacijske metrike rezultatov s projektivno transformacijo slik posnetkov.}
+	\caption[Validacijske metrike rezultatov s projektivno transformacijo]{Validacijske metrike rezultatov s projektivno transformacijo slik posnetkov.}
 	\label{tab:crop-proj}
 \end{table}
 
@@ -438,7 +434,7 @@ Rezultati obremenitvenih testov so prikazani v tabelah \ref{tab:crop-proj} in \r
 		\tdata{crop-sc}
 		\bottomrule
 	\end{tabular}
-	\caption{Rezultati obremenitvenega testa skaliranja.}
+	\caption[Rezultati obremenitvenega testa skaliranja]{Rezultati obremenitvenega testa skaliranja.}
 	\label{tab:crop-scale}
 \end{table}
 
@@ -452,7 +448,7 @@ Rezultati obremenitvenih testov so prikazani v tabelah \ref{tab:crop-proj} in \r
 
 
 \subsection{Tekalna steza s sledenjem}
-Pri testiranju vpeljve sledilnika smo dobili rezultate v tabeli \ref{tab:shake}. Z vpeljavo sledilnika smo dobili celo nekoliko boljše rezultate od tistih z ročnim izrezovanjem (tabela \ref{tab:lag}). To si lahko razlagamo s tem, da je z uporabo sledilnika določitev območja tarče bolj optimalno, saj je območje določeno za vsako sliko posebej. Zaradi tega so modeli bolj robustni na šum ozadja.
+Pri testiranju vpeljave sledilnika smo dobili rezultate v tabeli \ref{tab:shake}. Z vpeljavo sledilnika smo dobili celo nekoliko boljše rezultate od tistih z ročnim izrezovanjem (tabela \ref{tab:lag}). To si lahko razlagamo s tem, da je z uporabo sledilnika določitev območja tarče bolj optimalno, saj je območje določeno za vsako sliko posebej. Zaradi tega so modeli bolj robustni na šum ozadja.
 
 %Results of models with enabled tracker are represented in Table \ref{tab:tracker-models-validation}. If we compare them with results of initial models in Table \ref{tab:initial-models-validation}, the mean absolute difference of RRSE between them is \SI{28}{\%}. We can assume that this is due to the fact that tracker does not track selected object perfectly. In some cases it cannot find object, or detects wrong object. It can also track only part of the object. This anomalies can affect calculation of physiological parameters.
 
@@ -467,7 +463,7 @@ Pri testiranju vpeljve sledilnika smo dobili rezultate v tabeli \ref{tab:shake}.
 		\tdata{shake}
 		\bottomrule
 	\end{tabular}
-	\caption{Tracker normal and tracker shake}
+	\caption[Rezultati tekalne steze s sledenjem]{Rezultati tekalne steze s sledenjem. Pri modelih s \textit{sh} kratico smo uporabili simulacijo vibracij. Modeli \textit{tr} so brez vibracij.}
 	\label{tab:shake}
 \end{table}
 
@@ -496,14 +492,14 @@ Terenski rezultati squash igre z različnimi deskriptorji so predstavljeni v tab
 		\tdata{squash-mag}
 		\bottomrule
 	\end{tabular}
-	\caption{Validacijske metrike terenskega testiranja. Tu uporabljamo HOOF in HOOF-HAFA deskriptorje. Modeli so neveljavni.}
+	\caption[Validacijske metrike terenskega testiranja]{Validacijske metrike terenskega testiranja. Tu uporabljamo HOOF in HOOF-HAFA deskriptorje. Modeli so neveljavni.}
 	\label{tab:squash}
 \end{table}
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.5\columnwidth]{best-results-preliminary-squash2-normal-backview-backview-lag-sl}
-	\caption{Odziv modela hr-bv-lag-hoofhafa(bv) za squash igro eksperimentov 1. faze.}
+	\caption[Odziv modela hr-bv-lag-hoofhafa(bv) za terenski eksperiment 1. faze]{Odziv modela hr-bv-lag-hoofhafa(bv) za terenski eksperiment 1. faze.}
 	\label{fig:squash-rezultat}
 \end{figure}
 
@@ -529,19 +525,19 @@ Terenski rezultati squash igre z različnimi deskriptorji so predstavljeni v tab
 
 
 \subsection{Eksperiment detekcije dihanja}
-Za detekcijo dihanja, ki smo jo formulirali kot problem razrščanja v razrede, smo uporabili standardne metrike za evaluacijo dvorazrednega problema. ``Diha'' smo označili kot pozitivno vrednost, ``ne diha'' pa negativno. Dobili smo sledeče rezultate: Razmerje napačno potrjenih FPR = \SI{13}{\%}, razmerje pravilno potrjenih TPR = \SI{87}{\%}, razmerje napačno zavrnjenih FNR = \SI{26}{\%}, razmerje pravilno zavrnjenih TNR = \SI{74}{\%}. Rezultati so prav tako prikazani s kontigenčno matriko na sliki \ref{fig:breathtest-confusion} in ROC krivuljno \ref{fig:breathtest-roc}.
+Za detekcijo dihanja, ki smo jo formulirali kot problem razvrščanja v razrede, smo uporabili standardne metrike za evaluacijo dvorazrednega problema. ``Diha'' smo označili kot pozitivno vrednost, ``ne diha'' pa negativno. Dobili smo sledeče rezultate: Razmerje napačno potrjenih FPR = \SI{13}{\%}, razmerje pravilno potrjenih TPR = \SI{87}{\%}, razmerje napačno zavrnjenih FNR = \SI{26}{\%}, razmerje pravilno zavrnjenih TNR = \SI{74}{\%}. Rezultati so prav tako prikazani s kontigenčno matriko na sliki \ref{fig:breathtest-confusion} in ROC krivuljno \ref{fig:breathtest-roc}.
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{breathtest-confusion-sl}
-	\caption{Kontigenčna matrika med ciljnim in izhodnim razredom za detekcijo dihanja. Razred $1$ pomeni ``diha''. Razred $0$ pomeni ``ne diha''.}
+	\caption[Kontigenčna matrika za detekcijo dihanja]{Kontigenčna matrika med ciljnim in izhodnim razredom za detekcijo dihanja. Razred $1$ pomeni ``diha''. Razred $0$ pomeni ``ne diha''.}
 	\label{fig:breathtest-confusion}
 \end{figure}
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{breathtest-roc-sl}
-	\caption{ROC krivulja za detekcijo dihanja.}
+	\caption[ROC krivulja za detekcijo dihanja]{ROC krivulja za detekcijo dihanja.}
 	\label{fig:breathtest-roc}
 \end{figure}
 
@@ -590,7 +586,7 @@ Združevanje s značilkami se ni obneslo, zato smo to metodo opustili. Primer ne
 		\caption{Rezultat združevanja z značilkami}
 		\label{fig:zdruzevanje-result}
 	\end{subfigure}
-	\caption{Primer neuspelega poskusa združevanja slik iz dveh Kinect kamer s SURF značilkami.}
+	\caption[Neuspelo združevanje slik s SURF značilkami]{Primer neuspelega poskusa združevanja slik iz dveh Kinect kamer s SURF značilkami.}
 	\label{fig:zdruzevanje-znacilke}
 \end{figure}
 
@@ -609,7 +605,7 @@ Združevanje s značilkami se ni obneslo, zato smo to metodo opustili. Primer ne
  		\caption{Rezultat združevanja s kontrolnimi točkami}
  		\label{fig:zdruzevanje-result-cp}
  	\end{subfigure}
- 	\caption{Primer neuspelega poskusa združevanja slik iz dveh Kinect kamer s kontolnimi točkami.}
+ 	\caption[Neuspelo združevanje slik s kontrolnimi točkami]{Primer neuspelega poskusa združevanja slik iz dveh Kinect kamer s kontolnimi točkami.}
  	\label{fig:zdruzevanje-cp}
  \end{figure}
 
@@ -624,7 +620,7 @@ Združevanje s značilkami se ni obneslo, zato smo to metodo opustili. Primer ne
 
 
 \subsubsection{Optimizacija Gaussovega filtra}
-Rezultati povrprečnih vrednosti uporabljenih metrik so vidni v tabeli \ref{tab:gauss}. Za pravilno razlago rezultatov, moramo upoštevati tudi grafe metrik posameznih eksperimentov, ki so prikazani na slikah \ref{fig:sigma1-5}, \ref{fig:sigma-rmse5-21} in \ref{fig:sigma21-51}. 
+Rezultati povprečnih vrednosti uporabljenih metrik so vidni v tabeli \ref{tab:gauss}. Za pravilno razlago rezultatov, moramo upoštevati tudi grafe metrik posameznih eksperimentov, ki so prikazani na slikah \ref{fig:sigma1-5}, \ref{fig:sigma-rmse5-21} in \ref{fig:sigma21-51}. 
 
 
 
@@ -643,7 +639,7 @@ Rezultati povrprečnih vrednosti uporabljenih metrik so vidni v tabeli \ref{tab:
 		51 & 6.7155 & 26.5345\\
 		\bottomrule
 	\end{tabular}
-	\caption[Povprečne vrednosti RMSE in SNR metrik pri optimizaciji parametra $\sigma$ Gaussovega filtra]{Povprečne vrednosti RMSE in SNR metrik pri optimizaciji parametra $\sigma$ Gaussovega filtra. Najmanjši standardni odklon ima najmanjšo napako, vendar je tudi filtriranje majhno. Pri $\sigma=3$ in $\sigma=5$ so še opazne razlike pri filriranju. Za višje vrednosti ni več opazne razlike, vendar pa se napaka povečuje. $\sigma=5$ je tako optimalna vrednosti parametra.}
+	\caption[Metrike pri optimizaciji Gaussovega filtra]{Povprečne vrednosti RMSE in SNR metrik pri optimizaciji parametra $\sigma$ Gaussovega filtra. Najmanjši standardni odklon ima najmanjšo napako, vendar je tudi filtriranje majhno. Pri $\sigma=3$ in $\sigma=5$ so še opazne razlike pri filtriranju. Za višje vrednosti ni več opazne razlike, vendar pa se napaka povečuje. $\sigma=5$ je tako optimalna vrednosti parametra.}
 	\label{tab:gauss}
 \end{table}
 
@@ -682,7 +678,7 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 		\caption{Graf SNR  učnih vzorcev}
 		\label{fig:sigma-snr5-21}
 	\end{subfigure}
-	\caption{Grafa RMSE in SNR učnih vzorcev za \mbox{$\sigma \in [5,21]$}}
+	\caption[Grafa RMSE in SNR učnih vzorcev za \mbox{$\sigma \in [5,21]$}]{Grafa RMSE in SNR učnih vzorcev za \mbox{$\sigma \in [5,21]$}.}
 	\label{fig:sigma5-21}
 \end{figure}
 
@@ -701,7 +697,7 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 		\caption{Graf SNR  učnih vzorcev}
 		\label{fig:sigma-snr21-51}
 	\end{subfigure}
-	\caption{Grafa RMSE in SNR učnih vzorcev za \mbox{$\sigma \in [21,51]$}}
+	\caption[Grafa RMSE in SNR učnih vzorcev za \mbox{$\sigma \in [21,51]$}]{Grafa RMSE in SNR učnih vzorcev za \mbox{$\sigma \in [21,51]$}.}
 	\label{fig:sigma21-51}
 \end{figure}
 
@@ -718,7 +714,7 @@ Rezultati optimizacije parametra $\numax$ so predstavljeni v tabeli \ref{tab:nu-
 		\tdata{nu-max}
 		\bottomrule
 	\end{tabular}
-	\caption{Verifikacijske metrike pri optimizaciji parametra $\numax$ postopka mrežnega iskanja \nurbf.}
+	\caption[Verifikacijske metrike pri optimizaciji parametra $\numax$]{Verifikacijske metrike pri optimizaciji parametra $\numax$ postopka mrežnega iskanja \nurbf.}
 	\label{tab:nu-max}
 \end{table}
 
@@ -734,7 +730,7 @@ Tabela \ref{tab:rbf-nu} predstavlja primerjavo med postopkom z uporabo \nurbf in
 		\tdata{rbf-nu}
 		\bottomrule
 	\end{tabular}
-	\caption{Validacijske metrike za primerjavlo med postopkom z \nurbf in brez. Gre za povprečne vrednosti \textit{sv} in \textit{bv} modelov. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
+	\caption[Validacijske metrike za primerjavo med \nurbf in klasičnim modelom]{Validacijske metrike za primerjavlo med postopkom z \nurbf in brez. Gre za povprečne vrednosti \textit{sv} in \textit{bv} modelov. Pearsonov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
 	\label{tab:rbf-nu}
 \end{table}
 
@@ -775,7 +771,7 @@ V tabeli \ref{tab:norm-hafa} dobimo slabe rezultate tako za NORMAL model kot tud
 		\tdata{diag}
 		\bottomrule
 	\end{tabular}
-	\caption{Evaluacijske metrike pri primerjavi modelov NORMAL in DIAG, kjer upoštevamo amplitudni faktor $f_A$. }
+	\caption[Evaluacijske metrike pri primerjavi modelov NORMAL in DIAG]{Evaluacijske metrike pri primerjavi modelov NORMAL in DIAG, kjer upoštevamo amplitudni faktor $f_A$. }
 	\label{tab:norm-hafa}
 \end{table}
 
@@ -799,7 +795,7 @@ V tabeli \ref{tab:norm-hafa} dobimo slabe rezultate tako za NORMAL model kot tud
 
 \subsection{Laboratorijski eksperiementi}
 \subsubsection{Odvisnost na akumulacijo utrujenosti}
-V tabeli \ref{tab:stage2-lab-1-mean} je predstavljeno povprečje validacij merjencev za protokol 1. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo. Vsi modeli imajo visoko korelacijo z referenco. Napake so majhne. Opazimo, da dobimo boljše rezultate z uporabo prostorskega toka \textit{it}.
+V tabeli \ref{tab:stage2-lab-1-mean} je predstavljeno povprečje validacij merjencev za protokol 1. Pearsonov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo. Vsi modeli imajo visoko korelacijo z referenco. Napake so majhne. Opazimo, da dobimo boljše rezultate z uporabo prostorskega toka \textit{it}.
 
 \begin{table}[!htbp]
 	\centering
@@ -810,11 +806,11 @@ V tabeli \ref{tab:stage2-lab-1-mean} je predstavljeno povprečje validacij merje
 		\tdata{stage2-lab-1-mean}
 		\bottomrule
 	\end{tabular}
-	\caption{Povprečje validacij merjencev za protokol 1 druge faze laboratorijskih eksperimentov. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
+	\caption[Povprečje validacij merjencev za protokol 1 2. faze lab. eksperimentov]{Povprečje validacij merjencev za protokol 1 druge faze laboratorijskih eksperimentov. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
 	\label{tab:stage2-lab-1-mean}
 \end{table}
 
-V tabeli \ref{tab:stage2-lab-2-mean}  predstavljamo povprečje rezultatov za protokol 2. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo. Vsi modeli imajo pričakovano nizko korelacijo in veliko napak.
+V tabeli \ref{tab:stage2-lab-2-mean}  predstavljamo povprečje rezultatov za protokol 2. Pearsonov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo. Vsi modeli imajo pričakovano nizko korelacijo in veliko napak.
 
 \begin{table}[!htbp]
 	\centering
@@ -825,7 +821,7 @@ V tabeli \ref{tab:stage2-lab-2-mean}  predstavljamo povprečje rezultatov za pro
 		\tdata{stage2-lab-2-mean}
 		\bottomrule
 	\end{tabular}
-	\caption{Povprečje validacij merjencev za protokol 2 druge faze laboratorijskih eksperimentov. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
+	\caption[Povprečje validacij merjencev za protokol 2 2. faze lab. eksperimentov]{Povprečje validacij merjencev za protokol 2 druge faze laboratorijskih eksperimentov. Pearsonov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
 	\label{tab:stage2-lab-2-mean}
 \end{table}
 
@@ -841,25 +837,25 @@ S protokolom 3 smo želeli preveriti, če lahko uporabimo generaliziran model za
 		\toprule
 		\textbf{Model} & \thead{CORR} & \thead{RAE} & \thead{RRSE} & \thead{nSV} \\
 		\midrule
-		%\tdata{stage2-lab-3}
+		\tdata{stage2-lab-3}
 		\bottomrule
 	\end{tabular}
-	\caption{Validacijske metrike za protokol 3 druge faze laboratorijskih eksperimentov.}
+	\caption[Validacijske metrike za protokol 3 2. faze lab. eksperimentov]{Validacijske metrike za protokol 3 druge faze laboratorijskih eksperimentov.}
 	\label{tab:stage2-lab-3}
 \end{table}
 
-Najboljši rezultati za optični in prostoski tok, so predstavljeni na sliki \ref{fig:lab-3}. Odzivi modelov vsebujejo veliko šuma, zato bi lahko uporabili širše Gaussovo jedro za filtriranje rezultatov. Najslabšo predikcijo dobimo za največjo fizično aktivnost.
+Najboljši rezultati za optični in prostorski tok, so predstavljeni na sliki \ref{fig:lab-3}. Odzivi modelov vsebujejo veliko šuma, zato bi lahko uporabili širše Gaussovo jedro za filtriranje rezultatov. Najslabšo predikcijo dobimo za največjo fizično aktivnost.
 
 \begin{figure}[!htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		%\includegraphics[width=\columnwidth]{best-results-stage3-lab-of-3-subj6-sideview-sideview-normal-sl}
+		\includegraphics[width=\columnwidth]{best-results-stage3-ff-lab-of-3-subj5-backview-backview-normal-val-sl}
 		\caption{Rezultati eem-sv-of-subj9(sv) z optičnim tokom}
 		\label{fig:lab-of-3}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		%\includegraphics[width=\columnwidth]{best-results-stage3-lab-sf-3-subj6-sideview-sideview-normal-sl}
+		\includegraphics[width=\columnwidth]{best-results-stage3-ff-lab-sf-3-subj5-backview-backview-normal-val-sl}
 		\caption{Rezultati eem-sv-sf-subj9(sv) s prostorskim tokom}
 		\label{fig:lab-sf-3}
 	\end{subfigure}
@@ -869,7 +865,7 @@ Najboljši rezultati za optični in prostoski tok, so predstavljeni na sliki \re
 
 \subsection{Terenski eksperimenti}
 \subsubsection{Odvisnost na akumulacijo utrujenosti}
-V tabeli \ref{tab:stage2-field-1-mean} je predstavljeno povprečje validacij merjencev za protokol 1. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo. Najboljše rezultate dobimo za prostorski tok \textit{sf}. Korelacija je dokaj visoka, ampak metrike napak nakazujejo na slabši model.
+V tabeli \ref{tab:stage2-field-1-mean} je predstavljeno povprečje validacij merjencev za protokol 1. Pearsonov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo. Najboljše rezultate dobimo za prostorski tok \textit{sf}. Korelacija je dokaj visoka, ampak metrike napak nakazujejo na slabši model.
 
 \begin{table}[!htbp]
 	\centering
@@ -880,11 +876,11 @@ V tabeli \ref{tab:stage2-field-1-mean} je predstavljeno povprečje validacij mer
 		\tdata{stage2-field-1-mean}
 		\bottomrule
 	\end{tabular}
-	\caption{Povprečje validacij merjencev za protokol 1 druge faze terenskih eksperimentov. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
+	\caption[Povprečje validacij merjencev za protokol 1 2. faze terenskih eksperimentov]{Povprečje validacij merjencev za protokol 1 druge faze terenskih eksperimentov. Pearsonov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
 	\label{tab:stage2-field-1-mean}
 \end{table}
 
-V tabeli \ref{tab:stage2-field-2-mean} predstavljamo povprečje rezultatov za protokol 2. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo. Vsi modeli imajo pričakovano nizko korelacijo in veliko napak.
+V tabeli \ref{tab:stage2-field-2-mean} predstavljamo povprečje rezultatov za protokol 2. Pearsonov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo. Vsi modeli imajo pričakovano nizko korelacijo in veliko napak.
 
 \begin{table}[!htbp]
 	\centering
@@ -895,12 +891,12 @@ V tabeli \ref{tab:stage2-field-2-mean} predstavljamo povprečje rezultatov za pr
 		\tdata{stage2-field-2-mean}
 		\bottomrule
 	\end{tabular}
-	\caption{Povprečje validacij merjencev za protokol 2 druge faze terenskih eksperimentov. Personov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
+	\caption[Povprečje validacij merjencev za protokol 2 2. faze terenskih eksperimentov]{Povprečje validacij merjencev za protokol 2 druge faze terenskih eksperimentov. Pearsonov korelacijski koeficient (CORR) smo povprečili s Fisherjevo $z$ transformacijo.}
 	\label{tab:stage2-field-2-mean}
 \end{table}
 
 \subsubsection{Generalizacija modela}
-S protokolom 3 smo želeli preveriti, če lahko uporabimo generaliziran model za predikcijo energijske porabe na različnih merjencih. Rezultati so vidni v tabeli \ref{tab:stage2-field-3}. Tukaj dobimo najboljše rezultate pri uporabi prostorskega toka, kot smo to predlagali tudi sami. Tudi rezultati optičnega toka niso slabi. Najboljši rezultati za optični in prostoski tok, so predstavljeni na sliki \ref{fig:lab-3}.
+S protokolom 3 smo želeli preveriti, če lahko uporabimo generaliziran model za predikcijo energijske porabe na različnih merjencih. Rezultati so vidni v tabeli \ref{tab:stage2-field-3}. Tukaj dobimo najboljše rezultate pri uporabi prostorskega toka, kot smo to predlagali tudi sami. Tudi rezultati optičnega toka niso slabi. Najboljši rezultati za optični in prostorski tok, so predstavljeni na sliki \ref{fig:lab-3}.
 
 \begin{table}[!htbp]
 	\centering
@@ -911,24 +907,24 @@ S protokolom 3 smo želeli preveriti, če lahko uporabimo generaliziran model za
 		\tdata{stage2-field-3}
 		\bottomrule
 	\end{tabular}
-	\caption{Validacijske metrike za protokol 3 druge faze terenskih eksperimentov.}
+	\caption[Validacijske metrike za protokol 3 2. faze terenskih eksperimentov]{Validacijske metrike za protokol 3 druge faze terenskih eksperimentov.}
 	\label{tab:stage2-field-3}
 \end{table}
 
 \begin{figure}[!htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{best-results-stage3-final-field-of-3-subj6-backview-backview-normal-val-sl}
+		\includegraphics[width=\columnwidth]{best-results-stage3-ff-field-of-3-subj6-backview-backview-normal-val-sl}
 		\caption{Rezultati eem-bv-of-subj9(bf) z optičnim tokom}
 		\label{fig:field-of-3}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{best-results-stage3-final-field-sf-3-subj6-backview-backview-normal-val-sl}
+		\includegraphics[width=\columnwidth]{best-results-stage3-ff-field-sf-3-subj6-backview-backview-normal-val-sl}
 		\caption{Rezultati flow eem-bv-sf-subj9(bv) s prostorskim tokom}
 		\label{fig:field-sf-3}
 	\end{subfigure}
-	\caption[Odziv SUBJ9 modelov protokola 3 druge faze laboratorijskih eksperimentov]{Odziv najboljših modelov protokola 3 druge faze laboratorijskih eksperimentov. Rdeča krivulja predstavlja merjen parameter, zelena predikcijo. Na sliki \subref{fig:field-of-3}) je najboljši rezultat pri uporabi optičnega toka. Na sliki \subref{fig:field-sf-3}) je najboljši rezultat pri uporabi prostorskega toka.}
+	\caption[Odziv SUBJ9 modelov protokola 3 2. faze lab. eksperimentov]{Odziv najboljših modelov protokola 3 druge faze laboratorijskih eksperimentov. Rdeča krivulja predstavlja merjen parameter, zelena predikcijo. Na sliki \subref{fig:field-of-3}) je najboljši rezultat pri uporabi optičnega toka. Na sliki \subref{fig:field-sf-3}) je najboljši rezultat pri uporabi prostorskega toka.}
 	\label{fig:field-3}
 \end{figure}
 

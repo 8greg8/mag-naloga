@@ -1,12 +1,15 @@
-\section{Filtri}\label{sec:filtri}
-Filtri so zelo pomembni pri procesiranju signalov \cite{smith1997scientist}. V našem delu jih uporabljamo za izločitev šuma izhodnih podatkov razvrščevalnika. Izbrani filtri izhajajo iz družine filtrov tekočega povprečja, saj so ti najbolj optimalni za zmanjševanje šuma \cite{smith1997scientist}. Splošna enačba filtra tekočega povprečja je \eqref{eq:filter-tekocega-povprecja}, kjer je $x(i)$ i-ti vzorec vhodnega signala, $y(i)$ i-ti vzorec izhodnega signala in $M$ število vzorcev, ki jih uporabimo za filtriranje ali drugače, širina jedra filtra \cite{smith1997scientist}.
+\section{Filtriranje in glajenje}\label{sec:filtri}
+%Filtri so zelo pomembni pri procesiranju signalov \cite{smith1997scientist}. V našem delu jih uporabljamo za izločitev šuma izhodnih podatkov razvrščevalnika. 
+Vhodne podatke obdelujemo, bodisi z optičnim tokom ali prostorskim tokom, za vsako sliko video sekvence. Med slikami ne uporabljamo nobene informacije, kar rezultira v oceno porabe energije z veliko šuma. Smiselno je, da zagotovimo časovno kontinuiteto bodisi s filtriranjem ali glajenjem rezultatov porabe energije.
+
+Izbrani filtri izhajajo iz družine filtrov tekočega povprečja, saj so ti najbolj optimalni za zmanjševanje šuma \cite{smith1997scientist}. Splošna enačba filtra tekočega povprečja je \eqref{eq:filter-tekocega-povprecja}, kjer je $x(i)$ i-ti vzorec vhodnega signala, $y(i)$ i-ti vzorec izhodnega signala in $M$ število vzorcev, ki jih uporabimo za filtriranje ali drugače, širina jedra filtra \cite{smith1997scientist}.
 
 \begin{equation}
 y(i) = \frac{1}{M} \sum_{j=0}^{M-1} x(i + j)
 \label{eq:filter-tekocega-povprecja}
 \end{equation}
 
-V začetni fazi projekta smo uporabili Kalmanov filter, saj je to najbolj pogosta izbira pri podatkih, ki so povezani z gibanjem objekta. Zaradi slabih rezultatov in težko določljivega modela gibanja smo se nato osredotočili na Gaussov filter, ki je dal zadovoljive rezultate. Oba filtra sta podrobneje opisana v nadaljevanju.
+Prvi filter, ki je bil testiran, je Kalmanov filter. Zaradi slabih rezultatov in težav pri modeliranju hitrih sprememb porabe energije, ki so v številnih športih norma, smo prešli na Gaussov filter (bolj gladko), kar je dalo zadovoljive rezultate. Oba filtra sta podrobneje opisana v nadaljevanju.
 
 %digitalni filtri so zelo pomemnbi pri digitalnem procesiranju signalov. filtre uporabljamo za dve stvari: signal separation and signam restoration. Prva se uporablja ko imamo signal ki je kontaminiran z interferenco, šumom ali drugimi signali. 
 
@@ -47,7 +50,7 @@ Model gibanja je vektorska enačba \eqref{eq:model-gibanja}, ki govori o razvoju
 \label{eq:vhodni-parametri}
 \end{equation}
 
-$\vec{w}(k-1)$ predstavlja gaussov šum $\mathcal{N}$ modela gibanja s srednjo vrednostjo $0$ in kovariančno matriko $\vec{Q}$, kot je prikazano v enačbi \eqref{eq:sum-modela-gibanja} \cite{trucco1998introductory}.
+$\vec{w}(k-1)$ predstavlja Gaussov šum $\mathcal{N}$ modela gibanja s srednjo vrednostjo $0$ in kovariančno matriko $\vec{Q}$, kot je prikazano v enačbi \eqref{eq:sum-modela-gibanja} \cite{trucco1998introductory}.
 
 \begin{equation}
  \vec{w}(k) \sim \mathcal{N}\left(0,\vec{Q}\right)
@@ -58,7 +61,7 @@ Modeliranje šuma je ekvivalentno določevanju uteži upoštevanja modela v Kalm
 
 
 \subsubsection{Merilni model}
-Pri Kalmanovemu filtriranju predvidevamo, da ob vsakem časovnem trenutku dobimo meritev stanja $\vec{z}(k)$, ki je, realno gledano, pošumljena z Gaussovim šumom \cite{trucco1998introductory}. Merilni model lahko predstavimo z vektorsko enačbo \eqref{eq:merilni-model}, kjer je $\vec{H}$ merilna matrika in $\vec{\nu}(k)$ vektor gaussovega šuma $\mathcal{N}$ s srednjo vrednostjo $0$ in kovariančno matriko $\vec{R}$ \eqref{eq:sum-merilnega-modela}.
+Pri Kalmanovemu filtriranju predvidevamo, da ob vsakem časovnem trenutku dobimo meritev stanja $\vec{z}(k)$, ki je, realno gledano, pošumljena z Gaussovim šumom \cite{trucco1998introductory}. Merilni model lahko predstavimo z vektorsko enačbo \eqref{eq:merilni-model}, kjer je $\vec{H}$ merilna matrika in $\vec{\nu}(k)$ vektor Gaussovega šuma $\mathcal{N}$ s srednjo vrednostjo $0$ in kovariančno matriko $\vec{R}$ \eqref{eq:sum-merilnega-modela}.
 
 
 \begin{equation}
@@ -96,7 +99,7 @@ V predikciji določimo trenutno oceno stanja $\hat{\vec{x}}^-(k)$ po enačbi \eq
 \end{equation}
 
 \paragraph{Inovacija}
-V koraku inovacije izberemo trenutno meritev $\vec{z}(k)$ iz nabora meritev. Merilno napako $\vec{e}$ določimo po enačbi \eqref{eq:napaka}, kjer drugi člen predstavlja oceno meritve. Kovariaco inovacije $\vec{S}$ izračunamo po \eqref{eq:kovarianca-inovacije}. Gre za pomožno matriko, ki jo uporabljamo za izračun ojačanja v naslednjem koraku.
+V koraku inovacije izberemo trenutno meritev $\vec{z}(k)$ iz nabora meritev. Merilno napako $\vec{e}$ določimo po enačbi \eqref{eq:napaka}, kjer drugi člen predstavlja oceno meritve. Kovarianco inovacije $\vec{S}$ izračunamo po \eqref{eq:kovarianca-inovacije}. Gre za pomožno matriko, ki jo uporabljamo za izračun ojačanja v naslednjem koraku.
 
 \begin{equation}
 	\vec{e}(k) = \vec{z}(k) - \vec{H} \hat{\vec{x}}^-(k)
@@ -148,14 +151,14 @@ Primer filtra s standardnim odklonim $\sigma = 5$ je prikazan na sliki \ref{fig:
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.7\columnwidth]{gauss-kernel-sl}
-\caption{Gaussovo jedro s standardnim odklonom $\sigma=5$. }
+\caption[Gaussovo jedro s standardnim odklonom $\sigma=5$]{Gaussovo jedro s standardnim odklonom $\sigma=5$. }
 \label{fig:gauss}
 \end{figure}
 
 
 Gaussov filter je vrsta filtra tekočega povprečja, ki je zelo primeren za izločevanje odvečnega šuma \cite{smith1997scientist}. Ker je karakteriziran z impulznim odzivom, ki je simetričen okoli ničelnega vzorca, gre za vrsto filtra z ničelno fazo. To pomeni, da je faza v frekvenčnem prostoru vedno $0$ \cite{smith1997scientist}. Ker imamo pri takih filtrih negativne indekse, ga težje uporabljamo. 
 
-Ponavadi filtre uporabljamo v rekurzivni obliki, saj je računanje hitrejše. Impulzni odziv rekurzivnega filtra ni simetričen, zato ima nelinearno fazo \cite{smith1997scientist}. To pomankljivost lahko odpravimo z uporabo dvosmernega filtriranja.
+Ponavadi filtre uporabljamo v rekurzivni obliki, saj je računanje hitrejše. Impulzni odziv rekurzivnega filtra ni simetričen, zato ima nelinearno fazo \cite{smith1997scientist}. To pomanjkljivost lahko odpravimo z uporabo dvosmernega filtriranja.
 
 Pri \textbf{dvosmernem filtriranju} najprej filtriramo iz leve proti desni in nato iz desne proti levi \cite{smith1997scientist}. Dobljena signala združimo in dobimo pravilen rezultat.
 

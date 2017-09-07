@@ -9,15 +9,15 @@
 }
 
 % NODES
-\node (slika) [input] at (0,0) {Področje tarče\\na sliki $I(x,y)$};
+\node (slika) [input] at (0,0) {Področje\\na sliki $I(x,y)$};
 
-\node (of) [block, below= of slika] {Optični tok\\$\vec{w}$};
-\node (hoof) [block, right= of of] {HOOF deskriptorji\\$\vec{x}(t)$};
+\node (of) [block, right= of slika] {Optični\\tok $\vec{w}$};
+\node (hoof) [block, right= of of] {HOOF\\deskriptorji $\vec{x}(t)$};
 
 
-\node (ucenje) [block, right=of hoof] {C-SVC\\RBF jedro};
+\node (ucenje) [block, right= of hoof] {C-SVC\\RBF};
 
-\node (rezultat) [output, below= of ucenje] {Rezultat};
+\node (rezultat) [output, right= of ucenje] {Rezultat};
 
 % arrows
 \draw [arrow] (slika) -- (of);

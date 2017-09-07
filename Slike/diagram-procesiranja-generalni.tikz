@@ -9,15 +9,15 @@
 }
 
 % NODES
-\node (slika) [input, align=center] at (0,0) {Področje tarče\\na sliki $I(x,y)$};
+\node (slika) [input] at (0,0) {Področje tarče\\na sliki $I(x,y)$};
 
-\node (of) [block,align=center, below= of slika] {Optični/Prostorski\\tok};
-\node (hoof) [block, align=center, right= of of] {deskriptorji\\$\vec{x}(t)$};
+\node (of) [block, right= of slika] {Optični/Prostorski\\tok};
+\node (hoof) [block, right= of of] {deskriptorji\\$\vec{x}(t)$};
 
 
-\node (ucenje) [block, align=center, right=of hoof] {Postopel učenja.};
+\node (ucenje) [block, right=of hoof] {Postopek učenja};
 
-\node (rezultat) [output, below= of ucenje] {Rezultat};
+\node (rezultat) [output, right= of ucenje] {SVM/SVR\\parametri};
 
 % arrows
 \draw [arrow] (slika) -- (of);

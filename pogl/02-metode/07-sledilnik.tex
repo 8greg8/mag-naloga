@@ -7,7 +7,7 @@
 %
 Gibanje objektov v prostoru zaznamo kot temporalno spreminjanje slike. Ta lastnost nam omogoča izluščenje koristnih informacij, kot je identifikacija objektov na podlagi karakteristike gibanja, določevanje njihove pozicije in ugotavljanje kaj se v sceni dogaja \cite{forsyth2002computer}. Forsyth et. al \cite{forsyth2002computer} sledenje opiše kot postopek, s katerim sklepamo o gibanju objektov glede na zaporedje slik. Problem sledenja v računalniškem vidu še ni v celoti rešljiv, saj obstaja veliko faktorjev, ki otežujejo delo sledilnikov \cite{danelljan2014adaptive}. Med njimi sodijo okluzija objekta, ki mu sledimo, razne geometrijske deformacije in zamegljenost zaradi hitrega gibanja, temporalno spreminjanje osvetljenosti, šum iz ozadja ter variacije v skali. 
 
-Sledlinike delimo v glavnem na dva pristopa: generativne in diskriminativne metode \cite{danelljan2014adaptive}. Pri \textbf{generativnih metodah} iščemo področja, ki so najbolj podobna modelu tarče. \textbf{Diskriminativne metode} predstavljajo binarni problem razvrščanja, saj pri njih želimo določiti mejo med tarčo in ozadjem. Slednjo metodo uporabljamo pri sledenju z detekcijo, ki daje najboljše rezultate \cite{danelljan2014adaptive}. Glavna ideja takega sledenja je sprotno učenje razvrščevalnika s trenutnim vzorcem tarče. Sledi korak detekcije tarče na naslednji sliki zaporedja z razvrščevalnikom in vizualno predstavitvijo tarče, ki smo se jo naučili skozi čas.
+Sledilnike delimo v glavnem na dva pristopa: generativne in diskriminativne metode \cite{danelljan2014adaptive}. Pri \textbf{generativnih metodah} iščemo področja, ki so najbolj podobna modelu tarče. \textbf{Diskriminativne metode} predstavljajo binarni problem razvrščanja, saj pri njih želimo določiti mejo med tarčo in ozadjem. Slednjo metodo uporabljamo pri sledenju z detekcijo, ki daje najboljše rezultate \cite{danelljan2014adaptive}. Glavna ideja takega sledenja je sprotno učenje razvrščevalnika s trenutnim vzorcem tarče. Sledi korak detekcije tarče na naslednji sliki zaporedja z razvrščevalnikom in vizualno predstavitvijo tarče, ki smo se jo naučili skozi čas.
 
 
 
@@ -16,9 +16,11 @@ Sledlinike delimo v glavnem na dva pristopa: generativne in diskriminativne meto
 
 \subsection{Zmanjševanje merilne napake}
 
-V našem delu opazujemo gibajoča telesa, zato je smiselno vpeljati sledilnik v merjenje energijske porabe. Z uporabo sledilnika dobimo realnejšo sliko meritve, saj se znebimo šuma iz ozadja (premikanja slikovnih elementov, ki niso del tarče). Izognemo se napaki merjenja zaradi šuma CCD senzorja in premikanja drugih objektov. To so lahko razni predmeti (žoge, loparji, itd.) ali druge osebe. Brezkontaktnemu merilnemu instrumentu tako dodamo širšo uporabno vrednost, saj ga v nasprotnem primeru ne bi mogli uporabljati v ekipnih športih in športih z žogo. 
+Položaj subjektov, ki jih opazujemo, ni mogoče omejiti zunaj skrbno urejene laboratorijske postavitve, saj uporabljamo tokovna polja brez kakršnekoli predpostavke o postavitvi skeleta in brez kakršnih koli dodatnih omejitev. V takem primeru bi bila prevladujoča komponenta histogramov šum. Zato moramo uvesti algoritem za sledenje, da lokaliziramo položaj opazovanega subjekta v koordinatnem sistemu slike.
 
-Zaradi uporabe optičnega in prostorskega toka pri določevanju modela gibanja nam merilno napako povzroča tudi premikanje kamere. S premikanjem kamere povzročimo relativno premikanje objetkov glede na koordinatni sistem kamere, četudi so ti glede na referenčni koordinatni sistem v prostoru pri miru. Tega problema se lahko znebimo z uporabo sledilnika. 
+Z uporabo sledilnika dobimo realnejšo sliko meritve, saj se znebimo šuma iz ozadja (premikanja slikovnih elementov, ki niso del tarče). Izognemo se napaki merjenja zaradi šuma CCD senzorja in premikanja drugih objektov. To so lahko razni predmeti (žoge, loparji, itd.) ali druge osebe. Brezkontaktnemu merilnemu instrumentu tako dodamo širšo uporabno vrednost, saj ga v nasprotnem primeru ne bi mogli uporabljati v ekipnih športih in športih z žogo. 
+
+Zaradi uporabe optičnega in prostorskega toka pri določevanju modela gibanja nam merilno napako povzroča tudi premikanje kamere. S premikanjem kamere povzročimo relativno premikanje objektov glede na koordinatni sistem kamere, četudi so ti glede na referenčni koordinatni sistem v prostoru pri miru. Tega problema se lahko znebimo z uporabo sledilnika. 
 
 Predpostavimo, da imamo idealni sledilnik in enako definicijo in omejitve kamere, masnega delca, slike delca in osvetlitve kot v poglavju \ref{sec:opticni-tok}. Idealni sledilnik v vsaki sliki zaporedja najde sliko delca $\vec{q}$ in posamezno sliko v zaporedju obreže tako, da je težišče tarče vedno v centru obrezane slike. Ne glede na gibanje kamere, bo pozicija slike delca $\vec{q}$ vedno v centru slikovne ravnine. Gibanje kamere zato ne bo vplivalo na optični tok $\mathcal{O}$.
 
@@ -29,14 +31,14 @@ Sledilnik temelji na delu \cite{danelljan2014adaptive}, kjer izboljšajo origina
 
 \begin{figure}[htb]
 	\centering
-	\input{./Slike/diagram-kcf.tikz}
+	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-kcf.tikz}}
 	\caption[Diagram KCF sledilnika]{Diagram KCF sledilnika.}
 	\label{fig:diagram-kcf}
 \end{figure}
 
 
 \paragraph{Korak učenja.}
-Na področju tarče $x$ velikosti $M \times N$, vsakemu slikovnemu elementu pripada vrednost Gaussove funkcije $y$. Ob času $p$ poznamo $\mathcal{X}^p = \{x^j: j=1,\ldots,p\}$ področij tarče. Razvrščevalnik učimo z minimizacijo funkcije \eqref{eq:classifier-function}, ki predstavlja uteženo srednjo kvadratično napako čez področja $\mathcal{X}^p$, pri čemer je vsako področje uteženo s konstanto $\beta_j \geq 0$. $\phi$ predstavlja neliearno preslikavo v več rasežni prostor, za katero lahko uporabimo implicitno preslikavo ali funkcijo jedra $K$. V KCF sledilniku se uporablja Gaussovo RBF jedro \eqref{eq:kcf-gauss}. Konstanta $\lambda \geq 0$ je regularizacijski parameter.
+Na področju tarče $x$ velikosti $M \times N$, vsakemu slikovnemu elementu pripada vrednost Gaussove funkcije $y$. Ob času $p$ poznamo $\mathcal{X}^p = \{x^j: j=1,\ldots,p\}$ področij tarče. Razvrščevalnik učimo z minimizacijo funkcije \eqref{eq:classifier-function}, ki predstavlja uteženo srednjo kvadratično napako čez področja $\mathcal{X}^p$, pri čemer je vsako področje uteženo s konstanto $\beta_j \geq 0$. $\phi$ predstavlja neliearno preslikavo v več razsežni prostor, za katero lahko uporabimo implicitno preslikavo ali funkcijo jedra $K$. V KCF sledilniku se uporablja Gaussovo RBF jedro \eqref{eq:kcf-gauss}. Konstanta $\lambda \geq 0$ je regularizacijski parameter.
 
 \begin{equation}
 \begin{aligned}
@@ -101,7 +103,7 @@ Jedro sledilnika temelji na KCF sledilniku za optični tok iz dela \cite{henriqu
 \begin{figure}[htb]
 	\centering
 	\input{./Slike/diagram-dskcf.tikz}
-	\caption{Diagram DS-KCF sledilnika po \cite{hannuna2016ds}.}
+	\caption[Diagram DS-KCF sledilnika]{Diagram DS-KCF sledilnika. Diagram je povzet po \cite{hannuna2016ds}.}
 	\label{fig:diagram-dskcf}
 \end{figure}
 

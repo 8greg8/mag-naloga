@@ -1,7 +1,7 @@
 \section{Matematični modeli}\label{sec:matematicni-modeli}
+HOOF in HAFA deskriptorja sta relativno nizko dimenzijski predstavitvi gibanja. Njuna povezava s porabo energije ni znana. Da bi rešili ta problem, moramo uporabiti regresijsko modeliranje, s katerim napovedujemo \emph{trenutno} porabo energije za \emph{vsako sliko zaporedja}.
+
 Metode strojnega učenja s podpornimi vektorji (SVM) se pogosto uporabljajo za klasifikacijo in regresijo \cite{chang2011a}. Njihova popularnost temelji na visoki uspešnosti generalizacije brez potrebe po predhodnem znanju \cite{chapelle1999support}. Njihova performanca delovanja ni odvisna od števila značilk, saj jih ponavadi uporabljamo v primerih ko ima vhodni prostor značilk $\mathcal{W}^n$ veliko moč $n$. Cilj teh metod je, da generiramo matematični model in ga uporabimo za predikcijo izhoda $y$ \cite{hsu2003practical}. 
-
-
 
 
 
@@ -58,7 +58,7 @@ Učnim vzorcem, za katere so $\alpha_i^0 > 0$ pravimo \textbf{podporni vektorji}
 
 
 \subsection{Linearno neločljiva učna množica}
-Pri linearno neločjivi učni množici $\mathcal{U}_l$ uvedemo dodaten vektor spremenljivk $\vec{\xi} \in \mathit{\Lambda}^i$ in rešujemo optimizacijski problem \eqref{eq:svm}, kjer je $C>0$ regularizacijski parameter napake in $b$ prag \cite{chapelle1999support}. Večji $C$ pomeni manjšo dopustnost napak. 
+Pri linearno neločljivi učni množici $\mathcal{U}_l$ uvedemo dodaten vektor spremenljivk $\vec{\xi} \in \mathit{\Lambda}^i$ in rešujemo optimizacijski problem \eqref{eq:svm}, kjer je $C>0$ regularizacijski parameter napake in $b$ prag \cite{chapelle1999support}. Večji $C$ pomeni manjšo dopustnost napak. 
 
 \begin{equation}\label{eq:svm}
 \begin{aligned}
@@ -76,11 +76,11 @@ Pri linearno neločjivi učni množici $\mathcal{U}_l$ uvedemo dodaten vektor sp
 
 
 \subsection{Funkcije jedra}
-V primeru, ko učnih vzorcev ne moremo razmejiti brez napak v linearno hiper-ravnino jih lahko preslikamo v več razsežni prostor z nelinearno preslikavo $\phi: \mathcal{\Xi} \subset \mathbb{R}^n \to \mathcal{\Mu} \subset \mathbb{R}^m, n < m$, kjer lahko postanejo linearno separabilni \cite{chapelle1999support,boughorbel2005generalized}.Tako v enačni \eqref{eq:svm-lagrange} namesto $\vec{x}_i^\top\vec{x}_j$ uporabimo $\phi(\vec{x_i})^\top\phi(\vec{x_j})$ Preslikovanju vzorcev v m-razsežni prostor se lahko znebimo s t.i. \textbf{ukano jedra} (angl. Kernel trick), kjer uporabimo implicitno preslikavo $K: \mathcal{\Xi} \times \mathcal{\Xi} \to \mathbb{R}$ \cite{boughorbel2005generalized}. V skladu z Mercerjevim izrekom mora biti $K(\vec{x}_i,\vec{x}_j)$ simetrična in pozitivna funkcija. Takrat obstaja preslikava $\phi$ tako da velja $K(\vec{x_i}, \vec{x_j}) = \phi(\vec{x}_i)^\top\phi(\vec{x}_j)$.
+V primeru, ko učnih vzorcev ne moremo razmejiti brez napak v linearno hiper-ravnino jih lahko preslikamo v več razsežni prostor z nelinearno preslikavo $\phi: \mathcal{\Xi} \subset \mathbb{R}^n \to \mathcal{\Mu} \subset \mathbb{R}^m, n < m$, kjer lahko postanejo linearno separabilni \cite{chapelle1999support,boughorbel2005generalized}.Tako v enačbi \eqref{eq:svm-lagrange} namesto $\vec{x}_i^\top\vec{x}_j$ uporabimo $\phi(\vec{x_i})^\top\phi(\vec{x_j})$ Preslikovanju vzorcev v m-razsežni prostor se lahko znebimo s t.i. \textbf{ukano jedra} (angl. Kernel trick), kjer uporabimo implicitno preslikavo $K: \mathcal{\Xi} \times \mathcal{\Xi} \to \mathbb{R}$ \cite{boughorbel2005generalized}. V skladu z Mercerjevim izrekom mora biti $K(\vec{x}_i,\vec{x}_j)$ simetrična in pozitivna funkcija. Takrat obstaja preslikava $\phi$ tako da velja $K(\vec{x_i}, \vec{x_j}) = \phi(\vec{x}_i)^\top\phi(\vec{x}_j)$.
 
 
 \subsubsection{Jedro radialnih baznih funkcij}{
-Jedro radialnih baznh funckij (RBF) ima naslednjo obliko z enim hiper-parametrom $\gamma$ \cite{hsu2003practical}:
+Jedro radialnih baznih funkcij (RBF) ima naslednjo obliko z enim hiper-parametrom $\gamma$ \cite{hsu2003practical}:
 
 \begin{equation} \label{eq:rbf-kernel}
 		K_{RBF}(\vec{x_i}, \vec{x_j}) = e^{

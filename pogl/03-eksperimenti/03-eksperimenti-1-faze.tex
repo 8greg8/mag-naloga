@@ -142,31 +142,29 @@ Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za špo
 
 
 \subsubsection{Pridobivanje podatkov}
-Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Zaradi časovne neusklajenosti posnetkov smo jih sinhronizirali glede na začetno sliko meritev. Zaradi rahlo različne časovne frekvence na posameznih kamerah, se časovne neusklajenosti do potankosti nismo mogli znebiti. Ta se je akumulirala skozi čas. Primer hrbtnega in stranskega posnetka je prikazan na sliki \ref{fig:primer-posnetka-rgb}.
+Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Zaradi časovne neusklajenosti posnetkov smo jih sinhronizirali glede na začetno sliko meritev. Zaradi rahlo različne časovne frekvence na posameznih kamerah, se časovne neusklajenosti do potankosti nismo mogli znebiti. Ta se je akumulirala skozi čas. Pridobili smo posnetke barvnih RGB slik in infrardeče IR posnetke hrbtnega dela. Primer hrbtnega stranskega  in IR posnetka je prikazan na sliki \ref{fig:primer-posnetka-rgb-ir}.
 
 \begin{figure}[htb]
 	\centering
-	\begin{subfigure}{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/normal-sv-150.png}
-		\caption{Stranska 150. slika.}
+	\begin{subfigure}[t]{0.3\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth]{normal-sv-150.png}
+		\caption{Stranska RBG slika.}
 	\end{subfigure}
 	~
-	\begin{subfigure}{0.45\columnwidth}
-		\includegraphics[width=\columnwidth]{./Slike/normal-bv-150.png}
-		\caption{Hrbtna 150. slika.}
+	\begin{subfigure}[t]{0.3\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth]{normal-bv-150.png}
+		\caption{Hrbtna RGB slika.}
 	\end{subfigure}
-	\caption[Hrbtna in stranska 150. slika RGB posnetkov iz prve serije]{Hrbtna in stranska 150. slika RGB posnetkov iz prve serije. Kljub časovni sinhronizaciji med posnetkoma, se časovni neusklajenosti nismo mogli popolnoma izogniti. Časovni frekvenci kamer nista bili sinhronizirani.}
-	\label{fig:primer-posnetka-rgb}
-\end{figure}
-
-Pridobili smo posnetke barvnih RGB slik in infrardeče IR posnetke hrbtnega dela. Primer IR posnetka za hrbntni pogled je prikazan na sliki \ref{fig:primer-posnetka-ir}.
-
-
-\begin{figure}[htb]
-	\centering
-	\includegraphics[width=0.25\columnwidth]{./Slike/normal-ir-150.png}
-	\caption{Hrbtna 150. slika IR posnetka iz prve serije.}
-	\label{fig:primer-posnetka-ir}
+	~
+    \begin{subfigure}[t]{0.3\columnwidth}
+    	\centering
+		\includegraphics[width=0.6\columnwidth]{normal-ir-150.png}
+		\caption{Hrbtna IR slika.}
+	\end{subfigure}
+	\caption[Hrbtna, stranska in IR 150. slika posnetkov iz prve serije]{Hrbtna, stranska in IR 150. slika posnetkov iz prve serije. Kljub časovni sinhronizaciji med posnetkoma, se časovni neusklajenosti nismo mogli popolnoma izogniti. Časovni frekvenci kamer nista bili sinhronizirani.}
+	\label{fig:primer-posnetka-rgb-ir}
 \end{figure}
 
 Snemali smo v ločljivosti $480 \times 640$. Hitrost RGB posnetkov je bila \SI{30}{fps}, za IR posnetke pa je hitrost znašala \SI{25}{fps}.  Naklon tekalne steze je bil od \SI{1.5}{\%} do \SI{2}{\%}.
@@ -191,14 +189,15 @@ Za izbrano področje slike iz zaporedja posameznega posnetka smo nato izračunal
 	\centering
 	\begin{subfigure}{0.45\columnwidth}
 		\includegraphics[width=\columnwidth]{./Slike/normal-sv-150.png}
-		\caption{Originalna slika}
+		\caption{Originalna slika.}
 	\end{subfigure}
 	~
 	\begin{subfigure}{0.45\columnwidth}
 	    \includegraphics[width=\columnwidth, frame]{./Slike/normal-sv-of-coded-150.png}
-		\caption{Slika optičnega toka}
+		\caption{Slika optičnega toka.}
+		\label{fig:stage1-of}
 	\end{subfigure}
-    \caption[Optični tok za $150$. stransko sliko prve serije testov z legendo barvnega kodiranja]{Optični tok za $150$. stransko sliko prve serije testov z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{17}{ppf}.}
+    \caption[Originalna $150$. stranska slika in optični tok]{Originalna $150$. stranska slika in njen optični tok. Gre za sliko 1. serije testov. Na sliki \subref{fig:stage1-of} je legenda barvnega kodiranja v spodnjem levem kotu s standardnim barvnim kodiranjem, ki je povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{17}{ppf}.}
     \label{fig:opticni-tok-stage1}
 \end{figure}
 
@@ -220,8 +219,8 @@ Vse tipe eksperimentov smo križno testirali glede na enak tip eksperimenta, le 
 
 \begin{figure}[!htb]
 	\centering
-	\input{./Slike/diagram-procesiranja-stage1.tikz}
-	\caption[Diagram elemntarnega postopka procesiranja za eksperimente 1. faze]{Diagram elemntarnega postopka procesiranja za eksperimente 1. faze. Izbranemu področju na sliki določimo optični tok }
+	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-stage1.tikz}}
+	\caption[Diagram postopka za eksperimente 1. faze]{Diagram postopka za eksperimente 1. faze. Izbranemu področju na sliki določimo optični tok.}
 	\label{fig:diagram-procesiranja-stage1}
 \end{figure}
 
@@ -270,7 +269,7 @@ Zakasnitev smo določili, kot časovni interval od trenutka spremembe hitrosti t
 
 
 \subsubsection{Ročna določitev področja tarče}
-HOOF deskriptorji so v teoriji robustni na šum, saj ta zaradi majhnih amplitud nima vpliva na obliko histograma. Vseeno pa se lahko pojavijo anomalije, ki povečajo amplitudo šuma na raven vrednosti merjenca. Pri tem mislimo predvsem na objekte in osebe v ozadju, ki se premikajo. Temu se lahko preprosto izognemo z določevanjem področja tarče. Ker je bil prizor na posnetkih razmeroma enostaven in ciklično monoton, smo se za preizkus naše hipoteze odločili, da bomo področja najprej določili ročno. Področja smo izbrali tako, da je bil merjenec ves čas skozi posnetek v izbranem področju. Izbrana področja za posamezne posnetke so predstavljena v tabeli \ref{tab:rocna-podrocja}, pri čemer so $h$ dolžina slike $w$ širina slike ter $x$ in $y$ slikovni koordinati.. Vsi nadaljni testi razen, kjer se uporablja sledilnik, temeljijo na izrezanih posnetkih, glede na ta področja.
+HOOF deskriptorji so v teoriji robustni na šum, saj ta zaradi majhnih amplitud nima vpliva na obliko histograma. Vseeno pa se lahko pojavijo anomalije, ki povečajo amplitudo šuma na raven vrednosti merjenca. Pri tem mislimo predvsem na objekte in osebe v ozadju, ki se premikajo. Temu se lahko preprosto izognemo z določevanjem področja tarče. Ker je bil prizor na posnetkih razmeroma enostaven in ciklično monoton, smo se za preizkus naše hipoteze odločili, da bomo področja najprej določili ročno. Področja smo izbrali tako, da je bil merjenec ves čas skozi posnetek v izbranem področju. Izbrana področja za posamezne posnetke so predstavljena v tabeli \ref{tab:rocna-podrocja}, pri čemer so $h$ dolžina slike $w$ širina slike ter $x$ in $y$ slikovni koordinati. Vsi nadaljnji testi razen, kjer se uporablja sledilnik, temeljijo na izrezanih posnetkih, glede na ta področja.
 
 \begin{table}[!htb]
 	\centering
@@ -299,7 +298,7 @@ V dodatnih \textit{mixed} modelih, smo združili posnetke kamer z različnim zor
 \subsubsection{Obremenitveni testi}
 Z obremenitvenimi testi smo želeli preizkusiti robustnost našega postopka. Opravili smo dve vrsti testov, in sicer: \textit{scale} teste in \textit{proj} teste. Pri \textit{scale} testih smo posnetke zmanjšali za \SI{50}{\%}. S tem smo simulirali večjo oddaljenost merjenca od kamere in tako preverili teoretično invariantnost HOOF deskriptorjev glede na skalo.
 
-Z vnašanjem projektivne transformacije v posnetke smo s \textit{proj} testi preizkušali robustnost celotnega postopka na deformacije slike, ki jo lahko vnašajo leče kamere. Projektivno transformacijo smo izvedli s pomočjo matlabovih funkcij \texttt{fitgeotrans} in \texttt{imwarp}. Za vhodne točke smo izbrali robove posamezne slike zaporedja. Za izhodne točke smo izbrali vrednosti v tabeli \ref{tab:projective}, pri čemer so $h$ dolžina slike, $w$ širina slike ter $x$ in $y$ slikovni koordinati.
+Z vnašanjem projektivne transformacije v posnetke smo s \textit{proj} testi preizkušali robustnost celotnega postopka na deformacije slike, ki jo lahko vnašajo leče kamere. Projektivno transformacijo smo izvedli s pomočjo Matlabovih funkcij \texttt{fitgeotrans} in \texttt{imwarp}. Za vhodne točke smo izbrali robove posamezne slike zaporedja. Za izhodne točke smo izbrali vrednosti v tabeli \ref{tab:projective}, pri čemer so $h$ dolžina slike, $w$ širina slike ter $x$ in $y$ slikovni koordinati.
 
 \begin{table}[!htb]
 	\centering
@@ -328,7 +327,7 @@ Z vnašanjem projektivne transformacije v posnetke smo s \textit{proj} testi pre
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=0.6\columnwidth]{projective-bv-150.png}
+		\includegraphics[width=0.4\columnwidth]{projective-bv-150.png}
 		\caption{Hrbtna slika}
 	\end{subfigure}
 	\caption[Primer projektivne transformacije 150. slike posnetka iz prve serije]{Primer projektivne transformacije 150. slike posnetka iz prve serije. Prikazani sta stranska in hrbtna transformirana slika. Transformirali smo slike \ref{fig:primer-posnetka-rgb}.}
@@ -342,11 +341,11 @@ Obstaja veliko ekipnih športov, kjer sodeluje več igralcev. Ker so vsi vidni n
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.6\columnwidth]{normal-sv-test-kcf2.png}
-	\caption[Sledenje merjencu s KCF na stranski sliki.]{Sledenje merjencu s KCF na stranski sliki. Prikazana je 150. slika RGB posnetka druge serije. Zeleni okvir prikazuje področje, ki ga je detektiral sledilnik.}
+	\caption[Sledenje merjencu s KCF na stranski sliki]{Sledenje merjencu s KCF na stranski sliki. Prikazana je 150. slika RGB posnetka druge serije. Zeleni okvir prikazuje področje, ki ga je detektiral sledilnik.}
 	\label{fig:sledenje}
 \end{figure} 
 
-Za sledenje smo uporabili KCF sledilnik, ki je implementiran v OpenCV knjižnici. Izbiro sledilnika smo opredelili že v poglavju \ref{sec:testiranje-sledilnikov-za-opticni-tok}. Pri sledenju smo uporabili sledeče parametre: pasovna širina gaussovega jedra $0.2$, linearni interpolacijski faktor za adaptacijo $0.075$, regularizacijski faktor $0.01$, največja velikost obliža (ang. Patch) $6400$, prostorska pasovna širina $0.0625$, aktivirano skaliranje značilk za izboljšanje hitrosti procesiranja, razcepljeni učni koeficienti na dve matrike, dekativirano zavijanje (ang. wrapping) okoli vrednosti jedra, nekompresirani deskriptorji za sivinske slike in kompresirani za barvne slike, aktivirana PCA metoda za kompresijo značilk, velikost kompresije $2$ in  stopnja učenja kompresije $0.15$.
+Za sledenje smo uporabili KCF sledilnik, ki je implementiran v OpenCV knjižnici. Izbiro sledilnika smo opredelili že v poglavju \ref{sec:testiranje-sledilnikov-za-opticni-tok}. Pri sledenju smo uporabili sledeče parametre: pasovna širina Gaussovega jedra $0.2$, linearni interpolacijski faktor za adaptacijo $0.075$, regularizacijski faktor $0.01$, največja velikost obliža (ang. Patch) $6400$, prostorska pasovna širina $0.0625$, aktivirano skaliranje značilk za izboljšanje hitrosti procesiranja, razcepljeni učni koeficienti na dve matrike, dekativirano zavijanje (ang. wrapping) okoli vrednosti jedra, nekompresirani deskriptorji za sivinske slike in kompresirani za barvne slike, aktivirana PCA metoda za kompresijo značilk, velikost kompresije $2$ in  stopnja učenja kompresije $0.15$.
 
 KCF sledilnik smo inicializirali z ročnim obkroževanjem področja tarče na prvi sliki vsakega posnetka. Področja tarče, ki jih je izbral sledilnik, smo uporabili za izrezovanje področij merjenca iz slik optičnega toka. HOOF deskriptorje smo izračunali le na izbranem področju. 
 
@@ -355,7 +354,7 @@ KCF sledilnik smo inicializirali z ročnim obkroževanjem področja tarče na pr
 \subsubsection{Simulacija vibracij kamere}
 Kadar uporabljamo ročne kamere, pogosto pride do tresenja. Vibracije smo simulirali z majhnimi naključnimi premiki in rotacijo posameznih slik iz video zaporedja. Vsako sliko smo transformirali z Evklidsko transformacijo. Pri tem smo translacijo omejili na \SI{4}{\%} velikosti slike. Rotacija je bila omejena na \SI{0.13}{rad}. 
 
-Translacijo in rotacijo smo filtrirali še s Kalmanovim filtrom, tako da smo dobili bolj realistično simulacijo. Za Kalmanov filter smo uporabili enak model, kot je predstavljen v poglavju \ref{sec:kalmanov-filter}. Začetne variance filtra smo določili empirično tako, da smo dobili čimbolj realistične rezultate. Varianca šuma merilnega modela je znašala $\sigma_\vec{z}^2=1024$, variancal šuma modela gibanja pa $\sigma_\vec{x}^2=2$. Za kovariančno matriko predikcije smo uporabili varianco $\sigma_\vec{P}^2=2$.
+Translacijo in rotacijo smo filtrirali še s Kalmanovim filtrom, tako da smo dobili bolj realistično simulacijo. Za Kalmanov filter smo uporabili enak model, kot je predstavljen v poglavju \ref{sec:kalmanov-filter}. Začetne variance filtra smo določili empirično tako, da smo dobili čimbolj realistične rezultate. Varianca šuma merilnega modela je znašala $\sigma_\vec{z}^2=1024$, varianca šuma modela gibanja pa $\sigma_\vec{x}^2=2$. Za kovariančno matriko predikcije smo uporabili varianco $\sigma_\vec{P}^2=2$.
 
 S simulacijo vibracij smo naredili obremenitveni test za modele z vključenim sledilnikom. Rezultati so anotirani s \textit{sh} kratico. Primer delovanja sledilnika je prikazan na sliki \ref{fig:vibracije}.
 
@@ -402,11 +401,11 @@ Za določitev področja posameznega igralca smo uporabili KCF sledilnik. Kadar s
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=0.6\columnwidth, frame]{stage1-squash-flo-corrected.png}
+		\includegraphics[width=0.4\columnwidth, frame]{stage1-squash-flo-corrected.png}
 		\caption{Slika optičnega toka.}
 		\label{fig:of-squash}
 	\end{subfigure}
-	\caption[Slika sledenja in optičnega toka za igralca prve igre terenskih squash eksperimentov]{Slika sledenja in optičnega toka za igralca prve igre terenskih squash eksperimentov. Sledili smo modremu igralcu, ki smo ga uporabili za učne vzorce. Zeleni okvir na sliki \subref{fig:sledenje-squash}) prikazuje področje detekcije 276. slike posnetka. Korespondečni optični tok področja je prikazan na sliki \subref{fig:of-squash} z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{31}{ppf}. }
+	\caption[Slika sledenja in optičnega toka za igralca terenskih eksperimentov]{Slika sledenja in optičnega toka za igralca prve igre terenskih eksperimentov. Sledili smo modremu igralcu, ki smo ga uporabili za učne vzorce. Zeleni okvir na sliki \subref{fig:sledenje-squash}) prikazuje področje detekcije 276. slike posnetka. Korespondečni optični tok področja je prikazan na sliki \subref{fig:of-squash} z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{31}{ppf}. }
 	\label{fig:squash}
 \end{figure}
 
@@ -416,7 +415,7 @@ Po določevanju optičnega toka (slika \ref{fig:squash}), smo uporabili HOOF-HAF
 
 \begin{figure}[!htb]
 	\centering
-	\input{./Slike/diagram-procesiranja-field-stage1.tikz}
+	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-field-stage1.tikz}}
 	\caption[Diagram procesiranja terenskih eksperimentov 1. faze]{Diagram procesiranja terenskih eksperimentov 1. faze. Področju, ki smo ga dobili s KCF sledinikom, smo določili optični tok. Sledilo je učenje na HOOF-HAFA deskriptorjih, Rezultate smo filtrirali s Gaussovim filtrom.}
 	\label{fig:diagram-procesiranja-field-stag1}
 \end{figure}
@@ -438,7 +437,7 @@ Po določevanju optičnega toka (slika \ref{fig:squash}), smo uporabili HOOF-HAF
 
 
 \subsection{Detekcija dihanja}
-Za prikaz splošne uporabnosti elementarnega postoka iz poglavja \ref{sec:elementarni-postopek}, smo ga uporabili za detekcijo dihanja. Za razliko od uporabe postopka v športu, lahko detekcijo dihanja uporabljamo za medicinske namene, v skrbi za starejše ali pri nadzornih kamerah. Koncept optičnega merjenja nam omogoča, da aplikacijo uporabimo z daljših razdalj, dokler nam optični sistem to omogoča. 
+Za prikaz splošne uporabnosti elementarnega postopka iz poglavja \ref{sec:elementarni-postopek}, smo ga uporabili za detekcijo dihanja. Za razliko od uporabe postopka v športu, lahko detekcijo dihanja uporabljamo za medicinske namene, v skrbi za starejše ali pri nadzornih kamerah. Koncept optičnega merjenja nam omogoča, da aplikacijo uporabimo z daljših razdalj, dokler nam optični sistem to omogoča. 
 
 Seveda obstaja že kar nekaj aplikacij monitoringa pacientov s pomočjo računalniškega vida. Naša glavna motivacija je bilo testiranje predlagane metode na drugačnem problemu.
 
@@ -447,21 +446,21 @@ Za testiranje detekcije dihanja smo posneli video moškega merjenca, starosti 42
 
 \begin{figure}[htb]
 	\centering
-	\begin{subfigure}[t]{0.45\columnwidth}
+	\begin{subfigure}[t]{0.3\columnwidth}
 		\centering
-		\includegraphics[width=0.75\columnwidth]{breathtest-500.png}
+		\includegraphics[width=\columnwidth]{breathtest-500.png}
 		\caption{IR slika dihanja.}
 		\label{fig:dihanje-orig}
 	\end{subfigure}
 	~
-	\begin{subfigure}[t]{0.45\columnwidth}
+	\begin{subfigure}[t]{0.3\columnwidth}
 		\centering
-		\includegraphics[width=0.75\columnwidth, frame]{breathtest-flow-coding.png}
+		\includegraphics[width=\columnwidth, frame]{breathtest-flow-coding.png}
 		\caption{Optični tok dihanja.}
 		\label{fig:dihanje-of}
 	\end{subfigure}
 	~
-	\begin{subfigure}[t]{0.45\columnwidth}
+	\begin{subfigure}[t]{0.3\columnwidth}
 		\centering
 		\includegraphics[width=\columnwidth]{stage1-breathtest-hist-en}
 		\caption{HOOF histogram.}
@@ -481,8 +480,8 @@ Iz posnetka smo izbrali dva zaporedja slik s trajanjem \SI{5}{min}. Prvo zapored
 
 \begin{figure}[htb]
 	\centering
-	\input{./Slike/diagram-procesiranja-dihanje.tikz}
-	\caption[]{Diagram procesiranja pri uporabi metode za detekcijo dihanja.}
+	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-dihanje.tikz}}
+	\caption[Diagram procesiranja pri uporabi metode za detekcijo dihanja]{Diagram procesiranja pri uporabi metode za detekcijo dihanja.}
 	\label{fig:dihanje-postopek}
 \end{figure}
 

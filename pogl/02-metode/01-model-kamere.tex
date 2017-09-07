@@ -5,14 +5,14 @@ Za geometrijski model kamere uporabimo perspektivni model, ki je predstavljen s 
 \begin{figure}[htb]
 \centering
 \input{./Slike/perspektivni-model.tikz}
-\caption{Perspektivni model kamere.}
+\caption[Perspektivni model kamere]{Perspektivni model kamere.}
 \label{fig:perspektivni-model}
 \end{figure}
 
 
-\textbf{Koordinatni sistem kamere} (KSK) je postavljen tako, da \textbf{optična os} sovpada s $Z$ osjo. Zaradi poenostavitve KSK sovpada z globalnim koordinatnim sistemom.  Središče KSK $\vec{O}$ se imenuje projekcijsko središče, skozi katerega se točka prizora $\vec{p} = \left[ X~Y~Z \right]^\top$ projecira na slikovno ravnino \cite{trucco1998introductory}.
+\textbf{Koordinatni sistem kamere} (KSK) je postavljen tako, da \textbf{optična os} sovpada s $Z$ osjo. Zaradi poenostavitve KSK sovpada z globalnim koordinatnim sistemom.  Središče KSK $\vec{O}$ se imenuje projekcijsko središče, skozi katerega se točka prizora $\vec{p} = \left[ X~Y~Z \right]^\top$ projicira na slikovno ravnino \cite{trucco1998introductory}.
 
-\textbf{Slikovna ravnina} (ang. image plane) je ravnina $\mathit{\Omega} \subset \mathbb{R}^2$, ki leži na razdalji $f$ od projekcijskega središča $O$. Razdalja $f$ se imenuje goriščna razdalja (ang. focal length) \cite{trucco1998introductory}. Točka $\vec{c} = \left[c_x~c_y \right]^\top$ se nahaja na poziciji, kjer optična os prebada slikovno ravnino $\mathit{\Omega}$. Imenuje se optično središče slikovne ravnine (ang. principal point). Točka $\vec{q} = [x~y]^\top$ se nahaja na poziciji, kjer daljica med projekcijskim središčem $\vec{O}$ in točko prizora $\vec{p}$ prebada slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Točka je slika prizora $\vec{q} = [x~y]^\top$, kjer sta $x$ in $y$ slikovni koordinati. Kadar je $\vec{c} = \left[0~0\right]^\top$, lahko sliko $\vec{q}$ na slikovni ravnini $\mathit{\Omega}$ predstavimo z enačbo \eqref{eq:slika-delca}.
+\textbf{Slikovna ravnina} (ang. Image plane) je ravnina $\mathit{\Omega} \subset \mathbb{R}^2$, ki leži na razdalji $f$ od projekcijskega središča $O$. Razdalja $f$ se imenuje goriščna razdalja (ang. Focal length) \cite{trucco1998introductory}. Točka $\vec{c} = \left[c_x~c_y \right]^\top$ se nahaja na poziciji, kjer optična os prebada slikovno ravnino $\mathit{\Omega}$. Imenuje se optično središče slikovne ravnine (ang. Principal point). Točka $\vec{q} = [x~y]^\top$ se nahaja na poziciji, kjer daljica med projekcijskim središčem $\vec{O}$ in točko prizora $\vec{p}$ prebada slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Točka je slika prizora $\vec{q} = [x~y]^\top$, kjer sta $x$ in $y$ slikovni koordinati. Kadar je $\vec{c} = \left[0~0\right]^\top$, lahko sliko $\vec{q}$ na slikovni ravnini $\mathit{\Omega}$ predstavimo z enačbo \eqref{eq:slika-delca}.
 
 \begin{equation}
 	\vec{q} = f \frac{\vec{p}}{Z}.
@@ -43,7 +43,7 @@ Slikovne koordinate so v resnici diskretne, saj sliko sestavlja polje slikovnih 
     \label{eq:diskretne-slikovne-koordinate}
 \end{equation}
 
-Matrika $\vec{M}_{int}$ v enačbi \eqref{eq:diskretne-slikovne-koordinate} je intrinsična matrika \cite{trucco1998introductory}. Predstavljena je z enačbo \eqref{eq:intrinsic} in vsebuje intrinzične parametre kamere, kjer sta $f_u$ in $f_v$ določena z enačbo \eqref{eq:focal}.
+Matrika $\vec{M}_{int}$ v enačbi \eqref{eq:diskretne-slikovne-koordinate} je intrinzična matrika \cite{trucco1998introductory}. Predstavljena je z enačbo \eqref{eq:intrinsic} in vsebuje intrinzične parametre kamere, kjer sta $f_u$ in $f_v$ določena z enačbo \eqref{eq:focal}.
 
 \begin{equation}
 \vec{M}_{int} = \begin{bmatrix}
@@ -70,7 +70,7 @@ Koordinatni sistem kamere lahko transliramo in rotiramo tako, da ne sovpada več
 \begin{figure}[htb]
 \centering
 \input{./Slike/premikanje-kamere.tikz}
-\caption{Koordinatni sistem kamere ne sovpada z globalnim koordinatnim sistemom}
+\caption[Koordinatni sistem kamere in globalni koordinatni sistem]{Koordinatni sistem kamere (KSK) in globalni koordinatni sistem (GKS). KSK je predstavljen s črnimi osmi. GKS je predstavljen z rdečimi osmi. Koordinatna sistema med sabo ne sovpadata.}
 \label{fig:premikanje-kamere}
 \end{figure}
 

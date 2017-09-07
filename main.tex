@@ -31,8 +31,9 @@
 % Declare new unit
 \DeclareSIUnit{\cal}{cal}
 \DeclareSIUnit{\kcal}{\kilo\cal}
-\DeclareSIUnit{\joul}{J}
-\DeclareSIUnit{\kjoul}{\kilo\joul}
+\DeclareSIUnit{\joul}{\J}
+\DeclareSIUnit{\kjoul}{\kJ}
+\DeclareSIUnit{\min}{\minute}
 \sisetup{output-decimal-marker = {,}}
 %\sisetup{per-mode=reciprocal}
 %\sisetup{group-separator = {.}}
@@ -261,7 +262,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 \zamaknirobsodihstrani{0mm}
 
 %*************************** NASLOVNA STRAN *****************************
-\naslov{Brezkontaktno merjenje telesne aktivnosti in napora}
+\naslov{Kvantitativno brezkontaktno merjenje energijske porabe iz videa in 3D slik}
 \avtor{Gregor Koporec} \univerza{Univerza v Ljubljani}
 \fakulteta{Fakulteta za elektrotehniko}
 \delo{Magistrsko delo}
@@ -280,7 +281,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 %\maketitle
 
 %************************ NOTRANJA STRAN PRESEREN ********************************
-\maketitlep
+%\maketitlep
 \maketitlepp
 
 %********************* POVZETEK V SLO PRESEREN ****************************
@@ -328,6 +329,6 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 \bibliography{./bib/experiments,./bib/fatigue,./bib/features,./bib/filters,./bib/hr-motion-sensor,./bib/image-stitching,./bib/main,./bib/metabolism,./bib/metrics,./bib/optical-flow,./bib/physical-activity,./bib/related-work,./bib/scene-flow,./bib/sleep-apnoea,./bib/svm,./bib/tracking} 
 
 %**************** PRILOGE ************************
-\appendix
+%\appendix
 
 \end{document}

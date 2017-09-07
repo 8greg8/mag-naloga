@@ -11,7 +11,7 @@ Med laboratorijskimi in terenskimi eksperimenti je za merjenca SUBJ1 in SUBJ2 pr
 \subsubsection{Združevanje slik iz dveh Kinect kamer}\label{sec:zdruzevanje}
 
 \paragraph{Združevanje z značilkami}
-Časovno sinhornizirana zaporedja slik smo poskušali združiti z metodo panoramskega šivanja slik z uporabo značilk, kot je opisano v delu \cite{brown2007automatic}. Tu smo namesto SIFT značilk uporabili SURF značilke.
+Časovno sinhronizirana zaporedja slik smo poskušali združiti z metodo panoramskega šivanja slik z uporabo značilk, kot je opisano v delu \cite{brown2007automatic}. Tu smo namesto SIFT značilk uporabili SURF značilke.
 
 
 \paragraph{Združevanje s kontrolnimi točkami}
@@ -19,20 +19,20 @@ Zaporedja slik smo poskušali združiti z ročnim določevanjem kontrolnih točk
 
 
 \paragraph{Prilagojeno združevanje}
-Zaradi nezadovoljivih rezultatov klasičnih metod združevanja stereo slik, smo razvili metodo, ki je prilagojena za Kinect kamere. Iz kamer smo pridobili intrinzične parametre infra-redečega (IR) senzora, in sicer: slikovni koordinati goriščne razdalje $f_u$ in $f_v$ ter slikovni koordinati optičnega središča slike (ang. principal point) $c_u$ in $c_v$. Intrinsične parametre smo uporabili za določitev intrizične matrike $\vec{M}_{int}$ po enačbi \eqref{eq:intrinsic}.
+Zaradi nezadovoljivih rezultatov klasičnih metod združevanja stereo slik, smo razvili metodo, ki je prilagojena za Kinect kamere. Iz kamer smo z uporabo knjižnice libfreenect2 0.2 \cite{lingzhu2016libfreenect2} pridobili intrinzične parametre infra-redečega (IR) senzorja, in sicer: slikovni koordinati goriščne razdalje $f_u$ in $f_v$ ter slikovni koordinati optičnega središča slike (ang. principal point) $c_u$ in $c_v$. Intrinsične parametre smo uporabili za določitev intrizične matrike $\vec{M}_{int}$ po enačbi \eqref{eq:intrinsic}.
 
 
 Ker pravih ekstrinsičnih parametrov kamer nismo poznali, smo jih le ocenili z metodo določevanja sečišča vidnih polj obeh kamer. Sečišče je prikazano kot rdeča linija na sliki \ref{fig:zdruzevanje}. S to metodo smo določili translacijski vektor $\vec{t} = \left [ t_x~ t_y~ t_z \right]^\top$ in rotacijsko matriko $\vec{R}$ iz Eulerjevih kotov.
 
-S sledenjem igralca z DS-KCF algoritmom, smo s pomočjo projekcijske matrike \eqref{eq:projection-matrix} določili center tarče v metričnih enotah za vsako sliko zaporedja leve in desne kamere. Kadar slikovni element ni vseboval podatkov globine, smo za center tarče izbrali najbližji slikovni element z veljavno globino.
+S sledenjem igralca z DS-KCF algoritmom, smo s pomočjo projekcijske matrike \eqref{eq:projection-matrix} določili center tarče v metričnih enotah za vsako sliko zaporedja leve in desne kamere. Če center tarče ni vseboval podatkov globine, smo za center izbrali najbližjo točko z veljavno globino.
 
-Prva slika združenega zaporedja je bila slika kamere, kjer se igralec prvič pojavi. Nadaljne slike smo izbirali med zaporedjema kamer glede na pozicijo centra tarče. Ko je šel center tarče skozi upragovljeno mejo, ki je na sliki \ref{fig:zdruzevanje} prikazana z modro linijo smo preklopili na drugo kamero. Razdalja med pragom in sečiščem je znašala \SI{200}{mm}.
+Prva slika združenega zaporedja je bila slika kamere, kjer se igralec prvič pojavi. Nadaljnje slike smo izbirali med zaporedjema kamer glede na pozicijo centra tarče s histerezo, ki ne na sliki \ref{fig:zdruzevanje} prikazana z modrimi linijami. Pogled spremenimo samo takrat, ko center tarče prečka linijo histereze na igrišču. Razdalja med modrima črtama je znašala \SI{400}{mm}.
 
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\columnwidth]{zdruzevanje-example.png}
-	\caption[Določevanje sečišča vidnih polj leve in desne Kinect kamere]{Določevanje sečišča vidnih polj leve in desne Kinect kamere. Na sliki sta prikazani prvi sliki zaporedja leve in desne Kinect kamere 1. seta 2. igre terenskega eksperimenta iz 2. faze. Označen je 4. igralec. Zelena barva koordiat središča tarče predstavlja izbrano kamero. Kamera z rumeno barvo ni izbrana. Sečišče je rdeča linija. Modri liniji sta pragova za preklop med kamerama. Ležita \SI{200}{mm} levo in desno od sečišča.}
+	\caption[Določevanje sečišča vidnih polj leve in desne Kinect kamere]{Določevanje sečišča vidnih polj leve in desne Kinect kamere. Na sliki sta prikazani prvi sliki zaporedja leve in desne Kinect kamere 1. seta 2. igre terenskega eksperimenta iz 2. faze. Označen je 4. igralec. Zelena barva koordinat centra tarče predstavlja izbrano kamero. Kamera z rumeno barvo ni izbrana. Sečišče je rdeča linija. Modri liniji sta pragova za preklop med kamerama. Razdalja med njima je \SI{400}{mm}.}
 	\label{fig:zdruzevanje}
 \end{figure}
 
@@ -41,7 +41,7 @@ Prva slika združenega zaporedja je bila slika kamere, kjer se igralec prvič po
 \subsubsection{Mrežno iskanje \texorpdfstring{$\nu$}{nu}-RBF}
 Med evaluacijo eksperimentov 1. faze smo ugotovili, da z regresijo \esvr pogosto dobimo preobremenjene (ang. Overfitted) modele. Pri takih modeli je število podpornih vektorjev zelo visoko. Lahko se zgodi, da postanejo vsi vektorji značilk podporni vektorji. Preobremenjeni modeli lahko dajejo solidne rezultate, vendar pa so ti nerealistični. Takoj, ko bi v tak model vnesli rahlo spremenjene podatke, ne bi več delovali.
 
-Zaradi tovrstnih problemov smo v našem postopku regresijo \esvr zamenjali z \nusvr. Izkazalo se je, da tudi ta ne deluje, čeprav pri njej uporabljamo dodatni parameter $\nu$, s katerim v teoriji kontroliramo razmerje števila podpornih vektorjev, kot je opisano v poglavju \ref{sec:regresija-nusvr}. Chang et. al nam v delu \cite{chang2002training} parameter $\nu$ bolj natačno opiše kot spodnjo mejo razmerja števila podpornih vektorjev. Parameter $\nu$ tako v resnici ne predstavlja omejitve, s katero bi kaznovali prekomerno učneje modela. V ta namen smo razvili mrežno iskanje \nurbf, ki je predstavljeno v poglavju \ref{sec:nurbf}. 
+Zaradi tovrstnih problemov smo v našem postopku regresijo \esvr zamenjali z \nusvr. Izkazalo se je, da tudi ta ne deluje, čeprav pri njej uporabljamo dodatni parameter $\nu$, s katerim v teoriji kontroliramo razmerje števila podpornih vektorjev, kot je opisano v poglavju \ref{sec:regresija-nusvr}. Chang et. al nam v delu \cite{chang2002training} parameter $\nu$ bolj natančno opiše kot spodnjo mejo razmerja števila podpornih vektorjev. Parameter $\nu$ tako v resnici ne predstavlja omejitve, s katero bi kaznovali prekomerno učenje modela. V ta namen smo razvili mrežno iskanje \nurbf, ki je predstavljeno v poglavju \ref{sec:nurbf}. 
 
 Razvito mrežno iskanje uporablja regresijo \nusvr in jedro RBF, zato smo ju uporabljali tudi za učenje modelov. Celoten postopek krajše imenujemo kar \nurbf.
 
@@ -107,7 +107,7 @@ Velikost diagonale na laboratorijskih testih uporabljamo kot referenco. To pa za
 		$P_1$ & 389 & 452 \\
 		\bottomrule
 	\end{tabular}
-	\caption[Tabela izbranih točk okvirja merjenca, s katerimi smo določili amplitudni faktor]{Tabela izbranih točk okvirja merjenca, s katerimi smo določili amplitudni faktor. Točka $P_0$ je zgornji levi kot točka $P_1$ pa spodnji levi kot modrega okvirja na sliki \ref{fig:diag-bbox}}
+	\caption[Tabela izbranih točk okvirja za amplitudni faktor]{Tabela izbranih točk okvirja merjenca, s katerimi smo določili amplitudni faktor. Točka $P_0$ je zgornji levi kot točka $P_1$ pa spodnji levi kot modrega okvirja na sliki \ref{fig:diag-bbox}}
 	\label{tab:diag}
 \end{table}
 
@@ -164,7 +164,7 @@ Snemali smo z dvema Microsoft Xbox Kinect V2 kamerama. Kameri sta bili od tekaln
 		\includegraphics[width=\columnwidth]{lab-posnetek-zadaj-corrected.jpg}
 		\caption{Hrbtni pogled.}
 	\end{subfigure}
-	\caption[Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze]{Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze. Na sliki sta vidna podstavka, na katerih so postavljene Kinect kamere. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}.}
+	\caption[Stranski in hrbtni pogled izvajanja lab. testov 2. faze]{Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze. Na sliki sta vidna podstavka, na katerih so postavljene Kinect kamere. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}.}
 	\label{fig:lab-postavitev-kamer}
 \end{figure}
 
@@ -189,7 +189,7 @@ Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $5
 	\label{fig:stage2-lab-of-depth}
 \end{figure}
 
-Obremenilni test smo izvajali s pomočjo sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Uporabili smo  tekočo  preprogo HP Cosmos. Z obremenilnim testom smo pridobili podatke enrgijske porabe šestih različnih merjencev z oznakami: SUBJ1, SUBJ2, SUBJ4, SUBJ7 SUBJ8 in SUBJ9. Vzorčili smo s frekvenco \SI{0.2}{\hertz}.
+Obremenilni test smo izvajali s pomočjo sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Uporabili smo  tekočo  preprogo HP Cosmos. Z obremenilnim testom smo pridobili podatke energijske porabe šestih različnih merjencev z oznakami: SUBJ1, SUBJ2, SUBJ4, SUBJ7 SUBJ8 in SUBJ9. Vzorčili smo s frekvenco \SI{0.2}{\hertz}.
 
 \subsubsection{Protokol izvajanja meritev}
 Test smo pričeli z eno minutnim mirovanjem na tekalni stezi. Sledilo je tri minutno ogrevanje s hitrostjo teka \SI{5}{\km\per\hour}, pri naklonu preproge \SI{0}{\%}. Nadaljevali smo s 3 minutnim tekom s hitrostjo \SI{6}{\km\per\hour}. Po treh minutah smo naklon tekoče preproge  dvignili za \SI{2}{\%} in ga nismo več spreminjali. Po pretečeni minuti na  tretji stopnji (hitrost \SI{6}{\km\per\hour}, naklon \SI{2}{\%}) se je hitrost teka vsaki dve  minuti  povečevala za \SI{1}{\km\per\hour}. Test smo izvajali brez prekinitve do pojava objektivnih oz. subjektivnih razlogov za prekinitev testa. 
@@ -258,7 +258,7 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom KCF. Za tako izbrano pod
 \begin{figure}[!htb]
 	\centering
 	\input{./Slike/diagram-procesiranja-of-stage2.tikz}
-	\caption{Diagram postopka procesiranja z optičnim tokom za eksperimente 2. faze.}
+	\caption[Diagram postopka z optičnim tokom za eksperimente 2. faze]{Diagram postopka procesiranja z optičnim tokom za eksperimente 2. faze.}
 	\label{fig:diagram-procesiranja-of-stage2}
 \end{figure}
 
@@ -285,7 +285,7 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom DS-KCF. Za tako izbrano 
 	%	\input{./Slike/rgb-cube.tikz}
 	%	\caption{Hrbtna slika.}
 	%\end{subfigure}
-	\caption[Stranska in hrbtna slika prostorskega toka laboratorijskih eksperimentov]{Stranska in hrbtna slika prostorskega toka laboratorijskih eksperimentov. Slike smo pridobili s programom \texttt{Scene-Flow-Impair} avtorja \cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2 kamero. Sliki sta 8-bit RGB sliki. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$ kanal G $\mu_y$ ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
+	\caption[Stranska in hrbtna slika prostorskega toka lab. eksperimentov]{Stranska in hrbtna slika prostorskega toka laboratorijskih eksperimentov. Slike smo pridobili s programom \texttt{Scene-Flow-Impair} avtorja \cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2 kamero. Sliki sta 8-bit RGB sliki. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$ kanal G $\mu_y$ ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
 	\label{fig:stage2-lab-sf-pd}
 \end{figure}
 
@@ -314,14 +314,14 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom DS-KCF. Za tako izbrano 
 		\includegraphics[width=\columnwidth]{stage2-lab-bv-sf-hist-sl}
 		\caption{Histogram hrbtne slike.}
 	\end{subfigure}
-	\caption[Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino]{Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino. Gre za prostorska toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{5.7}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo})\SI{10,3}{\m\per\s}. Projekcijama prostorskega toka pripadata izračunana HOOF-HAFA histograma.}
+	\caption[Projekcije prostorskih tokov na slikovno ravnino]{Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino. Gre za prostorska toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{5.7}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo})\SI{10,3}{\m\per\s}. Projekcijama prostorskega toka pripadata izračunana HOOF-HAFA histograma.}
 	\label{fig:prostorski-tok-stage2}
 \end{figure}
 
 \begin{figure}[!htb]
 	\centering
-	\input{./Slike/diagram-procesiranja-sf-stage2.tikz}
-	\caption{Diagram postopka procesiranja s prostorskim tokom za eksperimente 2. faze.}
+	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-sf-stage2.tikz}}
+	\caption[Diagram postopka s prostorskim tokom za eksperimente 2. faze]{Diagram postopka procesiranja s prostorskim tokom za eksperimente 2. faze.}
 	\label{fig:diagram-procesiranja-sf-stage2}
 \end{figure}
  
@@ -418,7 +418,7 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 		\includegraphics[width=\columnwidth]{stage2-field-sf-left-tracked.png}
 		\caption{DS-KCF sledilnik.}
 	\end{subfigure}
-	\caption[Predstavitev delovanja KCF in DS-KCF sledilnikov za terenske eksperimente]{Predstavitev delovanja KCF in DS-KCF sledilnikov za terenske eksperimente. Za primerjavo sledilnikov sta prikazani 120. sliki leve kamere prvega seta 2. igre za merjenca SUBJ9. Zelena okvirja prikazujeta detektirani področji za posamezen sledilnik. Opazimo, da sta področji različni.}
+	\caption[Predstavitev delovanja KCF in DS-KCF sledilnikov]{Predstavitev delovanja KCF in DS-KCF sledilnikov za terenske eksperimente. Za primerjavo sledilnikov sta prikazani 120. sliki leve kamere prvega seta 2. igre za merjenca SUBJ9. Zelena okvirja prikazujeta detektirani področji za posamezen sledilnik. Opazimo, da sta področji različni.}
 	\label{fig:stage2-field-tracked}
 \end{figure}
 
@@ -445,7 +445,7 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-sf-pd-tr-corrected.jpg}
 		\caption{Prostorski tok.}
 	\end{subfigure}
-	\caption[Optični tok, prostorski tok in njegova projekcija na slikovno ravnino]{Optični tok, prostorski tok in njegova projekcija na slikovno ravnino. V spodnjem levem kotu optičnega tok in projekcije prostorskega toka sta legendi barvnega kodiranja. Uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka na sliki  \subref{fig:stage2-field-of}) je  \SI{10}{ppf}. Maksimalna amplituda projekcije prostorskega toka je \SI{13.7}{\m\per\s}. Sliko prostorskega toka \subref{fig:stage2-field-pd}) smo pridobili s programom \texttt{Scene-Flow-Impair} avtorja \cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2 kamero. Slika je 8-bitna RGB. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$ kanal G $\mu_y$ ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
+	\caption[Optični tok, prostorski tok in njegova projekcija]{Optični tok, prostorski tok in njegova projekcija na slikovno ravnino. V spodnjem levem kotu optičnega tok in projekcije prostorskega toka sta legendi barvnega kodiranja. Uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka na sliki  \subref{fig:stage2-field-of}) je  \SI{10}{ppf}. Maksimalna amplituda projekcije prostorskega toka je \SI{13.7}{\m\per\s}. Sliko prostorskega toka \subref{fig:stage2-field-pd}) smo pridobili s programom \texttt{Scene-Flow-Impair} avtorja \cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2 kamero. Slika je 8-bitna RGB. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$ kanal G $\mu_y$ ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
 	\label{fig:stage2-field-sfof}
 \end{figure}
 
@@ -462,7 +462,7 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 		\includegraphics[width=\columnwidth]{stage2-field-bv-sf-hist-sl}
 		\caption{Histogram prostorskega toka.}
 	\end{subfigure}
-	\caption[Histograma optičnega in projekcije prostorskega toka]{Histograma optičnega in projekcije prostorskega toka. Histogram za optični tok smo dobili iz slike \ref{fig:stage2-field-sfof}\subref{fig:stage2-field-of}). Histogram projekcije prostorskiega toka smo dobili iz slike \ref{fig:stage2-field-sfof}\subref{fig:stage2-field-pd}}
+	\caption[Histograma optičnega in projekcije prostorskega toka]{Histograma optičnega in projekcije prostorskega toka. Histogram za optični tok smo dobili iz slike \ref{fig:stage2-field-sfof}\subref{fig:stage2-field-of}). Histogram projekcije prostorskega toka smo dobili iz slike \ref{fig:stage2-field-sfof}\subref{fig:stage2-field-pd}}
 	\label{fig:stage2-field-hist}
 \end{figure}
 
@@ -471,7 +471,7 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 \begin{figure}[!htb]
 	\centering
 		\includegraphics[width=0.6\columnwidth]{squash-postavitev-corrected.jpg}	
-	\caption{Postavitev Kinect kamer pri terenskih testih 2. faze.}
+	\caption[Postavitev Kinect kamer pri terenskih testih 2. faze]{Postavitev Kinect kamer pri terenskih testih 2. faze.}
 	\label{fig:field-postavitev-kamer}
 \end{figure}
 
@@ -490,17 +490,17 @@ Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $5
 		\includegraphics[width=1.2\columnwidth]{stage2-field-right-depth-sl}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
-	\caption{Stranska in hrbtna globinska slika pri terenskih testih 2. faze.}
+	\caption[Stranska in hrbtna globinska slika pri terenskih testih 2. faze]{Stranska in hrbtna globinska slika pri terenskih testih 2. faze.}
 	\label{fig:stage2-field-of-depth}
 \end{figure}
 
-Fiziološke parametre smo pridobili s pomočjo prenosnega sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Frekvenca vzorčenja se je spreminjala, v povrečju pa je znašala \SI{0.5}{\hertz}. S testom smo pridobili podatke energijske porabe šestih različnih merjencev z oznakammi: SUBJ1, SUBJ2, SUBJ7, SUBJ8, SUBJ9 in SUBJ10.
+Fiziološke parametre smo pridobili s pomočjo prenosnega sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Frekvenca vzorčenja se je spreminjala, v povprečju pa je znašala \SI{0.5}{\hertz}. S testom smo pridobili podatke energijske porabe šestih različnih merjencev z oznakami: SUBJ1, SUBJ2, SUBJ7, SUBJ8, SUBJ9 in SUBJ10.
 
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.4\columnwidth]{./Slike/squash-maske-corrected.jpg}	
-	\caption{Prenosni sistem za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2}
+	\caption[Prenosni sistem za direktno ergospirometrijo]{Prenosni sistem za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2.}
 	\label{fig:maske}
 \end{figure}
 

@@ -1,7 +1,7 @@
 \section{Prostorski tok}
 % Teorija prostorskega toka
 % Katero metodo smo mi uporabili in zakaj
-Optični tok $\vec{O}$ predstavlja aproksimacijo polja gibanja $\vec{G}$, ta pa je projekcija polja hitrosti $\vec{H}$ na slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Če pogledamo z druge perspektive, ni optični tok $\vec{O}$ nič drugega kot projekcija aproksimacije polja hitrosti $\vec{H}$, ki jo po analogiji lahko imenujemo \textbf{prostorski tok} (angl. Scene Flow) \cite{vedula1999three}. 
+Optični tok $\vec{O}$ predstavlja aproksimacijo polja gibanja $\vec{G}$, ta pa je projekcija polja hitrosti $\vec{H}$ na slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Če pogledamo z druge perspektive, ni optični tok $\vec{O}$ nič drugega kot projekcija aproksimacije polja hitrosti $\vec{H}$, ki jo po analogiji lahko imenujemo \textbf{prostorski tok} (angl. Scene Flow) \cite{vedula1999three}.
 
 Za namen razlage upoštevamo enake omejitve kamere, masnega delca in osvetlitve, kot v poglavju \ref{sec:opticni-tok}. Predpostavimo, da imamo v prostoru površino $f(x,y,z) = 0$ na kateri imamo gibajoč točkovni delec $\vec{p} = \vec{p}(t)$. Na slikovni ravnini $\mathit{\Omega}$ imamo njegovo sliko $\vec{q}$ \cite{vedula1999three}. Vizualni prikaz prizora lahko vidimo na sliki \ref{fig:scene-flow}. 
 
@@ -24,7 +24,7 @@ Ker je slika projekcija delca na slikovno ravnino $\mathit{\Omega}$, lahko zapi�
 	\vec{w} = \frac{d\vec{q}}{dt} = \frac{\partial \vec{q}}{\partial \vec{p}}\frac{d\vec{p}}{dt}
 \end{equation}
 
-Če predpostavimo, da imamo dovoj informacije o sistemu, da lahko določimo inverzno funkcijo $\vec{p} = \vec{p}(\vec{q},t)$, kjer je masni delec $\vec{p}$ projekcija slike $\vec{q}$, lahko določimo njegovo hitrost $\vec{\mu} \in \mathcal{\Mu} \subset \mathbb{R}^3$ z enačbo \eqref{eq:scene-flow}. Slednja je sestavljena iz dveh delov. Prvi člen je projekcija vektorja optičnega toka $\vec{w}$ na tangentno ravnino površine $f$, v točki, kjer se nahaja delec $\vec{p}$ \cite{vedula1999three}. Drugi člen je hitrost spreminjanja oddaljenosti delca od slikovne ravnine $\mathit{\Omega}$, ko slika delca stoji na miru. 
+Če predpostavimo, da imamo dovolj informacije o sistemu, da lahko določimo inverzno funkcijo $\vec{p} = \vec{p}(\vec{q},t)$, kjer je masni delec $\vec{p}$ projekcija slike $\vec{q}$, lahko določimo njegovo hitrost $\vec{\mu} \in \mathcal{\Mu} \subset \mathbb{R}^3$ z enačbo \eqref{eq:scene-flow}. Slednja je sestavljena iz dveh delov. Prvi člen je projekcija vektorja optičnega toka $\vec{w}$ na tangentno ravnino površine $f$, v točki, kjer se nahaja delec $\vec{p}$ \cite{vedula1999three}. Drugi člen je hitrost spreminjanja oddaljenosti delca od slikovne ravnine $\mathit{\Omega}$, ko slika delca stoji na miru. 
 
 \begin{equation}\label{eq:scene-flow}
 	\vec{\mu} = \frac{d\vec{p}}{dt} = \frac{\partial \vec{p}}{\partial \vec{q}} \frac{d\vec{q}}{dt} + \left.\frac{\partial \vec{p}}{\partial t}\right|_{\vec{q}}
@@ -42,9 +42,9 @@ Kadar imamo v prostoru več, med seboj neodvisnih premikajočih masnih delcev, v
 $\dot{Z}$ predstavlja hitrost spreminjanja globine \cite{yan2016scene}.
 
 \subsection{Metode estimacije prostorskega toka}
-Konvencionalne metode estimacije prostorskega toka so se razvile iz optičnega toka, in dodatne informacije o globini \cite{yan2016scene}. Slednjo lahko pridobimo s parom stereo kamer ali z uporabo sistemov večih kamer \cite{jaimez2015primal}. Vektor hitrosti prostorskega toka lahko v takih sistemih aproksimiramo z $\vec{\mu} = \left[w_x~w_y~\dot{d}\right]^\top$, kjer sta $(w_x, w_y)$ komponenti vektorja optičnega toka $\vec{w}$, $\dot{d}$ pa časovna sprememba disparitete \cite{yan2016scene}.
+Konvencionalne metode estimacije prostorskega toka so se razvile iz optičnega toka, in dodatne informacije o globini \cite{yan2016scene}. Slednjo lahko pridobimo s parom stereo kamer ali z uporabo sistemov več kamer \cite{jaimez2015primal}. Vektor hitrosti prostorskega toka lahko v takih sistemih aproksimiramo z $\vec{\mu} = \left[w_x~w_y~\dot{d}\right]^\top$, kjer sta $(w_x, w_y)$ komponenti vektorja optičnega toka $\vec{w}$, $\dot{d}$ pa časovna sprememba disparitete \cite{yan2016scene}.
 
-Z razvojem RGB-D kamer, kjer RGB predstavlja barvno sliko, D pa globinsko sliko, smo dobili cenovno dostopne in natančne sisteme, ki omogočajo implementacijo hitrih algoritmov prostorskega toka \cite{yan2016scene,jaimez2015primal}. Ti večinoma temeljijo na globalni variacijski metodi, kjer rešujemo minimizacijski problem 
+Z razvojem t.i. ``Time-of-flight'' (ToF) kamer, smo dobili cenovno dostopne in natančne sisteme, ki omogočajo implementacijo hitrih algoritmov prostorskega toka \cite{yan2016scene,jaimez2015primal}. Ti večinoma temeljijo na globalni variacijski metodi, kjer rešujemo minimizacijski problem 
 
 \begin{equation}\label{eq:minimizacijski-problem}
 	\min_{\mu}\{E_D(\vec{\mu}) + E_R(\vec{\mu})\}
@@ -74,7 +74,7 @@ V nadaljevanju predstavljamo globalno variacijsko metodo PD-Flow algoritem.
 
 
 \subsubsection{PD-Flow algoritem.}\label{sec:pd-flow}
-Algoritem spada pod globalne variacijske metode \cite{jaimez2015primal}. Za cenilko $\Psi$ v \eqref{eq:konstantna-osvetljenost} in \eqref{eq:konsistentnost-globine} avtorji uporabljajo $L_1$ normo. Za utež $\alpha$ v podatkovnem delu funkcionala \eqref{eq:podatkovni-del} se v tem algorimu uporablja funkcija 
+Algoritem spada pod globalne variacijske metode \cite{jaimez2015primal}. Za cenilko $\Psi$ v \eqref{eq:konstantna-osvetljenost} in \eqref{eq:konsistentnost-globine} avtorji uporabljajo $L_1$ normo. Za utež $\alpha$ v podatkovnem delu funkcionala \eqref{eq:podatkovni-del} se v tem algoritmu uporablja funkcija 
 
 \begin{equation}\label{eq:utez}
  \alpha(x,y) = \frac{\mu_0}{1 + k_\mu \left( \frac{\partial Z^2}{\partial x} + \frac{\partial Z^2}{\partial y} + \frac{\partial Z^2}{\partial t} \right)},

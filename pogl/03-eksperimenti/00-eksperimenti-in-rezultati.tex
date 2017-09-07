@@ -5,12 +5,12 @@ Srčni utrip smo obravnavali kot posrednik (ang. Proxy) za energijsko porabo. Pr
 
 Z eksperimenti detekcije dihanja smo želeli preizkusiti predlagano metodo za širšo uporabo.
 
-Pri vseh naslovljenih fizioloških parametrih smo s pomočjo strojnega učenja izvajali predikcijo časovnih signalov $eem(t)$ za energijsko porabo, $hr(t)$ za srčni utrip in $dihanje(t)$ za dihanje. Predikcijo smo izvajali iz posamezne slike zaporedja video posnetka. Pri tem smo najprej generirali sliko optičnega ali prostorskega toka in nato določili področje, kjer se nahaja merjenec. Iz izbranega področja smo izračunali vektorje značilk $\vec{x}(t)$, te pa smo uporabili za predikcijo. Rezultat je zelo enostaven, realno-časoven model, ki ga lahko razširimo s temporalnim modeliranjem, če bi se pojavila potreba. Shema generalnega postopka je prikazana na sliki \ref{fig:shema-generalnega-postopka}.
+Pri vseh naslovljenih fizioloških parametrih smo s pomočjo strojnega učenja izvajali predikcijo časovnih signalov $eem(t)$ za energijsko porabo, $hr(t)$ za srčni utrip in $dihanje(t)$ za dihanje. Predikcijo smo izvajali iz posamezne slike zaporedja video posnetka. Pri tem smo najprej generirali sliko optičnega ali prostorskega toka in nato določili področje, kjer se nahaja merjenec. Iz izbranega področja smo izračunali vektorje značilk $\vec{x}(t)$, te pa smo uporabili za predikcijo. Rezultat je zelo enostaven, realno-časoven model, ki ga lahko razširimo s temporalnim modeliranjem, če bi se pojavila potreba. Prvi del postopka je učenje SVM/SVR modela, kot je prikazano na sliki \ref{fig:shema-generalnega-postopka}.
 
 \begin{figure}[!htb]
 	\centering
-	\input{./Slike/diagram-procesiranja-generalni.tikz}
-	\caption[Shema generalnega postopka procesiranja]{Shema generalnega postopka procesiranja. Iz izbranega področja tarče generiramo sliko toka in izračunamo vekorje značilk $\vec{x}(t)$. Te nato uporabimo za učenje realno-časovnih modelov, s katerimi izvajamo predikcijo nad fiziološkimi parametri.}
+	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-generalni.tikz}}
+	\caption[Shema generalnega postopka procesiranja]{Shema generalnega postopka učenja. Iz izbranega področja tarče generiramo sliko toka in izračunamo vekorje značilk $\vec{x}(t)$. Te nato uporabimo za učenje realno-časovnih modelov, s katerimi izvajamo predikcijo nad fiziološkimi parametri.}
 	\label{fig:shema-generalnega-postopka}
 \end{figure}
 

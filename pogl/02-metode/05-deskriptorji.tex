@@ -55,7 +55,7 @@ Vsak vektor $\vec{w}$, ki leži v podintervalu ali stolpcu $b$ bo prispeval svoj
 
 \begin{figure}[htb]
 \centering
-\input{./Slike/hoof.tikz}
+\resizebox{0.5\columnwidth}{!}{\input{./Slike/hoof.tikz}}
 \caption[Prikaz določitve HOOF histograma glede na kot vektorja]{Prikaz določitve HOOF histograma glede na kot vektorja optičnega toka $\vec{w}$. Slika prikazuje določitev za $6$ stolpcev.}
 \label{fig:hoof-histogram}
 \end{figure}
@@ -63,7 +63,7 @@ Vsak vektor $\vec{w}$, ki leži v podintervalu ali stolpcu $b$ bo prispeval svoj
 
 
 
-Preslikava intervala \eqref{eq:interval-kot2} v interval \eqref{eq:interval-kot} omogoča neodvisnost histograma od leve ali desne smeri gibanja \cite{chaudhry2009histograms}. Če se subjekt premika v levo ali desno, bo histogram enak. Z normiranjem histograma dobimo invariantnost na skalo \cite{chaudhry2009histograms}. Če se subjekt premika daleč ali blizu kamere, bo histogram enak. Ker je vsak prispevek vektorja sorazmeren njegovi amplitudi, šumni vektorji nimajo vpliva na obliko histograma \cite{chaudhry2009histograms}. Posledično lahko določimo histogram za celotno sliko in zato ne potrebujemo segmentacije ali subtrakcije gibajoče osebe iz ozadja. 
+Preslikava intervala \eqref{eq:interval-kot2} v interval \eqref{eq:interval-kot} omogoča neodvisnost histograma vzdolž $x$ osi~\cite{chaudhry2009histograms}. Z normiranjem histograma dobimo invariantnost na skalo \cite{chaudhry2009histograms}. Ker je vsak prispevek vektorja sorazmeren njegovi amplitudi, šumni vektorji nimajo vpliva na obliko histograma \cite{chaudhry2009histograms}. Posledično lahko določimo histogram za celotno sliko in zato ne potrebujemo segmentacije ali subtrakcije gibajoče osebe iz ozadja. 
 
 Edini parameter, ki ga moramo določiti za HOOF značilke je število stolpcev histograma $N_{HOOF}$. Chaudry et al \cite{chaudhry2009histograms} pravi, da moramo za dobro delovanje določiti najmanj $30$ stolpcev. 
 
@@ -76,7 +76,7 @@ Edini parameter, ki ga moramo določiti za HOOF značilke je število stolpcev h
 \subsection{Histogrami absolutnih tokovnih amplitud}\label{sec:hafa}
 % Opis dodatnih deskriptorjev
 % Kako uporabili nove deskriptorje
-HOOF deskriptor modelira samo smer gibanja. Za modeliranje amplitude gibanja moramo uporabiti drug deskriptor. Idejo deskriptorja za modeliranje amplitude gibanja smo dobili v delu \cite{pers2010histograms}, kjer so avtorji za opis gibanja uporabili histograme optičnega toka (HOF). Gre za histograme v dveh dimenzijah, ki posebej kvantizirata amplitudo in smer optičnega toka v podregijah slike. 
+HOOF deskriptor modelira samo smer gibanja, zato vsebuje le del informacije, ki jo potrebujemo za esetimacijo energijske porabe. Ostalo informacijo vsebuje amplituda gibanja, ki jo dobimo z amplitudo vektorja optičnega toka. Idejo deskriptorja za modeliranje amplitude gibanja smo dobili v delu \cite{pers2010histograms}, kjer so avtorji za opis gibanja uporabili histograme optičnega toka (HOF). Gre za histograme v dveh dimenzijah, ki posebej kvantizirata amplitudo in smer optičnega toka v podregijah slike. 
 
 Vektorju optičnega toka $\vec{w}$, ki je opredeljen v poglavju \ref{sec:hoof}, ima amplitudo določeno na intervalu \eqref{eq:interval-amp1}. 
 
@@ -96,7 +96,7 @@ Interval \eqref{eq:interval-amp1} lahko kvantiziramo po enačbi \eqref{eq:interv
 
 \begin{figure}[!htb]
 \centering
-\input{./Slike/hafa.tikz}
+\resizebox{0.5\columnwidth}{!}{\input{./Slike/hafa.tikz}}
 \caption[Prikaz določitve HAFA histograma glede na velikost vektorja]{Prikaz določitve HAFA histograma glede na velikost vektorja optičnega toka $\vec{w}$. Slika prikazuje določitev za $3$ stolpce.}
 \label{fig:hafa-histogram}
 \end{figure}
@@ -119,13 +119,13 @@ Smer $\Theta$ določimo s preslikavo vektorja prostorskega toka $\vec{\mu}$ na s
 \label{eq:smer-3d}
 \end{equation}
 
-Enačbe temeljijo na obrazcih za prehod iz kartezičnih koordinat $(x, ~y, ~z)$ na sferične koordinate $(r,~\phi,~\Theta)$ \cite{bronstein1990math}, pri čemer upoštevamo postavitev koordinatnega sistema po perspektivnem modelu kamere iz poglavja \ref{sec:model-kamere}. Slika \ref{fig:sphere} prikazuje sferične koordinate v koordinatnem sistemu kamere, kjer smo zaradi poenostavitve slikovno ravnino postavili v koordinatno izhodišče $\vec{O}$. Za koordinato $r$ velja $r=\norm{\vec{\mu}}$. Za enolično določitev točk prostora še velja, da $\Theta$ leži na intervalu $\left[\frac{-\pi}{2},~\frac{\pi}{2}\right]$, $\phi$ pa na intervalu $\left[0,~2\pi\right)$.
+Enačbe temeljijo na obrazcih za prehod iz kartezičnih koordinat $(x, ~y, ~z)$ na sferične koordinate $(r,~\phi,~\Theta)$ \cite{bronstein1990math}, pri čemer upoštevamo postavitev koordinatnega sistema po perspektivnem modelu kamere iz poglavja \ref{sec:model-kamere}. Slika \ref{fig:sphere} prikazuje sferične koordinate v koordinatnem sistemu kamere, kjer zaradi poenostavitve slikovna ravnina poteka skozi koordinatno izhodišče $\vec{O}$. Za koordinato $r$ velja $r=\norm{\vec{\mu}}$. Za enolično določitev točk prostora še velja, da $\Theta$ leži na intervalu $\left[\frac{-\pi}{2},~\frac{\pi}{2}\right]$, $\phi$ pa na intervalu $\left[0,~2\pi\right)$.
 
 \begin{figure}[htb]
 	\centering
 	\input{./Slike/sfericne-koordinate.tikz}
-	\caption[Sferične koordinate v koordinatnem sistemu kamere]{Sferične koordinat v koordinatnem sistemu kamere. Zaradi nazornosti prikaza je slikovna ravnina postavljena v koordinatno izhodišče $\vec{O}$.}
+	\caption[Sferične koordinate v koordinatnem sistemu kamere]{Sferične koordinat v koordinatnem sistemu kamere nam omogočajo razširitev histogramov za uporabo s prostorskim tokom.}
 	\label{fig:sphere}
 \end{figure}
 
-S tako uporabljenimi enačbami za histograme na prvi pogled izgubimo informacijo o smeri v HOOF histogramu, saj azimutnega kota $\phi$ ne upoštevamo. Informacije v resnici nismo izgubili, saj nam mora histogram omogočati neodvisnost v smeri premikanja od leve proti desni \cite{chaudhry2009histograms}. To pa je ravno azimutni kot $\phi$. Po preslikavi prostorskega kota $\vec{\mu}$ na slikovno ravnino, je določitev histogramov trivialna. 
+S tako uporabljenimi enačbami za histograme izgubimo informacijo o smeri v HOOF histogramu, saj azimutnega kota $\phi$ ne upoštevamo. To je sprejemljivo, saj nam mora histogram omogočati neodvisnost v smeri premikanja od leve proti desni \cite{chaudhry2009histograms}. To pa je ravno azimutni kot $\phi$. Po preslikavi prostorskega kota $\vec{\mu}$ na slikovno ravnino, je določitev histogramov trivialna. 
