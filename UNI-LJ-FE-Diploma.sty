@@ -23,6 +23,7 @@
 
 % ----- VKLJU?ENI STILI -----------------------------------------------------------
 \usepackage{amsmath}
+%\usepackage{titling}
 \if@pdftex
    \usepackage{graphicx,epstopdf}
    \def\potgrafike#1{
@@ -75,33 +76,84 @@
 \gdef\@avtor{}
 
 \def\maketitle{
-  \newpage
-  \thispagestyle{empty}
-  \begin{center}
-    {\Large \@univerza}
-    \vskip 0.5em
-    {\large \@fakulteta \par}
-    \vskip 7em
-    {\Large \@avtor}
-    \vskip 1em
-    {\Huge {\textbf \@naslov} \par}
-    \vskip 1em
-    {\large \@delo \par}
-    \vskip 3em
-    {\large Mentor: \@mentor \par}
-    \ifsomentor@
-      {\large Somentor: \@somentor }
-    \fi
-    \vfill
-    {\large \@date}
-  \end{center}
-  \newpage
-\praznastran
+	\newpage
+	\thispagestyle{empty}
+	\begin{center}
+		{\Large \@univerza}
+		\vskip 0.5em
+		{\large \@fakulteta \par}
+		\vskip 7em
+		{\Large \@avtor}
+		\vskip 1em
+		{\Huge {\textbf \@naslov} \par}
+		\vskip 1em
+		{\large \@delo \par}
+		\vskip 3em
+		{\large Mentor: \@mentor \par}
+		\ifsomentor@
+		{\large Somentor: \@somentor }
+		\fi
+		\vfill
+		{\large \@date}
+	\end{center}
+	\newpage
+	\praznastran
+}
+
+\def\maketitlep{
+	\newpage
+	\thispagestyle{empty}
+	\begin{titlepage}
+	\begin{center}
+		{\Large \@univerza}
+		\vskip 0.5em
+		{\large \@fakulteta \par}
+		\vskip 7em
+		{\Huge {\textbf \@naslov} \par}
+		\vskip 1em
+		{\Large \@avtor}
+		\vfill
+		{\large \@date}
+	\end{center}
+	\end{titlepage}
+	%\newpage
+	%\praznastran
+}
+
+
+\def\maketitlepp{
+	\newpage
+	\thispagestyle{empty}
+	\begin{titlepage}
+	\begin{center}
+		{\Large \@univerza}
+		\vskip 0.5em
+		{\large \@fakulteta \par}
+		\vskip 7em
+		{\Huge {\textbf \@naslov} \par}
+		\vskip 1em
+		{\Large \@avtor}
+		\vskip 4em
+		{\large Delo je pripravljeno v skladu s Pravilnikom o podeljevanju Prešernovih nagrad študentom, pod mentorstvom \hbox{\@mentor} \par}
+		\vfill
+		{\large \@date}
+	\end{center}
+	\end{titlepage}
+	\newpage
+	\praznastran
 }
 
 % ----- ZAHVALA ------------------------------------------------------------------
+\def\imezahvale{Zahvala} % <---
 \def\zahvala{%
-  \chapter*{Zahvala}
+  \chapter*{\imezahvale}
+}
+
+\def\zahvalap{\@restonecolfalse
+	\if@twocolumn\@restonecoltrue\onecolumn\fi
+	\chapter*{\imezahvale}
+	\@mkboth{{\imezahvale}}{{\imezahvale}}
+	\@starttoc{lof}\if@restonecol\twocolumn\fi
 }
 
 % -----  VSEBINA ------------------------------------------------------------------
@@ -166,6 +218,10 @@
   \@starttoc{lof}\if@restonecol\twocolumn\fi
 }
 
+\def\povzetekp{%
+	\chapter*{\imepovzetka}
+}
+
 \def\kljucnebesede{
   \vspace{1cm}\noindent
   \textbf{Ključne besede:}\
@@ -183,7 +239,9 @@
   \@mkboth{{\imeabstract}}{{\imeabstract}}
   \@starttoc{lof}\if@restonecol\twocolumn\fi
 }
-
+\def\abstractp{%
+	\chapter*{\imeabstract}
+}
 
 
 \def\keywords{

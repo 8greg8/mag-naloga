@@ -267,7 +267,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 \delo{Magistrsko delo}
 %\delo{Diplomsko delo visoko?olskega strokovnega ?tudija}
 \date{Ljubljana, 2017}
-\mentor{doc. dr. Janez Perš}
+\mentor{doc. dr. Janeza Perša}
 %\somentor{prof. dr. Ime Priimek}
 \begin{document}
 
@@ -277,11 +277,20 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 
 
 %************************ NASLOVNA STRAN ********************************
-\maketitle
+%\maketitle
 
+%************************ NOTRANJA STRAN PRESEREN ********************************
+\maketitlep
+\maketitlepp
+
+%********************* POVZETEK V SLO PRESEREN ****************************
+\input{./pogl/00-osnova/003-povzetekp-sl.tex}
+
+%*************************** POVZETEK V ANG PRESEREN ***********************
+\input{./pogl/00-osnova/004-povzetekp-en.tex}
 
 %*************************** ZAHVALA ************************************
-\input{./pogl/00-osnova/001-zahvala.tex}
+%\input{./pogl/00-osnova/001-zahvala.tex}
 
 
 %*************************** VSEBINA *************************************
@@ -297,11 +306,14 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 %------------------------ GLAVNI DEL ------------------------------------
 \mainmatter
 %-------------------------------------------------------------------------
+%*************************** ZAHVALA ************************************
+\input{./pogl/00-osnova/001-zahvalap.tex}
+
 %********************* POVZETEK V SLOVEN??INI ****************************
-\input{./pogl/00-osnova/003-povzetek-sl.tex}
+%\input{./pogl/00-osnova/003-povzetek-sl.tex}
 
 %*************************** POVZETEK V ANGLE??INI ***********************
-\input{./pogl/00-osnova/004-povzetek-en.tex}
+%\input{./pogl/00-osnova/004-povzetek-en.tex}
 
 %***************************** UVOD **************************************
 \input{./pogl/01-uvod/00-uvod.tex}
