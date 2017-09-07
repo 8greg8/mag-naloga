@@ -17,7 +17,7 @@
 
 \node (ucenje) [block, align=center, right=of hoof] {Training};
 
-\node (rezultat) [output, right= of ucenje] {Result};
+\node (rezultat) [output, right= of ucenje] {SVM/SVR parameters};
 
 % arrows
 \draw [arrow] (slika) -- (of);
