@@ -7,7 +7,7 @@ Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:re
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=2.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
 		\toprule
-		\thead{$\mathbf{N_{HOOF}}$} & \thead{$\mathbf{C}$} & \thead{$\mathbf{\gamma}$} & \thead{$\mathbf{\epsilon}$} & \thead{MSE} \\ 
+		\theadm{\nhoof} & \theadm{C} & \theadm{\gamma} & \theadm{\epsilon} & \thead{MSE} \\ 
 		\midrule
 		30 & 8 & 0.707 & 0.812 & 7.903 \\
 		60 & 8 & 0.354 & 0.379 & 7.320 \\
@@ -15,7 +15,7 @@ Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:re
 		160 & 11.314 & 0.125 & 0.616 & 6.832 \\
 		\bottomrule
 	\end{tabular}
-	\caption[Optimalni parameteri RBF jedra modelov za določitev $N_{HOOF}$]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev $N_{HOOF}$ v HOOF deskriptorju. Z njimi smo učili modele s katerimi smo preverjali optimalno število stolpcev v HOOF deskriptorju}
+	\caption[Optimalni parameteri RBF jedra modelov za določitev \nhoof]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev \nhoof v HOOF deskriptorju. Z njimi smo učili modele s katerimi smo preverjali optimalno število stolpcev v HOOF deskriptorju}
 	\label{tab:nhoof-param}
 \end{table}
 
@@ -26,14 +26,14 @@ Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:re
 
 
 \subsection{Optimizacija HAFA deskriptorjev}
-Parameter $N_{HAFA}$ smo določili na podlagi rezultatov~\ref{sec:rezultati-optimizacija-hafa}. Za evaluacijo smo uporabili enak eksperimentalni protokol kot za HOOF značilke v poglavju~\ref{sec:hoof}, s to razliko, da smo značilke normirali na intervalu $[0, 1]$ in odstranili stolpec z amplitudami $0.5$. S tem smo odstranili šum, ki se je pojavil, ko ni bilo nobenega gibanja. Amplitudo šuma smo določili, kot maksimalno vrednost amplitude, ki še ni predstavljala gibanja. Optimalni parametri evaluacijske metode so predstavljeni v tabeli~\ref{tab:nhafa-param}.
+Parameter \nhafa smo določili na podlagi rezultatov~\ref{sec:rezultati-optimizacija-hafa}. Za evaluacijo smo uporabili enak eksperimentalni protokol kot za HOOF značilke v poglavju~\ref{sec:hoof}, s to razliko, da smo značilke normirali na intervalu $[0, 1]$ in odstranili stolpec z amplitudami $0.5$. S tem smo odstranili šum, ki se je pojavil, ko ni bilo nobenega gibanja. Amplitudo šuma smo določili, kot maksimalno vrednost amplitude, ki še ni predstavljala gibanja. Optimalni parametri evaluacijske metode so predstavljeni v tabeli~\ref{tab:nhafa-param}.
 
 
 \begin{table}[!htb]
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=2.3] S[table-format=1.3]  S[table-format=1.3] S[table-format=1.3]}
 		\toprule
-		\thead{$\mathbf{N_{HAFA}}$} & \thead{$\mathbf{C}$} & \thead{$\mathbf{\gamma}$} & \thead{$\mathbf{\epsilon}$} & \thead{MSE} \\ 
+		\theadm{\nhafa} & \theadm{C} & \theadm{\gamma} & \theadm{\epsilon} & \thead{MSE} \\
 		\midrule
 		30 & 8 & 5.657 & 0.616 & 4.329 \\
 		60 & 8 & 5.657 & 0.616 & 4.327 \\
@@ -41,7 +41,7 @@ Parameter $N_{HAFA}$ smo določili na podlagi rezultatov~\ref{sec:rezultati-opti
 		160 & 8 & 5.657 & 0.616 & 4.327 \\
 		\bottomrule
 	\end{tabular}
-	\caption[Optimalni parameteri RBF jedra modelov za določitev $N_{HAFA}$]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev $N_{HAFA}$ v HAFA deskriptorju. Z njimi smo učili modele s katerimi smo preverjali optimalno število stolpcev v HAFA deskriptorju.}
+	\caption[Optimalni parameteri RBF jedra modelov za določitev \nhafa]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev \nhafa v HAFA deskriptorju. Z njimi smo učili modele s katerimi smo preverjali optimalno število stolpcev v HAFA deskriptorju.}
 	\label{tab:nhafa-param}
 \end{table}
 
@@ -59,7 +59,7 @@ Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne
 	\centering
 	\begin{tabular}{l S[table-format=2.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
 		\toprule
-		\emph{Deskriptor} & \thead{$\mathbf{C}$} & \thead{$\mathbf{\gamma}$} & \thead{$\mathbf{\epsilon}$} & \thead{MSE} \\ 
+		\textbf{Deskriptor} & \theadm{C} & \theadm{\gamma} & \theadm{\epsilon} & \thead{MSE} \\
 		\midrule
 		HOOF & 2.828 & 11.314 & 0.435 & 2.192 \\
 		HOOF-HAFA & 5.657 & 2.828 & 0.154 & 1.781 \\
@@ -273,9 +273,9 @@ HOOF deskriptorji so v teoriji robustni na šum, saj ta zaradi majhnih amplitud 
 	\centering
 	\begin{tabular}{l l l S[table-format=3] S[table-format=2] S[table-format=3] S[table-format=3]}
 		\toprule
-		\multicolumn{3}{c}{}& \multicolumn{4}{c}{\emph{Področje}} \\
+		\multicolumn{3}{c}{}& \multicolumn{4}{c}{\textbf{Področje}} \\
 		\cmidrule{4-7}
-		\emph{Serija} & \emph{Pogled} & \emph{Vrsta} & \thead{$\mathbf{x}$} & \thead{$\mathbf{y}$} & \thead{$\mathbf{w}$} & \thead{$\mathbf{h}$}  \\
+		\textbf{Serija} & \thead{Pogled} & \thead{Vrsta} & \theadm{x} & \theadm{y} & \theadm{w} & \theadm{h}  \\
 		\midrule
 		\multirow{3}{*}{1} & \multirow{2}{*}{hrbtni} & RGB & 228 & 43 & 207 & 437 \\
 		&& IR & 32 & 10 & 167 & 329 \\
@@ -302,7 +302,7 @@ Z vnašanjem projektivne transformacije v posnetke smo s \textit{proj} testi pre
 	\centering
 	\begin{tabular}{l S[table-format=1.3] S[table-format=1.3] }
 		\toprule
-		\thead{Točka} & \thead{$\mathbf{x~[\times w]}$} & \thead{$\mathbf{y~[\times h]}$} \\
+		\textbf{Točka} & \theadm{x~[\times w]} & \theadm{y~[\times h]} \\
 		\midrule
 		$P_0$ & 0 & 0.25 \\
 		$P_1$ & 1 & 0 \\
