@@ -1,8 +1,8 @@
 \section{Filtriranje in glajenje}\label{sec:filtri}
-%Filtri so zelo pomembni pri procesiranju signalov \cite{smith1997scientist}. V našem delu jih uporabljamo za izločitev šuma izhodnih podatkov razvrščevalnika. 
+%Filtri so zelo pomembni pri procesiranju signalov~\cite{smith1997scientist}. V našem delu jih uporabljamo za izločitev šuma izhodnih podatkov razvrščevalnika. 
 Vhodne podatke obdelujemo, bodisi z optičnim tokom ali prostorskim tokom, za vsako sliko video sekvence. Med slikami ne uporabljamo nobene informacije, kar rezultira v oceno porabe energije z veliko šuma. Smiselno je, da zagotovimo časovno kontinuiteto bodisi s filtriranjem ali glajenjem rezultatov porabe energije.
 
-Izbrani filtri izhajajo iz družine filtrov tekočega povprečja, saj so ti najbolj optimalni za zmanjševanje šuma \cite{smith1997scientist}. Splošna enačba filtra tekočega povprečja je \eqref{eq:filter-tekocega-povprecja}, kjer je $x(i)$ i-ti vzorec vhodnega signala, $y(i)$ i-ti vzorec izhodnega signala in $M$ število vzorcev, ki jih uporabimo za filtriranje ali drugače, širina jedra filtra \cite{smith1997scientist}.
+Izbrani filtri izhajajo iz družine filtrov tekočega povprečja, saj so ti najbolj optimalni za zmanjševanje šuma~\cite{smith1997scientist}. Splošna enačba filtra tekočega povprečja je~\eqref{eq:filter-tekocega-povprecja}, kjer je $x(i)$ i-ti vzorec vhodnega signala, $y(i)$ i-ti vzorec izhodnega signala in $M$ število vzorcev, ki jih uporabimo za filtriranje ali drugače, širina jedra filtra~\cite{smith1997scientist}.
 
 \begin{equation}
 y(i) = \frac{1}{M} \sum_{j=0}^{M-1} x(i + j)
@@ -21,10 +21,10 @@ Prvi filter, ki je bil testiran, je Kalmanov filter. Zaradi slabih rezultatov in
 %optimalen za reducing random noise while retaining a sharp step response. najboljši za signale v časovnem prostoru.  -> gaussov filter -> frekvenčni odziv ravno tako gaussian  
 
 \subsection{Digitalni Kalmanov filter}\label{sec:kalmanov-filter}
-Kalmanov filter je sestavljen iz modela gibanja, merilnega modela in algoritma s katerim izračunamo novo stanje modela gibanja \cite{trucco1998introductory}.
+Kalmanov filter je sestavljen iz modela gibanja, merilnega modela in algoritma s katerim izračunamo novo stanje modela gibanja~\cite{trucco1998introductory}.
 
 \subsubsection{Model gibanja}
-Gibanje modeliramo z vektorjem stanj $\vec{x}(k)$ na koraku $k$ \cite{trucco1998introductory}. Vektor stanj je predstavljen v enačbi \eqref{eq:vektor-stanj}. Za stanja si ponavadi izberemo tiste spremenljivke gibanja $s_i(k) \forall i = 1,2,\ldots \land k = 0, 1,\ldots$, ki jih opazujemo (npr. pozicija, hitrost, pospešek).
+Gibanje modeliramo z vektorjem stanj $\vec{x}(k)$ na koraku $k$~\cite{trucco1998introductory}. Vektor stanj je predstavljen v enačbi~\eqref{eq:vektor-stanj}. Za stanja si ponavadi izberemo tiste spremenljivke gibanja $s_i(k)~\forall i = 1,2,\ldots \land k = 0, 1,\ldots$, ki jih opazujemo (npr. pozicija, hitrost, pospešek).
 
 \begin{equation}
 \vec{x}(k) = \begin{bmatrix}
@@ -34,7 +34,7 @@ Gibanje modeliramo z vektorjem stanj $\vec{x}(k)$ na koraku $k$ \cite{trucco1998
 \end{equation}
 
 
-Model gibanja je vektorska enačba \eqref{eq:model-gibanja}, ki govori o razvoju modela gibanja skozi diskretni čas $k = 0,1,\ldots$ \cite{trucco1998introductory}. Diskretni čas oziroma koraki morajo biti dovolj majhni, da zajamemo dinamiko sistema. $\vec{A}$ je matrika prehajanja stanj in $\vec{G}$ matrika vhodnih parametrov $\tilde{s}_i \forall i = 1,2,\ldots$ v vektorju $\vec{u}(k)$ \eqref{eq:vhodni-parametri}. 
+Model gibanja je vektorska enačba~\eqref{eq:model-gibanja}, ki govori o razvoju modela gibanja skozi diskretni čas $k = 0,1,\ldots$~\cite{trucco1998introductory}. Diskretni čas oziroma koraki morajo biti dovolj majhni, da zajamemo dinamiko sistema. $\vec{A}$ je matrika prehajanja stanj in $\vec{G}$ matrika vhodnih parametrov $\tilde{s}_i~\forall i = 1,2,\ldots$ v vektorju $\vec{u}(k)$~\eqref{eq:vhodni-parametri}. 
 
 
 
@@ -50,18 +50,18 @@ Model gibanja je vektorska enačba \eqref{eq:model-gibanja}, ki govori o razvoju
 \label{eq:vhodni-parametri}
 \end{equation}
 
-$\vec{w}(k-1)$ predstavlja Gaussov šum $\mathcal{N}$ modela gibanja s srednjo vrednostjo $0$ in kovariančno matriko $\vec{Q}$, kot je prikazano v enačbi \eqref{eq:sum-modela-gibanja} \cite{trucco1998introductory}.
+$\vec{w}(k-1)$ predstavlja Gaussov šum $\mathcal{N}$ modela gibanja s srednjo vrednostjo $0$ in kovariančno matriko $\vec{Q}$, kot je prikazano v enačbi~\eqref{eq:sum-modela-gibanja}~\cite{trucco1998introductory}.
 
 \begin{equation}
  \vec{w}(k) \sim \mathcal{N}\left(0,\vec{Q}\right)
  \label{eq:sum-modela-gibanja}
 \end{equation}
 
-Modeliranje šuma je ekvivalentno določevanju uteži upoštevanja modela v Kalmanovem algoritmu. Večji je šum, večja je negotovost modela, zato bo njegov vpliv na določitev novega stanja manjši \cite{trucco1998introductory}.
+Modeliranje šuma je ekvivalentno določevanju uteži upoštevanja modela v Kalmanovem algoritmu. Večji je šum, večja je negotovost modela, zato bo njegov vpliv na določitev novega stanja manjši~\cite{trucco1998introductory}.
 
 
 \subsubsection{Merilni model}
-Pri Kalmanovemu filtriranju predvidevamo, da ob vsakem časovnem trenutku dobimo meritev stanja $\vec{z}(k)$, ki je, realno gledano, pošumljena z Gaussovim šumom \cite{trucco1998introductory}. Merilni model lahko predstavimo z vektorsko enačbo \eqref{eq:merilni-model}, kjer je $\vec{H}$ merilna matrika in $\vec{\nu}(k)$ vektor Gaussovega šuma $\mathcal{N}$ s srednjo vrednostjo $0$ in kovariančno matriko $\vec{R}$ \eqref{eq:sum-merilnega-modela}.
+Pri Kalmanovemu filtriranju predvidevamo, da ob vsakem časovnem trenutku dobimo meritev stanja $\vec{z}(k)$, ki je, realno gledano, pošumljena z Gaussovim šumom~\cite{trucco1998introductory}. Merilni model lahko predstavimo z vektorsko enačbo~\eqref{eq:merilni-model}, kjer je $\vec{H}$ merilna matrika in $\vec{\nu}(k)$ vektor Gaussovega šuma $\mathcal{N}$ s srednjo vrednostjo $0$ in kovariančno matriko $\vec{R}$~\eqref{eq:sum-merilnega-modela}.
 
 
 \begin{equation}
@@ -75,18 +75,18 @@ Pri Kalmanovemu filtriranju predvidevamo, da ob vsakem časovnem trenutku dobimo
 \end{equation}
 
 
-Tako kot pri modelu gibanja, tudi tu z modeliranjem šuma vnašamo določeno stopnjo negotovosti, ki vpliva na upoštevanje modela pri izračunu novega stanja \cite{trucco1998introductory}.
+Tako kot pri modelu gibanja, tudi tu z modeliranjem šuma vnašamo določeno stopnjo negotovosti, ki vpliva na upoštevanje modela pri izračunu novega stanja~\cite{trucco1998introductory}.
 
 
 \subsubsection{Algoritem}
-S Kalmanovim algoritmom želimo čimbolj natančno določiti naslednjo oceno stanja sistema $\hat{\vec{x}}(k+1)$, pri čemer uporabimo trenutno meritev $\vec{z}(k)$ in trenutno oceno stanja $\hat{\vec{x}}(k)$ \cite{trucco1998introductory}. 
+S Kalmanovim algoritmom želimo čimbolj natančno določiti naslednjo oceno stanja sistema $\hat{\vec{x}}(k+1)$, pri čemer uporabimo trenutno meritev $\vec{z}(k)$ in trenutno oceno stanja $\hat{\vec{x}}(k)$~\cite{trucco1998introductory}. 
 
-Jedro algoritma Kalmanovega filtra temelji na izračunavanju kovariančne matrike stanja $\vec{P}$ in matrike ojačanja filtra $\vec{K}$ \cite{trucco1998introductory}. Kovariančna matrika stanja predstavlja oceno vnosa napake zaradi šumnih modelov. Predstavlja šum celotnega sistema. Z ojačanjem določimo, kaj bolj vpliva na novo oceno stanja. Ali trenutna ocena stanja, ali trenutna meritev.
+Jedro algoritma Kalmanovega filtra temelji na izračunavanju kovariančne matrike stanja $\vec{P}$ in matrike ojačanja filtra $\vec{K}$~\cite{trucco1998introductory}. Kovariančna matrika stanja predstavlja oceno vnosa napake zaradi šumnih modelov. Predstavlja šum celotnega sistema. Z ojačanjem določimo, kaj bolj vpliva na novo oceno stanja. Ali trenutna ocena stanja, ali trenutna meritev.
 
-Algoritem lahko razdelimo na tri področja, in sicer: predikcijo, inovacijo in korekcijo \cite{trucco1998introductory}.
+Algoritem lahko razdelimo na tri področja, in sicer: predikcijo, inovacijo in korekcijo~\cite{trucco1998introductory}.
 
 \paragraph{Predikcija}
-V predikciji določimo trenutno oceno stanja $\hat{\vec{x}}^-(k)$ po enačbi \eqref{eq:ocena-stanja} in a priori kovariančno matriko stanja $\vec{P}^-(k)$ po enačbi \eqref{eq:apriori-p}.
+V predikciji določimo trenutno oceno stanja $\hat{\vec{x}}^-(k)$ po enačbi~\eqref{eq:ocena-stanja} in a priori kovariančno matriko stanja $\vec{P}^-(k)$ po enačbi~\eqref{eq:apriori-p}.
 
 \begin{equation}
 	\hat{\vec{x}}^-(k) = \vec{A} \hat{\vec{x}}(k-1) + \vec{G} \vec{u}(k)
@@ -99,7 +99,7 @@ V predikciji določimo trenutno oceno stanja $\hat{\vec{x}}^-(k)$ po enačbi \eq
 \end{equation}
 
 \paragraph{Inovacija}
-V koraku inovacije izberemo trenutno meritev $\vec{z}(k)$ iz nabora meritev. Merilno napako $\vec{e}$ določimo po enačbi \eqref{eq:napaka}, kjer drugi člen predstavlja oceno meritve. Kovarianco inovacije $\vec{S}$ izračunamo po \eqref{eq:kovarianca-inovacije}. Gre za pomožno matriko, ki jo uporabljamo za izračun ojačanja v naslednjem koraku.
+V koraku inovacije izberemo trenutno meritev $\vec{z}(k)$ iz nabora meritev. Merilno napako $\vec{e}$ določimo po enačbi~\eqref{eq:napaka}, kjer drugi člen predstavlja oceno meritve. Kovarianco inovacije $\vec{S}$ izračunamo po~\eqref{eq:kovarianca-inovacije}. Gre za pomožno matriko, ki jo uporabljamo za izračun ojačanja v naslednjem koraku.
 
 \begin{equation}
 	\vec{e}(k) = \vec{z}(k) - \vec{H} \hat{\vec{x}}^-(k)
@@ -112,7 +112,7 @@ V koraku inovacije izberemo trenutno meritev $\vec{z}(k)$ iz nabora meritev. Mer
 \end{equation}
 
 \paragraph{Korekcija}
-V zadnjem koraku najprej izračunamo ojačanje filtra $\vec{K}$ po enačbi \eqref{eq:ojacanje}. Sledi določitev a posteriori ocene stanja $\hat{\vec{x}}(k)$ po \eqref{eq:aposteriori-stanje} in a posteriori kovariančne matrike stanje $\vec{P}(k)$ po \eqref{eq:aposteriori-p}, kjer je $\vec{I}$ identiteta.
+V zadnjem koraku najprej izračunamo ojačanje filtra $\vec{K}$ po enačbi~\eqref{eq:ojacanje}. Sledi določitev a posteriori ocene stanja $\hat{\vec{x}}(k)$ po~\eqref{eq:aposteriori-stanje} in a posteriori kovariančne matrike stanje $\vec{P}(k)$ po~\eqref{eq:aposteriori-p}, kjer je $\vec{I}$ identiteta.
 
 \begin{equation}
 \vec{K}(k) = {\vec{P}^-(k) \vec{H}^\top} ~/~ {\vec{S}(k)}
@@ -137,7 +137,7 @@ V zadnjem koraku najprej izračunamo ojačanje filtra $\vec{K}$ po enačbi \eqre
 
 
 \subsection{Gaussov filter}\label{sec:gaussov-filter}
-Gaussov filter $g$ je opredeljen z enačbo \eqref{eq:gauss}, kjer je $x$ vzorec in $\sigma$ standardni odklon. 
+Gaussov filter $g$ je opredeljen z enačbo~\eqref{eq:gauss}, kjer je $x$ vzorec in $\sigma$ standardni odklon. 
 
 
 \begin{equation}
@@ -146,7 +146,7 @@ g(x) = \frac{1}{\sqrt{2 \pi} \sigma} \mathrm{e}^{-\frac{x^2}{2 \sigma^2}}
 \end{equation}
 
 
-Primer filtra s standardnim odklonim $\sigma = 5$ je prikazan na sliki \ref{fig:gauss}.
+Primer filtra s standardnim odklonim $\sigma = 5$ je prikazan na sliki~\ref{fig:gauss}.
 
 \begin{figure}[!htb]
 \centering
@@ -156,10 +156,10 @@ Primer filtra s standardnim odklonim $\sigma = 5$ je prikazan na sliki \ref{fig:
 \end{figure}
 
 
-Gaussov filter je vrsta filtra tekočega povprečja, ki je zelo primeren za izločevanje odvečnega šuma \cite{smith1997scientist}. Ker je karakteriziran z impulznim odzivom, ki je simetričen okoli ničelnega vzorca, gre za vrsto filtra z ničelno fazo. To pomeni, da je faza v frekvenčnem prostoru vedno $0$ \cite{smith1997scientist}. Ker imamo pri takih filtrih negativne indekse, ga težje uporabljamo. 
+Gaussov filter je vrsta filtra tekočega povprečja, ki je zelo primeren za izločevanje odvečnega šuma~\cite{smith1997scientist}. Ker je karakteriziran z impulznim odzivom, ki je simetričen okoli ničelnega vzorca, gre za vrsto filtra z ničelno fazo. To pomeni, da je faza v frekvenčnem prostoru vedno $0$~\cite{smith1997scientist}. Ker imamo pri takih filtrih negativne indekse, ga težje uporabljamo. 
 
-Ponavadi filtre uporabljamo v rekurzivni obliki, saj je računanje hitrejše. Impulzni odziv rekurzivnega filtra ni simetričen, zato ima nelinearno fazo \cite{smith1997scientist}. To pomanjkljivost lahko odpravimo z uporabo dvosmernega filtriranja.
+Ponavadi filtre uporabljamo v rekurzivni obliki, saj je računanje hitrejše. Impulzni odziv rekurzivnega filtra ni simetričen, zato ima nelinearno fazo~\cite{smith1997scientist}. To pomanjkljivost lahko odpravimo z uporabo dvosmernega filtriranja.
 
-Pri \textbf{dvosmernem filtriranju} najprej filtriramo iz leve proti desni in nato iz desne proti levi \cite{smith1997scientist}. Dobljena signala združimo in dobimo pravilen rezultat.
+Pri \emph{dvosmernem filtriranju} najprej filtriramo iz leve proti desni in nato iz desne proti levi~\cite{smith1997scientist}. Dobljena signala združimo in dobimo pravilen rezultat.
 
 

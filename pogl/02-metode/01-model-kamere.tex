@@ -1,5 +1,5 @@
 \section{Geometrijski model kamere}\label{sec:model-kamere}
-Za geometrijski model kamere uporabimo perspektivni model, ki je predstavljen s sliko \ref{fig:perspektivni-model}. Sestavljen je iz slikovne ravnine, koordinatnega sistema kamere in točke prizora \cite{trucco1998introductory}.
+Za geometrijski model kamere uporabimo perspektivni model, ki je predstavljen s sliko~\ref{fig:perspektivni-model}. Sestavljen je iz slikovne ravnine, koordinatnega sistema kamere in točke prizora~\cite{trucco1998introductory}.
 
 
 \begin{figure}[htb]
@@ -10,9 +10,9 @@ Za geometrijski model kamere uporabimo perspektivni model, ki je predstavljen s 
 \end{figure}
 
 
-\textbf{Koordinatni sistem kamere} (KSK) je postavljen tako, da \textbf{optična os} sovpada s $Z$ osjo. Zaradi poenostavitve KSK sovpada z globalnim koordinatnim sistemom.  Središče KSK $\vec{O}$ se imenuje projekcijsko središče, skozi katerega se točka prizora $\vec{p} = \left[ X~Y~Z \right]^\top$ projicira na slikovno ravnino \cite{trucco1998introductory}.
+\emph{Koordinatni sistem kamere} (KSK) je postavljen tako, da \emph{optična os} sovpada s $Z$ osjo. Zaradi poenostavitve KSK sovpada z globalnim koordinatnim sistemom.  Središče KSK $\vec{O}$ se imenuje projekcijsko središče, skozi katerega se točka prizora $\vec{p} = \left[ X~Y~Z \right]^\top$ projicira na slikovno ravnino~\cite{trucco1998introductory}.
 
-\textbf{Slikovna ravnina} (ang. Image plane) je ravnina $\mathit{\Omega} \subset \mathbb{R}^2$, ki leži na razdalji $f$ od projekcijskega središča $O$. Razdalja $f$ se imenuje goriščna razdalja (ang. Focal length) \cite{trucco1998introductory}. Točka $\vec{c} = \left[c_x~c_y \right]^\top$ se nahaja na poziciji, kjer optična os prebada slikovno ravnino $\mathit{\Omega}$. Imenuje se optično središče slikovne ravnine (ang. Principal point). Točka $\vec{q} = [x~y]^\top$ se nahaja na poziciji, kjer daljica med projekcijskim središčem $\vec{O}$ in točko prizora $\vec{p}$ prebada slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Točka je slika prizora $\vec{q} = [x~y]^\top$, kjer sta $x$ in $y$ slikovni koordinati. Kadar je $\vec{c} = \left[0~0\right]^\top$, lahko sliko $\vec{q}$ na slikovni ravnini $\mathit{\Omega}$ predstavimo z enačbo \eqref{eq:slika-delca}.
+\emph{Slikovna ravnina} (ang. Image plane) je ravnina $\varOmega \subset \mathbb{R}^2$, ki leži na razdalji $f$ od projekcijskega središča $O$. Razdalja $f$ se imenuje goriščna razdalja (ang. Focal length)~\cite{trucco1998introductory}. Točka $\vec{c} = \left[c_x~c_y \right]^\top$ se nahaja na poziciji, kjer optična os prebada slikovno ravnino $\varOmega$. Imenuje se optično središče slikovne ravnine (ang. Principal point). Točka $\vec{q} = [x~y]^\top$ se nahaja na poziciji, kjer daljica med projekcijskim središčem $\vec{O}$ in točko prizora $\vec{p}$ prebada slikovno ravnino $\varOmega$~\cite{trucco1998introductory}. Točka je slika prizora $\vec{q} = [x~y]^\top$, kjer sta $x$ in $y$ slikovni koordinati. Kadar je $\vec{c} = \left[0~0\right]^\top$, lahko sliko $\vec{q}$ na slikovni ravnini $\varOmega$ predstavimo z enačbo~\eqref{eq:slika-delca}.
 
 \begin{equation}
 	\vec{q} = f \frac{\vec{p}}{Z}.
@@ -20,7 +20,7 @@ Za geometrijski model kamere uporabimo perspektivni model, ki je predstavljen s 
 \end{equation}
 
 \subsection{Diskretna slikovna ravnina}
-Slikovne koordinate so v resnici diskretne, saj sliko sestavlja polje slikovnih elementov $\vec{\lambda}$ s širino $\lambda_u$ in dolžino $\lambda_v$ \cite{trucco1998introductory}. V splošnem je enačba slikovnih koordinat $x$ in $y$ v metričnih enotah \eqref{eq:slikovne-koordinate}, kjer sta $u$ in $v$ slikovni koordinati v pikslih. Točka $\vec{c} = \left[c_u~c_v \right]^\top$ je optično središče v pikslih.
+Slikovne koordinate so v resnici diskretne, saj sliko sestavlja polje slikovnih elementov $\vec{\lambda}$ s širino $\lambda_u$ in dolžino $\lambda_v$~\cite{trucco1998introductory}. V splošnem je enačba slikovnih koordinat $x$ in $y$ v metričnih enotah~\eqref{eq:slikovne-koordinate}, kjer sta $u$ in $v$ slikovni koordinati v pikslih. Točka $\vec{c} = \left[c_u~c_v \right]^\top$ je optično središče v pikslih.
 
 \begin{subequations}
 \begin{align}
@@ -30,7 +30,7 @@ Slikovne koordinate so v resnici diskretne, saj sliko sestavlja polje slikovnih 
 \label{eq:slikovne-koordinate}
 \end{subequations}
 
-Če uporabimo homogene koordinate lahko ob upoštevanju enačb \eqref{eq:slika-delca} in \eqref{eq:slikovne-koordinate} izračunamo diskretne slikovne koordinate slike $\vec{q}' = \left[ u~ v \right]^\top$ po enačbi \eqref{eq:diskretne-slikovne-koordinate} \cite{trucco1998introductory}.
+Če uporabimo homogene koordinate lahko ob upoštevanju enačb~\eqref{eq:slika-delca} in~\eqref{eq:slikovne-koordinate} izračunamo diskretne slikovne koordinate slike $\vec{q}' = \left[ u~ v \right]^\top$ po enačbi~\eqref{eq:diskretne-slikovne-koordinate}~\cite{trucco1998introductory}.
 
 
 \begin{equation}
@@ -43,7 +43,7 @@ Slikovne koordinate so v resnici diskretne, saj sliko sestavlja polje slikovnih 
     \label{eq:diskretne-slikovne-koordinate}
 \end{equation}
 
-Matrika $\vec{M}_{int}$ v enačbi \eqref{eq:diskretne-slikovne-koordinate} je intrinzična matrika \cite{trucco1998introductory}. Predstavljena je z enačbo \eqref{eq:intrinsic} in vsebuje intrinzične parametre kamere, kjer sta $f_u$ in $f_v$ določena z enačbo \eqref{eq:focal}.
+Matrika $\vec{M}_{int}$ v enačbi~\eqref{eq:diskretne-slikovne-koordinate} je intrinzična matrika~\cite{trucco1998introductory}. Predstavljena je z enačbo~\eqref{eq:intrinsic} in vsebuje intrinzične parametre kamere, kjer sta $f_u$ in $f_v$ določena z enačbo~\eqref{eq:focal}.
 
 \begin{equation}
 \vec{M}_{int} = \begin{bmatrix}
@@ -65,7 +65,7 @@ Matrika $\vec{M}_{int}$ v enačbi \eqref{eq:diskretne-slikovne-koordinate} je in
 
 
 \subsection{Premikanje kamere}
-Koordinatni sistem kamere lahko transliramo in rotiramo tako, da ne sovpada več z globalnim koordinatnim sistemom, kot je prikazano na sliki \ref{fig:premikanje-kamere}. 
+Koordinatni sistem kamere lahko transliramo in rotiramo tako, da ne sovpada več z globalnim koordinatnim sistemom, kot je prikazano na sliki~\ref{fig:premikanje-kamere}. 
 
 \begin{figure}[htb]
 \centering
@@ -74,9 +74,9 @@ Koordinatni sistem kamere lahko transliramo in rotiramo tako, da ne sovpada več
 \label{fig:premikanje-kamere}
 \end{figure}
 
-Translacijo koordinatnega sistema kamere lahko opišemo z vektorjem $\vec{t} = \left[t_x~t_y~t_z\right]^\top$ \cite{trucco1998introductory}. 
+Translacijo koordinatnega sistema kamere lahko opišemo z vektorjem $\vec{t} = \left[t_x~t_y~t_z\right]^\top$~\cite{trucco1998introductory}. 
 
-Rotacijo koordinatnega sistema kamere lahko opišemo z Eulerjevimi koti $\phi$ $\theta$ in $\psi$ \cite{bajd2011osnove}. S kotom $\phi$ rotiramo okoli $z$ osi (ang. Roll). Rotacija je predstavljena z enačbo \eqref{eq:roll}. Kot $\theta$ predstavlja rotacijo okoli $x$ osi (ang. Pitch). Rotacija je opisana z enačbo \eqref{eq:pitch}. Kot $\psi$ je rotacija okoli $y$ osi (ang. Yaw) in je opisana z enačbo \eqref{eq:yaw}.
+Rotacijo koordinatnega sistema kamere lahko opišemo z Eulerjevimi koti $\phi$, $\theta$ in $\psi$~\cite{bajd2011osnove}. S kotom $\phi$ rotiramo okoli $z$ osi (ang. Roll). Rotacija je predstavljena z enačbo~\eqref{eq:roll}. Kot $\theta$ predstavlja rotacijo okoli $x$ osi (ang. Pitch). Rotacija je opisana z enačbo~\eqref{eq:pitch}. Kot $\psi$ je rotacija okoli $y$ osi (ang. Yaw) in je opisana z enačbo~\eqref{eq:yaw}.
 
 \begin{equation}
 \vec{R}_\phi = \begin{bmatrix}
@@ -106,7 +106,7 @@ Rotacijo koordinatnega sistema kamere lahko opišemo z Eulerjevimi koti $\phi$ $
 \end{equation}
 
 
-Kadar opravimo vse rotacije osi glede na fiksni globalni koordinatni sistem po vrstnem redu $\vec{R}_\psi$, $\vec{R}_\theta$ in $\vec{R}_\phi$, lahko rotacijsko matriko $\vec{R}$ opišemo z enačbo \eqref{eq:rotation} \cite{bajd2011osnove}.
+Kadar opravimo vse rotacije osi glede na fiksni globalni koordinatni sistem po vrstnem redu $\vec{R}_\psi$, $\vec{R}_\theta$ in $\vec{R}_\phi$, lahko rotacijsko matriko $\vec{R}$ opišemo z enačbo~\eqref{eq:rotation}~\cite{bajd2011osnove}.
 
 
 \begin{equation}
@@ -115,7 +115,7 @@ Kadar opravimo vse rotacije osi glede na fiksni globalni koordinatni sistem po v
 \end{equation}
 
 
-Translacijo $\vec{t}$ in rotacijo $\vec{R}$ lahko združimo v matriko premika koordinatnega sistema kamere glede na globalni koordinatni sistem, ki jo imenujemo \textbf{ekstrinsična matrika} \cite{trucco1998introductory}. Opisana je z enačbo \eqref{eq:extrinsic}.
+Translacijo $\vec{t}$ in rotacijo $\vec{R}$ lahko združimo v matriko premika koordinatnega sistema kamere glede na globalni koordinatni sistem, ki jo imenujemo \emph{ekstrinsična matrika}~\cite{trucco1998introductory}. Opisana je z enačbo~\eqref{eq:extrinsic}.
 
 \begin{equation}
 \vec{M}_{ext} = \begin{bmatrix}
@@ -125,7 +125,7 @@ Translacijo $\vec{t}$ in rotacijo $\vec{R}$ lahko združimo v matriko premika ko
 \end{equation}
 
 
-Z upoštevanjem premika kamere lahko enačbo \eqref{eq:diskretne-slikovne-koordinate} zapišemo v obliko \eqref{eq:diskretne-slikovne-koordinate-premik}. Matrika $\vec{M}$ je \textbf{projekcijska matrika} in je opisana v enačbi \eqref{eq:projection-matrix}.
+Z upoštevanjem premika kamere lahko enačbo~\eqref{eq:diskretne-slikovne-koordinate} zapišemo v obliko~\eqref{eq:diskretne-slikovne-koordinate-premik}. Matrika $\vec{M}$ je \emph{projekcijska matrika} in je opisana v enačbi~\eqref{eq:projection-matrix}.
 
 \begin{equation}
 w \begin{bmatrix}

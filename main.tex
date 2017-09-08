@@ -14,7 +14,7 @@
 % \usepackage[x-1a]{pdfx}  % for PDF/X-1a
 
 \usepackage[utf8]{inputenc}  %Kodna stran za Windows okolje, za linux je kodna stran latin2
-\usepackage[T1]{fontenc}
+%\usepackage[T1]{fontenc}
 \usepackage[slovene]{babel}    % pravila za slovensko deljenje besed
 \usepackage[pdftex]{UNI-LJ-FE-Diploma} %Stil za diplome na Fakulteti za elektrotehniko (za pdfTeX v MkiTex)
 %\usepackage[pctex]{UNI-LJ-FE-Diploma} %Stil za diplome na Fakulteti za elektrotehniko  (za pcTex)
@@ -39,7 +39,7 @@
 \DeclareSIUnit{\joul}{\J}
 \DeclareSIUnit{\kjoul}{\kJ}
 \DeclareSIUnit{\min}{\minute}
-\sisetup{output-decimal-marker = {,}}
+\sisetup{output-decimal-marker = {,},separate-uncertainty=true,multi-part-units=single}
 %\sisetup{per-mode=reciprocal}
 %\sisetup{group-separator = {.}}
 % za uporabljanje decimalne vejice in ne pike
@@ -205,6 +205,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 % za urlje 
 %\usepackage[unicode, hidelinks]{hyperref}
 \usepackage{hyperref}
+\hypersetup{hidelinks}
 
 
 
@@ -224,8 +225,13 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 
 \newcommand{\vomax}{\ensuremath{VO_{2}max}}
 \newcommand{\vo}{\ensuremath{VO_2}}
+
 \newcommand{{\T}}{\ensuremath{^{\top}}}
 \newcommand{\Mu}{M}
+\renewcommand{\Xi}{X}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\renewcommand{\vec}[1]{{\boldsymbol{#1}}}
+
 \newcommand{\nhoof}{\ensuremath{N_{HOOF}}}
 \newcommand{\nhafa}{\ensuremath{N_{HAFA}}}
 \newcommand{\esvr}{\ensuremath{\epsilon}-SVR\xspace}
@@ -235,14 +241,15 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 \newcommand{\emse}{\ensuremath{\overline{e}_{MSE}}}
 \newcommand{\fsv}{\ensuremath{f_{SV}}}
 \newcommand{\numax}{\ensuremath{\nu_{max}}}
-\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\hrtmax}{\ensuremath{hr_{tmax}}}
+
 \newcommand{\folder}{./}
 
-\newcommand{\corr}{\ensuremath{CORR}}
-\newcommand{\rmse}{\ensuremath{RMSE}}
-\newcommand{\rae}{\ensuremath{RAE}}
-\newcommand{\rrse}{\ensuremath{RRSE}}
-\newcommand{\nsv}{\ensuremath{nSV}}
+\newcommand{\corr}{{CORR}\xspace}
+\newcommand{\rmse}{{RMSE}\xspace}
+\newcommand{\rae}{{RAE}\xspace}
+\newcommand{\rrse}{{RRSE}\xspace}
+\newcommand{\nsv}{{nSV}\xspace}
 
 
 \newcommand{\boldentry}[3]{%
@@ -256,8 +263,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 %\newcommand{\theadm}{1}{\thead{$\mathbf{#1}$}}
 \newcommand{\tdata}[1]{\input{./tab/#1.tex}}
 
-\renewcommand{\Xi}{X}
-\renewcommand{\vec}[1]{{\boldsymbol{#1}}}
+
 \newtheorem{definition}{Definicija}
 
 

@@ -1,7 +1,7 @@
 \section{Matematični modeli}\label{sec:matematicni-modeli}
 HOOF in HAFA deskriptorja sta relativno nizko dimenzijski predstavitvi gibanja. Njuna povezava s porabo energije ni znana. Da bi rešili ta problem, moramo uporabiti regresijsko modeliranje, s katerim napovedujemo \emph{trenutno} porabo energije za \emph{vsako sliko zaporedja}.
 
-Metode strojnega učenja s podpornimi vektorji (SVM) se pogosto uporabljajo za klasifikacijo in regresijo \cite{chang2011a}. Njihova popularnost temelji na visoki uspešnosti generalizacije brez potrebe po predhodnem znanju \cite{chapelle1999support}. Njihova performanca delovanja ni odvisna od števila značilk, saj jih ponavadi uporabljamo v primerih ko ima vhodni prostor značilk $\mathcal{W}^n$ veliko moč $n$. Cilj teh metod je, da generiramo matematični model in ga uporabimo za predikcijo izhoda $y$ \cite{hsu2003practical}. 
+Metode strojnega učenja s podpornimi vektorji (SVM) se pogosto uporabljajo za klasifikacijo in regresijo~\cite{chang2011a}. Njihova popularnost temelji na visoki uspešnosti generalizacije brez potrebe po predhodnem znanju~\cite{chapelle1999support}. Njihova performanca delovanja ni odvisna od števila značilk, saj jih ponavadi uporabljamo v primerih ko ima vhodni prostor značilk $\mathcal{W}^n$ veliko moč $n$. Cilj teh metod je, da generiramo matematični model in ga uporabimo za predikcijo izhoda $y$~\cite{hsu2003practical}. 
 
 
 
@@ -9,9 +9,9 @@ Metode strojnega učenja s podpornimi vektorji (SVM) se pogosto uporabljajo za k
 
 
 \subsection{Linearno ločljiva učna množica}
-Imamo učne vzorce $\{ \vec{x}_i, y_i \} \in \mathcal{U}_l$, kjer je $\vec{x}_i \in \mathcal{\Xi}_l \subset \mathbb{R}^n~\forall i = 1, \ldots, l$ vektor značilk oziroma deskriptor in $y_i \in \mathit{\Omega}_l \subset \mathbb{R}~\forall i = 1, \ldots, l$ oznake razredov objektov \cite{chapelle1999support}. Za poenostavitev privzamemo, da imamo samo dva razreda $y_i \in \{-1,1\}$. 
+Imamo učne vzorce $\{ \vec{x}_i, y_i \} \in \mathcal{U}_l$, kjer je $\vec{x}_i \in \mathcal{\Xi}_l \subset \mathbb{R}^n~\forall i = 1, \ldots, l$ vektor značilk oziroma deskriptor in $y_i \in \mathit{\Omega}_l \subset \mathbb{R}~\forall i = 1, \ldots, l$ oznake razredov objektov~\cite{chapelle1999support}. Za poenostavitev privzamemo, da imamo samo dva razreda $y_i \in \{-1,1\}$. 
 
-Pri postopku s podpornimi vektorji v splošnem iščemo koeficiente $\vec{w} \in \mathcal{W} \subset \mathbb{R}^m$ ločilnih mej ali \textbf{hiper-ravnin} in prag $b$, ki razmejujejo prostor $\mathbb{R}^n$ tako, da so enako oddaljene od vzorcev $\vec{x}$ iz različnih razredov $\mathcal{C}_i~\forall i= 1, \ldots, p$, kot je prikazano na sliki \ref{fig:svm-locljivo} \cite{chapelle1999support}. Pri tem velja omejitev
+Pri postopku s podpornimi vektorji v splošnem iščemo koeficiente \hbox{$\vec{w}\in\mathcal{W}\subset\mathbb{R}^m$} ločilnih mej ali \emph{hiper-ravnin} in prag $b$, ki razmejujejo prostor $\mathbb{R}^n$ tako, da so enako oddaljene od vzorcev $\vec{x}$ iz različnih razredov $\mathcal{C}_i~\forall i= 1, \ldots, p$, kot je prikazano na sliki~\ref{fig:svm-locljivo}~\cite{chapelle1999support}. Pri tem velja omejitev
 
 \begin{equation}\label{eq:omejitev-ravnine}
 	y_i(\vec{w} \vec{x}_i + b) \geq 1, i=1, \ldots, l.
@@ -31,7 +31,7 @@ Pri postopku s podpornimi vektorji v splošnem iščemo koeficiente $\vec{w} \in
 
 
 
-Če hiper-ravnina obstaja, pravimo, da je množica $\mathcal{U}_l$ \textbf{linearno ločljiva} \cite{chapelle1999support}. Ker želimo določiti ločilno mejo s čim širšim robom, moramo minimizrati $\|\vec{w}\|^2$, saj je razdalja med mejo in najbližjo točko $\frac{1}{\|\vec{w}\|}$. To naredimo z vpeljavo Lagrangeovih multiplikatorjev $\vec{\alpha} \in \mathcal{A}^i$ in maksimizacijo funkcije \eqref{eq:svm-lagrange} z omejitvijo \eqref{eq:svm-lagrange-omejitev} \cite{chapelle1999support}.
+Če hiper-ravnina obstaja, pravimo, da je množica $\mathcal{U}_l$ \emph{linearno ločljiva}~\cite{chapelle1999support}. Ker želimo določiti ločilno mejo s čim širšim robom, moramo minimizrati $\|\vec{w}\|^2$, saj je razdalja med mejo in najbližjo točko $\frac{1}{\|\vec{w}\|}$. To naredimo z vpeljavo Lagrangeovih multiplikatorjev $\vec{\alpha} \in \mathcal{A}^i$ in maksimizacijo funkcije~\eqref{eq:svm-lagrange} z omejitvijo~\eqref{eq:svm-lagrange-omejitev}~\cite{chapelle1999support}.
 
 \begin{equation}\label{eq:svm-lagrange}
 	\mathcal{L}(\vec{\alpha}) = \sum_{i=1}^l \alpha_i - \frac{1}{2}\sum_{i,j=1}^l \alpha_i\alpha_j y_i y_j \vec{x}_i^\top\vec{x}_j
@@ -41,13 +41,13 @@ Pri postopku s podpornimi vektorji v splošnem iščemo koeficiente $\vec{w} \in
 	\sum_{i=1}^ly_i\alpha_i = 0, \alpha_i \geq 0; i=1, \ldots, l
 \end{equation}
 
-Z rešitvijo maksimizacijskega problema \eqref{eq:svm-lagrange} $\vec{\alpha}^0$ lahko izračunamo optimalne koeficiente \cite{chapelle1999support}:
+Z rešitvijo maksimizacijskega problema~\eqref{eq:svm-lagrange} $\vec{\alpha}^0$ lahko izračunamo optimalne koeficiente~\cite{chapelle1999support}:
 
 \begin{equation}
 	\vec{w}_0 = \sum_{i=1}^l \alpha_i^0 y_i \vec{x}_i.
 \end{equation}
 
-Učnim vzorcem, za katere so $\alpha_i^0 > 0$ pravimo \textbf{podporni vektorji} \cite{chapelle1999support}.
+Učnim vzorcem, za katere so $\alpha_i^0 > 0$ pravimo \emph{podporni vektorji}~\cite{chapelle1999support}.
 
 
 
@@ -58,7 +58,7 @@ Učnim vzorcem, za katere so $\alpha_i^0 > 0$ pravimo \textbf{podporni vektorji}
 
 
 \subsection{Linearno neločljiva učna množica}
-Pri linearno neločljivi učni množici $\mathcal{U}_l$ uvedemo dodaten vektor spremenljivk $\vec{\xi} \in \mathit{\Lambda}^i$ in rešujemo optimizacijski problem \eqref{eq:svm}, kjer je $C>0$ regularizacijski parameter napake in $b$ prag \cite{chapelle1999support}. Večji $C$ pomeni manjšo dopustnost napak. 
+Pri linearno neločljivi učni množici $\mathcal{U}_l$ uvedemo dodaten vektor spremenljivk $\vec{\xi} \in \mathit{\Lambda}^i$ in rešujemo optimizacijski problem~\eqref{eq:svm}, kjer je $C>0$ regularizacijski parameter napake in $b$ prag~\cite{chapelle1999support}. Večji $C$ pomeni manjšo dopustnost napak. 
 
 \begin{equation}\label{eq:svm}
 \begin{aligned}
@@ -76,11 +76,11 @@ Pri linearno neločljivi učni množici $\mathcal{U}_l$ uvedemo dodaten vektor s
 
 
 \subsection{Funkcije jedra}
-V primeru, ko učnih vzorcev ne moremo razmejiti brez napak v linearno hiper-ravnino jih lahko preslikamo v več razsežni prostor z nelinearno preslikavo $\phi: \mathcal{\Xi} \subset \mathbb{R}^n \to \mathcal{\Mu} \subset \mathbb{R}^m, n < m$, kjer lahko postanejo linearno separabilni \cite{chapelle1999support,boughorbel2005generalized}.Tako v enačbi \eqref{eq:svm-lagrange} namesto $\vec{x}_i^\top\vec{x}_j$ uporabimo $\phi(\vec{x_i})^\top\phi(\vec{x_j})$ Preslikovanju vzorcev v m-razsežni prostor se lahko znebimo s t.i. \textbf{ukano jedra} (angl. Kernel trick), kjer uporabimo implicitno preslikavo $K: \mathcal{\Xi} \times \mathcal{\Xi} \to \mathbb{R}$ \cite{boughorbel2005generalized}. V skladu z Mercerjevim izrekom mora biti $K(\vec{x}_i,\vec{x}_j)$ simetrična in pozitivna funkcija. Takrat obstaja preslikava $\phi$ tako da velja $K(\vec{x_i}, \vec{x_j}) = \phi(\vec{x}_i)^\top\phi(\vec{x}_j)$.
+V primeru, ko učnih vzorcev ne moremo razmejiti brez napak v linearno hiper-ravnino jih lahko preslikamo v več razsežni prostor z nelinearno preslikavo $\phi: \mathcal{\Xi} \subset \mathbb{R}^n \to \mathcal{\Mu} \subset \mathbb{R}^m, n < m$, kjer lahko postanejo linearno separabilni~\cite{chapelle1999support,boughorbel2005generalized}. Tako v enačbi~\eqref{eq:svm-lagrange} namesto $\vec{x}_i^\top\vec{x}_j$ uporabimo $\phi(\vec{x_i})^\top\phi(\vec{x_j})$ Preslikovanju vzorcev v m-razsežni prostor se lahko znebimo s t.i. \emph{ukano jedra} (angl. Kernel trick), kjer uporabimo implicitno preslikavo $K: \mathcal{\Xi} \times \mathcal{\Xi} \to \mathbb{R}$~\cite{boughorbel2005generalized}. V skladu z Mercerjevim izrekom mora biti $K(\vec{x}_i,\vec{x}_j)$ simetrična in pozitivna funkcija. Takrat obstaja preslikava $\phi$ tako da velja $K(\vec{x_i}, \vec{x_j}) = \phi(\vec{x}_i)^\top\phi(\vec{x}_j)$.
 
 
 \subsubsection{Jedro radialnih baznih funkcij}{
-Jedro radialnih baznih funkcij (RBF) ima naslednjo obliko z enim hiper-parametrom $\gamma$ \cite{hsu2003practical}:
+Jedro radialnih baznih funkcij (RBF) ima naslednjo obliko z enim hiper-parametrom $\gamma$~\cite{hsu2003practical}:
 
 \begin{equation} \label{eq:rbf-kernel}
 		K_{RBF}(\vec{x_i}, \vec{x_j}) = e^{
@@ -91,18 +91,18 @@ Jedro radialnih baznih funkcij (RBF) ima naslednjo obliko z enim hiper-parametro
         }
 \end{equation}
 
-Avtorji v \cite{hsu2003practical} zagovarjajo, da pri učenju najprej poskusim z RBF jedrom. Prvi argument je, da to jedro ne vpliva na kompleksnost modela, saj moramo izbrati le en dodaten parameter $\gamma$. Kot drugo, imamo z njim manj numeričnih težav, saj se njegova vrednost giblje na intervalu $(0, 1]$ \cite{hsu2003practical}. 
+Avtorji v~\cite{hsu2003practical} zagovarjajo, da pri učenju najprej poskusim z RBF jedrom. Prvi argument je, da to jedro ne vpliva na kompleksnost modela, saj moramo izbrati le en dodaten parameter $\gamma$. Kot drugo, imamo z njim manj numeričnih težav, saj se njegova vrednost giblje na intervalu $(0, 1]$~\cite{hsu2003practical}. 
 
 
 \begin{comment}
 \subsubsection{Jedro preseka generaliziranih histogramov}\label{sec:ghi}
-Jedro preseka generaliziranih histogramov (GHI) je uporaben, ko imamo deskriptorje definirane kot histograme. Določen z enačbo \eqref{eq:ghi-kernel}, kjer je hiper-parameter $\beta \geq 0$, $m$ pa je število stolpcev histogramov $\vec{x}$ in $\vec{x}'$ \cite{boughorbel2005generalized}.
+Jedro preseka generaliziranih histogramov (GHI) je uporaben, ko imamo deskriptorje definirane kot histograme. Določen z enačbo~\eqref{eq:ghi-kernel}, kjer je hiper-parameter $\beta \geq 0$, $m$ pa je število stolpcev histogramov $\vec{x}$ in $\vec{x}'$~\cite{boughorbel2005generalized}.
 
 \begin{equation}\label{eq:ghi-kernel}
 K_{GHI}(\vec{x}, \vec{x}') = \sum_{i=1}^m min\left\{ \left| x_i \right|^\beta, \left|  x_i' \right| \right\}
 \end{equation}
 
-Po \cite{boughorbel2005generalized} je prednost uporabe GHI jedra ta, da so meje invariantne na skaliranje prostora značilk, zato ne potrebujemo dodatne optimizacije skalirnega hiper-parametra. Optimalna vrednosti hiper-parametra je okoli $\beta=0.25$.
+Po~\cite{boughorbel2005generalized} je prednost uporabe GHI jedra ta, da so meje invariantne na skaliranje prostora značilk, zato ne potrebujemo dodatne optimizacije skalirnega hiper-parametra. Optimalna vrednosti hiper-parametra je okoli $\beta=0.25$.
 
 %\subsubsection{linear}
 \end{comment}
@@ -114,7 +114,7 @@ Po \cite{boughorbel2005generalized} je prednost uporabe GHI jedra ta, da so meje
 \subsection{Predprocesiranje}
 \subsubsection{Skaliranje značilk}
 
-Po \cite{hsu2003practical} je skaliranje značilk pred uporabo SVM zelo pomembno. S skaliranjem se znebimo dejstva, da značilke, definirane na večjem intervalu bolj vplivajo na rezultat, kot značilke z manjšim intervalom. Prav tako se s skaliranjem znebimo numeričnih težav med učenjem. Avtorji \cite{hsu2003practical} zato predlagajo skaliranje na intervalih $[-1, 1]$ ali $[0, 1]$.
+Po~\cite{hsu2003practical} je skaliranje značilk pred uporabo SVM zelo pomembno. S skaliranjem se znebimo dejstva, da značilke, definirane na večjem intervalu bolj vplivajo na rezultat, kot značilke z manjšim intervalom. Prav tako se s skaliranjem znebimo numeričnih težav med učenjem. Avtorji~\cite{hsu2003practical} zato predlagajo skaliranje na intervalih $[-1, 1]$ ali $[0, 1]$.
 
 
 
@@ -124,17 +124,17 @@ Po \cite{hsu2003practical} je skaliranje značilk pred uporabo SVM zelo pomembno
 
 \subsubsection{Optimizacija SVM parametrov}\label{sec:optimizacija-svm-parametrov}
 
-Ker a priori ne poznamo najboljših parametrov postopka SVM in hiper-parametrov funkcij jedra, jih moramo optimizirati \cite{hsu2003practical}. S tem zagotovimo najboljše delovanje metode na naših podatkih. Za optimizacijo lahko uporabljamo mrežno iskanje s križno validacijo.  Pri mrežnem iskanju izračunamo predikcije za kombinacijo parametrov in jih evaluiramo s križno validacijo \cite{hsu2003practical}. Izberemo tisto kombinacijo parametrov, s katero smo dobili najboljšo natančnost. 
+Ker a priori ne poznamo najboljših parametrov postopka SVM in hiper-parametrov funkcij jedra, jih moramo optimizirati~\cite{hsu2003practical}. S tem zagotovimo najboljše delovanje metode na naših podatkih. Za optimizacijo lahko uporabljamo mrežno iskanje s križno validacijo.  Pri mrežnem iskanju izračunamo predikcije za kombinacijo parametrov in jih evaluiramo s križno validacijo~\cite{hsu2003practical}. Izberemo tisto kombinacijo parametrov, s katero smo dobili najboljšo natančnost. 
 
-Dobro je, če kombinacije parametrov izbiramo po eksponentni funkciji z osnovo $2$, saj s tem zagotovimo širok razpon iskanja \cite{hsu2003practical}. Iskanje optimalnih parametrov lahko pohitrimo z uporabo grobega in finega iskanja. Z grobim iskanjem omejimo območje iskanja za fino iskanje \cite{hsu2003practical}. S finim iskanjem pa dejansko optimiziramo parametre.
+Dobro je, če kombinacije parametrov izbiramo po eksponentni funkciji z osnovo $2$, saj s tem zagotovimo širok razpon iskanja~\cite{hsu2003practical}. Iskanje optimalnih parametrov lahko pohitrimo z uporabo grobega in finega iskanja. Z grobim iskanjem omejimo območje iskanja za fino iskanje~\cite{hsu2003practical}. S finim iskanjem pa dejansko optimiziramo parametre.
 
 
 \subsubsection{Optimizacija z mrežnim iskanjem \texorpdfstring{$\nu$}{nu}-RBF}\label{sec:nurbf}
 V mrežnem iskanju \nurbf gre za klasično mrežno iskanje, z dodatno omejitvijo števila podpornih vektorjev in filtriranjem rezultatov pri križni korelaciji.
 
-Tu uporabljamo 5-kratno križno validacijo z regresijo \nusvr in jedrom RBF, kjer računamo srednjo vrednost srednjih kvadratičnih napak $\emse$ posameznih korelacij ter razmerje števila podpornih vektorjev $\fsv$. Regresija \nusvr je predstavljena v poglavju \ref{sec:regresija-nusvr}.
+Tu uporabljamo 5-kratno križno validacijo z regresijo \nusvr in jedrom RBF, kjer računamo srednjo vrednost srednjih kvadratičnih napak $\emse$ posameznih korelacij ter razmerje števila podpornih vektorjev $\fsv$. Regresija \nusvr je predstavljena v poglavju~\ref{sec:regresija-nusvr}.
 
-Pri računanju napake MSE upoštevamo filtrirane predikcije, ki jih filtriramo z Gaussovim filtrom s standardnim odklonom $\sigma$. Vrednost parametra $\sigma$ je enaka vrednosti, ki jo uporabljamo za filtriranje končnih rezultatov pri eksperimentiranju. Za pridobitev $\fsv$ naučimo model s parametri trenutne iteracije mrežnega iskanja. Razmerje nato dobimo po enačbi \eqref{eq:fsv}, kjer je $n_{SV}$ število podpornih vektorjev in $n_{D}$ število deskriptorjev.
+Pri računanju napake MSE upoštevamo filtrirane predikcije, ki jih filtriramo z Gaussovim filtrom s standardnim odklonom $\sigma$. Vrednost parametra $\sigma$ je enaka vrednosti, ki jo uporabljamo za filtriranje končnih rezultatov pri eksperimentiranju. Za pridobitev $\fsv$ naučimo model s parametri trenutne iteracije mrežnega iskanja. Razmerje nato dobimo po enačbi~\eqref{eq:fsv}, kjer je $n_{SV}$ število podpornih vektorjev in $n_{D}$ število deskriptorjev.
 
 \begin{equation}
 \fsv = \frac{n_{SV}}{n_{D}}
@@ -152,7 +152,7 @@ Parametre $\{\emse^{i};\forall i=1,\ldots,N\}$ $N$ iteracij mrežnega iskanja so
 \subsection{Postopki SVM}
 \subsubsection{Razvrščevalnik C-SVC}
 
-Razvrščevalnik rešuje problem \cite{chang2011a}:
+Razvrščevalnik rešuje problem~\cite{chang2011a}:
 
 \begin{equation}\label{eq:c-svc}
 \begin{aligned}
@@ -162,7 +162,7 @@ Razvrščevalnik rešuje problem \cite{chang2011a}:
 \end{aligned}	
 \end{equation}
 
-$\vec{e}$ je vektor enic. $Q$ je pozitivna semidefinitna matrika s členi $Q_{ij} = y_i y_jK(\vec{x}_i,\vec{x}_j)$, kjer je $K(\vec{x}_i,\vec{x}_j)$ funkcija jedra. $\vec{\alpha}$ so Lagrangeovi multiplikatorji in $C>0$ je regularizacijski parameter \cite{chang2011a}.
+$\vec{e}$ je vektor enic. $Q$ je pozitivna semidefinitna matrika s členi $Q_{ij} = y_i y_jK(\vec{x}_i,\vec{x}_j)$, kjer je $K(\vec{x}_i,\vec{x}_j)$ funkcija jedra. $\vec{\alpha}$ so Lagrangeovi multiplikatorji in $C>0$ je regularizacijski parameter~\cite{chang2011a}.
 
 
 
@@ -173,7 +173,7 @@ $\vec{e}$ je vektor enic. $Q$ je pozitivna semidefinitna matrika s členi $Q_{ij
 
 \subsubsection{Regresija \texorpdfstring{$\epsilon$}{e}-SVR}
 
-Za uporabo SVM pri regresiji uvedemo dodatni vektor spremenljivk $\vec{\xi^+}$. Primarni problem regresije $\epsilon$-SVR je  tako \cite{chang2011a}:
+Za uporabo SVM pri regresiji uvedemo dodatni vektor spremenljivk $\vec{\xi^+}$. Primarni problem regresije $\epsilon$-SVR je  tako~\cite{chang2011a}:
 
 \begin{equation}\label{eq:e-svr-primal}
 \begin{aligned}
@@ -186,7 +186,7 @@ Za uporabo SVM pri regresiji uvedemo dodatni vektor spremenljivk $\vec{\xi^+}$. 
 
 kjer je $C>0$ regresijski parameter in $\epsilon > 0$ parameter kriterijske funkcije. Z njim določujemo toleranco do napak.
 
-Sekundarni problem se glasi \cite{chang2011a}:
+Sekundarni problem se glasi~\cite{chang2011a}:
 
 \begin{equation}\label{eq:e-svr-dual}
 \begin{aligned}
@@ -206,7 +206,7 @@ $Q$ je matrika s z elementi $Q_{ij} = KK(\vec{x}_i,\vec{x}_j)$.
 
 \subsubsection{Regresija \texorpdfstring{$\nu$}{nu}-SVR}\label{sec:regresija-nusvr}
 
-Pri regresiji $\nu$-SVR uporabljamo dodatni parameter $\nu \in (0, 1]$, s katerim kontroliramo razmerje števila podpornih vektorjev. Ostali parametri so enaki kot pri $\epsilon$-SVR, le da tu $\epsilon$ postane spremenljivka \cite{chang2011a}. Primarni problem se glasi:
+Pri regresiji $\nu$-SVR uporabljamo dodatni parameter $\nu \in (0, 1]$, s katerim kontroliramo razmerje števila podpornih vektorjev. Ostali parametri so enaki kot pri $\epsilon$-SVR, le da tu $\epsilon$ postane spremenljivka~\cite{chang2011a}. Primarni problem se glasi:
 
 \begin{equation}\label{eq:nu-svr-primal}
 \begin{aligned}
@@ -218,7 +218,7 @@ Pri regresiji $\nu$-SVR uporabljamo dodatni parameter $\nu \in (0, 1]$, s kateri
 \end{aligned}	
 \end{equation}
 
-Sekundarni problem opišemo z \cite{chang2011a}:
+Sekundarni problem opišemo z~\cite{chang2011a}:
 
 \begin{equation}\label{eq:nu-svr-dual}
 \begin{aligned}

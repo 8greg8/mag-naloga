@@ -1,9 +1,9 @@
 \section{Prostorski tok}
 % Teorija prostorskega toka
 % Katero metodo smo mi uporabili in zakaj
-Optični tok $\vec{O}$ predstavlja aproksimacijo polja gibanja $\vec{G}$, ta pa je projekcija polja hitrosti $\vec{H}$ na slikovno ravnino $\mathit{\Omega}$ \cite{trucco1998introductory}. Če pogledamo z druge perspektive, ni optični tok $\vec{O}$ nič drugega kot projekcija aproksimacije polja hitrosti $\vec{H}$, ki jo po analogiji lahko imenujemo \textbf{prostorski tok} (angl. Scene Flow) \cite{vedula1999three}.
+Optični tok $\vec{O}$ predstavlja aproksimacijo polja gibanja $\vec{G}$, ta pa je projekcija polja hitrosti $\vec{H}$ na slikovno ravnino $\varOmega$~\cite{trucco1998introductory}. Če pogledamo z druge perspektive, ni optični tok $\vec{O}$ nič drugega kot projekcija aproksimacije polja hitrosti $\vec{H}$, ki jo po analogiji lahko imenujemo \emph{prostorski tok} (angl. Scene Flow)~\cite{vedula1999three}.
 
-Za namen razlage upoštevamo enake omejitve kamere, masnega delca in osvetlitve, kot v poglavju \ref{sec:opticni-tok}. Predpostavimo, da imamo v prostoru površino $f(x,y,z) = 0$ na kateri imamo gibajoč točkovni delec $\vec{p} = \vec{p}(t)$. Na slikovni ravnini $\mathit{\Omega}$ imamo njegovo sliko $\vec{q}$ \cite{vedula1999three}. Vizualni prikaz prizora lahko vidimo na sliki \ref{fig:scene-flow}. 
+Za namen razlage upoštevamo enake omejitve kamere, masnega delca in osvetlitve, kot v poglavju~\ref{sec:opticni-tok}. Predpostavimo, da imamo v prostoru površino $f(x,y,z) = 0$ na kateri imamo gibajoč točkovni delec $\vec{p} = \vec{p}(t)$. Na slikovni ravnini $\varOmega$ imamo njegovo sliko $\vec{q}$~\cite{vedula1999three}. Vizualni prikaz prizora lahko vidimo na sliki~\ref{fig:scene-flow}. 
 
 
 
@@ -11,20 +11,20 @@ Za namen razlage upoštevamo enake omejitve kamere, masnega delca in osvetlitve,
 \begin{figure}[htb]
 \centering
 \input{./Slike/scene-flow.tikz}
-\caption[Vizualni prikaz vektorja prostorskega toka $\vec{w}$]{Vizualni prikaz vektorja prostorskega toka $\vec{w}$. V prostoru imamo površino $f$ na kateri leži gibajoči točkovni delec $\vec{p}$ \cite{vedula1999three}. Na slikovni ravnini $\mathit{\Omega}$ imamo sliko delca $\vec{q}$ s prostorskim tokom $\vec{w}$.}
+\caption[Vizualni prikaz vektorja prostorskega toka $\vec{w}$]{Vizualni prikaz vektorja prostorskega toka $\vec{w}$. V prostoru imamo površino $f$ na kateri leži gibajoči točkovni delec $\vec{p}$~\cite{vedula1999three}. Na slikovni ravnini $\varOmega$ imamo sliko delca $\vec{q}$ s prostorskim tokom $\vec{w}$.}
 \label{fig:scene-flow}
 \end{figure}
 
 
 
-Ker je slika projekcija delca na slikovno ravnino $\mathit{\Omega}$, lahko zapišemo $\vec{q} = \vec{q}(\vec{p})$. Hitrost slike določimo po enačbi \eqref{eq:opticni-tok-sf}, ki predstavlja enačbo vektorja optičnega toka $\vec{w}$, kot projekcijo prostorskega toka \cite{vedula1999three}. 
+Ker je slika projekcija delca na slikovno ravnino $\varOmega$, lahko zapišemo $\vec{q} = \vec{q}(\vec{p})$. Hitrost slike določimo po enačbi~\eqref{eq:opticni-tok-sf}, ki predstavlja enačbo vektorja optičnega toka $\vec{w}$, kot projekcijo prostorskega toka~\cite{vedula1999three}. 
 
 
 \begin{equation}\label{eq:opticni-tok-sf}
 	\vec{w} = \frac{d\vec{q}}{dt} = \frac{\partial \vec{q}}{\partial \vec{p}}\frac{d\vec{p}}{dt}
 \end{equation}
 
-Če predpostavimo, da imamo dovolj informacije o sistemu, da lahko določimo inverzno funkcijo $\vec{p} = \vec{p}(\vec{q},t)$, kjer je masni delec $\vec{p}$ projekcija slike $\vec{q}$, lahko določimo njegovo hitrost $\vec{\mu} \in \mathcal{\Mu} \subset \mathbb{R}^3$ z enačbo \eqref{eq:scene-flow}. Slednja je sestavljena iz dveh delov. Prvi člen je projekcija vektorja optičnega toka $\vec{w}$ na tangentno ravnino površine $f$, v točki, kjer se nahaja delec $\vec{p}$ \cite{vedula1999three}. Drugi člen je hitrost spreminjanja oddaljenosti delca od slikovne ravnine $\mathit{\Omega}$, ko slika delca stoji na miru. 
+Če predpostavimo, da imamo dovolj informacije o sistemu, da lahko določimo inverzno funkcijo $\vec{p} = \vec{p}(\vec{q},t)$, kjer je masni delec $\vec{p}$ projekcija slike $\vec{q}$, lahko določimo njegovo hitrost $\vec{\mu} \in \mathcal{\Mu} \subset \mathbb{R}^3$ z enačbo~\eqref{eq:scene-flow}. Slednja je sestavljena iz dveh delov. Prvi člen je projekcija vektorja optičnega toka $\vec{w}$ na tangentno ravnino površine $f$, v točki, kjer se nahaja delec $\vec{p}$~\cite{vedula1999three}. Drugi člen je hitrost spreminjanja oddaljenosti delca od slikovne ravnine $\varOmega$, ko slika delca stoji na miru. 
 
 \begin{equation}\label{eq:scene-flow}
 	\vec{\mu} = \frac{d\vec{p}}{dt} = \frac{\partial \vec{p}}{\partial \vec{q}} \frac{d\vec{q}}{dt} + \left.\frac{\partial \vec{p}}{\partial t}\right|_{\vec{q}}
@@ -39,18 +39,18 @@ Kadar imamo v prostoru več, med seboj neodvisnih premikajočih masnih delcev, v
 
 
 
-$\dot{Z}$ predstavlja hitrost spreminjanja globine \cite{yan2016scene}.
+$\dot{Z}$ predstavlja hitrost spreminjanja globine~\cite{yan2016scene}.
 
 \subsection{Metode estimacije prostorskega toka}
-Konvencionalne metode estimacije prostorskega toka so se razvile iz optičnega toka, in dodatne informacije o globini \cite{yan2016scene}. Slednjo lahko pridobimo s parom stereo kamer ali z uporabo sistemov več kamer \cite{jaimez2015primal}. Vektor hitrosti prostorskega toka lahko v takih sistemih aproksimiramo z $\vec{\mu} = \left[w_x~w_y~\dot{d}\right]^\top$, kjer sta $(w_x, w_y)$ komponenti vektorja optičnega toka $\vec{w}$, $\dot{d}$ pa časovna sprememba disparitete \cite{yan2016scene}.
+Konvencionalne metode estimacije prostorskega toka so se razvile iz optičnega toka, in dodatne informacije o globini~\cite{yan2016scene}. Slednjo lahko pridobimo s parom stereo kamer ali z uporabo sistemov več kamer~\cite{jaimez2015primal}. Vektor hitrosti prostorskega toka lahko v takih sistemih aproksimiramo z $\vec{\mu} = \left[w_x~w_y~\dot{d}\right]^\top$, kjer sta $(w_x, w_y)$ komponenti vektorja optičnega toka $\vec{w}$, $\dot{d}$ pa časovna sprememba disparitete~\cite{yan2016scene}.
 
-Z razvojem t.i. ``Time-of-flight'' (ToF) kamer, smo dobili cenovno dostopne in natančne sisteme, ki omogočajo implementacijo hitrih algoritmov prostorskega toka \cite{yan2016scene,jaimez2015primal}. Ti večinoma temeljijo na globalni variacijski metodi, kjer rešujemo minimizacijski problem 
+Z razvojem t.i. ``Time-of-flight'' (ToF) kamer, smo dobili cenovno dostopne in natančne sisteme, ki omogočajo implementacijo hitrih algoritmov prostorskega toka~\cite{yan2016scene,jaimez2015primal}. Ti večinoma temeljijo na globalni variacijski metodi, kjer rešujemo minimizacijski problem 
 
 \begin{equation}\label{eq:minimizacijski-problem}
 	\min_{\mu}\{E_D(\vec{\mu}) + E_R(\vec{\mu})\}
 \end{equation}
 
-V podatkovnem delu funkcionala \eqref{eq:minimizacijski-problem} $E_D(\vec{\mu})$ \eqref{eq:podatkovni-del} upoštevamo konstantno osvetljenost \eqref{eq:konstantna-osvetljenost} in konsistentnost spreminjana globine \eqref{eq:konsistentnost-globine}, kjer je  $\Psi$ cenilka. Ponavadi je uporabljena $L_2$ norma $\Psi(x) = \| x \|^2$ \cite{yan2016scene}. $\alpha$ v \eqref{eq:podatkovni-del} predstavlja utež.
+V podatkovnem delu funkcionala~\eqref{eq:minimizacijski-problem} $E_D(\vec{\mu})$~\eqref{eq:podatkovni-del} upoštevamo konstantno osvetljenost~\eqref{eq:konstantna-osvetljenost} in konsistentnost spreminjana globine~\eqref{eq:konsistentnost-globine}, kjer je  $\Psi$ cenilka. Ponavadi je uporabljena $L_2$ norma $\Psi(x) = \| x \|^2$~\cite{yan2016scene}. $\alpha$ v~\eqref{eq:podatkovni-del} predstavlja utež.
 
 \begin{equation}\label{eq:konstantna-osvetljenost}
 	E_{KO} = \sum_\Omega \Psi( I(\vec{q} + \vec{w}) - I(\vec{q}))
@@ -64,7 +64,7 @@ V podatkovnem delu funkcionala \eqref{eq:minimizacijski-problem} $E_D(\vec{\mu})
 	E_D = E_{KO} + \alpha E_{KG}
 \end{equation}
 
-V regularizacijskem delu funkcionala \eqref{eq:minimizacijski-problem} $E_R(\vec{\mu})$ pa uporabimo enačbo \eqref{eq:regularizacijski-del}
+V regularizacijskem delu funkcionala~\eqref{eq:minimizacijski-problem} $E_R(\vec{\mu})$ pa uporabimo enačbo~\eqref{eq:regularizacijski-del}
 
 \begin{equation}\label{eq:regularizacijski-del}
 	E_R = \sum_\Omega \Psi\left( \nabla w_x \right) + \Psi\left( \nabla w_y \right) + \Psi\left( \nabla \dot{Z} \right)
@@ -74,15 +74,15 @@ V nadaljevanju predstavljamo globalno variacijsko metodo PD-Flow algoritem.
 
 
 \subsubsection{PD-Flow algoritem.}\label{sec:pd-flow}
-Algoritem spada pod globalne variacijske metode \cite{jaimez2015primal}. Za cenilko $\Psi$ v \eqref{eq:konstantna-osvetljenost} in \eqref{eq:konsistentnost-globine} avtorji uporabljajo $L_1$ normo. Za utež $\alpha$ v podatkovnem delu funkcionala \eqref{eq:podatkovni-del} se v tem algoritmu uporablja funkcija 
+Algoritem spada pod globalne variacijske metode~\cite{jaimez2015primal}. Za cenilko $\Psi$ v~\eqref{eq:konstantna-osvetljenost} in~\eqref{eq:konsistentnost-globine} avtorji uporabljajo $L_1$ normo. Za utež $\alpha$ v podatkovnem delu funkcionala~\eqref{eq:podatkovni-del} se v tem algoritmu uporablja funkcija 
 
 \begin{equation}\label{eq:utez}
  \alpha(x,y) = \frac{\mu_0}{1 + k_\mu \left( \frac{\partial Z^2}{\partial x} + \frac{\partial Z^2}{\partial y} + \frac{\partial Z^2}{\partial t} \right)},
 \end{equation}
 
-kjer sta empirično določena parametra $\mu_0 = 75$ in $k_mu = 1000$. Za izračun podatkovnega dela uporabljajo hierarhično metodo grajenja slikovne piramide, pri tem pa uporabljajo linearizacijo podatkovnega dela \eqref{eq:podatkovni-del} \cite{jaimez2015primal}.
+kjer sta empirično določena parametra $\mu_0 = 75$ in $k_mu = 1000$. Za izračun podatkovnega dela uporabljajo hierarhično metodo grajenja slikovne piramide, pri tem pa uporabljajo linearizacijo podatkovnega dela~\eqref{eq:podatkovni-del}~\cite{jaimez2015primal}.
 
-Jaimez et al. v delu \cite{jaimez2015primal} predstavi nov regularizacijski del \eqref{eq:regularizacijski-del-pdflow}, kjer upošteva še geometrijo prizora s faktorjem $\vec{r}$ \eqref{eq:faktor-prizora}. Z njim upošteva, da lahko sosednji slikovni elementi predstavljajo točke v prostoru, ki so si različno oddaljene.
+Jaimez et al. v delu~\cite{jaimez2015primal} predstavi nov regularizacijski del~\eqref{eq:regularizacijski-del-pdflow}, kjer upošteva še geometrijo prizora s faktorjem $\vec{r}$~\eqref{eq:faktor-prizora}. Z njim upošteva, da lahko sosednji slikovni elementi predstavljajo točke v prostoru, ki so si različno oddaljene.
 
 \begin{equation}\label{eq:regularizacijski-del-pdflow}
 E_R = \sum_\Omega \Psi\left( (\nabla w_x)^\top \vec{r} \right) + \Psi\left( (\nabla w_y)^\top \vec{r} \right) + \Psi\left( (\nabla \dot{Z})^\top \vec{r} \right)
@@ -96,7 +96,7 @@ E_R = \sum_\Omega \Psi\left( (\nabla w_x)^\top \vec{r} \right) + \Psi\left( (\na
 \end{bmatrix}^\top
 \end{equation}
 
-Evaluacija PD-Flow algoritma je prikazana v tabeli \ref{tab:pdflow}. V tabeli so zapisani še rezultati RGB-D flow algoritma, ki za cenilko $\Psi$ ravno tako uporablja $L_1$ normo \cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma.
+Evaluacija PD-Flow algoritma je prikazana v tabeli~\ref{tab:pdflow}. V tabeli so zapisani še rezultati RGB-D flow algoritma, ki za cenilko $\Psi$ ravno tako uporablja $L_1$ normo~\cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma.
 
 \begin{table}[htb]
 	\centering
@@ -108,6 +108,6 @@ Evaluacija PD-Flow algoritma je prikazana v tabeli \ref{tab:pdflow}. V tabeli so
     RGB-D flow & 0.096 & 15.58 & 119.1 & 0.111 \\
     \bottomrule
     \end{tabular}
-    \caption[Evaluacija PD-Flow algoritma]{Evaluacija PD-Flow algoritma in primerjava z algoritmom RGB-D flow, ki uporablja enako cenilko $\Psi$ \cite{jaimez2015primal}. Za metrike se uporabljata povprečna kotna napaka (AAE) in normaliziran koren srednje kvadratične napake magnitude hitrosti (NRMS-V), kjer se največja magnituda (MAX-V) uporablja za normalizacijo \cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma. Odebeljene vrednosti predstavljajo najboljšo vrednost.}
+    \caption[Evaluacija PD-Flow algoritma]{Evaluacija PD-Flow algoritma in primerjava z algoritmom RGB-D flow, ki uporablja enako cenilko $\Psi$~\cite{jaimez2015primal}. Za metrike se uporabljata povprečna kotna napaka (AAE) in normaliziran koren srednje kvadratične napake magnitude hitrosti (NRMS-V), kjer se največja magnituda (MAX-V) uporablja za normalizacijo~\cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma. Odebeljene vrednosti predstavljajo najboljšo vrednost.}
     \label{tab:pdflow}
 \end{table}
