@@ -1,0 +1,31 @@
+\begin{tikzpicture}
+% LAYERS
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+\tikzset{
+	between/.style args={#1 and #2}{
+		at = ($(#1)!0.5!(#2)$)
+	}
+}
+
+% NODES
+\node (slika) [input] at (0,0) {Področje tarče\\na sliki $I(x,y)$};
+
+\node (of) [block, right= of slika] {Optični/Prostorski\\tok};
+\node (hoof) [block, right= of of] {Deskriptorji\\$\vec{x}(t)$};
+
+\node (params) [input, above=of hoof] {SVM/SVR\\parametri};
+\node (ucenje) [block, right=of hoof] {Predikcija (testiranje)};
+
+\node (rezultat) [output, right= of ucenje] {Energijska poraba};
+
+% arrows
+\draw [arrow] (slika) -- (of);
+
+
+\draw [arrow] (of) -- (hoof);
+\draw [arrow] (hoof) -- (ucenje);
+\draw [arrow,] (params.south east) -- (ucenje.north);
+
+\draw [arrow] (ucenje) -- (rezultat);
+\end{tikzpicture}

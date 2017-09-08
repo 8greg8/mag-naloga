@@ -7,8 +7,7 @@ Merjenca SUBJ4 smo uporabili samo v laboratorijskih eksperimentih, ker pri teren
 
 Med laboratorijskimi in terenskimi eksperimenti je za merjenca SUBJ1 in SUBJ2 preteklo 43 dni, za merjenca SUBJ4 42 dni in za ostale 1 dan.  
 
-\subsection{Preliminarni testi}
-\subsubsection{Združevanje slik iz dveh Kinect kamer}\label{sec:zdruzevanje}
+\subsection{Združevanje slik iz dveh Kinect kamer}\label{sec:zdruzevanje}
 
 \paragraph{Združevanje z značilkami}
 Časovno sinhronizirana zaporedja slik smo poskušali združiti z metodo panoramskega šivanja slik z uporabo značilk, kot je opisano v delu \cite{brown2007automatic}. Tu smo namesto SIFT značilk uporabili SURF značilke.
@@ -38,7 +37,7 @@ Prva slika združenega zaporedja je bila slika kamere, kjer se igralec prvič po
 
 
 
-\subsubsection{Mrežno iskanje \texorpdfstring{$\nu$}{nu}-RBF}
+\subsection{Mrežno iskanje \texorpdfstring{$\nu$}{nu}-RBF}
 Med evaluacijo eksperimentov 1. faze smo ugotovili, da z regresijo \esvr pogosto dobimo preobremenjene (ang. Overfitted) modele. Pri takih modeli je število podpornih vektorjev zelo visoko. Lahko se zgodi, da postanejo vsi vektorji značilk podporni vektorji. Preobremenjeni modeli lahko dajejo solidne rezultate, vendar pa so ti nerealistični. Takoj, ko bi v tak model vnesli rahlo spremenjene podatke, ne bi več delovali.
 
 Zaradi tovrstnih problemov smo v našem postopku regresijo \esvr zamenjali z \nusvr. Izkazalo se je, da tudi ta ne deluje, čeprav pri njej uporabljamo dodatni parameter $\nu$, s katerim v teoriji kontroliramo razmerje števila podpornih vektorjev, kot je opisano v poglavju \ref{sec:regresija-nusvr}. Chang et. al nam v delu \cite{chang2002training} parameter $\nu$ bolj natančno opiše kot spodnjo mejo razmerja števila podpornih vektorjev. Parameter $\nu$ tako v resnici ne predstavlja omejitve, s katero bi kaznovali prekomerno učenje modela. V ta namen smo razvili mrežno iskanje \nurbf, ki je predstavljeno v poglavju \ref{sec:nurbf}. 
@@ -56,7 +55,7 @@ Z optimiziranim parametrom $\numax=0.5$, smo \nurbf preizkusili še na elementar
 
 
 
-\subsubsection{Optimizacija Gaussovega filtra}
+\subsection{Optimizacija Gaussovega filtra}
 Pri optimizaciji Gaussovega filtra smo določili optimalni standardni odklon $\sigma$ z uporabo dveh metrik, in sicer: koren srednje kvadratične napake (RMSE) in razmerje med signalom in šumom (SNR). Pri RMSE metriki smo določili napako med učnimi vzorci in njihovo predikcijo. Pri SNR metriki smo za signal uporabili referenčne učne vzorce. Za šum smo uporabili rezidualni ali preostali šum. Tega smo dobili z odštevanjem filtriranih vzorcev od referenčnih. SNR metrika tako določa uspešnost izločevanja šuma, RMSE metrika pa pravilnost določevanja kateri podatki spadajo v signal in kateri v šum.
 
 Teste smo izvajali na elementarnih eksperimentih 1. faze brez upoštevanja izrezovanja slik, pre čemer smo uporabili HOOF-HAFA deskriptor. Značilke smo skalirali na intervalu $[0,~1]$, ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za postopek učenja smo izbrali \nurbf z $\numax=0.5$ in $\sigma = 1$. Testirali smo naslednje standardne odklone Gaussovega filtra: $1, 3, 5, 11, 21, 31$ in $51$. 
@@ -77,7 +76,7 @@ Pri postopku smo uporabili $\numax=0.5$ in $\sigma=5$. Rezultate smo filtrirali 
 \end{comment}
 
 
-\subsubsection{Normalizacija HAFA deskriptorjev}
+\subsection{Normalizacija HAFA deskriptorjev}
 V praksi se pokaže, da prvotni HAFA histogram ne deluje zadovoljivo, saj se histogram lahko močno spreminja pri uporabi sledilnika. Zaradi neidelanega delovanja sledilnika področje tarče skozi čas spreminja svojo velikost, to pa vpliva na vrednosti stolpcev HAFA histograma. Ker te dobimo s preštevanjem slikovnih elementov z enako amplitudo hitrosti bo manjše področje posledično zmanjšalo celoten histogram. Pri HOOF histogramih tega problema praktično nimamo, saj ima majhen vpliv. Razlog tiči v računanju vrednosti stolpcev HOOF histograma. Njihove vrednosti dobimo s seštevanjem amplitud in ne njihovim preštevanjem. Te so zato pred normiranjem praviloma večje.
 
 Probleme sledilnika smo poskušali kompenzirati z uvedbo amplitudnega faktorja $f_A$. Amplitudni faktor je pravzaprav razmerje med velikostjo področja igralca na terenskih testih in velikostjo merjenca na tekalni stezi. Razmerje lahko preprosto dobimo z razmerjem diagonal področij po enačbi \eqref{eq:diag}, kjer so $w_l$ in $h_l$ širina in dolžina področja na tekalni stezi ter $w_s$ in $h_s$ širina in dolžina področja na terenskih testih.
@@ -134,6 +133,10 @@ Pri testiranju smo uporabili parameter $\numax = 0.5$ in $\sigma=5$. Za filtrira
 Merjenci so opravili obremenilni test po protokolu Nowatzky. To je stopnjevani test na tekoči preprogi za merjenje maksimalne porabe kisika in oceno aerobne kapacitete posameznika.
 
 \subsubsection{Pridobivanje podatkov}
+\paragraph{Fiziolo\v{s}ki parametri.}
+Obremenilni test smo izvajali s pomočjo sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Uporabili smo  tekočo  preprogo HP Cosmos. Z obremenilnim testom smo pridobili podatke energijske porabe šestih različnih merjencev z oznakami: SUBJ1, SUBJ2, SUBJ4, SUBJ7 SUBJ8 in SUBJ9. Vzorčili smo s frekvenco \SI{0.2}{\hertz}.
+
+\paragraph{Video posnetki.}
 Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Kameri sta bili časovno sinhronizirani po NTP protokolu. Frekvenci vzorčenja na posamezni kameri sta se rahlo spreminjali, zato smo pridobivali tudi časovne štampiljke slik posnetkov. Z njimi smo posnetka dodatno sinhronizirali in se znebili akumulacije časovnega zamika.  Primer hrbtnega in stranskega posnetka je prikazan na sliki \ref{fig:primer-posnetka-stage2}.
 
 \begin{figure}[!htb]
@@ -151,7 +154,7 @@ Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stransk
 	\label{fig:primer-posnetka-stage2}
 \end{figure}
 
-Snemali smo z dvema Microsoft Xbox Kinect V2 kamerama. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}. Od tal sta bili dvignjeni za približno \SI{1.5}{m}. Postavitev kamer je prikazana na sliki \ref{fig:lab-postavitev-kamer}
+Snemali smo z dvema Microsoft Xbox Kinect V2 kamerama. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}. Od tal sta bili dvignjeni za približno \SI{1.5}{m}. Postavitev kamer je prikazana na sliki \ref{fig:lab-postavitev-kamer}. Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Hitrost posnetkov je znašala \SI{30}{fps}.
 
 \begin{figure}[!htb]
 	\centering
@@ -167,9 +170,6 @@ Snemali smo z dvema Microsoft Xbox Kinect V2 kamerama. Kameri sta bili od tekaln
 	\caption[Stranski in hrbtni pogled izvajanja lab. testov 2. faze]{Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze. Na sliki sta vidna podstavka, na katerih so postavljene Kinect kamere. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}.}
 	\label{fig:lab-postavitev-kamer}
 \end{figure}
-
-
-Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Hitrost posnetkov je znašala \SI{30}{fps}. Kameri smo časovno sinhronizirali po NTP protokolu.
 
 
 \begin{figure}[!htb]
@@ -189,17 +189,15 @@ Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $5
 	\label{fig:stage2-lab-of-depth}
 \end{figure}
 
-Obremenilni test smo izvajali s pomočjo sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Uporabili smo  tekočo  preprogo HP Cosmos. Z obremenilnim testom smo pridobili podatke energijske porabe šestih različnih merjencev z oznakami: SUBJ1, SUBJ2, SUBJ4, SUBJ7 SUBJ8 in SUBJ9. Vzorčili smo s frekvenco \SI{0.2}{\hertz}.
 
-\subsubsection{Protokol izvajanja meritev}
+
+\paragraph{Protokol meritev.}
 Test smo pričeli z eno minutnim mirovanjem na tekalni stezi. Sledilo je tri minutno ogrevanje s hitrostjo teka \SI{5}{\km\per\hour}, pri naklonu preproge \SI{0}{\%}. Nadaljevali smo s 3 minutnim tekom s hitrostjo \SI{6}{\km\per\hour}. Po treh minutah smo naklon tekoče preproge  dvignili za \SI{2}{\%} in ga nismo več spreminjali. Po pretečeni minuti na  tretji stopnji (hitrost \SI{6}{\km\per\hour}, naklon \SI{2}{\%}) se je hitrost teka vsaki dve  minuti  povečevala za \SI{1}{\km\per\hour}. Test smo izvajali brez prekinitve do pojava objektivnih oz. subjektivnih razlogov za prekinitev testa. 
 %Po koncu testiranja je sledilo še \SI{5}{min} hoje pri  hitrosti \SI{2}{\km\per\hour} ter \SI{0}{\%} naklonu. 
  
 
-\subsubsection{Protokoli postopka procesiranja}
-Tako kot pri eksperimentih 1. faze so bile  meritve fizioloških parametrov izvedene z vzorčenjem \SI{0.2}{\hertz}, hitrost posnetkov pa je bila \SI{30}{fps}. Zaradi neskladja frekvenc vzorčenja, smo te interpolirali s pomočjo Matlabove funkcije \texttt{interp1}.
-
-Tokrat smo modele učili po dveh postopkih. Prvi postopek temelji na optičnem toku, drugi pa na prostorskem.
+\subsubsection{Procesiranje}
+Zaradi razlik frekvenc vzorčenja, smo fiziološke parametre interpolirali s pomočjo Matlabove funkcije \texttt{interp1}. Modele smo učili po dveh postopkih. Prvi postopek temelji na optičnem toku, drugi pa na prostorskem.
 
 \paragraph{Postopek z optičnim tokom}
 Na slikah posnetkov smo merjencem sledili s sledilnikom KCF. Za tako izbrano področje slike smo izračunali optični tok. Primer dobljenega optičnega toka je prikazan na sliki \ref{fig:opticni-tok-stage2}. Sledilo je generiranje HOOF-HAFA deskriptorjev s parametri $N_{HOOF} = 60$ in $N_{HAFA} = 60$. HAFA deskriptorje smo normalizirali z vrednostmi amplitudnih faktorjev $f_A$, ki so zbrani v tabeli \ref{tab:fa-merjenci}.
@@ -230,7 +228,7 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom KCF. Za tako izbrano pod
 		\includegraphics[width=\columnwidth]{stage2-lab-bv-of-hist-sl}
 		\caption{Histogram hrbtne slike.}
 	\end{subfigure}
-    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Sliki \subref{fig:stage2-lab-of-sv-flo}) in \subref{fig:stage2-lab-of-bv-flo}) sta optična toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na sliki  \subref{fig:stage2-lab-of-sv-flo}) znašala \SI{6}{ppf} in na \subref{fig:stage2-lab-of-bv-flo}) \SI{6}{ppf}. Optičnima tokoma pripadata izračunana HOOF-HAFA histograma.}
+git    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Sliki \subref{fig:stage2-lab-of-sv-flo}) in \subref{fig:stage2-lab-of-bv-flo}) sta optična toka 24. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na sliki  \subref{fig:stage2-lab-of-sv-flo}) znašala \SI{6}{ppf} in na \subref{fig:stage2-lab-of-bv-flo}) \SI{6}{ppf}. Optičnima tokoma pripadata izračunana HOOF-HAFA histograma.}
 	\label{fig:opticni-tok-stage2}
 \end{figure}
 
@@ -257,8 +255,8 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom KCF. Za tako izbrano pod
 
 \begin{figure}[!htb]
 	\centering
-	\input{./Slike/diagram-procesiranja-of-stage2.tikz}
-	\caption[Diagram postopka z optičnim tokom za eksperimente 2. faze]{Diagram postopka procesiranja z optičnim tokom za eksperimente 2. faze.}
+	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-of-stage2.tikz}}
+	\caption[Diagram testiranja z optičnim tokom za eksperimente 2. faze]{Diagram testiranja procesiranja z optičnim tokom za eksperimente 2. faze.}
 	\label{fig:diagram-procesiranja-of-stage2}
 \end{figure}
 
@@ -270,7 +268,7 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom DS-KCF. Za tako izbrano 
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth, frame]{stage2-lab-sf-pdflow-corrected.jpg}
+		\includegraphics[width=\columnwidth, frame]{stage2-lab-sf-sv-pdflow-corrected.jpg}
 		\caption{Stranska slika.}
 	\end{subfigure}
 	~
@@ -314,14 +312,14 @@ Na slikah posnetkov smo merjencem sledili s sledilnikom DS-KCF. Za tako izbrano 
 		\includegraphics[width=\columnwidth]{stage2-lab-bv-sf-hist-sl}
 		\caption{Histogram hrbtne slike.}
 	\end{subfigure}
-	\caption[Projekcije prostorskih tokov na slikovno ravnino]{Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino. Gre za prostorska toka 149. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{5.7}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo})\SI{10,3}{\m\per\s}. Projekcijama prostorskega toka pripadata izračunana HOOF-HAFA histograma.}
+	\caption[Projekcije prostorskih tokov na slikovno ravnino]{Projekcija stranskega in hrbtnega prostorskega toka na slikovno ravnino. Gre za prostorska toka 24. stranske in hrbtne slike merjenca SUBJ1, ki sta že obrezani. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{10.4}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo}) \SI{9.4}{\m\per\s}. Projekcijama prostorskega toka pripadata izračunana HOOF-HAFA histograma.}
 	\label{fig:prostorski-tok-stage2}
 \end{figure}
 
 \begin{figure}[!htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-sf-stage2.tikz}}
-	\caption[Diagram postopka s prostorskim tokom za eksperimente 2. faze]{Diagram postopka procesiranja s prostorskim tokom za eksperimente 2. faze.}
+	\caption[Diagram testiranja s prostorskim tokom za eksperimente 2. faze]{Diagram testiranja procesiranja s prostorskim tokom za eksperimente 2. faze.}
 	\label{fig:diagram-procesiranja-sf-stage2}
 \end{figure}
  
@@ -398,12 +396,9 @@ Na podlagi slik \ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno mer
 
 
 \subsection{Terenski eksperimenti}
-Pri terenskih eksperimentih smo postopek z optičnim tokom in postopek s prostorskim tokom preverili še v realističnem okolju. Šest igralcev je igralo squash igro z dvema setoma. Tako smo pridobili podatke za 3 igre, ki so trajale \SI{16}{min} \SI{14}{min} in \SI{11}{min}. Postopki procesiranja in protokoli procesiranja so enaki kot v laboratorijskih eksperimentih 2. faze. 
+Pri terenskih eksperimentih smo postopek z optičnim tokom in postopek s prostorskim tokom preverili še v realističnem okolju. Šest igralcev je igralo squash igro z dvema setoma. Tako smo pridobili podatke za 3 igre, ki so trajale \SI{16}{min} \SI{14}{min} in \SI{11}{min}. 
 
-
-
-\paragraph{Pridobivanje podatkov.}
-Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili oddaljeni ena od druge za približno \SI{2}{m}. Vsaka kamera je pokrivala svojo polovico igrišča. Razdalja od tal je znašala približno \SI{3}{m}. Kameri sta bili tako pozicionirani nad zaščitnim steklom. S tem nismo dobili odbojev laserskih žarkov, ki so namenjeni za pridobivanje globinske slike. Kot $\theta$ (rotacija okoli x osi) je bil približno $30\stopinj$ tako, da so kamere pokrivale prvo polovico igrišča do linije serviranja.
+Postopki procesiranja in protokoli procesiranja so enaki kot v laboratorijskih eksperimentih 2. faze. Delovanje sledilnikov lahko vidimo na sliki \ref{fig:stage2-field-tracked}. Pripadajoči optični in prostorski tok sta prikazana na sliki \ref{fig:stage2-field-sfof}. Na sliki \ref{fig:stage2-field-hist} sta prikazana pripadajoča histograma.
 
 \begin{figure}[!htb]
 	\centering
@@ -436,7 +431,7 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 	\begin{subfigure}[t]{0.3\columnwidth}
 		\centering
 		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-sf-svbv-flo-corrected.png}
-		\caption{Projekcija prostoskega toka.}
+		\caption{Projekcija prostorskega toka.}
 		\label{fig:stage2-field-pd}
 	\end{subfigure}
 	~
@@ -466,19 +461,7 @@ Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili odd
 	\label{fig:stage2-field-hist}
 \end{figure}
 
-
-
-\begin{figure}[!htb]
-	\centering
-		\includegraphics[width=0.6\columnwidth]{squash-postavitev-corrected.jpg}	
-	\caption[Postavitev Kinect kamer pri terenskih testih 2. faze]{Postavitev Kinect kamer pri terenskih testih 2. faze.}
-	\label{fig:field-postavitev-kamer}
-\end{figure}
-
-
-Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Hitrost posnetkov je znašala \SI{30}{fps}. Kameri smo časovno sinhronizirali po NTP protokolu.
-
-
+\begin{comment}
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
@@ -493,8 +476,13 @@ Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $5
 	\caption[Stranska in hrbtna globinska slika pri terenskih testih 2. faze]{Stranska in hrbtna globinska slika pri terenskih testih 2. faze.}
 	\label{fig:stage2-field-of-depth}
 \end{figure}
+\end{comment}
 
-Fiziološke parametre smo pridobili s pomočjo prenosnega sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Frekvenca vzorčenja se je spreminjala, v povprečju pa je znašala \SI{0.5}{\hertz}. S testom smo pridobili podatke energijske porabe šestih različnih merjencev z oznakami: SUBJ1, SUBJ2, SUBJ7, SUBJ8, SUBJ9 in SUBJ10.
+
+
+\subsubsection{Pridobivanje podatkov.}
+\paragraph{Fiziolo\v{ski} parametri.}
+Fiziološke parametre smo pridobili s pomočjo prenosnega sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Sistem je prikazan na sliki \ref{fig:maske}. Frekvenca vzorčenja se je spreminjala, v povprečju pa je znašala \SI{0.5}{\hertz}. S testom smo pridobili podatke energijske porabe šestih različnih merjencev z oznakami: SUBJ1, SUBJ2, SUBJ7, SUBJ8, SUBJ9 in SUBJ10.
 
 
 \begin{figure}[!htb]
@@ -504,6 +492,21 @@ Fiziološke parametre smo pridobili s pomočjo prenosnega sistema za direktno er
 	\label{fig:maske}
 \end{figure}
 
+\paragraph{Video posnetki.}
+Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili oddaljeni ena od druge za približno \SI{2}{m}. Vsaka kamera je pokrivala svojo polovico igrišča. Razdalja od tal je znašala približno \SI{3}{m}. Kameri sta bili tako pozicionirani nad zaščitnim steklom. S tem nismo dobili odbojev laserskih žarkov, ki so namenjeni za pridobivanje globinske slike. Kot $\theta$ (rotacija okoli x osi) je bil približno $30\stopinj$ tako, da so kamere pokrivale prvo polovico igrišča do linije serviranja. Postavitev kamer je prikazana na sliki \ref{fig:field-postavitev-kamer}.
 
-\paragraph{Protokol izvajanja meritev.}
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.6\columnwidth]{squash-postavitev-corrected.jpg}	
+	\caption[Postavitev Kinect kamer pri terenskih testih 2. faze]{Postavitev Kinect kamer pri terenskih testih 2. faze.}
+	\label{fig:field-postavitev-kamer}
+\end{figure}
+
+
+Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Hitrost posnetkov je znašala \SI{30}{fps}. Kameri smo časovno sinhronizirali po NTP protokolu.
+
+
+
+\paragraph{Protokol meritev.}
 Posamezno igro smo pričeli s 5 minutnim ogrevalnim tekom. Sledilo je igranje na dva seta do 10 dobljenih točk z upoštevanjem dveh točk razlike. Med setoma so igralci počivali 2 minute. Ogrevanja in počivanja s kamerami nismo merili. Seta posamezne igre smo združili v en posnetek.
+

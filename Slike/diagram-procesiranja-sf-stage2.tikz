@@ -11,9 +11,9 @@
 % NODES
 \node (slika) [input] at (0,0) {Slika\\$I(x,y)$};
 \node (tracker) [block, right= of slika] {DS-KCF\\sledilnik};
-\node (tarca) [block, right= of tracker] {Področje\\ tarče $x^{p}$};
+%\node (tarca) [block, right= of tracker] {Področje\\ tarče $x^{p}$};
 
-\node (of) [block, right= of tarca] {Prostorski\\ tok};
+\node (of) [block, right= of tracker] {Prostorski\\ tok};
 \node (hoof) [block, right= of of] {HOOF-HAFA\\deskriptorji};
 
 
@@ -25,8 +25,8 @@
 
 % arrows
 \draw [arrow] (slika) -- (tracker);
-\draw [arrow] (tracker) -- (tarca);
-\draw [arrow] (tarca) -- (of);
+\draw [arrow] (tracker) -- (of);
+%\draw [arrow] (tarca) -- (of);
 \draw [arrow] (of) -- (hoof);
 \draw [arrow] (hoof) -- (ucenje);
 \draw [arrow] (ucenje) -- (kalman);

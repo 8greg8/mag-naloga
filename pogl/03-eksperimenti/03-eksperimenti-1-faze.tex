@@ -1,6 +1,6 @@
 \section{Eksperimenti 1. faze}
-\subsection{Preliminarni testi}
-\subsubsection{Optimizacija HOOF deskriptorjev}\label{sec:optimizacija-hoof}
+
+\subsection{Optimizacija HOOF deskriptorjev}\label{sec:optimizacija-hoof}
 Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja \ref{sec:rezultati-optimizacija-hoof}. Za evaluacijo smo uporabili učne vzorce hrbtne kamere preliminarnih laboratorijskih testov. Evaluirali smo samo za podatke energijske porabe $W$. Pridobljene značilke deskriptorjev smo normirali na intervalu $[-1,1]$ in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Metode so podrobneje predstavljene v poglavju \ref{sec:matematicni-modeli}. Za določitev optimalnih parametrov, ki so predstavljeni v tabeli \ref{tab:nhoof-param}, smo uporabili optimizacijsko metodo mrežnega iskanja \cite{hsu2003practical}. Rezultate smo filtrirali še s Kalmanovim filtrom, ki je predstavljen v \ref{sec:kalmanov-filter}.
 
 \begin{table}[htb]
@@ -25,7 +25,7 @@ Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja \ref{sec:re
 
 
 
-\subsubsection{Optimizacija HAFA deskriptorjev}
+\subsection{Optimizacija HAFA deskriptorjev}
 Parameter $N_{HAFA}$ smo določili na podlagi rezultatov \ref{sec:rezultati-optimizacija-hafa}. Za evaluacijo smo uporabili enak eksperimentalni protokol kot za HOOF značilke v poglavju \ref{sec:hoof}, s to razliko, da smo značilke normirali na intervalu $[0, 1]$ in odstranili stolpec z amplitudami $0.5$. S tem smo odstranili šum, ki se je pojavil, ko ni bilo nobenega gibanja. Amplitudo šuma smo določili, kot maksimalno vrednost amplitude, ki še ni predstavljala gibanja. Optimalni parametri evaluacijske metode so predstavljeni v tabeli \ref{tab:nhafa-param}.
 
 
@@ -50,7 +50,7 @@ Parameter $N_{HAFA}$ smo določili na podlagi rezultatov \ref{sec:rezultati-opti
 
 
 
-\subsubsection{Razširitev HOOF deskriptorja}\label{sec:razsiritev-hoof-rezultati}
+\subsection{Razširitev HOOF deskriptorja}\label{sec:razsiritev-hoof-rezultati}
 HOOF deskriptorju smo pripeli HAFA deskriptor in tako dobili razširjeni deskriptor HOOF-HAFA, ki po evaluaciji iz poglavja \ref{sec:rezultati-razsiritev-hoof} v splošnem daje boljše rezultate.
 
 Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne kamere terenskih testov. Evaluirali smo za podatke srčnega utripa $hr$. Srčni utrip smo za gradnjo modelov pretvorili v energijsko porabo $W$ po enačbi \eqref{eq:charlot}. Pridobljene značilke smo normirali na intervalu [0,1] in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Za določitev optimalnih parametrov, ki so predstavljeni v tabeli \ref{tab:nhoof-param}, smo uporabili optimizacijsko metodo mrežnega iskanja \cite{hsu2003practical}. Rezultate smo filtrirali še s Gaussovim jedrom (predstavljen v \ref{sec:gaussov-filter}) velikosti $6$ in varianco $\sigma=16$. 
@@ -82,7 +82,7 @@ Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne
 
 
 
-\subsubsection{Testiranje sledilnikov za optični tok}\label{sec:testiranje-sledilnikov-za-opticni-tok}
+\subsection{Testiranje sledilnikov za optični tok}\label{sec:testiranje-sledilnikov-za-opticni-tok}
 Sledilnike smo testirali na sekvencah slik \textit{handball1} in \textit{handball2} podatkovne baze VOT2016 \cite{kristan2016visual}.Primer posnetkov je viden na sliki \ref{fig:testiranje-tracker-visual}. Sledila je še hitra vizualna ocena delovanja na kratkih izsekih video posnetka \cite{squashtv2014squash}. Primer posnetka je viden na sliki \ref{fig:testiranje-squash-1-kcf}.
 
 \begin{figure}[!htbp]
@@ -138,11 +138,15 @@ Video posnetek \cite{squashtv2014squash} smo za potrebe vizualne ocene delovanja
 
 
 \subsection{Laboratorijski eksperimenti tekalne steze}
-Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za šport. Merjenec je tekel na tekalni stezi ob prisotnosti operaterja---zdravnika, ki je določal intenziteto in čas trajanja obremenitve. Pri tem smo merili srčni utrip in enrgijsko porabo športnika (starost: 26 let, višina: \SI{177}{\cm}, teža: \SI{79.1}{\kg}, $VO_2max$: \SI{3705}{\ml\per\min}). Energijsko porabo smo merili z indirektno kalorimetrijo, in sicer s ``breath by breath'' Cosmed CPET Metabolic Cart \cite{beaver1973line}. Pri tem smo uporabili Hans Rudolph obrazno masko s predpisanim minimalnim VD (mrtvim prostorom).
+Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za šport. Merjenec je tekel na tekalni stezi ob prisotnosti operaterja---fiziologa, ki je določal intenziteto in čas trajanja obremenitve. V sklopu testa faze 1 smo preučili možno uporabo RGB in infrardeče (IR) kamere, da bi olajšali snemanje pri slabih svetlobnih pogojih.
 
 
 \subsubsection{Pridobivanje podatkov}
-Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Zaradi časovne neusklajenosti posnetkov smo jih sinhronizirali glede na začetno sliko meritev. Zaradi rahlo različne časovne frekvence na posameznih kamerah, se časovne neusklajenosti do potankosti nismo mogli znebiti. Ta se je akumulirala skozi čas. Pridobili smo posnetke barvnih RGB slik in infrardeče IR posnetke hrbtnega dela. Primer hrbtnega stranskega  in IR posnetka je prikazan na sliki \ref{fig:primer-posnetka-rgb-ir}.
+\paragraph{Fiziolo\v{s}ki parametri.}
+Srčni utrip in energijsko porabo smo merili za izbranega športnika (starost: 26 let, višina: \SI{177}{\cm}, teža: \SI{79.1}{\kg}, $VO_2max$: \SI{3705}{\ml\per\min}). Zaradi doslednosti se nanašamo nanj kot SUBJ0. Energijsko porabo smo merili z indirektno kalorimetrijo, in sicer s ``breath by breath'' Cosmed CPET Metabolic Cart \cite{beaver1973line}. Pri tem smo uporabili Hans Rudolph obrazno masko s predpisanim minimalnim VD (mrtvim prostorom). Naklon tekalne steze je bil od \SI{1.5}{\%} do \SI{2}{\%}.
+
+\paragraph{Video posnetki.}
+Tekalno stezo s SUBJ0 smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Video posnetke smo časovno sinhronizirali glede na začetno sliko meritev, vendar pa se zaradi uporabe Axis 207W IP kamer časovne neusklajenosti do potankosti nismo mogli znebiti. Pridobili smo posnetke barvnih RGB slik in infrardeče IR posnetke hrbtnega dela, ki so prikazani na sliki \ref{fig:primer-posnetka-rgb-ir}. Snemali smo v ločljivosti $480 \times 640$. Hitrost RGB posnetkov je bila \SI{30}{fps}, za IR posnetke pa je hitrost znašala \SI{25}{fps}.  
 
 \begin{figure}[htb]
 	\centering
@@ -167,22 +171,12 @@ Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stransk
 	\label{fig:primer-posnetka-rgb-ir}
 \end{figure}
 
-Snemali smo v ločljivosti $480 \times 640$. Hitrost RGB posnetkov je bila \SI{30}{fps}, za IR posnetke pa je hitrost znašala \SI{25}{fps}.  Naklon tekalne steze je bil od \SI{1.5}{\%} do \SI{2}{\%}.
 
+\paragraph{Protokoli meritev.}
+Naredili smo dve seriji testov v razmiku 20 minut, pri čemer smo prvo serijo testov uporabili za pridobitev učnih vzorcev. Drugo serijo smo uporabili za testne vzorce. Fiziološke parametre smo vzorčili vsakih \SI{5}{\s}. V prvi seriji smo naredili 8 testov, kjer so vsi trajali 2 minuti. Hitrost tekalne steze smo vsak test povečali za \SI{1}{\km\per\hour}. Prvi test je imel hitrost  \SI{6}{\km\per\hour} zadnji pa \SI{13}{\km\per\hour}. V drugi seriji smo naredili 3 teste po 5 minut. Hitrosti tekalne steze so bile  \SI{7}{\km\per\hour}, \SI{10}{\km\per\hour} in \SI{13}{\km\per\hour}.
 
-
-\subsubsection{Protokoli izvajanja meritev}
-Naredili smo dve seriji testov v razmiku 20 minut. Fiziološke parametre smo vzorčili vsakih \SI{5}{\s}. V prvi seriji smo naredili 8 testov, kjer so vsi trajali 2 minuti. Hitrost tekalne steze smo vsak test povečali za \SI{1}{\km\per\hour}. Prvi test je imel hitrost  \SI{6}{\km\per\hour} zadnji pa \SI{13}{\km\per\hour}.
-
-V drugi seriji smo naredili 3 teste po 5 minut. Hitrosti tekalne steze so bile  \SI{7}{\km\per\hour}, \SI{10}{\km\per\hour} in \SI{13}{\km\per\hour}.
-
-Prvo serijo testov smo uporabili za pridobitev učnih vzorcev. Drugo serijo smo uporabili za testne vzorce.
-
-
-\subsubsection{Elementarni postopek procesiranja}\label{sec:elementarni-postopek}
-Kot smo že omenili so bile meritve fizioloških parametrov izvedene z vzorčenjem \SI{5}{\s} oziroma s frekvenco \SI{0.2}{\hertz}. Hitrost posnetkov je bila \SI{30}{fps} za RGB in \SI{25}{fps} za IR slike. Zaradi neskladja frekvenc vzorčenja slik in fizioloških parametrov, smo te interpolirali s pomočjo Matlabove funkcije \texttt{interp1}.
- 
-Za izbrano področje slike iz zaporedja posameznega posnetka smo nato izračunali optični tok. Primer dobljenega optičnega toka je prikazan na sliki \ref{fig:opticni-tok-stage1} Enote optičnega toka so \si{ppf}. Pomenijo število slikovnih elementov na sliko (ang. Pixel per Frame).
+\paragraph{Procesiranje}\label{sec:elementarni-postopek}
+Zaradi razlik pri frekvencah vzorčenja slik in fizioloških parametrov, smo te interpolirali s pomočjo Matlabove funkcije \texttt{interp1}. Za izbrano področje slike iz zaporedja posameznega posnetka smo nato izračunali optični tok. Primer dobljenega optičnega toka je prikazan na sliki \ref{fig:opticni-tok-stage1} Enote optičnega toka so \si{ppf}. Pomenijo število slikovnih elementov na sliko (ang. Pixel per Frame).
 
 
 \begin{figure}[!htb]
@@ -197,11 +191,11 @@ Za izbrano področje slike iz zaporedja posameznega posnetka smo nato izračunal
 		\caption{Slika optičnega toka.}
 		\label{fig:stage1-of}
 	\end{subfigure}
-    \caption[Originalna $150$. stranska slika in optični tok]{Originalna $150$. stranska slika in njen optični tok. Gre za sliko 1. serije testov. Na sliki \subref{fig:stage1-of} je legenda barvnega kodiranja v spodnjem levem kotu s standardnim barvnim kodiranjem, ki je povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{17}{ppf}.}
+    \caption[Originalna $150$. stranska slika in optični tok]{Originalna $150$. stranska slika in njen optični tok. Gre za sliko 1. serije testov. Na sliki \subref{fig:stage1-of} je legenda barvnega kodiranja v spodnjem levem kotu s standardnim barvnim kodiranjem, ki je povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{17}{ppf} (pikslov na sliko).}
     \label{fig:opticni-tok-stage1}
 \end{figure}
 
-Sledilo je generiranje HOOF deskriptorjev, ki smo jih pred tem optimizirali po postopku, opisanem v poglavju \ref{sec:optimizacija-hoof}. Za parameter smo izbrali $N_{HOOF} = 60 $, ker je dal najbolj optimalne rezultate. Primer HOOF deskriptorjev lahko vidimo na sliki \ref{fig:hoof-znacilke}.
+HOOF deskriptorje z $N_{HOOF} = 60 $ smo dobili iz optičnega toka. Primer HOOF deskriptorjev lahko vidimo na sliki \ref{fig:hoof-znacilke}.
 
 \begin{figure}[!htb]
 	\centering
@@ -210,11 +204,15 @@ Sledilo je generiranje HOOF deskriptorjev, ki smo jih pred tem optimizirali po p
 	\label{fig:hoof-znacilke}
 \end{figure}
 
-Modele smo učili z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Regresijske parametre jedra smo optimizirali z metodo mrežnega iskanja. Naučili smo \num{8} elementarnih modelov, ki smo jih razdelili na dve kategoriji: na \textit{hr} modele, ki predvidevajo srčni utrip in modele \textit{eem}, ki predvidevajo porabo energije v \si{\kcal\per\min}. Kategoriji sta nadalje razdeljeni glede na zorni kot kamere: \textit{sv} modeli za stransko kamero in \textit{bv} modeli za hrbtno kamero. Eksperimente smo razširili z vpeljavo zakasnitve med referenčnim fiziološkim parametrom in merjenim parametrom iz slik posnetka. Z eksperimenti, ki so označeni z \textit{lag} kratico, smo preverili predlagano časovno zakasnitev med vzbujanjem in fiziološkim odzivom. 
+Modele smo učili z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Regresijske parametre jedra smo optimizirali z metodo mrežnega iskanja, kjer smo morali določiti parametra jedra $C > 0$ in $\gamma$ ter parameter izgubne funkcije $\epsilon > 0$.
 
-Generirali smo tudi dodatne modele, in sicer: \textit{crop} modele, \textit{mixed} modele, \textit{track} modele, kjer smo uporabili sledilnik in obremenitvene modele. Ti so deljeni na \textit{scale} modele in \textit{proj} modele.
+Naučili smo \num{8} regresijskih modelov, ki smo jih razdelili na dve kategoriji: na \textit{hr} modele, ki napovedujejo srčni utrip in modele \textit{eem}, ki napovedujejo porabo energije v \si{\kcal\per\min}. Kategoriji sta nadalje razdeljeni glede na zorni kot kamere: \textit{sv} modeli za stransko kamero in \textit{bv} modeli za hrbtno kamero. 
 
-Vse tipe eksperimentov smo križno testirali glede na enak tip eksperimenta, le z drugim zornim kotom kamere. Uporabljen zorni kot kamere za križno testiranje je v imenih modelov zapisan v oklepajih. Rezultate smo pred testiranjem filtrirali s Kalmanovim filtrom. Uporabljeni parametri so opisani v poglavju \ref{sec:implementacija-kalman}.
+Eksperimente smo razširili z vpeljavo zakasnitve med referenčnim fiziološkim parametrom in merjenim parametrom iz slik posnetka. Z eksperimenti, ki so označeni z \textit{lag} kratico, smo preverili predlagano časovno zakasnitev med vzbujanjem in fiziološkim odzivom. 
+
+Generirali smo tudi dodatne modele, in sicer: \textit{crop}, \textit{mixed}, \textit{track} in obremenitvene modele. Pri \textit{mixed} modelih smo uporabili podatke različne modalitete zornega kota, kar nam je omogočilo oceno vpliva kota kamere. V \textit{track} modelih smo uporabili sledilnik. Obremenitvene modele delimo na \textit{scale} modele in \textit{proj} modele. Rezultate smo filtrirali s Kalmanovim filtrom.
+
+Vse tipe eksperimentov smo križno testirali glede na zorni kot kamere. Uporabljen zorni kot kamere za križno testiranje je zapisan v oklepajih.
 
 
 \begin{figure}[!htb]
@@ -375,10 +373,10 @@ S simulacijo vibracij smo naredili obremenitveni test za modele z vključenim sl
 \subsection{Terenski eksperimenti squash igre}
 Pri terenskih eksperimentih smo snemali dve squash igri z enim setom z RaspberryPi in RaspiCam napravo v resoluciji  $1920 \times 1080$. Zaradi nezadovoljivih podatkov druge igre, smo za učenje in testiranje modelov uporabili le prvo igro. Igralcem smo merili srčni utrip s kontaktnimi senzorji. 
 
-Prvega igralca prve igre  (starost: 45 let, velikost: \SI{176}{\cm}, teža: \SI{68}{\kg}, spol: male, $hr_{tmax}$: \SI{179}{bpm}, $hr_{r}$: \SI{45}{bpm}) smo uporabili za učne vzorce. Drugega igralca (starost: 17 let, višina: \SI{178}{\cm}, teža: \SI{66}{\kg}, spol: male, $hr_{tmax}$: \SI{203}{bpm}, $hr_{r}$: \SI{50}{bpm}) smo uporabili za testne vzorce. 
+Prvega igralca prve igre z oznako SUBJ11  (starost: 45 let, velikost: \SI{176}{\cm}, teža: \SI{68}{\kg}, spol: male, $hr_{tmax}$: \SI{179}{bpm}, $hr_{r}$: \SI{45}{bpm}) smo uporabili za učne vzorce. Drugega igralca z oznako SUBJ12 (starost: 17 let, višina: \SI{178}{\cm}, teža: \SI{66}{\kg}, spol: male, $hr_{tmax}$: \SI{203}{bpm}, $hr_{r}$: \SI{50}{bpm}) smo uporabili za testne vzorce. 
 
 \subsubsection{Razširitev HOOF deskriptorja}
-Chaudhry et al. \cite{chaudhry2009histograms} predlaga uporabo histogramov orientiranega optičnega toka (HOOF) za estimacijo gibanja. Vendar pa smo v terenskih testiranjih ugotovili, da njihova uporaba v realnih okoliščinah ni zadovoljiva. HOOF deskriptorju smo pripeli HAFA deskriptor in tako dobili razširjeni deskriptor HOOF-HAFA, ki v splošnem daje boljše rezultate, kot je bilo prikazano v poglavju \ref{sec:razsiritev-hoof-rezultati}. Primer deskriptorja je viden na sliki \ref{fig:hoof-hafa}.
+V terenskih testiranjih smo ugotovili, da uporaba HOOF deskriptorja v realnih okoliščinah ni zadovoljiva. Zato smo mu dodali HAFA deskriptor in tako dobili razširjeni deskriptor HOOF-HAFA. Primer deskriptorja je viden na sliki \ref{fig:hoof-hafa}.
 
 \begin{figure}[!htb]
 	\centering
@@ -388,7 +386,9 @@ Chaudhry et al. \cite{chaudhry2009histograms} predlaga uporabo histogramov orien
 \end{figure}
 
 \subsubsection{Postopek procesiranja}
-Za določitev področja posameznega igralca smo uporabili KCF sledilnik. Kadar sledilnik ni uspel najti objekta zanimanja, je bilo področje prazno, zato so bile vse vrednosti HOOF-HAFA deskriptorjev $0$. To se je zgodilo v primerih, ko je tarča izginila iz vidnega polja kamere ali pa ko sledilnik ni več deloval. Zaradi teh težav smo sledenje nadzorovano reinicializirali vsake \SI{3}{\s}. S tem smo zagotovili razumne sledilne rezultate. Zaradi prevelike resolucije posnetkov, smo morali za pravilno delovanje sledilnika posnetke skalirati na \SI{25}{\%} prvotne velikosti. Rezultate sledenja smo nato morali transformirati nazaj na originalno resolucijo. Primer sledenja je prikazan na sliki \ref{fig:squash}\subref{fig:sledenje-squash})
+Za določitev področja posameznega igralca smo uporabili KCF sledilnik. 
+%Kadar sledilnik ni uspel najti objekta zanimanja, je bilo področje prazno, zato so bile vse vrednosti HOOF-HAFA deskriptorjev $0$. To se je zgodilo v primerih, ko je tarča izginila iz vidnega polja kamere ali pa ko sledilnik ni več deloval. 
+Sledenje smo nadzorovano reinicializirali vsake \SI{3}{\s}, da smo zagotovili razumne sledilne rezultate. Zaradi prevelike resolucije posnetkov, smo morali za pravilno delovanje sledilnika posnetke skalirati na \SI{25}{\%} prvotne velikosti. Rezultate sledenja smo nato transformirali nazaj na originalno resolucijo. Primer sledenja je prikazan na sliki \ref{fig:squash}\subref{fig:sledenje-squash})
 
 \begin{figure}[!htb]
 	\centering
@@ -405,7 +405,7 @@ Za določitev področja posameznega igralca smo uporabili KCF sledilnik. Kadar s
 		\caption{Slika optičnega toka.}
 		\label{fig:of-squash}
 	\end{subfigure}
-	\caption[Slika sledenja in optičnega toka za igralca terenskih eksperimentov]{Slika sledenja in optičnega toka za igralca prve igre terenskih eksperimentov. Sledili smo modremu igralcu, ki smo ga uporabili za učne vzorce. Zeleni okvir na sliki \subref{fig:sledenje-squash}) prikazuje področje detekcije 276. slike posnetka. Korespondečni optični tok področja je prikazan na sliki \subref{fig:of-squash} z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{31}{ppf}. }
+	\caption[Slika sledenja in optičnega toka za igralca terenskih eksperimentov]{Slika rezultata sledenja in optičnega toka za igralca prve igre terenskih eksperimentov. Sledili smo modremu igralcu, ki smo ga uporabili za učne vzorce. Zeleni okvir na sliki \subref{fig:sledenje-squash}) prikazuje področje detekcije 276. slike posnetka. Korespondečni optični tok področja je prikazan na sliki \subref{fig:of-squash} z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po \cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{31}{ppf}. }
 	\label{fig:squash}
 \end{figure}
 
@@ -416,7 +416,7 @@ Po določevanju optičnega toka (slika \ref{fig:squash}), smo uporabili HOOF-HAF
 \begin{figure}[!htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-field-stage1.tikz}}
-	\caption[Diagram procesiranja terenskih eksperimentov 1. faze]{Diagram procesiranja terenskih eksperimentov 1. faze. Področju, ki smo ga dobili s KCF sledinikom, smo določili optični tok. Sledilo je učenje na HOOF-HAFA deskriptorjih, Rezultate smo filtrirali s Gaussovim filtrom.}
+	\caption[Diagram testiranja terenskih eksperimentov 1. faze]{Diagram testiranja terenskih eksperimentov 1. faze. Področju, ki smo ga dobili s KCF sledinikom, smo določili optični tok. Sledilo je učenje na HOOF-HAFA deskriptorjih, Rezultate smo filtrirali s Gaussovim filtrom.}
 	\label{fig:diagram-procesiranja-field-stag1}
 \end{figure}
 
@@ -481,7 +481,7 @@ Iz posnetka smo izbrali dva zaporedja slik s trajanjem \SI{5}{min}. Prvo zapored
 \begin{figure}[htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-dihanje.tikz}}
-	\caption[Diagram procesiranja pri uporabi metode za detekcijo dihanja]{Diagram procesiranja pri uporabi metode za detekcijo dihanja.}
+	\caption[Diagram testiranja pri uporabi metode za detekcijo dihanja]{Diagram testiranjas pri uporabi metode za detekcijo dihanja.}
 	\label{fig:dihanje-postopek}
 \end{figure}
 
