@@ -16,6 +16,9 @@
 \usepackage[pdftex]{UNI-LJ-FE-Diploma} %Stil za diplome na Fakulteti za elektrotehniko (za pdfTeX v MkiTex)
 %\usepackage[pctex]{UNI-LJ-FE-Diploma} %Stil za diplome na Fakulteti za elektrotehniko  (za pcTex)
 
+\usepackage[a-1b]{pdfx}   % for PDF/A-1b
+% \usepackage[x-1a]{pdfx}  % for PDF/X-1a
+
 % Not working \usepackage{natbib} % for \citeathor \citeyear
 %%%%%%%%%%%%%%%%%%%%%%%%
 % MATEMATIKA IN FIZIKA %
@@ -198,8 +201,8 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 % za dodajanje besedila iz drugih datotek
 \usepackage{verbatim}
 % za urlje 
-\usepackage[unicode, hidelinks]{hyperref}
-
+%\usepackage[unicode, hidelinks]{hyperref}
+\usepackage{hyperref}
 
 
 
@@ -217,21 +220,27 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 \newcommand{\opencv}{OpenCV\xspace}
 \newcommand{\dlib}{Dlib\xspace}
 
-\newcommand{\vomax}{$VO_{2max}$}
-\newcommand{\vo}{$VO_2$}
-\newcommand{{\T}}{$^{\top}$}
+\newcommand{\vomax}{\ensuremath{VO_{2}max}}
+\newcommand{\vo}{\ensuremath{VO_2}}
+\newcommand{{\T}}{\ensuremath{^{\top}}}
 \newcommand{\Mu}{M}
-\newcommand{\nhoof}{$N_{HOOF}$}
-\newcommand{\nhafa}{$N_{HAFA}$}
-\newcommand{\esvr}{$\epsilon$-SVR\xspace}
-\newcommand{\nusvr}{$\nu$-SVR\xspace}
-\newcommand{\nurbf}{$\nu$-RBF\xspace}
-\newcommand{\nughi}{$\nu$-GHI\xspace}
-\newcommand{\emse}{\overline{e}_{MSE}}
-\newcommand{\fsv}{f_{SV}}
-\newcommand{\numax}{\nu_{max}}
+\newcommand{\nhoof}{\ensuremath{N_{HOOF}}}
+\newcommand{\nhafa}{\ensuremath{N_{HAFA}}}
+\newcommand{\esvr}{\ensuremath{\epsilon}-SVR\xspace}
+\newcommand{\nusvr}{\ensuremath{\nu}-SVR\xspace}
+\newcommand{\nurbf}{\ensuremath{\nu}-RBF\xspace}
+\newcommand{\nughi}{\ensuremath{\nu}-GHI\xspace}
+\newcommand{\emse}{\ensuremath{\overline{e}_{MSE}}}
+\newcommand{\fsv}{\ensuremath{f_{SV}}}
+\newcommand{\numax}{\ensuremath{\nu_{max}}}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\folder}{./}
+
+\newcommand{\corr}{\ensuremath{CORR}}
+\newcommand{\rmse}{\ensuremath{RMSE}}
+\newcommand{\rae}{\ensuremath{RAE}}
+\newcommand{\rrse}{\ensuremath{RRSE}}
+\newcommand{\nsv}{\ensuremath{nSV}}
 
 
 \newcommand{\boldentry}[3]{%
