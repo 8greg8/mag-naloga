@@ -1,7 +1,7 @@
 \section{Matematični modeli}\label{sec:matematicni-modeli}
 HOOF in HAFA deskriptorja sta relativno nizko dimenzijski predstavitvi gibanja. Njuna povezava s porabo energije ni znana. Da bi rešili ta problem, moramo uporabiti regresijsko modeliranje, s katerim napovedujemo \emph{trenutno} porabo energije za \emph{vsako sliko zaporedja}.
 
-Metode strojnega učenja s podpornimi vektorji (SVM) se pogosto uporabljajo za klasifikacijo in regresijo~\cite{chang2011a}. Njihova popularnost temelji na visoki uspešnosti generalizacije brez potrebe po predhodnem znanju~\cite{chapelle1999support}. Njihova performanca delovanja ni odvisna od števila značilk, saj jih ponavadi uporabljamo v primerih ko ima vhodni prostor značilk $\mathcal{W}^n$ veliko moč $n$. Cilj teh metod je, da generiramo matematični model in ga uporabimo za predikcijo izhoda $y$~\cite{hsu2003practical}. 
+Metode strojnega učenja s podpornimi vektorji (SVM) se pogosto uporabljajo za klasifikacijo in regresijo~\cite{chang2011a}. Njihova popularnost temelji na visoki uspešnosti generalizacije brez potrebe po predhodnem znanju~\cite{chapelle1999support}. Njihova performanca delovanja ni odvisna od števila značilk, saj jih običajno uporabljamo v primerih, ko ima vhodni prostor značilk $\mathcal{W}^n$ veliko moč $n$. Cilj teh metod je, da generiramo matematični model in ga uporabimo za predikcijo izhoda $y$~\cite{hsu2003practical}. 
 
 
 
@@ -9,12 +9,12 @@ Metode strojnega učenja s podpornimi vektorji (SVM) se pogosto uporabljajo za k
 
 
 \subsection{Linearno ločljiva učna množica}
-Imamo učne vzorce $\{ \vec{x}_i, y_i \} \in \mathcal{U}_l$, kjer je $\vec{x}_i \in \mathcal{\Xi}_l \subset \mathbb{R}^n~\forall i = 1, \ldots, l$ vektor značilk oziroma deskriptor in $y_i \in \mathit{\Omega}_l \subset \mathbb{R}~\forall i = 1, \ldots, l$ oznake razredov objektov~\cite{chapelle1999support}. Za poenostavitev privzamemo, da imamo samo dva razreda $y_i \in \{-1,1\}$. 
+Imamo učne vzorce $\{ \vec{x}_i, y_i \} \in \mathcal{U}_l$, kjer je $\vec{x}_i \in \mathcal{\Xi}_l \subset \mathbb{R}^n~\forall i = 1, \ldots, l$ vektor značilk oziroma deskriptor, in $y_i \in \mathit{\Omega}_l \subset \mathbb{R}~\forall i = 1, \ldots, l$ oznake razredov objektov~\cite{chapelle1999support}. Za ponazoritev razlage, naj bosta dva razreda $y_i \in \{-1,1\}$. 
 
 Pri postopku s podpornimi vektorji v splošnem iščemo koeficiente \hbox{$\vec{w}\in\mathcal{W}\subset\mathbb{R}^m$} ločilnih mej ali \emph{hiper-ravnin} in prag $b$, ki razmejujejo prostor $\mathbb{R}^n$ tako, da so enako oddaljene od vzorcev $\vec{x}$ iz različnih razredov $\mathcal{C}_i~\forall i= 1, \ldots, p$, kot je prikazano na sliki~\ref{fig:svm-locljivo}~\cite{chapelle1999support}. Pri tem velja omejitev
 
 \begin{equation}\label{eq:omejitev-ravnine}
-	y_i(\vec{w} \vec{x}_i + b) \geq 1, i=1, \ldots, l.
+	y_i(\vec{w} \vec{x}_i + b) \geq 1, i=1, \ldots, l
 \end{equation}
 
 
@@ -47,7 +47,7 @@ Z rešitvijo maksimizacijskega problema~\eqref{eq:svm-lagrange} $\vec{\alpha}^0$
 	\vec{w}_0 = \sum_{i=1}^l \alpha_i^0 y_i \vec{x}_i.
 \end{equation}
 
-Učnim vzorcem, za katere so $\alpha_i^0 > 0$ pravimo \emph{podporni vektorji}~\cite{chapelle1999support}.
+Učnim vzorcem, za katere so $\alpha_i^0 > 0$, pravimo \emph{podporni vektorji}~\cite{chapelle1999support}.
 
 
 
@@ -76,7 +76,7 @@ Pri linearno neločljivi učni množici $\mathcal{U}_l$ uvedemo dodaten vektor s
 
 
 \subsection{Funkcije jedra}
-V primeru, ko učnih vzorcev ne moremo razmejiti brez napak v linearno hiper-ravnino jih lahko preslikamo v več razsežni prostor z nelinearno preslikavo $\phi: \mathcal{\Xi} \subset \mathbb{R}^n \to \mathcal{\Mu} \subset \mathbb{R}^m, n < m$, kjer lahko postanejo linearno separabilni~\cite{chapelle1999support,boughorbel2005generalized}. Tako v enačbi~\eqref{eq:svm-lagrange} namesto $\vec{x}_i^\top\vec{x}_j$ uporabimo $\phi(\vec{x_i})^\top\phi(\vec{x_j})$ Preslikovanju vzorcev v m-razsežni prostor se lahko znebimo s t.i. \emph{ukano jedra} (angl. Kernel trick), kjer uporabimo implicitno preslikavo $K: \mathcal{\Xi} \times \mathcal{\Xi} \to \mathbb{R}$~\cite{boughorbel2005generalized}. V skladu z Mercerjevim izrekom mora biti $K(\vec{x}_i,\vec{x}_j)$ simetrična in pozitivna funkcija. Takrat obstaja preslikava $\phi$ tako da velja $K(\vec{x_i}, \vec{x_j}) = \phi(\vec{x}_i)^\top\phi(\vec{x}_j)$.
+V primeru, ko učnih vzorcev ne moremo razmejiti brez napak v linearno hiper-ravnino, jih lahko preslikamo v več razsežni prostor z nelinearno preslikavo $\phi: \mathcal{\Xi} \subset \mathbb{R}^n \to \mathcal{\Mu} \subset \mathbb{R}^m, n < m$, kjer lahko postanejo linearno separabilni~\cite{chapelle1999support,boughorbel2005generalized}. Tako v enačbi~\eqref{eq:svm-lagrange} namesto $\vec{x}_i^\top\vec{x}_j$ uporabimo $\phi(\vec{x_i})^\top\phi(\vec{x_j})$ Preslikovanja vzorcev v m-razsežni prostor se lahko znebimo s t.i. \emph{ukano jedra} (angl. Kernel trick), kjer uporabimo implicitno preslikavo $K: \mathcal{\Xi} \times \mathcal{\Xi} \to \mathbb{R}$~\cite{boughorbel2005generalized}. V skladu z Mercerjevim izrekom mora biti $K(\vec{x}_i,\vec{x}_j)$ simetrična in pozitivna funkcija. Takrat obstaja preslikava $\phi$, tako da velja $K(\vec{x_i}, \vec{x_j}) = \phi(\vec{x}_i)^\top\phi(\vec{x}_j)$.
 
 
 \subsubsection{Jedro radialnih baznih funkcij}{
@@ -91,7 +91,7 @@ Jedro radialnih baznih funkcij (RBF) ima naslednjo obliko z enim hiper-parametro
         }
 \end{equation}
 
-Avtorji v~\cite{hsu2003practical} zagovarjajo, da pri učenju najprej poskusim z RBF jedrom. Prvi argument je, da to jedro ne vpliva na kompleksnost modela, saj moramo izbrati le en dodaten parameter $\gamma$. Kot drugo, imamo z njim manj numeričnih težav, saj se njegova vrednost giblje na intervalu $(0, 1]$~\cite{hsu2003practical}. 
+Avtorji v~\cite{hsu2003practical} zagovarjajo, da pri učenju najprej poskusimo z RBF jedrom. Prvi argument je, da to jedro ne vpliva na kompleksnost modela, saj moramo izbrati le en dodaten parameter $\gamma$. Kot drugo, imamo z njim manj numeričnih težav, saj se njegova vrednost giblje na intervalu $(0, 1]$~\cite{hsu2003practical}. 
 
 
 \begin{comment}
@@ -114,7 +114,7 @@ Po~\cite{boughorbel2005generalized} je prednost uporabe GHI jedra ta, da so meje
 \subsection{Predprocesiranje}
 \subsubsection{Skaliranje značilk}
 
-Po~\cite{hsu2003practical} je skaliranje značilk pred uporabo SVM zelo pomembno. S skaliranjem se znebimo dejstva, da značilke, definirane na večjem intervalu bolj vplivajo na rezultat, kot značilke z manjšim intervalom. Prav tako se s skaliranjem znebimo numeričnih težav med učenjem. Avtorji~\cite{hsu2003practical} zato predlagajo skaliranje na intervalih $[-1, 1]$ ali $[0, 1]$.
+Po~\cite{hsu2003practical} je skaliranje značilk pred uporabo SVM zelo pomembno. S skaliranjem se znebimo dejstva, da značilke, definirane na večjem intervalu, bolj vplivajo na rezultat kot značilke z manjšim intervalom. Prav tako se s skaliranjem znebimo numeričnih težav med učenjem. Avtorji~\cite{hsu2003practical} zato predlagajo skaliranje na intervalih $[-1, 1]$ ali $[0, 1]$.
 
 
 
@@ -126,11 +126,11 @@ Po~\cite{hsu2003practical} je skaliranje značilk pred uporabo SVM zelo pomembno
 
 Ker a priori ne poznamo najboljših parametrov postopka SVM in hiper-parametrov funkcij jedra, jih moramo optimizirati~\cite{hsu2003practical}. S tem zagotovimo najboljše delovanje metode na naših podatkih. Za optimizacijo lahko uporabljamo mrežno iskanje s križno validacijo.  Pri mrežnem iskanju izračunamo predikcije za kombinacijo parametrov in jih evaluiramo s križno validacijo~\cite{hsu2003practical}. Izberemo tisto kombinacijo parametrov, s katero smo dobili najboljšo natančnost. 
 
-Dobro je, če kombinacije parametrov izbiramo po eksponentni funkciji z osnovo $2$, saj s tem zagotovimo širok razpon iskanja~\cite{hsu2003practical}. Iskanje optimalnih parametrov lahko pohitrimo z uporabo grobega in finega iskanja. Z grobim iskanjem omejimo območje iskanja za fino iskanje~\cite{hsu2003practical}. S finim iskanjem pa dejansko optimiziramo parametre.
+Dobro je, če kombinacije parametrov izbiramo po eksponentni funkciji z osnovo $2$, saj s tem zagotovimo širok razpon iskanja~\cite{hsu2003practical}. Iskanje optimalnih parametrov lahko pospešimo z uporabo grobega in finega iskanja. Z grobim iskanjem omejimo območje iskanja za fino iskanje~\cite{hsu2003practical}. S finim iskanjem pa dejansko optimiziramo parametre.
 
 
 \subsubsection{Optimizacija z mrežnim iskanjem \texorpdfstring{$\nu$}{nu}-RBF}\label{sec:nurbf}
-V mrežnem iskanju \nurbf gre za klasično mrežno iskanje, z dodatno omejitvijo števila podpornih vektorjev in filtriranjem rezultatov pri križni korelaciji.
+V mrežnem iskanju \nurbf gre za klasično mrežno iskanje z dodatno omejitvijo števila podpornih vektorjev in filtriranjem rezultatov pri križni korelaciji.
 
 Tu uporabljamo 5-kratno križno validacijo z regresijo \nusvr in jedrom RBF, kjer računamo srednjo vrednost srednjih kvadratičnih napak $\emse$ posameznih korelacij ter razmerje števila podpornih vektorjev $\fsv$. Regresija \nusvr je predstavljena v poglavju~\ref{sec:regresija-nusvr}.
 
@@ -184,7 +184,7 @@ Za uporabo SVM pri regresiji uvedemo dodatni vektor spremenljivk $\vec{\xi^+}$. 
 \end{aligned}	
 \end{equation}
 
-kjer je $C>0$ regresijski parameter in $\epsilon > 0$ parameter kriterijske funkcije. Z njim določujemo toleranco do napak.
+kjer je $C>0$ regresijski parameter in $\epsilon > 0$ parameter kriterijske funkcije. Z njim določamo toleranco do napak.
 
 Sekundarni problem se glasi~\cite{chang2011a}:
 

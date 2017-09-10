@@ -44,10 +44,10 @@ $\dot{Z}$ predstavlja hitrost spreminjanja globine~\cite{yan2016scene}.
 \subsection{Metode estimacije prostorskega toka}
 Konvencionalne metode estimacije prostorskega toka so se razvile iz optičnega toka in dodatne informacije o globini~\cite{yan2016scene}. Slednjo lahko pridobimo s parom stereo kamer ali z uporabo sistemov več kamer~\cite{jaimez2015primal}. Vektor hitrosti prostorskega toka lahko v takih sistemih aproksimiramo z $\vec{\mu} = \left[w_x~w_y~\dot{d}\right]^\top$, kjer sta $(w_x, w_y)$ komponenti vektorja optičnega toka $\vec{w}$, $\dot{d}$ pa časovna sprememba disparitete~\cite{yan2016scene}.
 
-Z razvojem t.i. ``Time-of-flight'' (ToF) kamer, smo dobili cenovno dostopne in natančne sisteme, ki omogočajo implementacijo hitrih algoritmov prostorskega toka~\cite{yan2016scene,jaimez2015primal}. Ti večinoma temeljijo na globalni variacijski metodi, kjer rešujemo minimizacijski problem 
+Z razvojem t.i. ``Time-of-flight'' (ToF) kamer smo dobili cenovno dostopne in natančne sisteme, ki omogočajo implementacijo hitrih algoritmov prostorskega toka~\cite{yan2016scene,jaimez2015primal}. Ti večinoma temeljijo na globalni variacijski metodi, kjer rešujemo minimizacijski problem 
 
 \begin{equation}\label{eq:minimizacijski-problem}
-	\min_{\mu}\{E_D(\vec{\mu}) + E_R(\vec{\mu})\}
+	\min_{\mu}\{E_D(\vec{\mu}) + E_R(\vec{\mu})\}.
 \end{equation}
 
 Podatkovni del minimizacijskega problema je označen z $E_D(\vec{\mu})$, regularizacijski del pa z  $E_R(\vec{\mu})$. Podatkovni del izračunamo po enačbi~\eqref{eq:podatkovni-del}, kjer upoštevamo konstantno osvetljenost po~\eqref{eq:konstantna-osvetljenost} in konsistentnost spreminjanja globine po enačbi~\eqref{eq:konsistentnost-globine}. V slednji je  $\Psi$ cenilka. Običajno je uporabljena $L_2$ norma $\Psi(x) = \| x \|^2$~\cite{yan2016scene}. $\alpha$ v~\eqref{eq:podatkovni-del} predstavlja utež.
@@ -74,13 +74,13 @@ V nadaljevanju predstavljamo globalno variacijsko metodo PD-Flow algoritem.
 
 
 \subsubsection{PD-Flow algoritem.}\label{sec:pd-flow}
-Algoritem spada pod globalne variacijske metode~\cite{jaimez2015primal}. Za cenilko $\Psi$ v~\eqref{eq:konstantna-osvetljenost} in~\eqref{eq:konsistentnost-globine} avtorji uporabljajo $L_1$ normo. Za utež $\alpha$ v podatkovnem delu funkcionala~\eqref{eq:podatkovni-del} se v tem algoritmu uporablja funkcija 
+Algoritem spada pod globalne variacijske metode~\cite{jaimez2015primal}. Za cenilko $\Psi$ v~\eqref{eq:konstantna-osvetljenost} in~\eqref{eq:konsistentnost-globine} avtorji uporabljajo $L_1$ normo. Za utež $\alpha$ v enačbi~\eqref{eq:podatkovni-del} uporabljajo funkcijo 
 
 \begin{equation}\label{eq:utez}
  \alpha(x,y) = \frac{\mu_0}{1 + k_\mu \left( \frac{\partial Z^2}{\partial x} + \frac{\partial Z^2}{\partial y} + \frac{\partial Z^2}{\partial t} \right)},
 \end{equation}
 
-kjer sta empirično določena parametra $\mu_0 = 75$ in $k_mu = 1000$. Za izračun podatkovnega dela uporabljajo hierarhično metodo grajenja slikovne piramide, pri tem pa uporabljajo linearizacijo podatkovnega dela~\eqref{eq:podatkovni-del}~\cite{jaimez2015primal}.
+kjer sta empirično določena parametra $\mu_0 = 75$ in $k_\mu = 1000$. Za izračun enačbe~\eqref{eq:podatkovni-del} uporabljajo hierarhično metodo grajenja slikovne piramide~\cite{jaimez2015primal}.
 
 Jaimez et al. v delu~\cite{jaimez2015primal} predstavi nov regularizacijski del~\eqref{eq:regularizacijski-del-pdflow}, kjer upošteva še geometrijo prizora s faktorjem $\vec{r}$~\eqref{eq:faktor-prizora}. Z njim upošteva, da lahko sosednji slikovni elementi predstavljajo točke v prostoru, ki so si različno oddaljene.
 
@@ -96,7 +96,7 @@ E_R = \sum_\Omega \Psi\left( (\nabla w_x)^\top \vec{r} \right) + \Psi\left( (\na
 \end{bmatrix}^\top
 \end{equation}
 
-Evaluacija PD-Flow algoritma je prikazana v tabeli~\ref{tab:pdflow}. V tabeli so zapisani še rezultati RGB-D flow algoritma, ki za cenilko $\Psi$ ravno tako uporablja $L_1$ normo~\cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma.
+Evaluacija PD-Flow algoritma je prikazana v tabeli~\ref{tab:pdflow}. V tabeli so zapisani še rezultati RGB-D flow algoritma, ki za cenilko $\Psi$ ravno tako uporablja $L_1$ normo~\cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največje izboljšanje vidimo pri času izvajanja algoritma.
 
 \begin{table}[htb]
 	\centering
