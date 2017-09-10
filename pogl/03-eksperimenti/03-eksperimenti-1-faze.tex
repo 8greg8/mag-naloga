@@ -143,7 +143,7 @@ Video posnetek~\cite{squashtv2014squash} smo za potrebe vizualne ocene delovanja
 
 
 \subsection{Laboratorijski eksperimenti tekalne steze}
-Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za šport. Merjenec je tekel na tekalni stezi ob prisotnosti operaterja---fiziologa, ki je določal intenziteto in čas trajanja obremenitve. V sklopu testa faze 1 smo preučili možno uporabo RGB in bližnje infrardeče (IR) kamere, da bi olajšali snemanje pri slabih svetlobnih pogojih.
+Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za šport. Merjenec je tekel na tekalni stezi ob prisotnosti operaterja---fiziologa, ki je določal intenziteto in čas trajanja obremenitve. V sklopu testa faze 1 smo preučili možno uporabo RGB in bližnje-infrardeče (NIR) kamere, da bi olajšali snemanje pri slabih svetlobnih pogojih.
 
 
 \subsubsection{Pridobivanje podatkov}
@@ -151,7 +151,7 @@ Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za špo
 Srčni utrip in energijsko porabo smo merili za izbranega športnika (starost: 26 let, višina: \SI{177}{\cm}, teža: \SI{79.1}{\kg}, \vomax: \SI{3705}{\ml\per\min}). Zaradi doslednosti se nanašamo nanj kot SUBJ0. Energijsko porabo smo merili z indirektno kalorimetrijo, in sicer s ``breath by breath'' Cosmed CPET Metabolic Cart~\cite{beaver1973line}. Pri tem smo uporabili Hans Rudolph obrazno masko s predpisanim minimalnim VD (mrtvim prostorom). Naklon tekalne steze je bil od \SI{1.5}{\%} do \SI{2}{\%}.
 
 \paragraph{Video posnetki.}
-Tekalno stezo s SUBJ0 smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Video posnetke smo časovno sinhronizirali glede na začetno sliko meritev, vendar pa se zaradi uporabe Axis 207W IP kamer časovne neusklajenosti do potankosti nismo mogli znebiti. Pridobili smo posnetke barvnih RGB slik in infrardeče IR posnetke hrbtnega dela, ki so prikazani na sliki~\ref{fig:primer-posnetka-rgb-ir}. Snemali smo v ločljivosti $480 \times 640$. Hitrost RGB posnetkov je bila \SI{30}{fps}, za IR posnetke pa je hitrost znašala \SI{25}{fps}.  
+Tekalno stezo s SUBJ0 smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Video posnetke smo časovno sinhronizirali glede na začetno sliko meritev, vendar pa se zaradi uporabe Axis 207W IP kamer časovne neusklajenosti do potankosti nismo mogli znebiti. Pridobili smo posnetke barvnih RGB slik in bližnje-infrardeče NIR posnetke hrbtnega dela, ki so prikazani na sliki~\ref{fig:primer-posnetka-rgb-ir}. Snemali smo v ločljivosti $480 \times 640$. Hitrost RGB posnetkov je bila \SI{30}{fps}, za NIR posnetke pa je hitrost znašala \SI{25}{fps}.  
 
 \begin{figure}[htb]
 	\centering
@@ -170,9 +170,9 @@ Tekalno stezo s SUBJ0 smo snemali iz dveh različnih zornih kotov: hrbtni del in
     \begin{subfigure}[t]{0.3\columnwidth}
     	\centering
 		\includegraphics[width=0.6\columnwidth]{normal-ir-150.png}
-		\caption{Hrbtna IR slika.}
+		\caption{Hrbtna NIR slika.}
 	\end{subfigure}
-	\caption[Hrbtna, stranska in IR 150. slika posnetkov iz prve serije]{Hrbtna, stranska in IR 150. slika posnetkov iz prve serije. Kljub časovni sinhronizaciji med posnetkoma, se časovni neusklajenosti nismo mogli popolnoma izogniti. Časovni frekvenci kamer nista bili sinhronizirani.}
+	\caption[Hrbtna, stranska in NIR 150. slika posnetkov iz prve serije]{Hrbtna, stranska in NIR 150. slika posnetkov iz prve serije. Kljub časovni sinhronizaciji med posnetkoma, se časovni neusklajenosti nismo mogli popolnoma izogniti. Časovni frekvenci kamer nista bili sinhronizirani.}
 	\label{fig:primer-posnetka-rgb-ir}
 \end{figure}
 
@@ -284,11 +284,11 @@ HOOF deskriptorji so v teoriji robustni na šum, saj ta zaradi majhnih amplitud 
 		\textbf{Serija} & \thead{Pogled} & \thead{Vrsta} & \theadm{x} & \theadm{y} & \theadm{w} & \theadm{h}  \\
 		\midrule
 		\multirow{3}{*}{1} & \multirow{2}{*}{hrbtni} & RGB & 228 & 43 & 207 & 437 \\
-		&& IR & 32 & 10 & 167 & 329 \\
+		&& NIR & 32 & 10 & 167 & 329 \\
 		& stranski & RGB & 179 & 31 & 346 & 420 \\
 		\midrule
 		\multirow{3}{*}{2} & \multirow{2}{*}{hrbtni} & RGB & 230 & 51 & 228 & 429 \\
-		&& IR & 29 & 11 & 181 & 338 \\
+		&& NIR & 29 & 11 & 181 & 338 \\
 		& stranski & RGB & 182 & 33 & 351 & 423 \\
 		\bottomrule
 	\end{tabular}
@@ -452,7 +452,7 @@ Za testiranje detekcije dihanja smo posneli video moškega merjenca, starosti 42
 	\begin{subfigure}[t]{0.3\columnwidth}
 		\centering
 		\includegraphics[width=\columnwidth]{breathtest-500.png}
-		\caption{IR slika dihanja.}
+		\caption{NIR slika dihanja.}
 		\label{fig:dihanje-orig}
 	\end{subfigure}
 	~
@@ -469,7 +469,7 @@ Za testiranje detekcije dihanja smo posneli video moškega merjenca, starosti 42
 		\caption{HOOF histogram.}
 		\label{fig:dihanje-hist}
 	\end{subfigure}
-	\caption[Originalna IR slika dihanja, njen optični tok in HOOF histogram]{Originalna IR slika dihanja, njen optični tok in HOOF histogram Prikazana je 500. slika učnih vzorcev. Optični tok ima z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{1}{ppf}.}
+	\caption[Originalna NIR slika dihanja, njen optični tok in HOOF histogram]{Originalna NIR slika dihanja, njen optični tok in HOOF histogram Prikazana je 500. slika učnih vzorcev. Optični tok ima z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{1}{ppf}.}
 	\label{fig:dihanje}
 \end{figure} 
 
