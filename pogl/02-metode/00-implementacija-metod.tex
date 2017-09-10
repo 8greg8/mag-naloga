@@ -160,7 +160,7 @@ Zaporedja slik smo poskušali združiti tudi z ročnim določevanjem kontrolnih 
 	\label{fig:zdruzevanje-cp}
 \end{figure}
 
-Zaradi nezadovoljivih rezultatov klasičnih metod združevanja stereo slik smo razvili metodo, ki je prilagojena za Kinect kamere. Iz kamer smo z uporabo knjižnice libfreenect2 0.2~\cite{lingzhu2016libfreenect2} pridobili intrinzične parametre bli�nje-infrardečega (NIR) senzorja, in sicer: slikovni koordinati goriščne razdalje $f_u$ in $f_v$ ter slikovni koordinati optičnega središča slike (ang. principal point) $c_u$ in $c_v$. Intrinzične parametre smo uporabili za določitev intrinzične matrike $\vec{M}_{int}$ po enačbi~\eqref{eq:intrinsic}.
+Zaradi nezadovoljivih rezultatov klasičnih metod združevanja stereo slik smo razvili metodo, ki je prilagojena za Kinect kamere. Iz kamer smo z uporabo knjižnice libfreenect2 0.2~\cite{lingzhu2016libfreenect2} pridobili intrinzične parametre bližnje-infrardečega (NIR) senzorja, in sicer: slikovni koordinati goriščne razdalje $f_u$ in $f_v$ ter slikovni koordinati optičnega središča slike (ang. principal point) $c_u$ in $c_v$. Intrinzične parametre smo uporabili za določitev intrinzične matrike $\vec{M}_{int}$ po enačbi~\eqref{eq:intrinsic}.
 
 Ker pravih ekstrinzičnih parametrov kamer nismo poznali, smo jih le ocenili z metodo določevanja sečišča vidnih polj obeh kamer. Sečišče je prikazano kot rdeča linija na sliki~\ref{fig:zdruzevanje}. S to metodo smo določili translacijski vektor $\vec{t} = \left [ t_x~ t_y~ t_z \right]^\top$ in rotacijsko matriko $\vec{R}$ iz Eulerjevih kotov.
 
