@@ -1,8 +1,10 @@
 \section{Eksperimenti 1. faze}
 
 \subsection{Optimizacija HOOF deskriptorjev}\label{sec:optimizacija-hoof}
-Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:rezultati-optimizacija-hoof}. Za evaluacijo smo uporabili učne vzorce hrbtne kamere preliminarnih laboratorijskih testov. Evaluirali smo samo za podatke energijske porabe $W$. Pridobljene značilke deskriptorjev smo normirali na intervalu $[-1,1]$ in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Metode so podrobneje predstavljene v poglavju~\ref{sec:matematicni-modeli}. Za določitev optimalnih parametrov, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, smo uporabili optimizacijsko metodo mrežnega iskanja~\cite{hsu2003practical}. Rezultate smo filtrirali še s Kalmanovim filtrom, ki je predstavljen v~\ref{sec:kalmanov-filter}.
+Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:rezultati-optimizacija-hoof}. Za evaluacijo smo uporabili učne vzorce hrbtne kamere preliminarnih laboratorijskih testov. Evaluirali smo samo za podatke energijske porabe $W$. Pridobljene značilke deskriptorjev smo normirali na intervalu $[-1,1]$ in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Metode so podrobneje predstavljene v poglavju~\ref{sec:matematicni-modeli}. Za določitev optimalnih parametrov%, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, 
+smo uporabili optimizacijsko metodo mrežnega iskanja~\cite{hsu2003practical}. Rezultate smo filtrirali še s Kalmanovim filtrom, ki je predstavljen v~\ref{sec:kalmanov-filter}.
 
+\begin{comment}
 \begin{table}[htb]
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=2.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
@@ -18,7 +20,7 @@ Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:re
 	\caption[Optimalni parameteri RBF jedra modelov za določitev \nhoof]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev \nhoof v HOOF deskriptorju. Z njimi smo učili modele s katerimi smo preverjali optimalno število stolpcev v HOOF deskriptorju}
 	\label{tab:nhoof-param}
 \end{table}
-
+\end{comment}
 
 
 
@@ -26,9 +28,9 @@ Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:re
 
 
 \subsection{Optimizacija HAFA deskriptorjev}
-Parameter \nhafa smo določili na podlagi rezultatov~\ref{sec:rezultati-optimizacija-hafa}. Za evaluacijo smo uporabili enak eksperimentalni protokol kot za HOOF značilke v poglavju~\ref{sec:hoof}, s to razliko, da smo značilke normirali na intervalu $[0, 1]$ in odstranili stolpec z amplitudami $0.5$. S tem smo odstranili šum, ki se je pojavil, ko ni bilo nobenega gibanja. Amplitudo šuma smo določili, kot maksimalno vrednost amplitude, ki še ni predstavljala gibanja. Optimalni parametri evaluacijske metode so predstavljeni v tabeli~\ref{tab:nhafa-param}.
+Parameter \nhafa smo določili na podlagi rezultatov~\ref{sec:rezultati-optimizacija-hafa}. Za evaluacijo smo uporabili enak eksperimentalni protokol kot za HOOF značilke v poglavju~\ref{sec:hoof}, s to razliko, da smo značilke normirali na intervalu $[0, 1]$ in odstranili stolpec z amplitudami $0.5$. S tem smo odstranili šum, ki se je pojavil, ko ni bilo nobenega gibanja. Amplitudo šuma smo določili, kot maksimalno vrednost amplitude, ki še ni predstavljala gibanja. %Optimalni parametri evaluacijske metode so predstavljeni v tabeli~\ref{tab:nhafa-param}.
 
-
+\begin{comment}
 \begin{table}[!htb]
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=2.3] S[table-format=1.3]  S[table-format=1.3] S[table-format=1.3]}
@@ -44,6 +46,7 @@ Parameter \nhafa smo določili na podlagi rezultatov~\ref{sec:rezultati-optimiza
 	\caption[Optimalni parameteri RBF jedra modelov za določitev \nhafa]{Optimalni parametri RBF jedra za modele z različnim številom stolpcev \nhafa v HAFA deskriptorju. Z njimi smo učili modele s katerimi smo preverjali optimalno število stolpcev v HAFA deskriptorju.}
 	\label{tab:nhafa-param}
 \end{table}
+\end{comment}
 
 
 
@@ -53,8 +56,10 @@ Parameter \nhafa smo določili na podlagi rezultatov~\ref{sec:rezultati-optimiza
 \subsection{Razširitev HOOF deskriptorja}\label{sec:razsiritev-hoof-rezultati}
 HOOF deskriptorju smo pripeli HAFA deskriptor in tako dobili razširjeni deskriptor HOOF-HAFA, ki po evaluaciji iz poglavja~\ref{sec:rezultati-razsiritev-hoof} v splošnem daje boljše rezultate.
 
-Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne kamere terenskih testov. Evaluirali smo za podatke srčnega utripa $hr$. Srčni utrip smo za gradnjo modelov pretvorili v energijsko porabo $W$ po enačbi~\eqref{eq:charlot}. Pridobljene značilke smo normirali na intervalu [0,1] in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Za določitev optimalnih parametrov, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, smo uporabili optimizacijsko metodo mrežnega iskanja~\cite{hsu2003practical}. Rezultate smo filtrirali še s Gaussovim jedrom (predstavljen v~\ref{sec:gaussov-filter}) z varianco $\sigma=16$. 
+Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne kamere terenskih testov. Evaluirali smo za podatke srčnega utripa $hr$. Srčni utrip smo za gradnjo modelov pretvorili v energijsko porabo $W$ po enačbi~\eqref{eq:charlot}. Pridobljene značilke smo normirali na intervalu [0,1] in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Za določitev optimalnih parametrov%, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, 
+smo uporabili optimizacijsko metodo mrežnega iskanja~\cite{hsu2003practical}. Rezultate smo filtrirali še s Gaussovim jedrom (predstavljen v~\ref{sec:gaussov-filter}) z varianco $\sigma=16$. 
 
+\begin{comment}
 \begin{table}[htb]
 	\centering
 	\begin{tabular}{l S[table-format=2.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3]}
@@ -68,7 +73,7 @@ Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne
 	\caption[Optimalni parameteri RBF jedra modelov za izbiro deskriptorjev]{Optimalni parametri RBF jedra za modele z različnim deskriptorjem. Z modeloma smo preverjali razširitev HOOF deskriptorja v HOOF-HAFA deskriptor.}
 	\label{tab:izbira-param}
 \end{table}
-
+\end{comment}
 
 
 
@@ -138,7 +143,7 @@ Video posnetek~\cite{squashtv2014squash} smo za potrebe vizualne ocene delovanja
 
 
 \subsection{Laboratorijski eksperimenti tekalne steze}
-Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za šport. Merjenec je tekel na tekalni stezi ob prisotnosti operaterja---fiziologa, ki je določal intenziteto in čas trajanja obremenitve. V sklopu testa faze 1 smo preučili možno uporabo RGB in infra-rdeče (IR) kamere, da bi olajšali snemanje pri slabih svetlobnih pogojih.
+Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za šport. Merjenec je tekel na tekalni stezi ob prisotnosti operaterja---fiziologa, ki je določal intenziteto in čas trajanja obremenitve. V sklopu testa faze 1 smo preučili možno uporabo RGB in bližnje infrardeče (IR) kamere, da bi olajšali snemanje pri slabih svetlobnih pogojih.
 
 
 \subsubsection{Pridobivanje podatkov}
@@ -172,11 +177,11 @@ Tekalno stezo s SUBJ0 smo snemali iz dveh različnih zornih kotov: hrbtni del in
 \end{figure}
 
 
-\paragraph{Protokoli meritev.}
+\paragraph{Protokol meritve.}
 Naredili smo dve seriji testov v razmiku 20 minut, pri čemer smo prvo serijo testov uporabili za pridobitev učnih vzorcev. Drugo serijo smo uporabili za testne vzorce. Fiziološke parametre smo vzorčili vsakih \SI{5}{\s}. V prvi seriji smo naredili 8 testov, kjer so vsi trajali 2 minuti. Hitrost tekalne steze smo vsak test povečali za \SI{1}{\km\per\hour}. Prvi test je imel hitrost  \SI{6}{\km\per\hour} zadnji pa \SI{13}{\km\per\hour}. V drugi seriji smo naredili 3 teste po 5 minut. Hitrosti tekalne steze so bile  \SI{7}{\km\per\hour}, \SI{10}{\km\per\hour} in \SI{13}{\km\per\hour}.
 
-\paragraph{Procesiranje}\label{sec:elementarni-postopek}
-Zaradi razlik pri frekvencah vzorčenja slik in fizioloških parametrov, smo te interpolirali s pomočjo Matlabove funkcije \texttt{interp1}. Za izbrano področje slike iz zaporedja posameznega posnetka smo nato izračunali optični tok. Primer dobljenega optičnega toka je prikazan na sliki~\ref{fig:opticni-tok-stage1} Enote optičnega toka so \si{ppf}. Pomenijo število slikovnih elementov na sliko (ang. Pixel per Frame).
+\paragraph{Procesiranje.}\label{sec:elementarni-postopek}
+Zaradi razlik pri frekvencah vzorčenja slik in fizioloških parametrov, smo uporabili linearno interpolacijo na fizioloških parametrih za natančno uskladitev obeh vrst podatkov. Za izbrano področje slike iz zaporedja posameznega posnetka smo nato izračunali optični tok. Primer dobljenega optičnega toka je prikazan na sliki~\ref{fig:opticni-tok-stage1} Enote optičnega toka so \si{ppf}. Pomenijo število slikovnih elementov na sliko (ang. Pixel per Frame).
 
 
 \begin{figure}[!htb]
@@ -210,15 +215,16 @@ Naučili smo \num{8} regresijskih modelov, ki smo jih razdelili na dve kategorij
 
 Eksperimente smo razširili z vpeljavo zakasnitve med referenčnim fiziološkim parametrom in merjenim parametrom iz slik posnetka. Z eksperimenti, ki so označeni z \textit{lag} kratico, smo preverili predlagano časovno zakasnitev med vzbujanjem in fiziološkim odzivom. 
 
-Generirali smo tudi dodatne modele, in sicer: \textit{crop}, \textit{mixed}, \textit{track} in obremenitvene modele. Pri \textit{mixed} modelih smo uporabili podatke različne modalitete zornega kota, kar nam je omogočilo oceno vpliva kota kamere. V \textit{track} modelih smo uporabili sledilnik. Obremenitvene modele delimo na \textit{scale} modele in \textit{proj} modele. Rezultate smo filtrirali s Kalmanovim filtrom.
+Generirali smo tudi dodatne modele, in sicer: \textit{crop}, \textit{mixed}, \textit{track} in obremenitvene modele. V \textit{crop} modelih smo ročno določili področje tarče. V \textit{mixed} modelih smo uporabili podatke različne modalitete zornega kota, kar nam je omogočilo oceno vpliva kota kamere. Iz posnetkov obeh kamer smo izrezali področja tarče po principu \textit{crop} modelov in jih spojili v en sam posnetek. V \textit{track} modelih smo uporabili sledilnik. Obremenitvene modele delimo na \textit{scale} modele in \textit{proj} modele. 
 
-Vse tipe eksperimentov smo križno testirali glede na zorni kot kamere. Uporabljen zorni kot kamere za križno testiranje je zapisan v oklepajih.
+Rezultate smo filtrirali s Kalmanovim filtrom. Vse modele smo križno testirali glede na zorni kot kamere. Uporabljen zorni kot kamere za križno testiranje je zapisan v oklepajih. Za jasnejše razumevanje smo označili
+postopek za testiranje vseh laboratorijskih modelov v fazi 1 kot P1OFL. Shema je prikazana na sliki~\ref{fig:diagram-procesiranja-stage1}.
 
 
 \begin{figure}[!htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-stage1.tikz}}
-	\caption[Diagram postopka za eksperimente 1. faze]{Diagram postopka za eksperimente 1. faze. Izbranemu področju na sliki določimo optični tok.}
+	\caption[Shema napovedovanja P1OFL]{Shema napovedovanja P1OFL. Uporablja se za testiranje laboratorijskih eksperimentov 1. faze.}
 	\label{fig:diagram-procesiranja-stage1}
 \end{figure}
 
@@ -371,9 +377,7 @@ S simulacijo vibracij smo naredili obremenitveni test za modele z vključenim sl
 
 
 \subsection{Terenski eksperimenti squash igre}
-Pri terenskih eksperimentih smo snemali dve squash igri z enim setom z RaspberryPi in RaspiCam napravo v resoluciji  $1920 \times 1080$. Zaradi nezadovoljivih podatkov druge igre, smo za učenje in testiranje modelov uporabili le prvo igro. Igralcem smo merili srčni utrip s kontaktnimi senzorji. 
-
-Prvega igralca prve igre z oznako SUBJ11  (starost: 45 let, velikost: \SI{176}{\cm}, teža: \SI{68}{\kg}, spol: moški, \hrtmax: \SI{179}{bpm}, $hr_{r}$: \SI{45}{bpm}) smo uporabili za učne vzorce. Drugega igralca z oznako SUBJ12 (starost: 17 let, višina: \SI{178}{\cm}, teža: \SI{66}{\kg}, spol: moški, \hrtmax: \SI{203}{bpm}, $hr_{r}$: \SI{50}{bpm}) smo uporabili za testne vzorce. 
+Pri terenskih eksperimentih smo snemali squash igro z RaspberryPi in RaspiCam napravo v resoluciji  $1920 \times 1080$. Igralcema smo merili srčni utrip s kontaktnimi senzorji. Prvega igralca z oznako SUBJ11  (starost: 45 let, velikost: \SI{176}{\cm}, teža: \SI{68}{\kg}, spol: moški, \hrtmax: \SI{179}{bpm}, $hr_{r}$: \SI{45}{bpm}) smo uporabili za učne vzorce. Drugega igralca z oznako SUBJ12 (starost: 17 let, višina: \SI{178}{\cm}, teža: \SI{66}{\kg}, spol: moški, \hrtmax: \SI{203}{bpm}, $hr_{r}$: \SI{50}{bpm}) smo uporabili za testne vzorce. 
 
 \subsubsection{Razširitev HOOF deskriptorja}
 V terenskih testiranjih smo ugotovili, da uporaba HOOF deskriptorja v realnih okoliščinah ni zadovoljiva. Zato smo mu dodali HAFA deskriptor in tako dobili razširjeni deskriptor HOOF-HAFA. Primer deskriptorja je viden na sliki~\ref{fig:hoof-hafa}.
@@ -385,10 +389,10 @@ V terenskih testiranjih smo ugotovili, da uporaba HOOF deskriptorja v realnih ok
 	\label{fig:hoof-hafa}
 \end{figure}
 
-\subsubsection{Postopek procesiranja}
-Za določitev področja posameznega igralca smo uporabili KCF sledilnik. 
-%Kadar sledilnik ni uspel najti objekta zanimanja, je bilo področje prazno, zato so bile vse vrednosti HOOF-HAFA deskriptorjev $0$. To se je zgodilo v primerih, ko je tarča izginila iz vidnega polja kamere ali pa ko sledilnik ni več deloval. 
-Sledenje smo nadzorovano reinicializirali vsake \SI{3}{\s}, da smo zagotovili razumne sledilne rezultate. Zaradi prevelike resolucije posnetkov, smo morali za pravilno delovanje sledilnika posnetke skalirati na \SI{25}{\%} prvotne velikosti. Rezultate sledenja smo nato transformirali nazaj na originalno resolucijo. Primer sledenja je prikazan na sliki~\ref{fig:squash}\subref{fig:sledenje-squash})
+\subsubsection{Procesiranje}
+Izmerjeni srčni utrip smo linearno interpolirali, da smo dobili podatke za vsako sliko posnetka. Te smo filtrirali z Gaussovim filtrom s standardnim odklonom \num{16} in tako preprečili učenje na šumnih podatkih. Srčni utrip je bil individualiziran na parametre učnega igralca s pretvorbo v energijsko porabo po enačbi~\eqref{eq:charlot}. Rezultate smo nato z isto enačbo pretvorili nazaj v srčni utrip s parametri testnega igralca. S tem smo omogočili učenje na enem in testiranje na drugem igralcu. 
+
+Za določitev področja posameznega igralca smo uporabili KCF sledilnik, ki smo ga nadzorovano reinicializirali vsake \SI{3}{\s}, da smo zagotovili razumne sledilne rezultate. Zaradi prevelike resolucije posnetkov, smo morali za pravilno delovanje sledilnika posnetke skalirati na \SI{25}{\%} prvotne velikosti. Rezultate sledenja smo nato transformirali nazaj na originalno resolucijo. Primer sledenja je prikazan na sliki~\ref{fig:squash}\subref{fig:sledenje-squash})
 
 \begin{figure}[!htb]
 	\centering
@@ -409,15 +413,13 @@ Sledenje smo nadzorovano reinicializirali vsake \SI{3}{\s}, da smo zagotovili ra
 	\label{fig:squash}
 \end{figure}
 
-Izmerjeni srčni utrip smo filtrirali z Gaussovim filtrom s standardnim odklonom \num{16}. S tem smo preprečili učenje na šumnih podatkih. Srčni utrip je bil individualiziran na parametre učnega igralca s pretvorbo v energijsko porabo po enačbi~\eqref{eq:charlot}. Rezultate smo nato z isto enačbo pretvorili nazaj v srčni utrip s parametri testnega igralca. S tem smo omogočili učenje na enem in testiranje na drugem igralcu. 
-
-Po določevanju optičnega toka (slika~\ref{fig:squash}), smo uporabili HOOF-HAFA deskriptorje, katerih značilke smo skalirali na intervalu $[-1,1]$. Učili smo s postopkom \esvr in jedrom RBF. Za terenske eksperimente Kalmanovega filtra nismo uporabili. Ker je bil Gaussov filter uporabljen pri predprocesiranju podatkov, smo enak filter uporabili tudi za filtriranje izhodov modela.
+Po določevanju optičnega toka (slika~\ref{fig:squash}), smo uporabili HOOF-HAFA deskriptorje, katerih značilke smo skalirali na intervalu $[-1,1]$. Učili smo s postopkom \esvr in jedrom RBF. Konsistetno z učenjem, smo Gaussov filter uporabili tudi za filtriranje izhodov modela. Parameter jedra je bil $\sigma=16$. Postopek za testiranje vseh terenskih modelov faze 1 označujemo kot P1OFC. Shema postopka je prikazana na sliki~\ref{fig:diagram-procesiranja-field-stage1}.
 
 \begin{figure}[!htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-field-stage1.tikz}}
-	\caption[Diagram testiranja terenskih eksperimentov 1. faze]{Diagram testiranja terenskih eksperimentov 1. faze. Področju, ki smo ga dobili s KCF sledinikom, smo določili optični tok. Sledilo je učenje na HOOF-HAFA deskriptorjih, Rezultate smo filtrirali s Gaussovim filtrom.}
-	\label{fig:diagram-procesiranja-field-stag1}
+	\caption[P1OFC predikcijska shema]{P1OFC predikcijska shema. Uporabili smo jo za testiranje terenskih modelov faze 1.}
+	\label{fig:diagram-procesiranja-field-stage1}
 \end{figure}
 
 
