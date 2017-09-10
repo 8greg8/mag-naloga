@@ -109,9 +109,9 @@ Jedro sledilnika temelji na KCF sledilniku za optični tok iz dela~\cite{henriqu
 
 V DS-KCF sledilniku Najprej segmentirajo globinsko sliko na področja podobne globine s pomočjo rojenja~\cite{hannuna2016ds}. S tem pridobijo relevantne značilke globinske distribucije. 
 
-S pomočjo globinske distribucije izračunajo spremembe v skali glede na začetno srednjo vrednost globine tarče in jih uporabijo za posodobitev modela tarče. Posodobitev poteka, ko dobijo novo estimacijo pozicije tarče. Pri tem uporabljajo interpolacijo ali decimacijo v frekvenčnem prostoru~\cite{hannuna2016ds}.
+S pomočjo globinske distribucije izračunajo spremembe v skali, glede na začetno srednjo vrednost globine tarče, in jih uporabijo za posodobitev modela tarče. Posodobitev poteka, ko dobijo novo estimacijo pozicije tarče. Pri tem uporabljajo interpolacijo ali decimacijo v frekvenčnem prostoru~\cite{hannuna2016ds}.
 
-V istem času ko sledilnik računa spremembe v skali se globinska distribucija uporabi tudi za detekcijo okluzij. Kadar sledilnik detektira, da je prišlo do okluzije se model tarče ne posodobi~\cite{hannuna2016ds}. Pri določevanju okluzije sledilnik uporablja Kalmanov filter, s katerim sledi centru tarče in objekta, ki povzroča okluzijo. V~\cite{hannuna2016ds} uporabljajo linearni model konstantne hitrosti.  
+V istem času, ko sledilnik računa spremembe v skali, se globinska distribucija uporabi tudi za detekcijo okluzij. Kadar sledilnik detektira, da je prišlo do okluzije, se model tarče ne posodobi~\cite{hannuna2016ds}. Pri določevanju okluzije sledilnik uporablja Kalmanov filter, s katerim sledi centru tarče in objekta, ki povzroča okluzijo. V~\cite{hannuna2016ds} uporabljajo linearni model konstantne hitrosti.  
 
 Na koncu sledijo popravki zaradi sprememb oblike objekta. Popravki temeljijo na razmerju stranic začetnega pravokotnika modela tarče~\cite{hannuna2016ds}. Sledilnik model tarče popravi vedno tako, da razmerje stranic ostaja konstantno.
 

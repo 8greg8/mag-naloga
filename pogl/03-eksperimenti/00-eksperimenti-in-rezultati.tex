@@ -1,5 +1,5 @@
 \chapter{Eksperimenti}\label{sec:eksperimenti}
-V tem poglavju predstavljamo eksperimente, ki smo jih izvedli v dveh različnih okoljih: v fiziološkem laboratoriju in na squash igrišču (terenski testi). Z njimi smo naslovili energijsko porabo $eem(t)$, kot osrednji fiziološki parameter. Srčni utrip $hr(t)$ smo obravnavali kot sekundarni parameter, z razumevanjem, da slabo odraža dejansko energijsko porabo. Z eksperimenti detekcije dihanja smo želeli preizkusiti predlagano metodo za širšo uporabo.
+V tem poglavju predstavljamo eksperimente, ki smo jih izvedli v dveh različnih okoljih: v fiziološkem laboratoriju in na squash igrišču (terenski testi). Z njimi smo naslovili energijsko porabo $eem(t)$ kot osrednji fiziološki parameter. Srčni utrip $hr(t)$ smo obravnavali kot sekundarni parameter, z razumevanjem, da slabo odraža dejansko energijsko porabo. Z eksperimenti detekcije dihanja smo želeli preizkusiti predlagano metodo za širšo uporabo.
 
 Pri vseh naslovljenih fizioloških parametrih smo s pomočjo strojnega učenja izvajali predikcijo časovnih signalov $eem(t)$ za energijsko porabo, $hr(t)$ za srčni utrip in $dihanje(t)$ za dihanje. Predikcijo smo izvajali iz posamezne slike zaporedja video posnetka. Pri tem smo najprej generirali sliko optičnega ali prostorskega toka in nato določili področje, kjer se nahaja merjenec. Iz izbranega področja smo izračunali vektorje značilk $\vec{x}(t)$, te pa smo uporabili za predikcijo. Rezultat je zelo enostaven, skoraj realno-časoven model, ki ga lahko razširimo s temporalnim modeliranjem, če bi se pojavila potreba. 
 
@@ -8,7 +8,7 @@ Prvi del postopka je učenje SVM/SVR modela, kot je prikazano na sliki~\ref{fig:
 \begin{figure}[!htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-generalni.tikz}}
-	\caption[Shema generalnega postopka učenja]{Shema generalnega postopka učenja. Iz izbranega področja tarče generiramo sliko toka in izračunamo vekorje značilk $\vec{x}(t)$. Te nato uporabimo za učenje realno-časovnih modelov, s katerimi izvajamo predikcijo nad fiziološkimi parametri.}
+	\caption[Shema generalnega postopka učenja]{Shema generalnega postopka učenja. Iz izbranega področja tarče generiramo sliko toka in izračunamo vektorje značilk $\vec{x}(t)$. Te nato uporabimo za učenje realno-časovnih modelov, s katerimi izvajamo predikcijo nad fiziološkimi parametri.}
 	\label{fig:shema-generalnega-postopka01}
 \end{figure}
 
