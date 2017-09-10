@@ -6,9 +6,9 @@
 % Kako smo ga uporabili
 % Problemi naše predpostavke
 % Rešitev s kalibracijo velikosti
-Za namen razlage upoštevamo perspektivni model kamere iz poglavja~\ref{sec:model-kamere} in model gibanja iz poglavja~\ref{sec:model-gibanja}. Dodatno upoštevamo da se osvetlitev ne spreminja.
+Za namen razlage upoštevamo perspektivni model kamere iz poglavja~\ref{sec:model-kamere} in model gibanja iz poglavja~\ref{sec:model-gibanja}. Dodatno upoštevamo, da se osvetlitev ne spreminja.
 
-$\vec{q}$ je slika delca $\vec{p}$ na slikovni ravnini $\varOmega$ Delec in njegova slika sta predstavljena na sliki~\ref{fig:optical-flow} S časovnim odvodom enačbe~\eqref{eq:slika-delca}, dobimo hitrost delca na slikovni ravnini:
+$\vec{q}$ je slika delca $\vec{p}$ na slikovni ravnini $\varOmega$. Delec in njegova slika sta predstavljena na sliki~\ref{fig:optical-flow}. S časovnim odvodom enačbe~\eqref{eq:slika-delca} dobimo hitrost delca na slikovni ravnini:
 
 \begin{equation}\label{eq:hitrost-slike-delca}
 	\vec{u} = f \frac{Z\vec{v}-v_Z\vec{p}}{Z^2},
@@ -40,13 +40,13 @@ Razširjena oblika enačbe~\eqref{eq:hitrost-slike-delca}, kjer upoštevamo~\eqr
 
 Kadar imamo na slikovni ravnini več slik delcev, množico vektorjev hitrosti $\vec{u}$ imenujemo \emph{polje gibanja} (angl. Motion Field) $\vec{G} : \varOmega \to \mathcal{U}$, kjer velja $ \vec{q} \mapsto \vec{u}$~\cite{trucco1998introductory}. Polje gibanja $\vec{G}$ lahko razumemo kot projekcijo polja hitrosti $\vec{H}$ na slikovno ravnino, zato ta predstavlja idealno rekonstrukcijo gibanja. V praksi do polja gibanja ne moremo dostopati, zato se poslužujemo njegovih približkov.  
 
-Video posnetek je sestavljen iz sekvence slik, to pa lahko opišemo kot funkcijo osvetljenosti slikovnega elementa $I(\vec{x},t)$, na poziciji $\vec{x} = [x~y]^\top$ ob času $t$~\cite{wedel2011stereo}. Gibanje oseb opazimo kot premikanje pikslov skozi čas, pri čemer predpostavimo, da osvetljenost posameznega piksla ostaja konstantna~\cite{trucco1998introductory}. Stacionarnost osvetljenosti slikovnega elementa lahko opišemo z enačbo  
+Video posnetek je sestavljen iz sekvence slik, kar lahko opišemo kot funkcijo osvetljenosti slikovnega elementa $I(\vec{x},t)$, na poziciji $\vec{x} = [x~y]^\top$, ob času $t$~\cite{wedel2011stereo}. Gibanje oseb opazimo kot premikanje pikslov skozi čas, pri čemer predpostavimo, da osvetljenost posameznega piksla ostaja konstantna~\cite{trucco1998introductory}. Stacionarnost osvetljenosti slikovnega elementa lahko opišemo z enačbo  
 
 \begin{equation}
-	\frac{d I(\vec{x}, t)}{dt} = \frac{\partial I}{\partial x} \frac{dx}{dt} + \frac{\partial I}{\partial y} \frac{dy}{dt} + \frac{\partial I}{\partial t} = 0,
+	\frac{d I(\vec{x}, t)}{dt} = \frac{\partial I}{\partial x} \frac{dx}{dt} + \frac{\partial I}{\partial y} \frac{dy}{dt} + \frac{\partial I}{\partial t} = 0.
 \end{equation}
 
-to pa lahko zapišemo z vektorjem hitrosti slikovnega elementa $\vec{w} \in \mathcal{W} \subset \mathbb{R}^2$ v kompaktnejšo obliko
+To lahko zapišemo z vektorjem hitrosti slikovnega elementa $\vec{w} \in \mathcal{W} \subset \mathbb{R}^2$ v kompaktnejšo obliko
 
 \begin{equation}\label{eq:opticni-tok}
 	(\nabla I)^\top \vec{w} + I_t = 0.
@@ -66,7 +66,7 @@ Enačba~\eqref{eq:opticni-tok} predstavlja \emph{omejitev optičnega toka}~\cite
 \begin{figure}[htb]
 \centering
 \input{./Slike/problem-reze.tikz}
-\caption[Problem reže]{Problem reže. Ker skozi režo ne vidim koncev daljice, lahko določimo le hitrost v pravokotni smeri na daljico $\vec{w}_n$~\cite{trucco1998introductory}.}
+\caption[Problem reže]{Problem reže. Ker skozi režo ne vidimo koncev daljice, lahko določimo le hitrost v pravokotni smeri na daljico $\vec{w}_n$~\cite{trucco1998introductory}.}
 \label{fig:aperture-problem}
 \end{figure}
 
@@ -124,6 +124,6 @@ Evaluacija algoritma je bila narejena v~\cite{Geiger2012CVPR}. Rezultati so povz
     47.59~\% & 54.00~\% & 17.3~px & 25.3~px & 100.00~\% & 1~s\\
     \bottomrule
     \end{tabular}
-    \caption[Evaluacija Farneb{\"a}ck algoritma v KITTI Vision Benchmark 2012]{Evaluacija Farneb{\"a}ck algoritma v KITTI Vision Benchmark 2012~\cite{Geiger2012CVPR}. Metrika Out-Noc predstavlja procent pikslov, ki težijo k napakam v območju, kjer ni prekrivnosti. Out-all je procent pikslov, ki težijo k napakam v celoti. Avg-Noc je povprečna napaka disparitete v območjih neprekrivnosti. Avg-All je povprečna napaka disparitete v celoti. Gostota predstavlja procent pikslov, za katere je metoda določila referenco~\cite{Geiger2012CVPR}.}
+    \caption[Evaluacija Farneb{\"a}ck algoritma v KITTI Vision Benchmark 2012]{Evaluacija Farneb{\"a}ck algoritma v KITTI Vision Benchmark 2012~\cite{Geiger2012CVPR}. Metrika Out-Noc predstavlja odstotek pikslov, ki težijo k napakam v območju, kjer ni prekrivanja. Out-all je odstotek pikslov, ki težijo k napakam v celoti. Avg-Noc je povprečna napaka disparitete v območjih neprekrivanja. Avg-All je povprečna napaka disparitete v celoti. Gostota predstavlja odstotek pikslov, za katere je metoda določila referenco~\cite{Geiger2012CVPR}.}
     \label{tab:farneback}
 \end{table}
