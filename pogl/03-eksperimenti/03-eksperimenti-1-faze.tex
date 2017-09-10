@@ -28,7 +28,7 @@ smo uporabili optimizacijsko metodo mrežnega iskanja~\cite{hsu2003practical}. R
 
 
 \subsection{Optimizacija HAFA deskriptorjev}
-Parameter \nhafa smo določili na podlagi rezultatov~\ref{sec:rezultati-optimizacija-hafa}. Za evaluacijo smo uporabili enak eksperimentalni protokol kot za HOOF značilke v poglavju~\ref{sec:hoof}, s to razliko, da smo značilke normirali na intervalu $[0, 1]$ in odstranili stolpec z amplitudami $0.5$. S tem smo odstranili šum, ki se je pojavil, ko ni bilo nobenega gibanja. Amplitudo šuma smo določili, kot maksimalno vrednost amplitude, ki še ni predstavljala gibanja. %Optimalni parametri evaluacijske metode so predstavljeni v tabeli~\ref{tab:nhafa-param}.
+Parameter \nhafa smo določili na podlagi rezultatov~\ref{sec:rezultati-optimizacija-hafa}. Za evaluacijo smo uporabili enak eksperimentalni protokol kot za HOOF značilke v poglavju~\ref{sec:hoof}, s to razliko, da smo značilke normirali na intervalu $[0, 1]$ in odstranili stolpec z amplitudami \num{0.5}. S tem smo odstranili šum, ki se je pojavil, ko ni bilo nobenega gibanja. Amplitudo šuma smo določili, kot maksimalno vrednost amplitude, ki še ni predstavljala gibanja. %Optimalni parametri evaluacijske metode so predstavljeni v tabeli~\ref{tab:nhafa-param}.
 
 \begin{comment}
 \begin{table}[!htb]
@@ -217,7 +217,7 @@ Eksperimente smo razširili z vpeljavo zakasnitve med referenčnim fiziološkim 
 
 Generirali smo tudi dodatne modele, in sicer: \textit{crop}, \textit{mixed}, \textit{track} in obremenitvene modele. V \textit{crop} modelih smo ročno določili področje tarče. V \textit{mixed} modelih smo uporabili podatke različne modalitete zornega kota, kar nam je omogočilo oceno vpliva kota kamere. Iz posnetkov obeh kamer smo izrezali področja tarče po principu \textit{crop} modelov in jih spojili v en sam posnetek. V \textit{track} modelih smo uporabili sledilnik. Obremenitvene modele delimo na \textit{scale} modele in \textit{proj} modele. 
 
-Rezultate smo filtrirali s Kalmanovim filtrom. Vse modele smo križno testirali glede na zorni kot kamere. Uporabljen zorni kot kamere za križno testiranje je zapisan v oklepajih. Za jasnejše razumevanje smo označili
+Rezultate smo filtrirali s Kalmanovim filtrom. Za jasnejše razumevanje smo označili
 postopek za testiranje vseh laboratorijskih modelov v fazi 1 kot P1OFL. Shema je prikazana na sliki~\ref{fig:diagram-procesiranja-stage1}.
 
 
@@ -349,7 +349,8 @@ Obstaja veliko ekipnih športov, kjer sodeluje več igralcev. Ker so vsi vidni n
 	\label{fig:sledenje}
 \end{figure} 
 
-Za sledenje smo uporabili KCF sledilnik, ki je implementiran v OpenCV knjižnici. Izbiro sledilnika smo opredelili že v poglavju~\ref{sec:testiranje-sledilnikov-za-opticni-tok}. Pri sledenju smo uporabili sledeče parametre: pasovna širina Gaussovega jedra $0.2$, linearni interpolacijski faktor za adaptacijo $0.075$, regularizacijski faktor $0.01$, največja velikost obliža (ang. Patch) $6400$, prostorska pasovna širina $0.0625$, aktivirano skaliranje značilk za izboljšanje hitrosti procesiranja, razcepljeni učni koeficienti na dve matrike, dekativirano zavijanje (ang. wrapping) okoli vrednosti jedra, nekompresirani deskriptorji za sivinske slike in kompresirani za barvne slike, aktivirana PCA metoda za kompresijo značilk, velikost kompresije $2$ in  stopnja učenja kompresije $0.15$.
+Za sledenje smo uporabili KCF sledilnik, ki je implementiran v OpenCV knjižnici. Izbiro sledilnika smo opredelili že v poglavju~\ref{sec:testiranje-sledilnikov-za-opticni-tok}. Pri sledenju smo uporabili privzete vrednosti, kot so specificirane v OpenCV knjižnici.
+%sledeče parametre: pasovna širina Gaussovega jedra \num{0.2}, linearni interpolacijski faktor za adaptacijo \num{0.075}, regularizacijski faktor \num{0.01}, največja velikost obliža (ang. Patch) \num{6400}, prostorska pasovna širina \num{0.0625}, aktivirano skaliranje značilk za izboljšanje hitrosti procesiranja, razcepljeni učni koeficienti na dve matrike, dekativirano zavijanje (ang. wrapping) okoli vrednosti jedra, nekompresirani deskriptorji za sivinske slike in kompresirani za barvne slike, aktivirana PCA metoda za kompresijo značilk, velikost kompresije $2$ in  stopnja učenja kompresije \num{0.15}.
 
 KCF sledilnik smo inicializirali z ročnim obkroževanjem področja tarče na prvi sliki vsakega posnetka. Področja tarče, ki jih je izbral sledilnik, smo uporabili za izrezovanje področij merjenca iz slik optičnega toka. HOOF deskriptorje smo izračunali le na izbranem področju. 
 

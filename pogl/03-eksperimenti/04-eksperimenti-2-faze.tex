@@ -1,7 +1,7 @@
 \section{Eksperimenti 2. faze}
 %Z laboratorijskimi eksperimenti v 1. fazi smo dobili zadovoljive rezultate, težave pa so nastale pri uporabi postopka na terenu. Zato smo v 2. fazi optimizirali posamezne segmente elementarnega postopka estimacije fizioloških parametrov. Te smo tudi uporabili v končni preiskavi. 
 
-Za statistično bolj oprijemljive rezultate smo v laboratorijskih in terenskih eksperimentih 2. faze uporabili 7 različnih merjencev  ($srednja vrednost \pm SD$: starost $16.29 \pm 2.29$ let, velikost $175.37 \pm 11.60$ \si{\cm}, teža $59.36 \pm 12.08$ \si{\kg}, spol moški, $hr_{max}$ $203.71 \pm 2.29$ \si{bpm}, \vomax $3144 \pm 629.27$ \si{\ml\per\min} ). Oznake, ki jih uporabljamo za posameznega merjenca skozi preostanek dela so: SUBJ1, SUBJ2, SUBJ4, SUBJ7, SUBJ8, SUBJ9, SUBJ10. Merjenca SUBJ4 smo uporabili samo v laboratorijskih eksperimentih, ker pri terenskih eksperimentih ni bil prisoten. Namesto njega smo v terenskih eksperimentih uporabili SUBJ10. Med laboratorijskimi in terenskimi eksperimenti je za merjenca SUBJ1 in SUBJ2 preteklo 43 dni, za merjenca SUBJ4 42 dni in za ostale 1 dan.  
+Za statistično bolj oprijemljive rezultate smo v laboratorijskih in terenskih eksperimentih 2. faze uporabili 7 različnih merjencev  (srednja vrednost $\pm$ SD: starost \SI{16.29 \pm 2.29}{let}, velikost \SI{175.37 \pm 11.60}{\cm}, teža \SI{59.36 \pm 12.08}{\kg}, spol moški, $hr_{max}$ \SI{203.71 \pm 2.29}{bpm}, \vomax \SI{3144 \pm 629.27}{\ml\per\min} ). Oznake, ki jih uporabljamo za posameznega merjenca skozi preostanek dela so: SUBJ1, SUBJ2, SUBJ4, SUBJ7, SUBJ8, SUBJ9, SUBJ10. Merjenca SUBJ4 smo uporabili samo v laboratorijskih eksperimentih, ker pri terenskih eksperimentih ni bil prisoten. Namesto njega smo v terenskih eksperimentih uporabili SUBJ10. Med laboratorijskimi in terenskimi eksperimenti je za merjenca SUBJ1 in SUBJ2 preteklo 43 dni, za merjenca SUBJ4 42 dni in za ostale 1 dan.  
 
 \subsection{Mrežno iskanje \texorpdfstring{$\nu$}{nu}-RBF}
 Med evaluacijo eksperimentov 1. faze smo ugotovili, da z regresijo \esvr pogosto dobimo preobremenjene (ang. Overfitted) modele. Pri takih modeli je število podpornih vektorjev zelo visoko. Lahko se zgodi, da postanejo vsi vektorji značilk podporni vektorji. Preobremenjeni modeli lahko dajejo solidne rezultate, vendar pa so ti nerealistični. Takoj, ko bi v tak model vnesli rahlo spremenjene podatke, ne bi več delovali.
@@ -14,17 +14,17 @@ Razvito mrežno iskanje uporablja regresijo \nusvr in jedro RBF, zato smo ju upo
 \paragraph{Optimizacija parametrov}
 Najprej smo optimizirali parameter $\numax$. Slednji predstavlja različico parametra $\numax$, s katerim določimo dejansko število podpornih vektorjev. Za tovrstno optimizacijo smo ponovno naučili \textit{mixed} modele iz 1. faze, pri čemer smo za mrežno iskanje uporabili nov postopek. Modele smo nato uporabili za testiranje na učnih podatkih terenskih eksperimentov 1. faze. S takim postopkom smo izluščili slabe \textit{squash} modele, ki bi oteževali pravilno evaluacijo rezultatov pri optimizaciji.
 
-Za optimizacijo smo uporabili HOOF-HAFA deskriptor in naslednje vrednosti parametrov: začetna vrednost $\nu$ $0.1$, skaliranje značilk na intervalu $[-1,~1]$ in standardni odklon za Gaussov filter $\sigma=5$. Za $\numax$ smo uporabili \num{0.2}, \num{0.5} in \num{0.8}. Pri evaluaciji smo uporabili rezultate verifikacije in ne validacije, kot običajno. Pri validaciji smo dobili slabe rezultate iz katerih nismo mogli sklepati o izbiri optimalnega parametra.
+Za optimizacijo smo uporabili HOOF-HAFA deskriptor in naslednje vrednosti parametrov: začetna vrednost $\nu=\num{0.1}$, skaliranje značilk na intervalu $[-1,~1]$ in standardni odklon za Gaussov filter $\sigma=5$. Za $\numax$ smo uporabili \num{0.2}, \num{0.5} in \num{0.8}. Pri evaluaciji smo uporabili rezultate verifikacije in ne validacije, kot običajno. Pri validaciji smo dobili slabe rezultate iz katerih nismo mogli sklepati o izbiri optimalnega parametra.
 
 \paragraph{Primerjava z elementarnim postopkom 1. faze}
-Z optimiziranim parametrom $\numax=0.5$, smo \nurbf preizkusili še na elementarnih modelih, pri čemer nismo upoštevali izrezovanja slik. Ostali parametri so enaki kot pri optimizaciji
+Z optimiziranim parametrom $\numax=\num{0.5}$, smo \nurbf preizkusili še na elementarnih modelih, pri čemer nismo upoštevali izrezovanja slik. Ostali parametri so enaki kot pri optimizaciji
 
 
 
 \subsection{Optimizacija Gaussovega filtra}
 Pri optimizaciji Gaussovega filtra smo določili optimalni standardni odklon $\sigma$ z uporabo dveh metrik, in sicer: koren srednje kvadratične napake (RMSE) in razmerje med signalom in šumom (SNR). Pri RMSE metriki smo določili napako med učnimi vzorci in njihovo predikcijo. Pri SNR metriki smo za signal uporabili referenčne učne vzorce. Za šum smo uporabili rezidualni ali preostali šum. Tega smo dobili z odštevanjem filtriranih vzorcev od referenčnih. SNR metrika tako določa uspešnost izločevanja šuma, RMSE metrika pa pravilnost določevanja kateri podatki spadajo v signal in kateri v šum.
 
-Teste smo izvajali na elementarnih eksperimentih 1. faze brez upoštevanja izrezovanja slik, pre čemer smo uporabili HOOF-HAFA deskriptor. Značilke smo skalirali na intervalu $[0,~1]$, ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za postopek učenja smo izbrali \nurbf z \hbox{$\numax=0.5$} in \hbox{$\sigma=1$}. Testirali smo naslednje standardne odklone Gaussovega filtra: $1, 3, 5, 11, 21, 31$ in $51$. 
+Teste smo izvajali na elementarnih eksperimentih 1. faze brez upoštevanja izrezovanja slik, pre čemer smo uporabili HOOF-HAFA deskriptor. Značilke smo skalirali na intervalu $[0,~1]$, ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za postopek učenja smo izbrali \nurbf z \hbox{$\numax=\num{0.5}$} in \hbox{$\sigma=1$}. Testirali smo naslednje standardne odklone Gaussovega filtra: $1, 3, 5, 11, 21, 31$ in $51$. 
 
 
 \begin{comment}
@@ -76,7 +76,7 @@ Velikost diagonale na laboratorijskih testih uporabljamo kot referenco. To pa za
 	\label{tab:diag}
 \end{table}
 
-Pri testiranju smo uporabili parameter $\numax = 0.5$ in $\sigma=5$. Za filtriranje meritev srčnega utripa smo uporabili $\sigma=16$ za rezultate pa optimalno vrednost $\sigma=5$. Značilke smo skalirali na intervalu $[0,~1]$,  ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za modele z diagonalo smo uporabili parameter $diag=381.266$. %Pri učenju smo uporabili optimalne vrednosti parametrov, ki so prikazane v tabeli~\ref{tab:diag}. 
+Pri testiranju smo uporabili parameter $\numax = \num{0.5}$ in $\sigma=5$. Za filtriranje meritev srčnega utripa smo uporabili $\sigma=16$ za rezultate pa optimalno vrednost $\sigma=5$. Značilke smo skalirali na intervalu $[0,~1]$,  ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za modele z diagonalo smo uporabili parameter $diag=\num{381.266}$. %Pri učenju smo uporabili optimalne vrednosti parametrov, ki so prikazane v tabeli~\ref{tab:diag}. 
 Za evaluacijo rezultatov smo uporabili predikcije testnih vzorcev z modeli s zakasnitvijo.
 
 
@@ -298,7 +298,7 @@ Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinici
 
 
 
-Modele obeh postopkov (P2OF in P2SF) smo učili s postopkom \nurbf, kjer smo za Gaussov filter uporabili $\sigma=5$ in za največje število podpornih vektorjev $\numax =0.5$ (\SI{50}{\%} podpornih vektorjev). Podobno kot v eksperimentih 1. faze smo tudi tu naučili \num{6} elementarnih modelov, in sicer: \textit{eem} modele, ki predvidevajo porabo energije v \si{\kcal\per\min}, \textit{sv} modele za stransko kamero in \textit{bv} modele za hrbtno kamero. %ter \textit{lag} modele z upoštevanjem časovne zakasnitve.
+Modele obeh postopkov (P2OF in P2SF) smo učili s postopkom \nurbf, kjer smo za Gaussov filter uporabili $\sigma=5$ in za največje število podpornih vektorjev $\numax =\num{0.5}$ (\SI{50}{\%} podpornih vektorjev). Podobno kot v eksperimentih 1. faze smo tudi tu naučili \num{6} elementarnih modelov, in sicer: \textit{eem} modele, ki predvidevajo porabo energije v \si{\kcal\per\min}, \textit{sv} modele za stransko kamero in \textit{bv} modele za hrbtno kamero. %ter \textit{lag} modele z upoštevanjem časovne zakasnitve.
 
 %Vse tipe eksperimentov smo križno testirali glede na enak tip eksperimenta, le z drugim zornim kotom kamere. Uporabljen zorni kot kamere za križno testiranje je v imenih modelov zapisan v oklepajih.  
 

@@ -1,12 +1,7 @@
 \chapter{Rezultati}\label{sec:rezultati}
 Vse modele energijske porabe in srčnega utripa smo validirali na predhodno opisanih testnih vzorcih. Za primerjavo med različnimi modeli smo izbrali validacijske metrike: korelacijski koeficient \corr, relativna absolutna napaka \rae in koren relativne kvadratne napake \rrse~\cite{witten2005data}. Dodali smo tudi razmerje med številom podpornih vektorjev in številom učnih vzorcev \nsv. Višja je vrednost \corr predstavlja boljši rezultat, z \rae, \rrse in \nsv pa je ravno obratno.
 
-Modele smo ovrednotili tudi z navzkrižnim testiranjem. Testiranje je bilo opravljeno za stranski ali hrbtni pogled. \textit{sv} modeli, ki smo jih izdelali z učnimi vzorci iz stranske kamere, smo najprej preizkusili z učnimi vzorce iz stranske kamere in nato z vzorci iz hrbtne kamere. Navzkrižni testi imajo v oklepajih določen tip kamere, ki smo ga uporabili za vhodne podatke pri testiranju.
-
-
-
-
-
+Modele smo ovrednotili tudi z navzkrižnim testiranjem. Testiranje je bilo opravljeno za stranski ali hrbtni pogled. Navzkrižni testi imajo v oklepajih določen tip kamere, ki smo ga uporabili za vhodne podatke pri testiranju.
 
 
 
@@ -21,9 +16,7 @@ Modele smo ovrednotili tudi z navzkrižnim testiranjem. Testiranje je bilo oprav
 \section{Eksperimenti 1. faze}
 
 
-\subsection{Preliminarni testi}
-
-\subsubsection{Optimizacija HOOF deskriptorjev}\label{sec:rezultati-optimizacija-hoof}
+\subsection{Optimizacija HOOF deskriptorjev}\label{sec:rezultati-optimizacija-hoof}
 Parameter $N_{HOOF}$ smo določili na podlagi rezultatov evaluacije v tabeli~\ref{tab:nhoof} in grafov korelacije med referenčnimi podatki in predikcijo~\ref{fig:corr-hoof}.
 
 V tabeli~\ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rezultati bistveno ne razlikujejo. Najboljše rezultate nam sicer daje $120$ stolpcev, vendar pa smo za potrebe naše metode uporabili $N_{HOOF}=60$, ki je ravno tako dal zadovoljive rezultate. S takim številom smo zagotovili dobro delovanje glede na minimalno vrednost, še vseeno pa ne gre za tako veliko število, ko bi do izraza prišle amplitude šumnih vektorjev.
@@ -32,7 +25,7 @@ V tabeli~\ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rez
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2, round-mode=places, round-precision=2]}
 		\toprule
-		\thead{$\mathbf{N_{HOOF}}$} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\thead{$\mathbf{N_{HOOF}}$} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule%nSV
 		30 & 0.978 & 0.296 & 0.304 & \boldentry{2}{2}{0.6281}\\%18089
 		\boldentry{2}{0}{60} & 0.980 & 0.277 & 0.289 & 0.8121\\%23388
@@ -84,14 +77,14 @@ V tabeli~\ref{tab:nhoof} lahko vidimo, da se povečevanjem števila stolpcev rez
 
 
 
-\subsubsection{Optimizacija HAFA deskriptorjev}\label{sec:rezultati-optimizacija-hafa}
+\subsection{Optimizacija HAFA deskriptorjev}\label{sec:rezultati-optimizacija-hafa}
 Parameter $N_{HAFA}$ smo določili na podlagi rezultatov evaluacije v tabeli~\ref{tab:nhafa} in grafov korelacije med referenčnimi podatki in predikcijo~\ref{fig:corr-hafa}.
 
 \begin{table}[!htbp]
 	\centering
 	\begin{tabular}{S[table-format=2.0] S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\thead{$\mathbf{N_{HAFA}}$} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\thead{$\mathbf{N_{HAFA}}$} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule%nSV
 		30 & 0.984 & 0.213 & \boldentry{1}{3}{0.231} & \boldentry{1}{2}{0.6208} \\%17879/28799
 		\boldentry{2}{0}{60} & \boldentry{1}{3}{0.984} & \boldentry{1}{3}{0.211} & 0.228 & 0.6260 \\%18028
@@ -144,13 +137,13 @@ V tabeli~\ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za naš
 
 
 
-\subsubsection{Razširitev HOOF deskriptorja}\label{sec:rezultati-razsiritev-hoof}
+\subsection{Razširitev HOOF deskriptorja}\label{sec:rezultati-razsiritev-hoof}
 
 \begin{table}[!htbp]
 	\centering
 	\begin{tabular}{l S[table-format=1.3] S[table-format=1.3] S[table-format=1.3] S[table-format=2.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Deskriptor} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Deskriptor} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule%nSV
 		HOOF & \boldentry{1}{3}{0.992} & 0.336 & 0.317 & \boldentry{2}{2}{0.8234} \\%2187/2656
 		\textbf{HOOF-HAFA} & 0.991 & \boldentry{1}{3}{0.157} & \boldentry{1}{3}{0.205} & 0.8953 \\%2378
@@ -198,7 +191,7 @@ V tabeli~\ref{tab:nhafa} lahko vidimo, da so rezultati praktično enaki. Za naš
 
 
 
-\subsubsection{Sledilniki za optični tok} \label{sec:rezultati-sledilnikov-za-opticni-tok}
+\subsection{Sledilniki za optični tok} \label{sec:rezultati-sledilnikov-za-opticni-tok}
 
 
 Rezultati testiranja so prikazani v tabeli~\ref{tab:region-overlap}. Za izbrane sledilnike smo določili povprečje prekrivanja področja za posamezen posnetek. V tretjem stolpcu je predstavljeno povprečje prekrivanja glede na oba posnetka. Najboljši rezultati so odebeljeni. Po tabeli~\ref{tab:region-overlap} se za posnetek \textit{handball1} najbolje izkaže DLIB-CORR sledilnik. Za posnetek \textit{handball2} smo dobili najboljše rezultate pri sledilniku OPENCV-TLD. V povprečju se najbolje izkaže sledilnik CORR.
@@ -246,7 +239,7 @@ Na sliki~\ref{fig:tracker-visual} lahko vidimo primer delovanja sledilnikov za o
 
 
 
-Čeprav smo z mero določili, da se je najbolje izkazal sledilnik DLIB-ORR, se je pri hitri vizualni oceni sledenja na izsekih posnetka~\cite{squashtv2014squash} izkazalo, da najbolje deluje sledilnik KCF. Primer boljšega delovanja KCF sledilnika je slika~\ref{fig:squash-tracker-visual}, kjer sledimo modremu igralcu. Na isti sliki posnetka je KCF algoritem našel modrega igralca, medtem ko ga je DLIB-CORR algoritem zamenjal z drugim igralcem. 
+Čeprav smo z mero določili, da se je najbolje izkazal sledilnik DLIB-CORR, se je pri hitri vizualni oceni sledenja na izsekih posnetka~\cite{squashtv2014squash} izkazalo, da najbolje deluje sledilnik KCF. Primer boljšega delovanja KCF sledilnika je slika~\ref{fig:squash-tracker-visual}, kjer sledimo modremu igralcu. Na isti sliki posnetka je KCF algoritem našel modrega igralca, medtem ko ga je DLIB-CORR algoritem zamenjal z drugim igralcem. 
 
 
 
@@ -284,7 +277,7 @@ Rezultate observabilnosti lahko vidimo v tabeli~\ref{tab:observabilnost}. Valida
 \centering
 \begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 	\toprule
-	\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+	\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{observabilnost}
 		\bottomrule
@@ -308,7 +301,7 @@ Tabela~\ref{tab:rocni-izrez} prikazuje rezultate ročnega izreza. Prikazani so t
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{rocni-izrez}
 		\bottomrule
@@ -324,7 +317,7 @@ Rezultati posameznega pogleda kamere so vidni v tabeli~\ref{tab:zorni-kot}. Slik
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 \toprule
-\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 \midrule
 \tdata{zorni-kot}
 	\bottomrule
@@ -341,7 +334,7 @@ Rezultati različne modalitete glede na tip slike so prikazani v tabeli~\ref{tab
 \centering
 \begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 \toprule
-\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 \midrule
 \tdata{crop-ir}
 	\bottomrule
@@ -375,7 +368,7 @@ Modeli z dodatno zakasnitvijo so v tabeli~\ref{tab:lag} označeni z \textit{lag}
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{crop-lag}
 		\bottomrule
@@ -416,7 +409,7 @@ Rezultati obremenitvenih testov so prikazani v tabelah~\ref{tab:crop-proj} in~\r
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{crop-proj}
 		\bottomrule
@@ -429,7 +422,7 @@ Rezultati obremenitvenih testov so prikazani v tabelah~\ref{tab:crop-proj} in~\r
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{crop-sc}
 		\bottomrule
@@ -458,7 +451,7 @@ Pri testiranju vpeljave sledilnika smo dobili rezultate v tabeli~\ref{tab:shake}
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{shake}
 		\bottomrule
@@ -487,7 +480,7 @@ Terenski rezultati squash igre z različnimi deskriptorji so predstavljeni v tab
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{squash-mag}
 		\bottomrule
@@ -569,19 +562,9 @@ Za detekcijo dihanja, ki smo jo formulirali kot problem razvrščanja v razrede,
 
 
 \section{Eksperimenti 2. faze}
-\subsection{Preliminarni eksperimenti}
 
 
-
-
-
-
-
-
-
-
-
-\subsubsection{Optimizacija Gaussovega filtra}
+\subsection{Optimizacija Gaussovega filtra}
 Rezultati povprečnih vrednosti uporabljenih metrik so vidni v tabeli~\ref{tab:gauss}. Za pravilno razlago rezultatov, moramo upoštevati tudi grafe metrik posameznih eksperimentov, ki so prikazani na slikah~\ref{fig:sigma1-5},~\ref{fig:sigma-rmse5-21} in~\ref{fig:sigma21-51}. 
 
 
@@ -664,14 +647,14 @@ Najmanjšo napako dobimo, če uporabimo $\sigma=1$, vendar pa imamo pri tem najm
 \end{figure}
 
 
-\subsubsection{Rezultati mrežnega iskanja \texorpdfstring{$\nu$}{nu}-RBF}
-Rezultati optimizacije parametra $\numax$ so predstavljeni v tabeli~\ref{tab:nu-max}. Pri validaciji ni opaznih sprememb med različnim parametrom $\numax$ zaradi slabih modelov, zato smo preverili verifikacijo. Pri verifikaciji lahko opazimo, da se s povečevanjem parametra povečuje število podpornih vektorjev, vendar nSV nikoli ne doseže željene vrednosti $\numax$. Kljub podoptimalnosti modelov, z višjimi vrednostmi $\numax$ dobimo boljše rezultate. Razlike med $\numax=0.5$ in $\numax=0.8$ so minimalne zato lahko zaključimo, da potrebujemo za dobro delovanje vsaj $\numax=0.5$. 
+\subsection{Rezultati mrežnega iskanja \texorpdfstring{$\nu$}{nu}-RBF}
+Rezultati optimizacije parametra $\numax$ so predstavljeni v tabeli~\ref{tab:nu-max}. Pri validaciji ni opaznih sprememb med različnim parametrom $\numax$ zaradi slabih modelov, zato smo preverili verifikacijo. Pri verifikaciji lahko opazimo, da se s povečevanjem parametra povečuje število podpornih vektorjev, vendar nSV nikoli ne doseže željene vrednosti $\numax$. Kljub podoptimalnosti modelov, z višjimi vrednostmi $\numax$ dobimo boljše rezultate. Razlike med $\numax=\num{0.5}$ in $\numax=\num{0.8}$ so minimalne zato lahko zaključimo, da potrebujemo za dobro delovanje vsaj $\numax=\num{0.5}$. 
 
 \begin{table}[!htbp]
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{nu-max}
 		\bottomrule
@@ -687,7 +670,7 @@ Tabela~\ref{tab:rbf-nu} predstavlja primerjavo med postopkom z uporabo \nurbf in
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{rbf-nu}
 		\bottomrule
@@ -721,14 +704,14 @@ Tabela~\ref{tab:rbf-nu} predstavlja primerjavo med postopkom z uporabo \nurbf in
 \end{comment}
 
 
-\subsubsection{Normalizacija HAFA deskriptorja}
+\subsection{Normalizacija HAFA deskriptorja}
 V tabeli~\ref{tab:norm-hafa} dobimo slabe rezultate tako za NORMAL model kot tudi za DIAG model, kjer upoštevamo amplitudni faktor $f_A$. Kljub temu so rezultati z upoštevanjem diagonale boljši, kar nakazuje tudi slika~\ref{fig:corr-diag}.
 
 \begin{table}[!htbp]
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{diag}
 		\bottomrule
@@ -757,13 +740,13 @@ V tabeli~\ref{tab:norm-hafa} dobimo slabe rezultate tako za NORMAL model kot tud
 
 \subsection{Laboratorijski eksperiementi}
 \subsubsection{Odvisnost na akumulacijo utrujenosti}
-V tabeli~\ref{tab:stage2-lab-1-mean} je predstavljeno povprečje validacij merjencev za protokol 1. Pearsonov korelacijski koeficient \corr smo povprečili s Fisherjevo $z$ transformacijo. Vsi modeli imajo visoko korelacijo z referenco. Napake so majhne. Opazimo, da dobimo boljše rezultate z uporabo prostorskega toka \textit{it}.
+V tabeli~\ref{tab:stage2-lab-1-mean} je predstavljeno povprečje validacij merjencev za protokol 1. Pearsonov korelacijski koeficient \corr smo povprečili s Fisherjevo $z$ transformacijo. Vsi modeli imajo visoko korelacijo z referenco. Napake so majhne. Opazimo, da dobimo boljše rezultate z uporabo prostorskega toka \textit{sf}.
 
 \begin{table}[!htbp]
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{stage2-lab-1-mean}
 		\bottomrule
@@ -778,7 +761,7 @@ V tabeli~\ref{tab:stage2-lab-2-mean}  predstavljamo povprečje rezultatov za pro
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{stage2-lab-2-mean}
 		\bottomrule
@@ -797,7 +780,7 @@ S protokolom 3 smo želeli preveriti, če lahko uporabimo generaliziran model za
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{stage2-lab-3}
 		\bottomrule
@@ -833,7 +816,7 @@ V tabeli~\ref{tab:stage2-field-1-mean} je predstavljeno povprečje validacij mer
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{stage2-field-1-mean}
 		\bottomrule
@@ -848,7 +831,7 @@ V tabeli~\ref{tab:stage2-field-2-mean} predstavljamo povprečje rezultatov za pr
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{stage2-field-2-mean}
 		\bottomrule
@@ -864,7 +847,7 @@ S protokolom 3 smo želeli preveriti, če lahko uporabimo generaliziran model za
 	\centering
 	\begin{tabular}{l S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2] S[table-format=1.2, round-mode=places, round-precision=2]}
 		\toprule
-		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \thead{\nsv}\\
+		\textbf{Model} & \thead{\corr} & \thead{\rae} & \thead{\rrse} & \theadm{\nsv}\\
 		\midrule
 		\tdata{stage2-field-3}
 		\bottomrule

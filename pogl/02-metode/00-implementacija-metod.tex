@@ -4,7 +4,7 @@ V tem poglavju so opisane implementacije nekaterih metod, opisanih v poglavju~\r
 \subsection{Optični in prostorski tok}
 Na podlagi opisanih lastnosti metod optičnega toka v poglavju~\ref{sec:metode-of} smo se odločili, da bomo v tem delu uporabili diferencialno metodo. Kljub višji računski zahtevnosti, ki ob današnji tehnologiji ne predstavlja več takega problema, smo želeli računati gost optični tok. Z gostim optičnim tokom tako dobimo natančno aproksimacijo polja gibanja za celotno telo. Prav tako nimamo problemov pri estimaciji energijske porabe za hitre gibe, kot bi bilo to v primeru uporabe ujemalnih metod. Ker je glavni namen uporaba in ne implementacija diferencialne metode, smo se osredotočili na Farneb{\"a}ck algoritem, ki je dostopen v knjižnici OpenCV 3.1.0.
 
-Za optični tok smo uporabili sledeče parametre: piramidna skala $pyr\_scale=0.5$, število piramidnih slojev $levels=3$, velikost okna povprečenja $winsize=15$, število iteracij na vsakem piramidnem sloju $iterations=3$, velikost okolice slikovnih elementov $poly\_n=5$ in Gaussov standardni odklon $poly\_sigma=1.2$.
+Za optični tok smo uporabili sledeče parametre: piramidna skala $pyr\_scale=\num{0.5}$, število piramidnih slojev $levels=3$, velikost okna povprečenja $winsize=15$, število iteracij na vsakem piramidnem sloju $iterations=3$, velikost okolice slikovnih elementov $poly\_n=5$ in Gaussov standardni odklon $poly\_sigma=\num{1.2}$.
 
 Z uporabo prostorskega toka lahko bolje opišemo mehanično delo, kot pri uporabi optičnega toka. Vsekakor pa potrebujemo dodatno informacijo, ki jo moramo pridobiti iz slikovnih podatkov. Za ta namen smo uporabili t.i. ``Time-of-flight'' (ToF) kamere, ki so vgrajene v pocnei Microsoft Kinect for Windows V2 senzor~\cite{Yang2015KinectV2}. Z njim pridobivamo registrirane RGB-D (rdeče, zelene, modre in globinske) podatke. Za pridobitev prostorskega toka smo uporabili PD-Flow algoritem. Njegova implementacija je javno dostopna~\cite{jaimez2015primal}. Podrobneje je opisan v poglavju~\ref{sec:pd-flow}.
 
@@ -20,7 +20,7 @@ Testiranje sledilnikov je opisano v poglavju~\ref{sec:testiranje-sledilnikov-za-
 Pri uporabi prostorskega toka smo preizkusili in uporbili DS-KCF sledilnik avtorja Hannuna et. al~\cite{hannuna2016ds}. Sledilnik uporablja RGB in globinske slike.
 
 
-Rezultat sledenja je pri obeh uporabljenih sledilnikih (KCF in DS-KCF) okvir opazovanega subjekta. Notranjost okvirja uporabljamo za zapolnitev histogramov v deskriptorjih, preostanek toka v prizorišču zavržemo. Algoritma sledenja smo potrebovali za terenske teste, kjer položaj igralca ni znan. Kljub skrbni izbiri algoritmov, je to najmanj robusten del našega pristopa--če sledilnik za posamezen časovni interval ne detektira igralca, manjkajo podatki na tem intervalu, razen če smo sledenje nadzorovali in odpravljali napake. Sledilnik ne detektira igralca kadar:
+Rezultat sledenja je pri obeh uporabljenih sledilnikih (KCF in DS-KCF) okvir opazovanega subjekta. Notranjost okvirja uporabljamo za zapolnitev histogramov v deskriptorjih, preostanek toka v prizorišču zavržemo. Algoritma sledenja smo potrebovali za terenske teste, kjer položaj igralca ni znan. Kljub skrbni izbiri algoritmov, je to najmanj robusten del našega pristopa---če sledilnik za posamezen časovni interval ne detektira igralca, manjkajo podatki na tem intervalu, razen če smo sledenje nadzorovali in odpravljali napake. Sledilnik ne detektira igralca kadar:
 
 \begin{itemize}
 	\item{Algoritem signalizira, da ni zaznal tarče.}
@@ -78,7 +78,7 @@ Merilna matrika je predstavljena z enačbo~\eqref{eq:h}
 
 Za začetno hitrost in pospešek smo izbrali vrednost $0$, ker se naši testi večinoma začnejo v mirovanju. 
 
-Variance šuma modela gibanja, merilnega modela in kovariančne matrike stanja smo določili z uporabo mrežnega iskanja, ki je opisan v poglavju~\ref{sec:optimizacija-svm-parametrov}. Pri tem smo uporabili labele učnih vzorcev vseh testov 1. sklopa eksperimentov za referenco, njihove pošumljene ocene pa za meritev. Varianca šuma merilnega modela je tako znašala $\sigma_\vec{z}^2 = 0.04$, varianca šuma modela gibanja pa $\sigma_\vec{x}^2 = 456.13$. Za kovariančno matriko predikcije smo uporabili varianco $\sigma_\vec{P}^2 = 456.13$. Kovariančno matriko modela gibanja smo določili po enačbi~\eqref{eq:Q}, kovariančna matrika merilnega modela je bila določena z enačbo~\eqref{eq:R} in začetna vrednost kovariančne matrike stanja z~\eqref{eq:P}.
+Variance šuma modela gibanja, merilnega modela in kovariančne matrike stanja smo določili z uporabo mrežnega iskanja, ki je opisan v poglavju~\ref{sec:optimizacija-svm-parametrov}. Pri tem smo uporabili labele učnih vzorcev vseh testov 1. sklopa eksperimentov za referenco, njihove pošumljene ocene pa za meritev. Varianca šuma merilnega modela je tako znašala $\sigma_\vec{z}^2 = \num{0.04}$, varianca šuma modela gibanja pa $\sigma_\vec{x}^2 = \num{456.13}$. Za kovariančno matriko predikcije smo uporabili varianco $\sigma_\vec{P}^2 = \num{456.13}$. Kovariančno matriko modela gibanja smo določili po enačbi~\eqref{eq:Q}, kovariančna matrika merilnega modela je bila določena z enačbo~\eqref{eq:R} in začetna vrednost kovariančne matrike stanja z~\eqref{eq:P}.
 
 \begin{equation}
 \vec{Q} = \vec{G} \vec{G}^\top \sigma_\vec{x}^2

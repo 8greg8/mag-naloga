@@ -39,13 +39,15 @@
 \DeclareSIUnit{\joul}{\J}
 \DeclareSIUnit{\kjoul}{\kJ}
 \DeclareSIUnit{\min}{\minute}
-\sisetup{output-decimal-marker = {,},separate-uncertainty=true,multi-part-units=single}
+\sisetup{output-decimal-marker = {,}}
+\sisetup{separate-uncertainty=true,multi-part-units=single}
+\sisetup{range-phrase = --}
 %\sisetup{per-mode=reciprocal}
 %\sisetup{group-separator = {.}}
 % za uporabljanje decimalne vejice in ne pike
 % pises decimalno piko, vendar ti zgenerira kot decimalno vejico
 % to zato, da ko uporabljas vejico imas za vejico avtomatsko presledek
-\DeclareMathSymbol{.}{\mathord}{letters}{"3B}
+%\DeclareMathSymbol{.}{\mathord}{letters}{"3B}
 % lahko bi uporabil tudi novo komando
 \newcommand{\vejica}{{,}}
 % lahko pa uporabljas \num{stevilka}, iz paketa siunitx
@@ -250,7 +252,7 @@ xticklabels={$3$, $4$, $5$, $6$, $5$, $4$, $3$, $2$, $1$,, $1$, $2$}
 \newcommand{\rmse}{{RMSE}\xspace}
 \newcommand{\rae}{{RAE}\xspace}
 \newcommand{\rrse}{{RRSE}\xspace}
-\newcommand{\nsv}{{nSV}\xspace}
+\newcommand{\nsv}{\fsv}
 
 
 \newcommand{\boldentry}[3]{%
