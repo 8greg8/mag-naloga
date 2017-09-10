@@ -83,9 +83,9 @@ Metode estimacije optičnega toka $\vec{O}$ v grobem delimo na diferencialne in 
 
 Pri \emph{ujemalnih metodah} računamo optični tok le na značilnih točkah~\cite{trucco1998introductory}. Zaradi uporabe značilk so te metode lahko bolj efektivne, saj ne potrebujemo določevanja korespondenc za vse piksle. Prav tako se lahko uporabijo za računanje optičnega toka v realnem času, saj niso računsko zahtevne. Po~\cite{trucco1998introductory} je največja težava teh metod, da računajo \emph{redek optični tok}, saj je ta določen le za slikovne elemente, ki predstavljajo značilne točke. Prav tako delujejo dobro le pri majhnih premikih, ker temeljijo na Taylorjevi aproksimaciji enačbe~\eqref{eq:opticni-tok}~\cite{wedel2011stereo}. 
 
-V nadaljevanju predstavljamo diferencialno metodo Farneb{\"a}ck algoritem.
+V nadaljevanju predstavljamo diferencialno metodo Farneb{\"a}ck.
 
-\subsubsection{Farneb{\"a}ck algoritem.}
+\subsubsection{Algoritem Farneb{\"a}ck}
 Algoritem temelji na estimaciji premika z razčlenjevanjem polinoma  po enačbi~\eqref{eq:polinom}, kjer je $\vec{A}$ simetrična matrika, $\vec{b}$ vektor in $c$ skalar~\cite{farneback2003two}.
 
 \begin{equation}\label{eq:polinom}
@@ -113,7 +113,7 @@ Rešitev minimizacije enačbe~\eqref{eq:polinom-min} je enačba~\eqref{eq:polino
  \vec{d}(\vec{x}) = \left( \sum w \vec{A}^\top \vec{a} \right)^{-1} \sum w \vec{A}^\top \Delta\vec{b}
 \end{equation}
 
-Evaluacija algoritma je bila narejena v~\cite{Geiger2012CVPR}. Rezultati so povzeti v tabeli~\ref{tab:farneback}. Algoritem so preverjali s procesorjem z 1 jedrom \@ \SI{2.5}{GHz}.
+Evaluacija algoritma je bila narejena v~\cite{Geiger2012CVPR}. Rezultati so povzeti v tabeli~\ref{tab:farneback}. Algoritem so preverjali s procesorjem z 1 jedrom in frekvenco delovanja \SI{2.5}{GHz}.
 
 \begin{table}[htb]
 	\centering
@@ -124,6 +124,6 @@ Evaluacija algoritma je bila narejena v~\cite{Geiger2012CVPR}. Rezultati so povz
     47.59~\% & 54.00~\% & 17.3~px & 25.3~px & 100.00~\% & 1~s\\
     \bottomrule
     \end{tabular}
-    \caption[Evaluacija Farneb{\"a}ck algoritma v KITTI Vision Benchmark 2012]{Evaluacija Farneb{\"a}ck algoritma v KITTI Vision Benchmark 2012~\cite{Geiger2012CVPR}. Metrika Out-Noc predstavlja odstotek pikslov, ki težijo k napakam v območju, kjer ni prekrivanja. Out-all je odstotek pikslov, ki težijo k napakam v celoti. Avg-Noc je povprečna napaka disparitete v območjih neprekrivanja. Avg-All je povprečna napaka disparitete v celoti. Gostota predstavlja odstotek pikslov, za katere je metoda določila referenco~\cite{Geiger2012CVPR}.}
+    \caption[Evaluacija Farneb{\"a}ck algoritma v KITTI Vision Benchmark 2012]{Evaluacija algoritma Farneb{\"a}ck  v KITTI Vision Benchmark 2012~\cite{Geiger2012CVPR}. Metrika Out-Noc predstavlja odstotek pikslov, ki težijo k napakam v območju, kjer ni prekrivanja. Out-all je odstotek pikslov, ki težijo k napakam v celoti. Avg-Noc je povprečna napaka disparitete v območjih neprekrivanja. Avg-All je povprečna napaka disparitete v celoti. Gostota predstavlja odstotek pikslov, za katere je metoda določila referenco~\cite{Geiger2012CVPR}.}
     \label{tab:farneback}
 \end{table}
