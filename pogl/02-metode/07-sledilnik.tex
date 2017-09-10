@@ -5,9 +5,9 @@
 % Primerjava sledilnikov
 % Naši eksperimenti kateri je boljši
 %
-Gibanje objektov v prostoru zaznamo kot temporalno spreminjanje slike. Ta lastnost nam omogoča izluščenje koristnih informacij, kot je identifikacija objektov na podlagi karakteristike gibanja, določevanje njihove pozicije in ugotavljanje kaj se v sceni dogaja~\cite{forsyth2002computer}. Forsyth et al.~\cite{forsyth2002computer} sledenje opiše kot postopek, s katerim sklepamo o gibanju objektov glede na zaporedje slik. Problem sledenja v računalniškem vidu še ni v celoti rešljiv, saj obstaja veliko faktorjev, ki otežujejo delo sledilnikov~\cite{danelljan2014adaptive}. Med njimi sodijo okluzija objekta, ki mu sledimo, razne geometrijske deformacije in zamegljenost zaradi hitrega gibanja, temporalno spreminjanje osvetljenosti, šum iz ozadja ter variacije v skali. 
+Gibanje objektov v prostoru zaznamo kot časovno spreminjanje slike. Ta lastnost nam omogoča izluščiti koristne informacije, kot so identifikacija objektov na podlagi karakteristike gibanja, določevanje njihove pozicije in ugotavljanje kaj se v sceni dogaja~\cite{forsyth2002computer}. Forsyth et al.~\cite{forsyth2002computer} sledenje opiše kot postopek, s katerim sklepamo o gibanju objektov glede na zaporedje slik. Problem sledenja v računalniškem vidu še ni v celoti rešljiv, saj obstaja veliko faktorjev, ki otežujejo delo sledilnikov~\cite{danelljan2014adaptive}. Med njih sodijo okluzija objekta, ki mu sledimo, razne geometrijske deformacije in zamegljenost zaradi hitrega gibanja, časovno spreminjanje osvetljenosti, šum iz ozadja ter variacije v skali. 
 
-Sledilnike delimo v glavnem na dva pristopa: generativne in diskriminativne metode~\cite{danelljan2014adaptive}. Pri \emph{generativnih metodah} iščemo področja, ki so najbolj podobna modelu tarče. \emph{Diskriminativne metode} predstavljajo binarni problem razvrščanja, saj pri njih želimo določiti mejo med tarčo in ozadjem. Slednjo metodo uporabljamo pri sledenju z detekcijo, ki daje najboljše rezultate~\cite{danelljan2014adaptive}. Glavna ideja takega sledenja je sprotno učenje razvrščevalnika s trenutnim vzorcem tarče. Sledi korak detekcije tarče na naslednji sliki zaporedja z razvrščevalnikom in vizualno predstavitvijo tarče, ki smo se jo naučili skozi čas.
+Sledilnike delimo na dva pristopa: generativne in diskriminativne metode~\cite{danelljan2014adaptive}. Pri \emph{generativnih metodah} iščemo področja, ki so najbolj podobna modelu tarče. \emph{Diskriminativne metode} predstavljajo binarni problem razvrščanja, saj pri njih želimo določiti mejo med tarčo in ozadjem. Slednjo uporabljamo pri sledenju z detekcijo, ki daje najboljše rezultate~\cite{danelljan2014adaptive}. Glavna ideja takega sledenja je sprotno učenje razvrščevalnika s trenutnim vzorcem tarče. Sledi korak detekcije tarče na naslednji sliki zaporedja z razvrščevalnikom in vizualno predstavitvijo tarče, ki smo se jo naučili skozi čas.
 
 
 
@@ -16,13 +16,13 @@ Sledilnike delimo v glavnem na dva pristopa: generativne in diskriminativne meto
 
 \subsection{Zmanjševanje merilne napake}
 
-Položaj subjektov, ki jih opazujemo, ni mogoče omejiti zunaj skrbno urejene laboratorijske postavitve, saj uporabljamo tokovna polja brez kakršnekoli predpostavke o postavitvi skeleta in brez kakršnih koli dodatnih omejitev. V takem primeru bi bila prevladujoča komponenta histogramov šum. Zato moramo uvesti algoritem za sledenje, da lokaliziramo položaj opazovanega subjekta v koordinatnem sistemu slike.
+Položaj subjektov, ki jih opazujemo, ni mogoče omejiti zunaj skrbno urejene laboratorijske postavitve, saj uporabljamo tokovna polja brez kakršnekoli predpostavke o postavitvi skeleta in brez kakršnihkoli dodatnih omejitev. V takem primeru bi bila prevladujoča komponenta histogramov šum. Zato moramo uvesti algoritem za sledenje, da lokaliziramo položaj opazovanega subjekta v koordinatnem sistemu slike.
 
-Z uporabo sledilnika dobimo realnejšo sliko meritve, saj se znebimo šuma iz ozadja (premikanja slikovnih elementov, ki niso del tarče). Izognemo se napaki merjenja zaradi šuma CCD senzorja in premikanja drugih objektov. To so lahko razni predmeti (žoge, loparji, itd.) ali druge osebe. Brezkontaktnemu merilnemu instrumentu tako dodamo širšo uporabno vrednost, saj ga v nasprotnem primeru ne bi mogli uporabljati v ekipnih športih in športih z žogo. 
+Z uporabo sledilnika dobimo realnejšo sliko meritve, saj se znebimo šuma iz ozadja (premikanja slikovnih elementov, ki niso del tarče). Izognemo se napaki merjenja zaradi šuma CCD senzorja in premikanja drugih objektov. To so lahko razni predmeti (žoge, loparji, itd.) ali druge osebe. Brezkontaktnemu merilnemu instrumentu dodamo širšo uporabno vrednost, saj ga drugače ne bi mogli uporabljati pri ekipnih športih in športih z žogo. 
 
-Zaradi uporabe optičnega in prostorskega toka pri določevanju modela gibanja nam merilno napako povzroča tudi premikanje kamere. S premikanjem kamere povzročimo relativno premikanje objektov glede na koordinatni sistem kamere, četudi so ti glede na referenčni koordinatni sistem v prostoru pri miru. Tega problema se lahko znebimo z uporabo sledilnika. 
+Zaradi uporabe optičnega in prostorskega toka pri določevanju modela gibanja nam merilno napako povzroča tudi premikanje kamere. S premikanjem kamere povzročimo relativno premikanje objektov glede na koordinatni sistem kamere, četudi so ti, glede na referenčni koordinatni sistem, v prostoru pri miru. Tega problema se lahko znebimo z uporabo sledilnika. 
 
-Predpostavimo, da imamo idealni sledilnik in enako definicijo in omejitve kamere, masnega delca, slike delca in osvetlitve kot v poglavju~\ref{sec:opticni-tok}. Idealni sledilnik v vsaki sliki zaporedja najde sliko delca $\vec{q}$ in posamezno sliko v zaporedju obreže tako, da je težišče tarče vedno v centru obrezane slike. Ne glede na gibanje kamere, bo pozicija slike delca $\vec{q}$ vedno v centru slikovne ravnine. Gibanje kamere zato ne bo vplivalo na optični tok $\mathcal{O}$.
+Predpostavimo, da imamo idealni sledilnik in enako definicijo ter omejitve kamere, masnega delca, slike delca in osvetlitve kot v poglavju~\ref{sec:opticni-tok}. Idealni sledilnik v vsaki sliki zaporedja najde sliko delca $\vec{q}$ in posamezno sliko v zaporedju obreže tako, da je težišče tarče vedno v centru obrezane slike. Ne glede na gibanje kamere, bo pozicija slike delca $\vec{q}$ vedno v centru slikovne ravnine. Gibanje kamere zato ne bo vplivalo na optični tok $\mathcal{O}$.
 
 
 
@@ -38,11 +38,11 @@ Sledilnik temelji na delu~\cite{danelljan2014adaptive}, kjer izboljšajo origina
 
 
 \paragraph{Korak učenja.}
-Na področju tarče $x$ velikosti $M \times N$, vsakemu slikovnemu elementu pripada vrednost Gaussove funkcije $y$. Ob času $p$ poznamo \hbox{$\mathcal{X}^p = \{x^j: j=1,\ldots,p\}$} področij tarče. Razvrščevalnik učimo z minimizacijo funkcije~\eqref{eq:classifier-function}, ki predstavlja uteženo srednjo kvadratično napako čez področja $\mathcal{X}^p$, pri čemer je vsako področje uteženo s konstanto $\beta_j \geq 0$. $\phi$ predstavlja neliearno preslikavo v več razsežni prostor, za katero lahko uporabimo implicitno preslikavo ali funkcijo jedra $K$. V KCF sledilniku se uporablja Gaussovo RBF jedro~\eqref{eq:kcf-gauss}. Konstanta $\lambda \geq 0$ je regularizacijski parameter.
+Na področju tarče $x$ velikosti $M \times N$ vsakemu slikovnemu elementu pripada vrednost Gaussove funkcije $y$. Ob času $p$ poznamo \hbox{$\mathcal{X}^p = \{x^j: j=1,\ldots,p\}$} področij tarče. Razvrščevalnik učimo z minimizacijo funkcije~\eqref{eq:classifier-function}, ki predstavlja uteženo srednjo kvadratično napako čez področja $\mathcal{X}^p$, pri čemer je vsako področje uteženo s konstanto $\beta_j \geq 0$. $\phi$ predstavlja neliearno preslikavo v več razsežni prostor, za katero lahko uporabimo implicitno preslikavo ali funkcijo jedra $K$. V KCF sledilniku se uporablja Gaussovo RBF jedro~\eqref{eq:kcf-gauss}. Konstanta $\lambda \geq 0$ je regularizacijski parameter.
 
 \begin{equation}
 \begin{aligned}
-\epsilon &= \sum_{j=1}^p \beta_j \left( 
+	\epsilon &= \sum_{j=1}^p \beta_j \left( 
 	\sum_{m,n} \left| \langle \phi\left(x_{m,n}^j \right), w^j \rangle - y^j(m,n) \right|^2
     + \lambda \langle w^j, w^j \rangle
 \right), \\
