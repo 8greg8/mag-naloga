@@ -7,36 +7,6 @@ Merjenca SUBJ4 smo uporabili samo v laboratorijskih eksperimentih, ker pri teren
 
 Med laboratorijskimi in terenskimi eksperimenti je za merjenca SUBJ1 in SUBJ2 preteklo 43 dni, za merjenca SUBJ4 42 dni in za ostale 1 dan.  
 
-\subsection{Združevanje slik iz dveh Kinect kamer}\label{sec:zdruzevanje}
-
-\paragraph{Združevanje z značilkami}
-Časovno sinhronizirana zaporedja slik smo poskušali združiti z metodo panoramskega šivanja slik z uporabo značilk, kot je opisano v delu~\cite{brown2007automatic}. Tu smo namesto SIFT značilk uporabili SURF značilke.
-
-
-\paragraph{Združevanje s kontrolnimi točkami}
-Zaporedja slik smo poskušali združiti z ročnim določevanjem kontrolnih točk.
-
-
-\paragraph{Prilagojeno združevanje}
-Zaradi nezadovoljivih rezultatov klasičnih metod združevanja stereo slik, smo razvili metodo, ki je prilagojena za Kinect kamere. Iz kamer smo z uporabo knjižnice libfreenect2 0.2~\cite{lingzhu2016libfreenect2} pridobili intrinzične parametre infra-redečega (IR) senzorja, in sicer: slikovni koordinati goriščne razdalje $f_u$ in $f_v$ ter slikovni koordinati optičnega središča slike (ang. principal point) $c_u$ in $c_v$. Intrinsične parametre smo uporabili za določitev intrizične matrike $\vec{M}_{int}$ po enačbi~\eqref{eq:intrinsic}.
-
-
-Ker pravih ekstrinsičnih parametrov kamer nismo poznali, smo jih le ocenili z metodo določevanja sečišča vidnih polj obeh kamer. Sečišče je prikazano kot rdeča linija na sliki~\ref{fig:zdruzevanje}. S to metodo smo določili translacijski vektor $\vec{t} = \left [ t_x~ t_y~ t_z \right]^\top$ in rotacijsko matriko $\vec{R}$ iz Eulerjevih kotov.
-
-S sledenjem igralca z DS-KCF algoritmom, smo s pomočjo projekcijske matrike~\eqref{eq:projection-matrix} določili center tarče v metričnih enotah za vsako sliko zaporedja leve in desne kamere. Če center tarče ni vseboval podatkov globine, smo za center izbrali najbližjo točko z veljavno globino.
-
-Prva slika združenega zaporedja je bila slika kamere, kjer se igralec prvič pojavi. Nadaljnje slike smo izbirali med zaporedjema kamer glede na pozicijo centra tarče s histerezo, ki ne na sliki~\ref{fig:zdruzevanje} prikazana z modrimi linijami. Pogled spremenimo samo takrat, ko center tarče prečka linijo histereze na igrišču. Razdalja med modrima črtama je znašala \SI{400}{mm}.
-
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=\columnwidth]{zdruzevanje-example.png}
-	\caption[Določevanje sečišča vidnih polj leve in desne Kinect kamere]{Določevanje sečišča vidnih polj leve in desne Kinect kamere. Na sliki sta prikazani prvi sliki zaporedja leve in desne Kinect kamere 1. seta 2. igre terenskega eksperimenta iz 2. faze. Označen je 4. igralec. Zelena barva koordinat centra tarče predstavlja izbrano kamero. Kamera z rumeno barvo ni izbrana. Sečišče je rdeča linija. Modri liniji sta pragova za preklop med kamerama. Razdalja med njima je \SI{400}{mm}.}
-	\label{fig:zdruzevanje}
-\end{figure}
-
-
-
 \subsection{Mrežno iskanje \texorpdfstring{$\nu$}{nu}-RBF}
 Med evaluacijo eksperimentov 1. faze smo ugotovili, da z regresijo \esvr pogosto dobimo preobremenjene (ang. Overfitted) modele. Pri takih modeli je število podpornih vektorjev zelo visoko. Lahko se zgodi, da postanejo vsi vektorji značilk podporni vektorji. Preobremenjeni modeli lahko dajejo solidne rezultate, vendar pa so ti nerealistični. Takoj, ko bi v tak model vnesli rahlo spremenjene podatke, ne bi več delovali.
 
