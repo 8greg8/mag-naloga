@@ -1,6 +1,6 @@
 \section{Filtriranje in glajenje}\label{sec:filtri}
 %Filtri so zelo pomembni pri procesiranju signalov~\cite{smith1997scientist}. V našem delu jih uporabljamo za izločitev šuma izhodnih podatkov razvrščevalnika. 
-Vhodne podatke obdelujemo bodisi z optičnim tokom bodisi s prostorskim tokom za vsako sliko video sekvence. Med slikami ne uporabljamo nobene informacije, kar rezultira v oceno porabe energije z veliko šuma. Smiselno je, da zagotovimo časovno kontinuiteto ali s filtriranjem ali z glajenjem rezultatov porabe energije.
+Vhodne podatke obdelujemo bodisi z izračunom optičnega toka, bodisi s izračunom prostorskega toka za vsako sliko zaporedja slik, oziroma par slik. Ocena energijske porabe ni nikakor omejena med posameznimi slikami, zato vsebuje veliko šuma. Smiselno je, da zagotovimo časovno kontinuiteto ali s filtriranjem ali z glajenjem rezultatov porabe energije.
 
 Izbrani filtri izhajajo iz družine filtrov tekočega povprečja, saj so ti najbolj optimalni za zmanjševanje šuma~\cite{smith1997scientist}. Splošna enačba filtra tekočega povprečja je~\eqref{eq:filter-tekocega-povprecja}, kjer je $x(i)$ i-ti vzorec vhodnega signala, $y(i)$ i-ti vzorec izhodnega signala in $M$ število vzorcev, ki jih uporabimo za filtriranje ali drugače, širina jedra filtra~\cite{smith1997scientist}.
 

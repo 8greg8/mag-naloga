@@ -104,7 +104,7 @@ Merjenci so opravili obremenilni test po protokolu Nowatzky. To je stopnjevani t
 Obremenilni test smo izvajali s pomočjo sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2 na tekalni stezi HP Cosmos. Z obremenilnim testom smo pridobili podatke energijske porabe šestih različnih merjencev (SUBJ1, SUBJ2, SUBJ4, SUBJ7 SUBJ8 in SUBJ9). Vzorčili smo s frekvenco \SI{0.2}{\hertz}.
 
 \paragraph{Video in globinski posnetki.}
-Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Kameri sta bili časovno sinhronizirani po NTP protokolu. Pri uporabi več Kinect senzorjev njihove vzorčne frekvence niso striktno enake, zato smo pridobivali tudi časovne štampiljke. Primer hrbtnega in stranskega posnetka je prikazan na sliki~\ref{fig:primer-posnetka-stage2}.
+Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Kameri sta bili časovno sinhronizirani s pomočjo protokola NTP. Pri uporabi več Kinect senzorjev njihove frekvence vzorčenja niso striktno enake, zato smo shranjevali tudi časovne štampiljke vsake posamezne slike. Primer hrbtnega in stranskega posnetka je prikazan na sliki~\ref{fig:primer-posnetka-stage2}.
 
 \begin{figure}[!htb]
 	\centering
@@ -117,11 +117,11 @@ Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stransk
 		\includegraphics[width=\columnwidth]{stage2-lab-bv-tracked.png}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
-	\caption[Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju]{Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju. Sliki sta bili registrirani na korespondečni globinski sliki~\ref{fig:stage2-lab-of-depth}. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta. Zelen okvir je rezultat sledenja s KCF sledilnikom.}
+	\caption[Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju]{Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju. Sliki sta bili registrirani na korespondečni globinski sliki~\ref{fig:stage2-lab-of-depth}. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta. Zelen okvir je rezultat sledenja s  sledilnikom KCF.}
 	\label{fig:primer-posnetka-stage2}
 \end{figure}
 
-Snemali smo z dvema Microsoft Kinect za Windows V2 kamerama s pomočjo knjižnice libfreenect2 0.2~\cite{lingzhu2016libfreenect2}. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}. Od tal sta bili dvignjeni za približno \SI{1.5}{m}. Postavitev kamer je prikazana na sliki~\ref{fig:lab-postavitev-kamer}. Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Hitrost posnetkov je znašala \SI{30}{fps}.
+Snemali smo z dvema kamerama Microsoft Kinect za Windows V2 s pomočjo knjižnice libfreenect2 0.2~\cite{lingzhu2016libfreenect2}. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}. Od tal sta bili dvignjeni za približno \SI{1.5}{m}. Postavitev kamer je prikazana na sliki~\ref{fig:lab-postavitev-kamer}. Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Frekvenca zajema slik je znašala \SI{30} slik na sekundo.
 
 \begin{figure}[!htb]
 	\centering
@@ -152,14 +152,14 @@ Snemali smo z dvema Microsoft Kinect za Windows V2 kamerama s pomočjo knjižnic
 		\includegraphics[width=1.2\columnwidth]{stage2-lab-bv-depth-sl}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
-	\caption[Stranska in hrbtna globinska slika laboratorijskih eksperimentov]{Stranska in hrbtna globinska slika laboratorijskih eksperimentov. Globinski sliki sta korespondečni RGB slikam~\ref{fig:primer-posnetka-stage2}. Barvna skala prikazuje globino v metrih. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta.}
+	\caption[Stranska in hrbtna globinska slika laboratorijskih eksperimentov]{Stranska in hrbtna globinska slika laboratorijskih eksperimentov. Globinski sliki sta korespondečni RGB slikam~\ref{fig:primer-posnetka-stage2}. Barvna skala prikazuje globino v metrih. Črni slikovni elementi predstavljajo točke, kjer globina ni bila zajeta.}
 	\label{fig:stage2-lab-of-depth}
 \end{figure}
 
 
 
 \paragraph{Protokol meritve.}
-Test smo pričeli z eno minutnim mirovanjem na tekalni stezi. Sledilo je tri minutno ogrevanje, s hitrostjo teka \SI{5}{\km\per\hour}, pri naklonu preproge \SI{0}{\%}. Nadaljevali smo s tri minutnim tekom, s hitrostjo \SI{6}{\km\per\hour}. Po treh minutah smo naklon tekoče preproge dvignili za \SI{2}{\%} in ga nismo več spreminjali. Po zadnji minuti, na tretji stopnji (hitrost \SI{6}{\km\per\hour}, naklon \SI{2}{\%}), se je hitrost teka vsaki dve minuti povečevala za \SI{1}{\km\per\hour}. Test smo izvajali brez prekinitve do pojava objektivnih oz. subjektivnih razlogov za prekinitev testa. 
+Test smo pričeli z eno minutnim mirovanjem na tekalni stezi. Sledilo je tri minutno ogrevanje, s hitrostjo teka \SI{5}{\km\per\hour}, pri naklonu preproge \SI{0}{\%}. Nadaljevali smo s tri minutnim tekom, s hitrostjo \SI{6}{\km\per\hour}. Po treh minutah smo naklon tekoče preproge dvignili za \SI{2}{\%} in ga nismo več spreminjali. Po zadnji minuti, na tretji stopnji (hitrost \SI{6}{\km\per\hour}, naklon \SI{2}{\%}), se je hitrost teka vsaki dve minuti povečevala za \SI{1}{\km\per\hour}. Test smo izvajali brez prekinitve do pojava objektivnih oz. subjektivnih razlogov za prekinitev testa, ki jih je določil zdravnik, ki je spremljal parametre merjencev. 
 %Po koncu testiranja je sledilo še \SI{5}{min} hoje pri  hitrosti \SI{2}{\km\per\hour} ter \SI{0}{\%} naklonu. 
  
 
@@ -232,17 +232,16 @@ Merjencem smo v P2OF sledili s sledilnikom KCF, ki smo ga nadzorovano reiniciali
 \end{comment}
 
 
-Procesiranje s prostorskim tokom je malenkost drugačno. Označili smo ga s P2SF. Shematski prikaz procesiranja je prikazan na sliki~\ref{fig:diagram-procesiranja-sf-stage2}.
+Procesiranje s prostorskim tokom je bilo podobno, postopek označujemo kot P2SF. Shematski prikaz procesiranja je prikazan na sliki~\ref{fig:diagram-procesiranja-sf-stage2}.
 
 \begin{figure}[!htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-sf-stage2.tikz}}
-	\caption[P2SF predikcijska shema]{P2SF predikcijska shema. Uporabljamo jo za testiranje modelov s prostorskim tokom v fazi 2.}
+	\caption[Predikcijska shema P2SF]{Predikcijska shema P2SF. Uporabljamo jo za testiranje modelov s prostorskim tokom v fazi 2.}
 	\label{fig:diagram-procesiranja-sf-stage2}
 \end{figure}
 
-Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinicializirali vsako minuto. Izbranim področjem smo izračunali prostorski tok. Primer dobljenega optičnega toka je prikazan na sliki~\ref{fig:prostorski-tok-stage2}. Sledilo je generiranje HOOF-HAFA deskriptorjev po postopku P2OF, le da HAFA deskriptorjev nismo normalizirali, ker smo histograme pridobili iz podatkov z metričnimi enotami. 
-
+Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinicializirali vsako minuto. Izbranim področjem smo izračunali prostorski tok. Primer dobljenega toka je prikazan na sliki~\ref{fig:prostorski-tok-stage2}. Sledilo je generiranje HOOF-HAFA deskriptorjev po postopku P2OF, le da HAFA deskriptorjev nismo normalizirali. Zaradi narave prostorskega toka je ta že v metričnih enotah.
 
 \begin{figure}[!htb]
 	\centering
@@ -263,7 +262,7 @@ Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinici
 	%	\input{./Slike/rgb-cube.tikz}
 	%	\caption{Hrbtna slika.}
 	%\end{subfigure}
-	\caption[Prostorski tok za sliki~\ref{fig:primer-posnetka-stage2}]{Prostorski tok za sliki~\ref{fig:primer-posnetka-stage2}. Slike smo pridobili s programom \texttt{Scene-Flow-Impair}, avtorja~\cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2 kamero. Sliki sta 8-bit RGB sliki. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$, kanal G $\mu_y$, ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
+	\caption[Prostorski tok za sliki~\ref{fig:primer-posnetka-stage2}]{Prostorski tok za sliki~\ref{fig:primer-posnetka-stage2}. Slike smo pridobili s programom \texttt{Scene-Flow-Impair}, avtorja~\cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2. Sliki sta 8-bitni RGB sliki. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$, kanal G $\mu_y$, ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
 	\label{fig:stage2-lab-sf-pd}
 \end{figure}
 
@@ -298,7 +297,7 @@ Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinici
 
 
 
-Modele obeh postopkov (P2OF in P2SF) smo učili s postopkom \nurbf, kjer smo za Gaussov filter uporabili $\sigma=5$ in za največje število podpornih vektorjev $\numax =\num{0.5}$ (\SI{50}{\%} podpornih vektorjev). Podobno kot v eksperimentih 1. faze smo tudi tu naučili \num{6} elementarnih modelov, in sicer: \textit{eem} modele, ki predvidevajo porabo energije v \si{\kcal\per\min}, \textit{sv} modele za stransko kamero in \textit{bv} modele za hrbtno kamero. %ter \textit{lag} modele z upoštevanjem časovne zakasnitve.
+Modele obeh postopkov (P2OF in P2SF) smo učili s postopkom \nurbf, kjer smo za Gaussov filter uporabili $\sigma=5$ in za največje število podpornih vektorjev $\numax =\num{0.5}$ (\SI{50}{\%} podpornih vektorjev). Podobno kot v eksperimentih 1. faze smo tudi tu naučili \num{6} osnovnih modelov, in sicer: modele \textit{eem}, ki predvidevajo porabo energije v \si{\kcal\per\min}, modele \textit{sv} za stransko kamero in modele \textit{bv} za hrbtno kamero. %ter \textit{lag} modele z upoštevanjem časovne zakasnitve.
 
 %Vse tipe eksperimentov smo križno testirali glede na enak tip eksperimenta, le z drugim zornim kotom kamere. Uporabljen zorni kot kamere za križno testiranje je v imenih modelov zapisan v oklepajih.  
 
@@ -312,7 +311,7 @@ Za testne vzorce vzamemo vsak 3. vzorec fiziološkega parametra in slike iz posa
 Za učne vzorce izberemo prvih \SI{70}{\%} vzorce in za testne naslednjih \SI{30}{\%}. Rezultate vseh 6 meritev povprečimo.
 
 \paragraph{Protokol 3.}
-Uporabimo protokol 1, pri čemer učimo na prvih štirih meritvah in testiramo na zadnjih dveh. Rezultatov ne povprečimo. Na ta način smo proučili možnost posplošitve naučenih modelov za uporabo na merjencih, ki niso bili vključeni v učenje.
+Uporabimo protokol 1, pri čemer učimo na prvih štirih merjencih in testiramo na zadnjih dveh. Rezultatov ne povprečimo. Na ta način smo proučili možnost posplošitve naučenih modelov za uporabo na merjencih, ki niso bili vključeni v učenje.
 
 \begin{comment}
 \subsubsection{Določitev zakasnitve fiziološkega odziva}
@@ -371,22 +370,22 @@ Na podlagi slik~\ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno mer
 
 
 \subsection{Terenski eksperimenti}
-Šest igralcev je igralo tri squash igre. V vsaki igri sta bila dva seta. Igre so trajale \SI{16}{\min}, \SI{14}{\min} in \SI{11}{\min}. Uporabili smo P2OF in P2SF procesiranje z nadzorovano reinicializacijo sledilnikov vsake \SI{2}{\s}. Delovanje sledilnikov lahko vidimo na sliki~\ref{fig:stage2-field-tracked}. Pripadajoči optični in prostorski tok sta prikazana na sliki~\ref{fig:stage2-field-sfof}. Na sliki~\ref{fig:stage2-field-hist} sta prikazana pripadajoča histograma.
+Šest igralcev je odigralo igralo tri tekme squasha, po dva niza na tekmo. Tekme so trajale \SI{16}{\min}, \SI{14}{\min} in \SI{11}{\min}. Uporabili smo procesiranje P2OF in P2SF  z nadzorovano reinicializacijo sledilnikov vsake \SI{2}{\s}. Delovanje sledilnikov lahko vidimo na sliki~\ref{fig:stage2-field-tracked}. Pripadajoči optični in prostorski tok sta prikazana na sliki~\ref{fig:stage2-field-sfof}. Na sliki~\ref{fig:stage2-field-hist} sta prikazana pripadajoča histograma.
 
 \begin{figure}[!htb]
 	\centering
 	\begin{subfigure}{0.45\columnwidth}
 		\centering
 		\includegraphics[width=\columnwidth]{stage2-field-of-left-tracked.png}
-		\caption{KCF sledilnik}
+		\caption{Sledilnik KCF}
 	\end{subfigure}
 	~
 	\begin{subfigure}{0.45\columnwidth}
 		\centering
 		\includegraphics[width=\columnwidth]{stage2-field-sf-left-tracked.png}
-		\caption{DS-KCF sledilnik.}
+		\caption{Sledilnik DS-KCF}
 	\end{subfigure}
-	\caption[Predstavitev delovanja KCF in DS-KCF sledilnikov]{Predstavitev delovanja KCF in DS-KCF sledilnikov za terenske eksperimente. Za primerjavo sledilnikov sta prikazani 120. sliki leve kamere prvega seta 2. igre za merjenca SUBJ9. Zelena okvirja prikazujeta detektirani področji za posamezen sledilnik. Opazimo, da sta področji različni.}
+	\caption[Predstavitev delovanja sledilnikov KCF in DS-KCF]{Predstavitev delovanja sledilnikov KCF in DS-KCF za terenske eksperimente. Za primerjavo sledilnikov sta prikazani 120. sliki leve kamere prvega niza 2. tekme. Na slikah je merjenec SUBJ9. Zelena okvirja prikazujeta detektirani področji za posamezen sledilnik. Opazimo, da sta področji nekoliko različni.}
 	\label{fig:stage2-field-tracked}
 \end{figure}
 
@@ -413,7 +412,7 @@ Na podlagi slik~\ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno mer
 		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-sf-pd-tr-corrected.jpg}
 		\caption{Prostorski tok.}
 	\end{subfigure}
-	\caption[Optični tok, prostorski tok in njegova projekcija]{Optični tok, prostorski tok in njegova projekcija na slikovno ravnino. V spodnjem levem kotu optičnega toka in projekcije prostorskega toka sta legendi barvnega kodiranja. Uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka na sliki  \subref{fig:stage2-field-of}) je  \SI{10}{ppf}. Maksimalna amplituda projekcije prostorskega toka je \SI{13.7}{\m\per\s}. Sliko prostorskega toka \subref{fig:stage2-field-pd}) smo pridobili s programom \texttt{Scene-Flow-Impair}, avtorja~\cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2 kamero. Slika je 8-bitna RGB. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$, kanal G $\mu_y$, ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
+	\caption[Optični tok, prostorski tok in njegova projekcija]{Optični tok, prostorski tok in njegova projekcija na slikovno ravnino. V spodnjem levem kotu optičnega toka in projekcije prostorskega toka sta legendi barvnega kodiranja. Uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka na sliki  \subref{fig:stage2-field-of}) je  \SI{10}{ppf}. Maksimalna amplituda projekcije prostorskega toka je \SI{13.7}{\m\per\s}. Sliko prostorskega toka \subref{fig:stage2-field-pd}) smo pridobili s programom \texttt{Scene-Flow-Impair}, avtorja~\cite{jaimez2015primal}, ki smo ga prilagodili za kamero Kinect V2. Slika je 8-bitna RGB. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$, kanal G $\mu_y$, ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
 	\label{fig:stage2-field-sfof}
 \end{figure}
 
@@ -466,20 +465,20 @@ Fiziološke parametre smo pridobili s pomočjo prenosnega sistema za direktno er
 \end{figure}
 
 \paragraph{Video posnetki.}
-Igrišče smo snemali z dvema Microsoft Xbox Kinect V2 kamerama, ki sta bili oddaljeni ena od druge za približno \SI{2}{m}. Vsaka kamera je pokrivala svojo polovico igrišča. Razdalja od tal je znašala približno \SI{3}{m}. Kameri sta bili pozicionirani nad zaščitnim steklom. S tem nismo dobili odbojev laserskih žarkov, ki so namenjeni za pridobivanje globinske slike. Kot $\theta$ (rotacija okoli x osi) je bil približno $30\stopinj$ tako, da so kamere pokrivale prvo polovico igrišča do linije serviranja. Postavitev kamer je prikazana na sliki~\ref{fig:field-postavitev-kamer}.
+Igrišče smo snemali z dvema kamerama Microsoft Xbox Kinect V2, ki sta bili oddaljeni ena od druge za približno \SI{2}{m}. Vsaka kamera je pokrivala svojo polovico igrišča. Razdalja od tal je znašala približno \SI{3}{m}. Kameri sta bili pozicionirani nad zaščitnim steklom. Takšna postavitev je preprečila neposredni odboj laserske svetlobe, ki jo oddaja Kinect V2 od stekla, s katerim je zaščiteno igrišče. Kot $\theta$ (rotacija okoli x osi) je bil približno $30\stopinj$ tako, da so kamere pokrivale prvo polovico igrišča do linije serviranja. Postavitev kamer je prikazana na sliki~\ref{fig:field-postavitev-kamer}.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.6\columnwidth]{squash-postavitev-corrected.jpg}	
-	\caption[Postavitev Kinect kamer pri terenskih testih 2. faze]{Postavitev Kinect kamer pri terenskih testih 2. faze.}
+	\caption[Postavitev kamer Kinect V2 pri terenskih testih 2. faze]{Postavitev Kinect kamer pri terenskih testih 2. faze.}
 	\label{fig:field-postavitev-kamer}
 \end{figure}
 
 
-Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Hitrost posnetkov je znašala \SI{30}{fps}. Kameri smo časovno sinhronizirali po NTP protokolu.
+Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Frekvenca zajema slik je znašala \SI{30} slik na sekundo. Kameri smo časovno sinhronizirali s pomočjo protokola NTP.
 
 
 
 \paragraph{Protokol meritve.}
-Posamezno igro smo pričeli s 5 minutnim ogrevalnim tekom. Sledilo je igranje na dva seta do 10 dobljenih točk z upoštevanjem dveh točk razlike. Med setoma so igralci počivali 2 minuti. Ogrevanja in počivanja s kamerami nismo merili. Seta posamezne igre smo združili v en posnetek.
+Posamezno tekmo smo pričeli s 5 minutnim ogrevalnim tekom. Sledilo je igranje na dva niza do 10 dobljenih točk z upoštevanjem dveh točk razlike. Med nizoma so igralci počivali 2 minuti. V času ogrevanja in počivanja nismo zajemali video posnetkov. Niza posamezne igre smo združili v en posnetek.
 

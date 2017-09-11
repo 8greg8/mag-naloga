@@ -1,7 +1,7 @@
 \section{Eksperimenti 1. faze}
 
 \subsection{Optimizacija HOOF deskriptorjev}\label{sec:optimizacija-hoof}
-Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:rezultati-optimizacija-hoof}. Za evaluacijo smo uporabili učne vzorce hrbtne kamere preliminarnih laboratorijskih testov. Evaluirali smo samo za podatke energijske porabe $W$. Pridobljene značilke deskriptorjev smo normirali na intervalu $[-1,1]$ in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Metode so podrobneje predstavljene v poglavju~\ref{sec:matematicni-modeli}. Za določitev optimalnih parametrov %, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, 
+Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:rezultati-optimizacija-hoof}. Za evaluacijo smo uporabili učne vzorce hrbtne kamere preliminarnih laboratorijskih testov. Ocenjevali smo samo energijsko porabo $W$. Pridobljene značilke deskriptorjev smo normirali na intervalu $[-1,1]$ in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Metode so podrobneje predstavljene v poglavju~\ref{sec:matematicni-modeli}. Za določitev optimalnih parametrov %, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, 
 smo uporabili optimizacijsko metodo mrežnega iskanja~\cite{hsu2003practical}. Rezultate smo filtrirali še s Kalmanovim filtrom, ki je predstavljen v~\ref{sec:kalmanov-filter}.
 
 \begin{comment}
@@ -142,16 +142,16 @@ Video posnetek~\cite{squashtv2014squash} smo za potrebe vizualne ocene delovanja
 
 
 
-\subsection{Laboratorijski eksperimenti tekalne steze}
+\subsection{Laboratorijski eksperimenti na tekalni stezi}
 Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za šport. Merjenec je tekel na tekalni stezi ob prisotnosti operaterja---fiziologa, ki je določal intenziteto in čas trajanja obremenitve. V sklopu testa faze 1 smo preučili možno uporabo RGB in bližnje-infrardeče (NIR) kamere, da bi olajšali snemanje pri slabih svetlobnih pogojih.
 
 
 \subsubsection{Pridobivanje podatkov}
 \paragraph{Fiziolo\v{s}ki parametri.}
-Srčni utrip in energijsko porabo smo merili za izbranega športnika (starost: 26 let, višina: \SI{177}{\cm}, teža: \SI{79.1}{\kg}, \vomax: \SI{3705}{\ml\per\min}). Zaradi doslednosti se nanašamo nanj kot SUBJ0. Energijsko porabo smo merili z indirektno kalorimetrijo, in sicer z ``breath by breath'' Cosmed CPET Metabolic Cart~\cite{beaver1973line}. Pri tem smo uporabili Hans Rudolph obrazno masko s predpisanim minimalnim VD (mrtvim prostorom). Naklon tekalne steze je bil od \SI{1.5}{\%} do \SI{2}{\%}.
+Srčni utrip in energijsko porabo smo merili za izbranega športnika (starost: 26 let, višina: \SI{177}{\cm}, teža: \SI{79.1}{\kg}, \vomax: \SI{3705}{\ml\per\min}). Zaradi doslednosti in lažje dekumentacije ga označimo kot SUBJ0. Energijsko porabo smo merili z indirektno kalorimetrijo, in sicer z ``breath by breath'' Cosmed CPET Metabolic Cart~\cite{beaver1973line}. Pri tem smo uporabili Hans Rudolph obrazno masko s predpisanim minimalnim VD (mrtvim prostorom). Naklon tekalne steze je bil od \SI{1.5}{\%} do \SI{2}{\%}.
 
 \paragraph{Video posnetki.}
-Tekalno stezo s SUBJ0 smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Video posnetke smo časovno sinhronizirali glede na začetno sliko meritev, vendar pa se zaradi uporabe Axis 207W IP kamer časovne neusklajenosti do potankosti nismo mogli znebiti. Pridobili smo posnetke barvnih RGB slik in bližnje-infrardeče NIR posnetke hrbtnega dela, ki so prikazani na sliki~\ref{fig:primer-posnetka-rgb-ir}. Snemali smo v ločljivosti $480 \times 640$. Hitrost RGB posnetkov je bila \SI{30}{fps}, za NIR posnetke pa je hitrost znašala \SI{25}{fps}.  
+Tekalno stezo s SUBJ0 smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Video posnetke smo časovno sinhronizirali glede na začetno sliko meritev, vendar pa se zaradi uporabe IP kamer (Axis 207W) časovne neusklajenosti do potankosti nismo mogli znebiti. Pridobili smo posnetke barvnih RGB slik in bližnje-infrardeče NIR posnetke hrbtnega dela, ki so prikazani na sliki~\ref{fig:primer-posnetka-rgb-ir}. Snemali smo v ločljivosti $480 \times 640$. Frekvenca slik RGB posnetkov je bila \SI{30} slik na sekundo, za NIR posnetke pa je frekvenca znašala \SI{25} slik na sekundo.  
 
 \begin{figure}[htb]
 	\centering
@@ -258,22 +258,22 @@ Zakasnitev smo določili kot časovni interval od trenutka spremembe hitrosti te
 	\centering
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\includegraphics[width=\columnwidth]{odziv1-sl}
-		\caption{Odziv učnih vzorcev.}
+		\caption{Učni vzorci.}
 		\label{fig:odziv-ucnih-stage1}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\columnwidth}
 		\includegraphics[width=\columnwidth]{odziv2-sl}
-		\caption{Odziv testnih vzorcev.}
+		\caption{Testni vzorci.}
 		\label{fig:odziv-testnih-stage1}
 	\end{subfigure}
-	\caption[Odziv posameznih fizioloških parametrov za obe seriji testov]{Odziv posameznih fizioloških parametrov za obe seriji testov.}
+	\caption[Odziv srčnega utripa in izmerjene energijske porabe na hitrost tekalne steze]{Odziv srčnega utripa in izmerjene energijske porabe na hitrost tekalne steze.}
 	\label{fig:odziv-stage1}
 \end{figure} 
 
 
 \subsubsection{Ročna določitev področja tarče}
-HOOF deskriptorji so v teoriji robustni na šum, saj ta zaradi majhnih amplitud nima vpliva na obliko histograma. Vseeno se lahko pojavijo anomalije, ki povečajo amplitudo šuma na raven vrednosti merjenca. Pri tem mislimo predvsem na objekte in osebe v ozadju, ki se premikajo. Temu se lahko preprosto izognemo z določevanjem področja tarče. Ker je bil prizor na posnetkih razmeroma enostaven in ciklično monoton, smo se za preizkus naše hipoteze odločili, da bomo področja najprej določili ročno. Področja smo izbrali tako, da je bil merjenec ves čas posnetka v izbranem področju. Izbrana področja za posamezne posnetke so predstavljena v tabeli~\ref{tab:rocna-podrocja}, pri čemer so $h$ dolžina slike, $w$ širina slike in $x$ ter $y$ slikovni koordinati. Vsi nadaljnji testi, razen tisti, pri katerih se uporablja sledilnik, temeljijo na izrezanih posnetkih glede na ta področja.
+Deskriptorji HOOF so v teoriji robustni na šum, saj ta zaradi majhnih amplitud nima vpliva na obliko histograma. Vseeno se lahko pojavijo anomalije, ki povečajo amplitudo šuma na raven vrednosti merjenca. Pri tem mislimo predvsem na objekte in osebe v ozadju, ki se premikajo. Temu se lahko preprosto izognemo z določevanjem področja tarče. Ker je bil prizor na posnetkih razmeroma enostaven in ciklično monoton, smo se za preizkus naše hipoteze odločili, da bomo področja najprej določili ročno. Področja smo izbrali tako, da je bil merjenec ves čas posnetka v izbranem področju. Izbrana področja za posamezne posnetke so predstavljena v tabeli~\ref{tab:rocna-podrocja}, pri čemer so $h$ dolžina slike, $w$ širina slike in $x$ ter $y$ slikovni koordinati. Vsi nadaljnji testi, razen tisti, pri katerih se uporablja sledilnik, temeljijo na izrezanih posnetkih glede na ta področja.
 
 \begin{table}[!htb]
 	\centering
@@ -296,13 +296,13 @@ HOOF deskriptorji so v teoriji robustni na šum, saj ta zaradi majhnih amplitud 
 	\label{tab:rocna-podrocja}
 \end{table}
 
-\subsubsection{Združevanje posnetkov}
-V dodatnih \textit{mixed} modelih smo združili posnetke kamer z različnim zornim kotom. Združeni posnetek je bil po vrstnem redu sestavljen iz posnetka stranske kamere in posnetka hrbtne kamere. Pri tem smo uporabili izrezane posnetke glede na ročno določena področja. Z združenim posnetkom smo želeli preveriti vpliv povečevanja informacije o gibanju merjenca zaradi uporabe različnih zornih kotov. 
+\subsubsection{Združevanje posnetkov iz različnih zornih kotov}
+V dodatnih \textit{mixed} modelih smo združili posnetke kamer z različnim zornim kotom. Združeni posnetek je bil po vrstnem redu sestavljen iz posnetka stranske kamere in posnetka hrbtne kamere. Pri tem smo uporabili izrezane posnetke glede na ročno določena področja. Z združenim posnetkom smo želeli preveriti, ali učenje na posnetkih iz različnih zornih kotov bistveno izboljša kvaliteto modelov.
 
-\subsubsection{Obremenitveni testi}
-Z obremenitvenimi testi smo želeli preizkusiti robustnost našega postopka. Opravili smo dve vrsti testov, in sicer: \textit{scale} teste in \textit{proj} teste. Pri \textit{scale} testih smo posnetke zmanjšali za \SI{50}{\%}. S tem smo simulirali večjo oddaljenost merjenca od kamere in tako preverili teoretično invariantnost HOOF deskriptorjev glede na skalo.
+\subsubsection{Testi robustnosti}
+Opravili smo dve vrsti testov, in sicer: teste \textit{scale} in teste \textit{proj}. Pri testih \textit{scale} smo posnetke zmanjšali za \SI{50}{\%}. S tem smo simulirali večjo oddaljenost merjenca od kamere in tako preverili teoretično invariantnost HOOF deskriptorjev glede na skalo.
 
-Z vnašanjem projektivne transformacije v posnetke smo s \textit{proj} testi preizkušali robustnost celotnega postopka na deformacije slike, ki jo lahko vnašajo leče kamere. Projektivno transformacijo smo izvedli s pomočjo Matlabovih funkcij \texttt{fitgeotrans} in \texttt{imwarp}. Za vhodne točke smo izbrali robove posamezne slike zaporedja. Za izhodne točke smo izbrali vrednosti v tabeli~\ref{tab:projective}, pri čemer so $h$ dolžina slike, $w$ širina slike in $x$ ter $y$ slikovni koordinati.
+Z vnašanjem projektivne transformacije v posnetke smo s  testi\textit{proj} preizkušali robustnost celotnega postopka na deformacije slike, ki jo lahko vnašajo leče kamere, ali pa radikalno spreminjanje vidnega kota. Projektivno transformacijo smo izvedli s pomočjo Matlabovih funkcij \texttt{fitgeotrans} in \texttt{imwarp}. Za vhodne točke smo izbrali robove posamezne slike zaporedja. Za izhodne točke smo izbrali vrednosti v tabeli~\ref{tab:projective}, pri čemer so $h$ dolžina slike, $w$ širina slike in $x$ ter $y$ slikovni koordinati.
 
 \begin{table}[!htb]
 	\centering
@@ -349,24 +349,24 @@ Obstaja veliko ekipnih športov, kjer sodeluje več igralcev. Ker so vsi vidni n
 	\label{fig:sledenje}
 \end{figure} 
 
-Za sledenje smo uporabili KCF sledilnik, ki je implementiran v OpenCV knjižnici. Izbiro sledilnika smo opredelili že v poglavju~\ref{sec:testiranje-sledilnikov-za-opticni-tok}. Pri sledenju smo uporabili privzete vrednosti, kot so specificirane v OpenCV knjižnici.
+Za sledenje smo uporabili KCF sledilnik, kot je implementiran v knjižnici OpenCV. Izbiro sledilnika smo opredelili že v poglavju~\ref{sec:testiranje-sledilnikov-za-opticni-tok}. Pri sledenju smo uporabili privzete vrednosti, kot so specificirane v knjižnici OpenCV.
 %sledeče parametre: pasovna širina Gaussovega jedra \num{0.2}, linearni interpolacijski faktor za adaptacijo \num{0.075}, regularizacijski faktor \num{0.01}, največja velikost obliža (ang. Patch) \num{6400}, prostorska pasovna širina \num{0.0625}, aktivirano skaliranje značilk za izboljšanje hitrosti procesiranja, razcepljeni učni koeficienti na dve matrike, dekativirano zavijanje (ang. wrapping) okoli vrednosti jedra, nekompresirani deskriptorji za sivinske slike in kompresirani za barvne slike, aktivirana PCA metoda za kompresijo značilk, velikost kompresije $2$ in  stopnja učenja kompresije \num{0.15}.
 
-KCF sledilnik smo inicializirali z ročnim obkroževanjem področja tarče na prvi sliki vsakega posnetka. Področja tarče, ki jih je izbral sledilnik, smo uporabili za izrezovanje področij merjenca iz slik optičnega toka. HOOF deskriptorje smo izračunali le na izbranem področju. 
+Sledilnik KCF smo inicializirali z ročnim obkroževanjem področja tarče na prvi sliki vsakega posnetka. Področja tarče, ki jih je izbral sledilnik, smo uporabili za izrezovanje področij merjenca iz slik optičnega toka. Deskriptorje HOOF smo izračunali le na izbranem področju. 
 
 
 
 \subsubsection{Simulacija vibracij kamere}
-Kadar uporabljamo ročne kamere, pogosto pride do tresenja. Vibracije smo simulirali z majhnimi naključnimi premiki in rotacijo posameznih slik iz video zaporedja. Vsako sliko smo transformirali z Evklidsko transformacijo. Pri tem smo translacijo omejili na \SI{4}{\%} velikosti slike. Rotacija je bila omejena na \SI{0.13}{rad}. 
+Kadar uporabljamo ročne kamere, pogosto pride do tresenja. Vibracije smo simulirali z majhnimi naključnimi premiki in rotacijo posameznih slik iz video zaporedja. Pri tem smo translacijo omejili na \SI{4}{\%} velikosti slike. Rotacija je bila omejena na \SI{0.13}{rad}. 
 
-Translacijo in rotacijo smo filtrirali še s Kalmanovim filtrom, tako da smo dobili bolj realistično simulacijo. Za Kalmanov filter smo uporabili enak model, kot je predstavljen v poglavju~\ref{sec:kalmanov-filter}. Začetne variance filtra smo določili empirično tako, da smo dobili čimbolj realistične rezultate. Varianca šuma merilnega modela je znašala $\sigma_\vec{z}^2=1024$, varianca šuma modela gibanja pa $\sigma_\vec{x}^2=2$. Za kovariančno matriko predikcije smo uporabili varianco $\sigma_\vec{P}^2=2$.
+Translacijo in rotacijo smo filtrirali še s Kalmanovim filtrom, tako da smo dobili časovno bolj realistično simulacijo premikanja kamere. Za Kalmanov filter smo uporabili enak model, kot je predstavljen v poglavju~\ref{sec:kalmanov-filter}. Začetne variance filtra smo določili empirično tako, da smo dobili čimbolj realistično gibanje kamere, kot ga pričakujemo pri ročni kameri. Varianca šuma merilnega modela je znašala $\sigma_\vec{z}^2=1024$, varianca šuma modela gibanja pa $\sigma_\vec{x}^2=2$. Za kovariančno matriko predikcije smo uporabili varianco $\sigma_\vec{P}^2=2$.
 
-S simulacijo vibracij smo naredili obremenitveni test za modele z vključenim sledilnikom. Rezultati so anotirani s \textit{sh} kratico. Primer delovanja sledilnika je prikazan na sliki~\ref{fig:vibracije}.
+Posnetke s simuliranim tresenjem kamere smo testirali z vključenim sledilnikom. Rezultati so anotirani s kratico \textit{sh}. Primer delovanja sledilnika je prikazan na sliki~\ref{fig:vibracije}.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.6\columnwidth]{shake-bv-train-kcf2.png}
-	\caption[Sledenje merjencu na tresočem posnetku]{Sledenje merjencu na tresočem posnetku. Prikazana je 82. slika hrbtnega RGB posnetka prve serije. Zelen okvir prikazuje področje, ki ga je detektiral KCF sledilnik.}
+	\caption[Sledenje merjencu na tresočem se posnetku]{Sledenje merjencu na tresočem  se posnetku. Prikazana je 82. slika hrbtnega RGB posnetka prve serije. Zelen okvir prikazuje področje, ki ga je detektiral sledilnik KCF.}
 	\label{fig:vibracije}
 \end{figure} 
 
@@ -377,23 +377,23 @@ S simulacijo vibracij smo naredili obremenitveni test za modele z vključenim sl
 
 
 
-\subsection{Terenski eksperimenti squash igre}
-Pri terenskih eksperimentih smo snemali squash igro z RaspberryPi in RaspiCam napravo v resoluciji  $1920 \times 1080$. Igralcema smo merili srčni utrip s kontaktnimi senzorji. Prvega igralca z oznako SUBJ11  (starost: 45 let, velikost: \SI{176}{\cm}, teža: \SI{68}{\kg}, spol: moški, \hrtmax: \SI{179}{bpm}, $hr_{r}$: \SI{45}{bpm}) smo uporabili za učne vzorce. Drugega igralca z oznako SUBJ12 (starost: 17 let, višina: \SI{178}{\cm}, teža: \SI{66}{\kg}, spol: moški, \hrtmax: \SI{203}{bpm}, $hr_{r}$: \SI{50}{bpm}) smo uporabili za testne vzorce. 
+\subsection{Terenski eksperimenti -- squash igra}
+Pri terenskih eksperimentih smo snemali squash igro z vgradno razvojno platformo RaspberryPi in kamero RaspiCam, v resoluciji  $1920 \times 1080$. Igralcema smo merili srčni utrip s kontaktnimi senzorji. Prvega igralca z oznako SUBJ11  (starost: 45 let, velikost: \SI{176}{\cm}, teža: \SI{68}{\kg}, spol: moški, \hrtmax: \SI{179}{bpm}, $hr_{r}$: \SI{45}{bpm}) smo uporabili kot vir učnih vzorcev. Drugega igralca z oznako SUBJ12 (starost: 17 let, višina: \SI{178}{\cm}, teža: \SI{66}{\kg}, spol: moški, \hrtmax: \SI{203}{bpm}, $hr_{r}$: \SI{50}{bpm}) smo uporabili kot vir testnih vzorcev.
 
 \subsubsection{Razširitev HOOF deskriptorja}
-V terenskih testiranjih smo ugotovili, da uporaba HOOF deskriptorja v realnih okoliščinah ni zadovoljiva. Zato smo mu dodali HAFA deskriptor in dobili razširjeni deskriptor HOOF-HAFA. Primer deskriptorja je viden na sliki~\ref{fig:hoof-hafa}.
+V terenskih testiranjih smo ugotovili, da uporaba deskriptorja HOOF v realnih okoliščinah ni zadovoljiva. Zato smo mu dodali deskriptor HAFA in dobili razširjeni deskriptor HOOF-HAFA. Primer deskriptorja je viden na sliki~\ref{fig:hoof-hafa}.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.6\columnwidth]{stage1-field-bv-of-hist-sl}
-	\caption[HOOF-HAFA deskriptor za 276. sliko učnih vzorcev]{HOOF-HAFA deskriptor za 276. sliko učnih vzorcev. Deskriptor se ujema s sliko~\ref{fig:sledenje-squash}.}
+	\caption[HOOF-HAFA deskriptor za 276. sliko sliko iz zaporedja učnih vzorcev]{HOOF-HAFA deskriptor za 276. sliko iz zaporedja učnih vzorcev. Deskriptor ustreza sliki~\ref{fig:sledenje-squash}.}
 	\label{fig:hoof-hafa}
 \end{figure}
 
 \subsubsection{Procesiranje}
-Izmerjen srčni utrip smo linearno interpolirali, da smo dobili podatke za vsako sliko posnetka. Te smo filtrirali z Gaussovim filtrom s standardnim odklonom \num{16} in tako preprečili učenje na šumnih podatkih. Srčni utrip je bil individualiziran na parametre učnega igralca s pretvorbo v energijsko porabo po enačbi~\eqref{eq:charlot}. Rezultate smo nato z isto enačbo pretvorili nazaj v srčni utrip s parametri testnega igralca. S tem smo omogočili učenje na enem in testiranje na drugem igralcu. 
+Izmerjen srčni utrip smo linearno interpolirali, da smo dobili podatke za vsako sliko posnetka. Po časovni osi smo ga filtrirali z Gaussovim filtrom s standardnim odklonom \num{16}, da zmanjšamo vpliv učenja na sicer šumnih podatkih. Srčni utrip je bil individualiziran na parametre učnega igralca s pretvorbo v energijsko porabo po enačbi~\eqref{eq:charlot}. Rezultate smo nato z isto enačbo pretvorili nazaj v srčni utrip s parametri testnega igralca. S tem smo omogočili učenje na enem in testiranje na drugem igralcu. 
 
-Za določitev področja posameznega igralca smo uporabili KCF sledilnik, ki smo ga nadzorovano reinicializirali vsake \SI{3}{\s}, da smo zagotovili razumne sledilne rezultate. Zaradi prevelike resolucije posnetkov smo morali za pravilno delovanje sledilnika posnetke skalirati na \SI{25}{\%} prvotne velikosti. Rezultate sledenja smo nato transformirali nazaj na originalno resolucijo. Primer sledenja je prikazan na sliki~\ref{fig:squash}\subref{fig:sledenje-squash})
+Za določitev področja posameznega igralca smo uporabili sledilnik KCF, ki smo ga nadzorovano reinicializirali vsake \SI{3}{\s}, da smo zagotovili razumne sledilne rezultate. Zaradi prevelike resolucije posnetkov smo morali za pravilno delovanje sledilnika posnetke skalirati na \SI{25}{\%} prvotne velikosti. Rezultate sledenja smo nato transformirali nazaj na originalno resolucijo. Primer sledenja je prikazan na sliki~\ref{fig:squash}\subref{fig:sledenje-squash})
 
 \begin{figure}[!htb]
 	\centering
@@ -410,7 +410,7 @@ Za določitev področja posameznega igralca smo uporabili KCF sledilnik, ki smo 
 		\caption{Slika optičnega toka.}
 		\label{fig:of-squash}
 	\end{subfigure}
-	\caption[Slika sledenja in optičnega toka za igralca terenskih eksperimentov]{Slika rezultata sledenja in optičnega toka za igralca prve igre terenskih eksperimentov. Sledili smo modremu igralcu, ki smo ga uporabili za učne vzorce. Zelen okvir na sliki \subref{fig:sledenje-squash}) prikazuje področje detekcije 276. slike posnetka. Korespondečni optični tok področja je prikazan na sliki \subref{fig:of-squash} z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{31}{ppf}. }
+	\caption[Slika sledenja in optičnega toka za igralca terenskih eksperimentov]{Slika rezultata sledenja in optičnega toka za igralca prve igre terenskih eksperimentov. Sledili smo modremu igralcu, ki smo ga uporabili za učne vzorce. Zelen okvir na sliki \subref{fig:sledenje-squash}) prikazuje področje detekcije 276. slike posnetka. Ustrezni optični tok področja je prikazan na sliki \subref{fig:of-squash} z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{31}{ppf}. }
 	\label{fig:squash}
 \end{figure}
 
@@ -445,7 +445,7 @@ Detekcijo dihanja uporabljamo v medicinske namene, pri skrbi za starejše ali pr
 Obstaja že kar nekaj aplikacij monitoringa pacientov s pomočjo računalniškega vida. Naša glavna motivacija je bila testiranje predlagane metode na drugačnem problemu.
 
 \subsubsection{Pridobivanje podatkov}
-Za testiranje detekcije dihanja smo posneli video moškega merjenca, starosti 42 let z diagnozo spalne apneje. Snemanje se je začelo ob 4:45 zjutraj, med spanjem merjenca, in je trajalo \SI{30}{\min}. Prostor smo osvetlili s \SI{60}{\W} bližnje-infrardečim (NIR) osvetljevalnikom. Snemali smo z RaspberryPi RaspiCam  napravo (NIR verzija, brez filtra za blokiranje NIR). Hitrost snemanja je bila \SI{25}{fps}, ki smo jo zmanjšali na \SI{10}{fps} v predprocesiranju videa. Ker je dihanje počasen proces, smo z zmanjševanjem hitrosti izboljšali SNR v pridobljenem optičnem toku. Pri snemanju smo uporabili širokokotno M12 lečo z goriščno razdaljo \SI{1.8}{mm}. Snemalna aparatura je bila oddaljena približno \SI{2}{m} od opazovanega subjekta. Primer slike posnetka je prikazan na sliki~\ref{fig:dihanje-orig}.
+Za testiranje detekcije dihanja smo posneli video moškega merjenca, starosti 42 let z diagnozo spalne apneje. Snemanje se je začelo ob 4:45 zjutraj, med spanjem merjenca, in je trajalo \SI{30}{\min}. Prostor smo osvetlili s \SI{60}{\W} bližnje-infrardečim (NIR) osvetljevalnikom. Snemali smo z vgradno platformo RaspberryPi s kamero RaspiCam (NIR verzija, brez filtra za blokiranje NIR). Frekvenca zajema je bila \SI{25} slik na sekundo, ki pa smo jo zmanjšali na \SI{10} v predprocesiranju videa. Ker je dihanje počasen proces, smo z zmanjševanjem frekvence izboljšali razmerje signal-šum v pridobljenem optičnem toku. Pri snemanju smo uporabili širokokotni objektiv M12 z goriščno razdaljo \SI{1.8}{mm}. Snemalna aparatura je bila oddaljena približno \SI{2}{m} od opazovanega subjekta. Primer slike posnetka je prikazan na sliki~\ref{fig:dihanje-orig}.
 
 \begin{figure}[htb]
 	\centering
@@ -474,12 +474,12 @@ Za testiranje detekcije dihanja smo posneli video moškega merjenca, starosti 42
 \end{figure} 
 
 \subsubsection{Referenčni podatki}
-Za pridobitev referenčnih podatkov smo snemali zvok z avdio modulom za RaspberryPi. Mikrofon smo postavili v neposredno bližino merjenca. Zvok smo sinhronizirali z video posnetkom. Detekcije dihanja so predstavljale visoko amplitudo zvoka. Dobljene detekcije smo pregledali z operaterjem in potrdili, da korespondirajo z dejanskim dihanjem na avdio posnetku. Detekcije dihanja smo prevzorčili na \SI{10}{Hz}, da so bile skladne s frekvenco vzorčenja video posnetka.
+Za pridobitev referenčnih podatkov smo snemali zvok z zunanjim USB avdio modulom za RaspberryPi. Mikrofon smo postavili v neposredno bližino merjenca. Zvok smo sinhronizirali z video posnetkom. Detekcije dihanja so predstavljale visoko amplitudo zvoka. Dobljene detekcije smo pregledali in potrdili, da ustrezajo dejanskemu dihanju na avdio posnetku. Detekcije dihanja smo prevzorčili na \SI{10}{Hz}, da so bile skladne s frekvenco vzorčenja video posnetka.
 
 \subsubsection{Procesiranje}\label{sec:data-preprocessing}
 Opazovali smo področje subjektovega hrbta. Subjekt je ležal obrnjen navzdol. Področje je bilo veliko $384 \times 512$ slikovnih elementov in je pokrivalo približno $2/3$ hrbta. To je bil edini del slike, ki smo ga uporabili.
 
-Iz posnetka smo izbrali dva zaporedja slik s trajanjem \SI{5}{min}. Prvo zaporedje smo uporabili za učenje, drugo pa za testiranje. Pri uporabi optičnega toka smo spremenili parameter velikosti okna na $64$. Iz optičnega toka smo izračunali HOOF histograme. Njihove značilke smo normirali na intervalu $[-1,1]$. Učili smo s C-SVC razvrščevalnikom in RBF jedrom, pri tem pa uporabili optimizacijo parametrov. Za določitev uspešnosti delovanja smo problem formulirali kot problem binarnega razvrščanja z razredoma ``diha'' in ``ne diha''. Rezultatov nismo filtrirali.
+Iz razmeroma dolgega posnetka smo izbrali dve zaporedji slik s trajanjem \SI{5}{min}. Prvo zaporedje smo uporabili za učenje, drugo pa za testiranje. Pri uporabi optičnega toka smo spremenili parameter velikosti okna na $64$. Iz optičnega toka smo izračunali histograme HOOF. Izhod modela smo določili tako, da so referenčne vrednosti z razredoma ``diha'' in ``ne diha'' imele vrednosti 1 oziroma -1. Učili smo s C-SVC razvrščevalnikom in RBF jedrom, pri tem pa uporabili optimizacijo parametrov. Za določitev uspešnosti delovanja smo problem formulirali kot problem binarnega razvrščanja. Rezultatov nismo filtrirali.
 
 \begin{figure}[htb]
 	\centering

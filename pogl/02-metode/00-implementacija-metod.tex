@@ -1,12 +1,12 @@
 \chapter{Implementacija metod}
-V tem poglavju so opisane implementacije nekaterih metod, opisanih v poglavju~\ref{sec:metode}. Gre za tiste metode, kjer iz teoretične podlage implementacija ni bila točno razvidna. Opisane so tudi metode, ki nimajo teoretične podlage, saj gre samo za specifično implementacijo.
+V tem poglavju so opisane implementacije nekaterih metod, opisanih v poglavju~\ref{sec:metode}. Gre za tiste metode, kjer iz teoretične podlage implementacija ni bila točno razvidna. Opisane so tudi metode, kjer teoretične podlage nismo podrobneje opisovali.
 
 \subsection{Optični in prostorski tok}
 Na podlagi opisanih lastnosti metod optičnega toka v poglavju~\ref{sec:metode-of} smo se odločili, da bomo v tem delu uporabili diferencialno metodo. Kljub višji računski zahtevnosti, ki ob današnji tehnologiji ne predstavlja več takega problema, smo želeli računati gost optični tok. Z gostim optičnim tokom dobimo natančno aproksimacijo polja gibanja za celotno telo. Prav tako nimamo problemov pri estimaciji energijske porabe za hitre gibe, kot bi bilo to v primeru uporabe ujemalnih metod. Ker je glavni namen uporaba in ne implementacija diferencialne metode, smo se osredotočili na Farneb{\"a}ck algoritem, ki je dostopen v knjižnici OpenCV 3.1.0.
 
 Za optični tok smo uporabili sledeče parametre: piramidna skala $pyr\_scale=\num{0.5}$, število piramidnih slojev $levels=3$, velikost okna povprečenja $winsize=15$, število iteracij na vsakem piramidnem sloju $iterations=3$, velikost okolice slikovnih elementov $poly\_n=5$ in Gaussov standardni odklon $poly\_sigma=\num{1.2}$.
 
-Z uporabo prostorskega toka lahko bolje opišemo mehanično delo kot pri uporabi optičnega toka. Vsekakor pa potrebujemo dodatno informacijo, ki jo moramo pridobiti iz slikovnih podatkov. Za ta namen smo uporabili t.i. ``Time-of-Flight'' (ToF) kamere, ki so vgrajene v poceni Microsoft Kinect for Windows V2 senzor~\cite{Yang2015KinectV2}. Z njim pridobivamo registrirane RGB-D (rdeče, zelene, modre in globinske) podatke. Za pridobitev prostorskega toka smo uporabili PD-Flow algoritem. Njegova implementacija je javno dostopna~\cite{jaimez2015primal}. Podrobneje je opisan v poglavju~\ref{sec:pd-flow}.
+Z uporabo prostorskega toka lahko bolje opišemo mehanično delo kot pri uporabi optičnega toka. Vsekakor pa potrebujemo dodatno informacijo, ki jo moramo pridobiti iz slikovnih podatkov. Za ta namen smo uporabili kamere na podlagi časa preleta (ToF), ki so vgrajene v poceni senzor Microsoft Kinect for Windows V2~\cite{Yang2015KinectV2}. Z njim pridobivamo registrirane RGB-D (rdeče, zelene, modre in globinske) podatke. Za pridobitev prostorskega toka smo uporabili algoritem PD-Flow. Njegova implementacija je javno dostopna~\cite{jaimez2015primal}. Podrobneje je opisan v poglavju~\ref{sec:pd-flow}.
 
 
 
@@ -17,7 +17,7 @@ Pri uporabi optičnega toka smo najprej preizkusili sledilnik TLD avtorja Kalal 
 
 Testiranje sledilnikov je opisano v poglavju~\ref{sec:testiranje-sledilnikov-za-opticni-tok}, rezultati pa v poglavju~\ref{sec:rezultati-sledilnikov-za-opticni-tok}. Ugotovili smo, da najbolje deluje sledilnik KCF. Tega smo tudi uporabili v naših nadaljnjih eksperimentih.
 
-Pri uporabi prostorskega toka smo preizkusili in uporbili DS-KCF sledilnik avtorja Hannuna et. al~\cite{hannuna2016ds}. Sledilnik uporablja RGB in globinske slike.
+Pri uporabi prostorskega toka smo preizkusili in uporbili sledilnik DS-KCF avtorja Hannuna et. al~\cite{hannuna2016ds}. Sledilnik uporablja RGB in globinske slike.
 
 
 Rezultat sledenja je pri obeh uporabljenih sledilnikih (KCF in DS-KCF) okvir opazovanega subjekta. Notranjost okvirja uporabljamo za zapolnitev histogramov v deskriptorjih, preostanek toka v prizorišču zavržemo. Algoritma sledenja smo potrebovali za terenske teste, kjer položaj igralca ni znan. Kljub skrbni izbiri algoritmov je to najmanj robusten del našega pristopa---če sledilnik za posamezen časovni interval ne detektira igralca, manjkajo podatki na tem intervalu, razen če smo sledenje nadzorovali in odpravljali napake. Sledilnik ne detektira igralca kadar:
