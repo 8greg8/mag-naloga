@@ -25,7 +25,7 @@
 
 \draw [arrow] (of) -- (hoof);
 \draw [arrow] (hoof) -- (ucenje);
-\draw [arrow] (params.south east) -- (ucenje.north);
+\draw [arrow] (params) to[out=0,in=90] (ucenje);
 
 \draw [arrow] (ucenje) -- (rezultat);
 \end{tikzpicture}

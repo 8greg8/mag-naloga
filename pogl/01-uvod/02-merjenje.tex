@@ -11,10 +11,10 @@ Za potrebe terenskih raziskav se je razvila tretja skupina merilnih tehnik, t.i.
 \subsection{Srčni utrip}\label{sec:srcni-utrip}
 Pri zmerni fizični aktivnosti obstaja linearna povezava med srčnim utripom in porabo kisika~\cite{keytel2005prediction}. Kar pa težko rečemo za odnos do energijske porabe, saj obstaja velika varianca med posamezniki~\cite{levine2005measurement}. Ta je odvisna od fizioloških parametrov, kot so spol, višina, teža in telesna pripravljenost. Prav tako na pravilno estimacijo energijske porabe iz srčnega utripa vplivajo emocije in okoljske spremembe~\cite{keytel2005prediction}. Srčni utrip lahko zato uporabimo le v ozkem področju med \SI{90}{bpm} in \SI{150}{bpm}. Vendar tudi tu lahko dobimo razlike na intervalu $[-20~\% , 25~\%]$ glede na meritve indirektnih metod~\cite{keytel2005prediction}. 
 
-Ker je srčni utrip zelo slab posrednik za estimacijo energijske porabe, so raziskovalci predlagali modele, ki upoštevajo dodatne fiziološke parametre~\cite{charlot2014improvement}. Najbolj pogosto citirana modela, ki se uporabljata tudi za široko populacijo, sta \emph{Keytelova modela}~\cite{keytel2005prediction}. Pri prvem modelu~\eqref{eq:keytel1} moramo za izračun energijske porabe $W_p$ [\si{\kcal\per\min}] poznati spol $s$ ($1$ moški, $0$ ženska), starost $st$ [leto], težo $m$ [\si{\kg}], srčni utrip $hr$ [\si{bpm}] in maksimalno porabo kiska merjenca \vomax [\si{\ml\per\kg\per\min}]. Korelacijski koeficient $CORR$ tega modela glede na indirektno kalorimetrijo znaša \num{0.812}~\cite{charlot2014improvement}.
+Ker je srčni utrip zelo slab posrednik za estimacijo energijske porabe, so raziskovalci predlagali modele, ki upoštevajo dodatne fiziološke parametre~\cite{charlot2014improvement}. Najbolj pogosto citirana modela, ki se uporabljata tudi za široko populacijo, sta \emph{Keytelova modela}~\cite{keytel2005prediction}. Pri prvem modelu~\eqref{eq:keytel1} moramo za izračun energijske porabe $W$ [\si{\kcal\per\min}] poznati spol $s$ ($1$ moški, $0$ ženska), starost $st$ [leto], težo $m$ [\si{\kg}], srčni utrip $hr$ [\si{bpm}] in maksimalno porabo kiska merjenca \vomax [\si{\ml\per\kg\per\min}]. Korelacijski koeficient $CORR$ tega modela glede na indirektno kalorimetrijo znaša \num{0.812}~\cite{charlot2014improvement}.
 
 \begin{align} \label{eq:keytel1}
-W_p = & \num{-59.3954} + s~(\num{-36.3781} + \num{0.271}~st + \num{0.394}~m  \nonumber \\
+W = & \num{-59.3954} + s~(\num{-36.3781} + \num{0.271}~st + \num{0.394}~m  \nonumber \\
 & + \num{0.404}~v + \num{0.634}~hr ) + (1 - s) \nonumber \\
 &\cdot (\num{0.274}~st + \num{0.103}~m + \num{0.380}~VO_{2max} + \num{0.450}~hr)
 \end{align}
@@ -22,14 +22,14 @@ W_p = & \num{-59.3954} + s~(\num{-36.3781} + \num{0.271}~st + \num{0.394}~m  \no
 Drugi Keytelov model~\eqref{eq:keytel2} ne upošteva maksimalne porabe kisika \vomax, ki nam pogosto manjka, in je zato manj točen~\cite{keytel2005prediction}. Njegov korelacijski koeficient \corr znaša \num{0.632}~\cite{charlot2014improvement}.
 
 \begin{align}\label{eq:keytel2}
- W_p = & s~(\num{-55.0969} + \num{0.6309}~hr + \num{0.1988}~m + \num{0.2017}~st) \nonumber \\
+ W = & s~(\num{-55.0969} + \num{0.6309}~hr + \num{0.1988}~m + \num{0.2017}~st) \nonumber \\
  & + (1 - s) \cdot (\num{-20.4022} + \num{0.4472}~hr - \num{0.1263}~m + \num{0.074}~st)
 \end{align}
 
-Charlot et al.~\cite{charlot2014improvement} je z uporabo drugačnih parametrov izboljšala rezultate glede na drugi Keytelov model. Model~\eqref{eq:charlot} je tako dosegel korelacijski koeficient $\corr= \num{0.657}$. Pri tem modelu moramo za izračun energijske porabe $W_p$ [\si{\kcal\per\hour}]  poznati srčni utrip $hr$ [\si{bpm}], višino $h$ [\si{\cm}], težo $m$ [\si{\kg}], spol $s$ ($1$ moški, $2$ ženski), srčni utrip v mirovanju $hr_r$ [\si{bpm}] in teoretični maksimalni srčni utrip \hrtmax [\si{bpm}]~\cite{charlot2014improvement}. Srčni utrip v mirovanju je definiran kot srednja vrednost srčnega utripa zadnjih dveh minut pet minutnega mirovanja v ležečem položaju. Teoretični maksimalni srčni utrip lahko izračunamo na več različnih načinov. Najbolj pogosto uporabljena enačba za izračun je~\eqref{eq:hrtmax1}, vendar pa obstajajo bolj natačni modeli, kot je enačba~\eqref{eq:hrtmax2}~\cite{miller1993predicting}. 
+Charlot et al.~\cite{charlot2014improvement} je z uporabo drugačnih parametrov izboljšala rezultate glede na drugi Keytelov model. Model~\eqref{eq:charlot} je tako dosegel korelacijski koeficient $\corr= \num{0.657}$. Pri tem modelu moramo za izračun energijske porabe $W$ [\si{\kcal\per\hour}]  poznati srčni utrip $hr$ [\si{bpm}], višino $h$ [\si{\cm}], težo $m$ [\si{\kg}], spol $s$ ($1$ moški, $2$ ženski), srčni utrip v mirovanju $hr_r$ [\si{bpm}] in teoretični maksimalni srčni utrip \hrtmax [\si{bpm}]~\cite{charlot2014improvement}. Srčni utrip v mirovanju je definiran kot srednja vrednost srčnega utripa zadnjih dveh minut pet minutnega mirovanja v ležečem položaju. Teoretični maksimalni srčni utrip lahko izračunamo na več različnih načinov. Najbolj pogosto uporabljena enačba za izračun je~\eqref{eq:hrtmax1}, vendar pa obstajajo bolj natačni modeli, kot je enačba~\eqref{eq:hrtmax2}~\cite{miller1993predicting}. 
 
 \begin{align}\label{eq:charlot}
-W_p = & \num{171.62} + \num{6.87}~hr + \num{3.99}~h + \num{2.3}~m \nonumber \\
+W = & \num{171.62} + \num{6.87}~hr + \num{3.99}~h + \num{2.3}~m \nonumber \\
 & - \num{139.89}~s - \num{4.26}~hr_r - \num{4.87}~hr_{tmax}
 \end{align}
 
