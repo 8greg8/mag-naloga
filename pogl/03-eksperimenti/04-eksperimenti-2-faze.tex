@@ -101,7 +101,7 @@ Merjenci so opravili obremenilni test po protokolu Nowatzky. To je stopnjevani t
 
 \subsubsection{Pridobivanje podatkov}
 \paragraph{Fiziolo\v{s}ki parametri.}
-Obremenilni test smo izvajali s pomočjo sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2 na tekalni stezi HP Cosmos. Z obremenilnim testom smo pridobili podatke energijske porabe šestih različnih merjencev (SUBJ1, SUBJ2, SUBJ4, SUBJ7 SUBJ8 in SUBJ9). Vzorčili smo s frekvenco \SI{0.2}{\hertz}.
+Obremenilni test smo izvajali s pomočjo sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2 na tekalni stezi HP Cosmos. Z obremenilnim testom smo pridobili podatke porabe energije šestih različnih merjencev (SUBJ1, SUBJ2, SUBJ4, SUBJ7 SUBJ8 in SUBJ9). Vzorčili smo s frekvenco \SI{0.2}{\hertz}.
 
 \paragraph{Video in globinski posnetki.}
 Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Kameri sta bili časovno sinhronizirani s pomočjo protokola NTP. Pri uporabi več senzorjev Kinect njihove frekvence vzorčenja niso striktno enake, zato smo shranjevali tudi časovne štampiljke vsake posamezne slike. Primer hrbtnega in stranskega posnetka je prikazan na sliki~\ref{fig:primer-posnetka-stage2}.
@@ -203,7 +203,7 @@ Merjencem smo v P2OF sledili s sledilnikom KCF, ki smo ga nadzorovano reiniciali
 		\includegraphics[width=\columnwidth]{stage2-lab-bv-of-hist-sl}
 		\caption{Histogram hrbtne slike.}
 	\end{subfigure}
-    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Sliki \subref{fig:stage2-lab-of-sv-flo}) in \subref{fig:stage2-lab-of-bv-flo}) sta optična toka detekcije merjencev na sliki~\ref{fig:primer-posnetka-stage2}. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na sliki  \subref{fig:stage2-lab-of-sv-flo}) znašala \SI{6}{ppf} in na \subref{fig:stage2-lab-of-bv-flo}) \SI{6}{ppf}. Optičnima tokoma pripadata izračunana histograma HOOF-HAFA.}
+    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Sliki \subref{fig:stage2-lab-of-sv-flo}) in \subref{fig:stage2-lab-of-bv-flo}) sta optična toka zaznave merjencev na sliki~\ref{fig:primer-posnetka-stage2}. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na sliki  \subref{fig:stage2-lab-of-sv-flo}) znašala \SI{6}{ppf} in na \subref{fig:stage2-lab-of-bv-flo}) \SI{6}{ppf}. Optičnima tokoma pripadata izračunana histograma HOOF-HAFA.}
 	\label{fig:opticni-tok-stage2}
 \end{figure}
 
@@ -291,7 +291,7 @@ Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinici
 		\includegraphics[width=\columnwidth]{stage2-lab-bv-sf-hist-sl}
 		\caption{Histogram hrbtne slike.}
 	\end{subfigure}
-	\caption[Projekcije prostorskih tokov na slikovno ravnino]{Projekcija prostorskih tokov na slikovno ravnino. Gre za prostorska toka detekcije merjencev na sliki~\ref{fig:primer-posnetka-stage2}. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{10.4}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo}) \SI{9.4}{\m\per\s}. Projekcijama prostorskega toka pripadata izračunana histograma HOOF-HAFA.}
+	\caption[Projekcije prostorskih tokov na slikovno ravnino]{Projekcija prostorskih tokov na slikovno ravnino. Gre za prostorska toka zaznave merjencev na sliki~\ref{fig:primer-posnetka-stage2}. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{10.4}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo}) \SI{9.4}{\m\per\s}. Projekcijama prostorskega toka pripadata izračunana histograma HOOF-HAFA.}
 	\label{fig:prostorski-tok-stage2}
 \end{figure}
 
@@ -317,7 +317,7 @@ Uporabimo protokol 1, pri čemer učimo na prvih štirih merjencih in testiramo 
 \subsubsection{Določitev zakasnitve fiziološkega odziva}
 Določitve zakasnitve fiziološkega odziva smo se, glede na eksperimente 1. faze, tu lotili nekoliko drugače. Na podlagi protokola izvajanja meritev, smo pridobili podatke eno minutnega mirovanja posameznega merjenca z vzorčno frekvenco \SI{0.2}{\hertz}. Kljub temu, da je signal v stacionarnem stanju, je nihajoč zaradi narave fiziologije. Signal mirovanja smo interpolirali na vzorčno frekvenco \SI{1}{\hertz}. Določili smo mu srednjo vrednost in vrednost treh standardnih odklonov. S tem smo dobili interval nedoločenosti, v katerem ne moremo določiti ali je pri spremembi amplitude signala prišlo zaradi fizioloških dejavnikov ali zaradi dejanskega odziva na vzbujalni signal. 
 
-Na podlagi slik~\ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno meritev določili kot časovni interval od trenutka spremembe hitrosti tekalne steze do trenutka, ko je bila vrednost fiziološkega parametra prvič nad intervalom nedoločenosti. Zakasnitev smo, zaradi treh standardnih odklonov, lahko določili s \SI{99.73}{\%} zagotovostjo za posameznega merjenca. Zakasnitve vseh merjencev smo povprečili in dobili vrednost \SI{26}{\s} za energijsko porabo.
+Na podlagi slik~\ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno meritev določili kot časovni interval od trenutka spremembe hitrosti tekalne steze do trenutka, ko je bila vrednost fiziološkega parametra prvič nad intervalom nedoločenosti. Zakasnitev smo, zaradi treh standardnih odklonov, lahko določili s \SI{99.73}{\%} zagotovostjo za posameznega merjenca. Zakasnitve vseh merjencev smo povprečili in dobili vrednost \SI{26}{\s} za porabo energije.
 
 \begin{figure}[!htbp]
 	\centering
@@ -395,21 +395,21 @@ Na podlagi slik~\ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno mer
 	\centering
 	\begin{subfigure}[t]{0.3\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-of-svbv-flo-corrected.png}
+		\includegraphics[width=0.9\columnwidth, frame]{./Slike/stage2-field-of-svbv-flo-corrected.png}
 		\caption{Optični tok.}
 		\label{fig:stage2-field-of}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.3\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-sf-svbv-flo-corrected.png}
+		\includegraphics[width=0.9\columnwidth, frame]{./Slike/stage2-field-sf-svbv-flo-corrected.png}
 		\caption{Projekcija prostorskega toka.}
 		\label{fig:stage2-field-pd}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.3\columnwidth}
 		\centering
-		\includegraphics[width=\columnwidth, frame]{./Slike/stage2-field-sf-pd-tr-corrected.jpg}
+		\includegraphics[width=0.9\columnwidth, frame]{./Slike/stage2-field-sf-pd-tr-corrected.jpg}
 		\caption{Prostorski tok.}
 	\end{subfigure}
 	\caption[Optični tok, prostorski tok in njegova projekcija]{Optični tok, prostorski tok in njegova projekcija na slikovno ravnino. V spodnjem levem kotu optičnega toka in projekcije prostorskega toka sta legendi barvnega kodiranja. Uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka na sliki  \subref{fig:stage2-field-of}) je  \SI{10}{ppf}. Maksimalna amplituda projekcije prostorskega toka je \SI{13.7}{\m\per\s}. Sliko prostorskega toka \subref{fig:stage2-field-pd}) smo pridobili s programom \texttt{Scene-Flow-Impair}, avtorja~\cite{jaimez2015primal}, ki smo ga prilagodili za kamero Kinect V2. Slika je 8-bitna RGB. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$, kanal G $\mu_y$, ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
@@ -454,7 +454,7 @@ Na podlagi slik~\ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno mer
 
 \subsubsection{Pridobivanje podatkov.}
 \paragraph{Fiziolo\v{ski} parametri.}
-Fiziološke parametre smo pridobili s pomočjo prenosnega sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Sistem je prikazan na sliki~\ref{fig:maske}. Frekvenca vzorčenja se je spreminjala, v povprečju pa je znašala \SI{0.5}{\hertz}. S testom smo pridobili podatke energijske porabe šestih različnih merjencev (SUBJ1, SUBJ2, SUBJ7, SUBJ8, SUBJ9 in SUBJ10).
+Fiziološke parametre smo pridobili s pomočjo prenosnega sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2. Sistem je prikazan na sliki~\ref{fig:maske}. Frekvenca vzorčenja se je spreminjala, v povprečju pa je znašala \SI{0.5}{\hertz}. S testom smo pridobili podatke porabe energije šestih različnih merjencev (SUBJ1, SUBJ2, SUBJ7, SUBJ8, SUBJ9 in SUBJ10).
 
 
 \begin{figure}[!htb]
@@ -465,7 +465,7 @@ Fiziološke parametre smo pridobili s pomočjo prenosnega sistema za direktno er
 \end{figure}
 
 \paragraph{Video posnetki.}
-Igrišče smo snemali z dvema kamerama Microsoft Xbox Kinect V2, ki sta bili oddaljeni ena od druge za približno \SI{2}{m}. Vsaka kamera je pokrivala svojo polovico igrišča. Razdalja od tal je znašala približno \SI{3}{m}. Kameri sta bili pozicionirani nad zaščitnim steklom. Takšna postavitev je preprečila neposredni odboj laserske svetlobe, ki jo oddaja Kinect V2 od stekla, s katerim je zaščiteno igrišče. Kot $\theta$ (rotacija okoli x osi) je bil približno $30\stopinj$ tako, da so kamere pokrivale prvo polovico igrišča do linije serviranja. Postavitev kamer je prikazana na sliki~\ref{fig:field-postavitev-kamer}.
+Igrišče smo snemali z dvema kamerama Microsoft Xbox Kinect V2, ki sta bili oddaljeni ena od druge za približno \SI{2}{m}. Vsaka kamera je pokrivala svojo polovico igrišča. Razdalja od tal je znašala približno \SI{3}{m}. Kameri sta bili pozicionirani nad zaščitnim steklom. Takšna postavitev je preprečila neposredni odboj laserske svetlobe, ki jo oddaja Kinect V2 od stekla, s katerim je zaščiteno igrišče. Kot $\theta$ (rotacija okoli x osi) je bil približno $30\stopinj$ tako, da so kamere pokrivale prvo polovico igrišča do linije serviranja. Postavitev kamer je prikazana na sliki~\ref{fig:field-postavitev-kamer}. Pridobili smo barvne slike RGB in globinske slike DEPTH. Snemali smo v ločljivosti $512 \times 424$. Frekvenca zajema slik je znašala \SI{30} slik na sekundo. Kameri smo časovno sinhronizirali s pomočjo protokola NTP.
 
 \begin{figure}[!htb]
 	\centering
@@ -475,7 +475,7 @@ Igrišče smo snemali z dvema kamerama Microsoft Xbox Kinect V2, ki sta bili odd
 \end{figure}
 
 
-Pridobili smo barvne slike RGB in globinske slike DEPTH. Snemali smo v ločljivosti $512 \times 424$. Frekvenca zajema slik je znašala \SI{30} slik na sekundo. Kameri smo časovno sinhronizirali s pomočjo protokola NTP.
+
 
 
 

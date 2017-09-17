@@ -1,7 +1,7 @@
 \section{Eksperimenti 1. faze}
 
 \subsection{Optimizacija deskriptorjev HOOF}\label{sec:optimizacija-hoof}
-Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:rezultati-optimizacija-hoof}. Za evaluacijo smo uporabili učne vzorce hrbtne kamere preliminarnih laboratorijskih testov. Ocenjevali smo samo energijsko porabo $W$. Pridobljene značilke deskriptorjev smo normirali na intervalu $[-1,1]$ in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Metode so podrobneje predstavljene v poglavju~\ref{sec:matematicni-modeli}. Za določitev optimalnih parametrov %, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, 
+Parameter $N_{HOOF}$ smo določili na podlagi rezultatov iz poglavja~\ref{sec:rezultati-optimizacija-hoof}. Za evaluacijo smo uporabili učne vzorce hrbtne kamere preliminarnih laboratorijskih testov. Ocenjevali smo samo porabo energije $W$. Pridobljene značilke deskriptorjev smo normirali na intervalu $[-1,1]$ in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Metode so podrobneje predstavljene v poglavju~\ref{sec:matematicni-modeli}. Za določitev optimalnih parametrov %, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, 
 smo uporabili optimizacijsko metodo mrežnega iskanja~\cite{hsu2003practical}. Rezultate smo filtrirali še s Kalmanovim filtrom, ki je predstavljen v~\ref{sec:kalmanov-filter}.
 
 \begin{comment}
@@ -56,7 +56,7 @@ Parameter \nhafa smo določili na podlagi rezultatov~\ref{sec:rezultati-optimiza
 \subsection{Razširitev deskriptorja HOOF}\label{sec:razsiritev-hoof-rezultati}
 Deskriptorju HOOF smo pripeli deskriptor HAFA in tako dobili razširjeni deskriptor HOOF-HAFA, ki po evaluaciji iz poglavja~\ref{sec:rezultati-razsiritev-hoof} v splošnem daje boljše rezultate.
 
-Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne kamere terenskih testov. Evaluirali smo za podatke srčnega utripa $hr$. Srčni utrip smo za gradnjo modelov pretvorili v energijsko porabo $W$ po enačbi~\eqref{eq:charlot}. Pridobljene značilke smo normirali na intervalu [0,1] in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Za določitev optimalnih parametrov %, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, 
+Pri evaluaciji deskriptorjev HOOF in HOOF-HAFA smo uporabili učne vzorce hrbtne kamere terenskih testov. Evaluirali smo za podatke srčnega utripa $hr$. Srčni utrip smo za gradnjo modelov pretvorili v porabo energije $W$ po enačbi~\eqref{eq:charlot}. Pridobljene značilke smo normirali na intervalu [0,1] in jih uporabili za učenje regresijskega modela z metodo podpornih vektorjev $\epsilon$-SVR in jedrom RBF. Za določitev optimalnih parametrov %, ki so predstavljeni v tabeli~\ref{tab:nhoof-param}, 
 smo uporabili optimizacijsko metodo mrežnega iskanja~\cite{hsu2003practical}. Rezultate smo filtrirali še s Gaussovim jedrom (predstavljen v~\ref{sec:gaussov-filter}) z varianco $\sigma=16$. 
 
 \begin{comment}
@@ -119,7 +119,7 @@ Sledilnike smo testirali na sekvencah slik \textit{handball1} in \textit{handbal
 
 
 
-Pri testiranju sekvenc slik podatkovne baze VOT2016 smo poenostavili rotirajoča se referenčna področja detekcij na nerotirajoča se področja. Pri tem smo za zgornji levi kot $T_0(x,y)$ in spodnji desni kot $T_1(x,y)$ uporabili enačbo~\eqref{eq:vot-bb}, kjer so $\left( x_i, y_i\right), \forall i=1,\ldots,4$ oglišča rotirajočega se referenčnega področja. 
+Pri testiranju sekvenc slik podatkovne baze VOT2016 smo poenostavili rotirajoča se referenčna področja zaznav na nerotirajoča se področja. Pri tem smo za zgornji levi kot $T_0(x,y)$ in spodnji desni kot $T_1(x,y)$ uporabili enačbo~\eqref{eq:vot-bb}, kjer so $\left( x_i, y_i\right), \forall i=1,\ldots,4$ oglišča rotirajočega se referenčnega področja. 
 
 \begin{equation}
 \begin{aligned}
@@ -148,7 +148,7 @@ Prve eksperimente smo izvedli v laboratoriju za fiziologijo na Fakulteti za špo
 
 \subsubsection{Pridobivanje podatkov}
 \paragraph{Fiziolo\v{s}ki parametri.}
-Srčni utrip in energijsko porabo smo merili za izbranega športnika (starost: 26 let, višina: \SI{177}{\cm}, teža: \SI{79.1}{\kg}, \vomax: \SI{3705}{\ml\per\min}). Zaradi doslednosti in lažje dekumentacije ga označimo kot SUBJ0. Energijsko porabo smo merili z indirektno kalorimetrijo, in sicer z ``breath by breath'' Cosmed CPET Metabolic Cart~\cite{beaver1973line}. Pri tem smo uporabili obrazno masko Hans Rudolph s predpisanim minimalnim VD (mrtvim prostorom). Naklon tekalne steze je bil od \SI{1.5}{\%} do \SI{2}{\%}.
+Srčni utrip in porabo energije smo merili za izbranega športnika (starost: 26 let, višina: \SI{177}{\cm}, teža: \SI{79.1}{\kg}, \vomax: \SI{3705}{\ml\per\min}). Zaradi doslednosti in lažje dekumentacije ga označimo kot SUBJ0. porabo energije smo merili z indirektno kalorimetrijo, in sicer z ``breath by breath'' Cosmed CPET Metabolic Cart~\cite{beaver1973line}. Pri tem smo uporabili obrazno masko Hans Rudolph s predpisanim minimalnim VD (mrtvim prostorom). Naklon tekalne steze je bil od \SI{1.5}{\%} do \SI{2}{\%}.
 
 \paragraph{Video posnetki.}
 Tekalno stezo s SUBJ0 smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Video posnetke smo časovno sinhronizirali glede na začetno sliko meritev, vendar pa se zaradi uporabe kamer IP (Axis 207W) časovne neusklajenosti do potankosti nismo mogli znebiti. Pridobili smo posnetke barvnih slik posnetkov RGB in bližnje-infrardeče posnetke NIR hrbtnega dela, ki so prikazani na sliki~\ref{fig:primer-posnetka-rgb-ir}. Snemali smo v ločljivosti $480 \times 640$. Frekvenca slik posnetkov RGB je bila \SI{30} slik na sekundo, za posnetke NIR pa je frekvenca znašala \SI{25} slik na sekundo.  
@@ -267,7 +267,7 @@ Zakasnitev smo določili kot časovni interval od trenutka spremembe hitrosti te
 		\caption{Testni vzorci.}
 		\label{fig:odziv-testnih-stage1}
 	\end{subfigure}
-	\caption[Odziv srčnega utripa in izmerjene energijske porabe na hitrost tekalne steze]{Odziv srčnega utripa in izmerjene energijske porabe na hitrost tekalne steze.}
+	\caption[Odziv srčnega utripa in izmerjene porabe energije na hitrost tekalne steze]{Odziv srčnega utripa in izmerjene porabe energije na hitrost tekalne steze.}
 	\label{fig:odziv-stage1}
 \end{figure} 
 
@@ -377,8 +377,8 @@ Posnetke s simuliranim tresenjem kamere smo testirali z vključenim sledilnikom.
 
 
 
-\subsection{Terenski eksperimenti -- squash igra}
-Pri terenskih eksperimentih smo snemali squash igro z vgradno razvojno platformo RaspberryPi in kamero RaspiCam, v resoluciji  $1920 \times 1080$. Igralcema smo merili srčni utrip s kontaktnimi senzorji. Prvega igralca z oznako SUBJ11  (starost: 45 let, velikost: \SI{176}{\cm}, teža: \SI{68}{\kg}, spol: moški, \hrtmax: \SI{179}{bpm}, $hr_{r}$: \SI{45}{bpm}) smo uporabili kot vir učnih vzorcev. Drugega igralca z oznako SUBJ12 (starost: 17 let, višina: \SI{178}{\cm}, teža: \SI{66}{\kg}, spol: moški, \hrtmax: \SI{203}{bpm}, $hr_{r}$: \SI{50}{bpm}) smo uporabili kot vir testnih vzorcev.
+\subsection{Terenski eksperimenti -- igra squash}
+Pri terenskih eksperimentih smo snemali igro squash z vgradno razvojno platformo RaspberryPi in kamero RaspiCam, v resoluciji  $1920 \times 1080$. Igralcema smo merili srčni utrip s kontaktnimi senzorji. Prvega igralca z oznako SUBJ11  (starost: 45 let, velikost: \SI{176}{\cm}, teža: \SI{68}{\kg}, spol: moški, \hrtmax: \SI{179}{bpm}, $hr_{r}$: \SI{45}{bpm}) smo uporabili kot vir učnih vzorcev. Drugega igralca z oznako SUBJ12 (starost: 17 let, višina: \SI{178}{\cm}, teža: \SI{66}{\kg}, spol: moški, \hrtmax: \SI{203}{bpm}, $hr_{r}$: \SI{50}{bpm}) smo uporabili kot vir testnih vzorcev.
 
 \subsubsection{Razširitev deskriptorja HOOF}
 V terenskih testiranjih smo ugotovili, da uporaba deskriptorja HOOF v realnih okoliščinah ni zadovoljiva. Zato smo mu dodali deskriptor HAFA in dobili razširjeni deskriptor HOOF-HAFA. Primer deskriptorja je viden na sliki~\ref{fig:hoof-hafa}.
@@ -410,7 +410,7 @@ Za določitev področja posameznega igralca smo uporabili sledilnik KCF, ki smo 
 		\caption{Slika optičnega toka.}
 		\label{fig:of-squash}
 	\end{subfigure}
-	\caption[Slika sledenja in optičnega toka za igralca terenskih eksperimentov]{Slika rezultata sledenja in optičnega toka za igralca prve igre terenskih eksperimentov. Sledili smo modremu igralcu, ki smo ga uporabili za učne vzorce. Zelen okvir na sliki \subref{fig:sledenje-squash}) prikazuje področje detekcije 276. slike posnetka. Ustrezni optični tok področja je prikazan na sliki \subref{fig:of-squash} z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{31}{ppf}. }
+	\caption[Slika sledenja in optičnega toka za igralca terenskih eksperimentov]{Slika rezultata sledenja in optičnega toka za igralca prve igre terenskih eksperimentov. Sledili smo modremu igralcu, ki smo ga uporabili za učne vzorce. Zelen okvir na sliki \subref{fig:sledenje-squash}) prikazuje področje zaznave 276. slike posnetka. Ustrezni optični tok področja je prikazan na sliki \subref{fig:of-squash} z legendo barvnega kodiranja v spodnjem levem kotu. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na tej sliki znašala \SI{31}{ppf}. }
 	\label{fig:squash}
 \end{figure}
 
@@ -439,13 +439,13 @@ Po določitvi optičnega toka (slika~\ref{fig:squash}) smo uporabili deskriptorj
 
 
 
-\subsection{Detekcija dihanja}
-Detekcijo dihanja uporabljamo za medicinske namene, pri skrbi za starejše ali pri nadzornih kamerah. Koncept optičnega merjenja nam omogoča, da aplikacijo uporabimo iz daljših razdalj, dokler nam optični sistem to omogoča. 
+\subsection{Zaznavanje dihanja}
+Zaznavanje dihanja uporabljamo za medicinske namene, pri skrbi za starejše ali pri nadzornih kamerah. Koncept optičnega merjenja nam omogoča, da aplikacijo uporabimo iz daljših razdalj, dokler nam optični sistem to omogoča. 
 
 Obstaja že kar nekaj aplikacij monitoringa pacientov s pomočjo računalniškega vida. Naša glavna motivacija je bila testiranje predlagane metode na drugačnem problemu.
 
 \subsubsection{Pridobivanje podatkov}
-Za testiranje detekcije dihanja smo posneli video moškega merjenca, starosti 42 let z diagnozo spalne apneje. Snemanje se je začelo ob 4:45 zjutraj, med spanjem merjenca, in je trajalo \SI{30}{\min}. Prostor smo osvetlili s \SI{60}{\W} bližnje-infrardečim osvetljevalnikom (NIR). Snemali smo z vgradno platformo RaspberryPi s kamero RaspiCam (NIR verzija, brez filtra za blokiranje NIR). Frekvenca zajema je bila \SI{25} slik na sekundo, ki pa smo jo zmanjšali na \SI{10} v predprocesiranju videa. Ker je dihanje počasen proces, smo z zmanjševanjem frekvence izboljšali razmerje signal-šum v pridobljenem optičnem toku. Pri snemanju smo uporabili širokokotni objektiv M12 z goriščno razdaljo \SI{1.8}{mm}. Snemalna aparatura je bila oddaljena približno \SI{2}{m} od opazovanega subjekta. Primer slike posnetka je prikazan na sliki~\ref{fig:dihanje-orig}.
+Za testiranje zaznavanja dihanja smo posneli video moškega merjenca, starosti 42 let z diagnozo spalne apneje. Snemanje se je začelo ob 4:45 zjutraj, med spanjem merjenca, in je trajalo \SI{30}{\min}. Prostor smo osvetlili s \SI{60}{\W} bližnje-infrardečim osvetljevalnikom (NIR). Snemali smo z vgradno platformo RaspberryPi s kamero RaspiCam (NIR verzija, brez filtra za blokiranje NIR). Frekvenca zajema je bila \SI{25} slik na sekundo, ki pa smo jo zmanjšali na \SI{10} v predprocesiranju videa. Ker je dihanje počasen proces, smo z zmanjševanjem frekvence izboljšali razmerje signal-šum v pridobljenem optičnem toku. Pri snemanju smo uporabili širokokotni objektiv M12 z goriščno razdaljo \SI{1.8}{mm}. Snemalna aparatura je bila oddaljena približno \SI{2}{m} od opazovanega subjekta. Primer slike posnetka je prikazan na sliki~\ref{fig:dihanje-orig}.
 
 \begin{figure}[htb]
 	\centering
@@ -474,7 +474,7 @@ Za testiranje detekcije dihanja smo posneli video moškega merjenca, starosti 42
 \end{figure} 
 
 \subsubsection{Referenčni podatki}
-Za pridobitev referenčnih podatkov smo snemali zvok z zunanjim avdio modulom USB za RaspberryPi. Mikrofon smo postavili v neposredno bližino merjenca. Zvok smo sinhronizirali z video posnetkom. Detekcije dihanja so predstavljale visoko amplitudo zvoka. Dobljene zaznave smo pregledali in potrdili, da ustrezajo dejanskemu dihanju na avdio posnetku. Detekcije dihanja smo prevzorčili na \SI{10}{Hz}, da so bile skladne s frekvenco vzorčenja video posnetka.
+Za pridobitev referenčnih podatkov smo snemali zvok z zunanjim avdio modulom USB za RaspberryPi. Mikrofon smo postavili v neposredno bližino merjenca. Zvok smo sinhronizirali z video posnetkom. Zaznavanje dihanja so predstavljale visoko amplitudo zvoka. Dobljene zaznave smo pregledali in potrdili, da ustrezajo dejanskemu dihanju na avdio posnetku. Zaznavanje dihanja smo prevzorčili na \SI{10}{Hz}, da so bile skladne s frekvenco vzorčenja video posnetka.
 
 \subsubsection{Procesiranje}\label{sec:data-preprocessing}
 Opazovali smo področje subjektovega hrbta. Subjekt je ležal obrnjen navzdol. Področje je bilo veliko $384 \times 512$ slikovnih elementov in je pokrivalo približno $2/3$ hrbta. To je bil edini del slike, ki smo ga uporabili.
@@ -484,7 +484,7 @@ Iz razmeroma dolgega posnetka smo izbrali dve zaporedji slik s trajanjem \SI{5}{
 \begin{figure}[htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-dihanje.tikz}}
-	\caption[Diagram testiranja pri uporabi metode za detekcijo dihanja]{Diagram testiranja pri uporabi metode za detekcijo dihanja.}
+	\caption[Diagram testiranja pri uporabi metode za zaznavanje dihanja]{Diagram testiranja pri uporabi metode za zaznavanje dihanja.}
 	\label{fig:dihanje-postopek}
 \end{figure}
 

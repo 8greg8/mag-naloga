@@ -271,7 +271,7 @@ Boljše delovanje KCF je razumljivo, saj prvi testi temeljijo na posnetkih rokom
 
 
 \subsection{Observabilnost}
-Rezultate observabilnosti vidimo v tabeli~\ref{tab:observabilnost}. Validacijske metrike so povprečne vrednosti modelov \textit{sv} in \textit{bv}, brez križnega testiranja.  Pearsonov korelacijski koeficient smo povprečili s Fisherjevo $z$ transformacijo. Tako energijska poraba kot srčni utrip imata visoko pozitivno korelacijo, kar pomeni, da sta oba parametra observabilna. Modeli \textit{hr} se po rezultatih \corr bolje ujemajo z referenco, vendar moramo pri tem upoštevati tudi razmerje \nsv, ki je tu večje. Če primerjamo metrike napak, modeli \textit{eem} prekašajo modele \textit{hr}. S tem lahko potrdimo, da srčni utrip ni dober fiziološki parameter za določevanje fizične aktivnosti. Najboljši rezultati predikcije porabe energije in srčnega utripa so prikazani na sliki~\ref{fig:stage1-observability}.
+Rezultate observabilnosti vidimo v tabeli~\ref{tab:observabilnost}. Validacijske metrike so povprečne vrednosti modelov \textit{sv} in \textit{bv}, brez križnega testiranja.  Pearsonov korelacijski koeficient smo povprečili s Fisherjevo $z$ transformacijo. Tako poraba energije kot srčni utrip imata visoko pozitivno korelacijo, kar pomeni, da sta oba parametra observabilna. Modeli \textit{hr} se po rezultatih \corr bolje ujemajo z referenco, vendar moramo pri tem upoštevati tudi razmerje \nsv, ki je tu večje. Če primerjamo metrike napak, modeli \textit{eem} prekašajo modele \textit{hr}. S tem lahko potrdimo, da srčni utrip ni dober fiziološki parameter za določevanje fizične aktivnosti. Najboljši rezultati predikcije porabe energije in srčnega utripa so prikazani na sliki~\ref{fig:stage1-observability}.
 
 \begin{table}[!htbp]
 \centering
@@ -517,20 +517,20 @@ Terenski rezultati igre squash z različnimi deskriptorji so predstavljeni v tab
 
 
 
-\subsection{Eksperiment detekcije dihanja}
-Za detekcijo dihanja, ki smo jo formulirali kot problem razvrščanja v razrede, smo uporabili standardne metrike za evaluacijo dvorazrednega problema. ``Diha'' smo označili kot pozitivno vrednost, ``ne diha'' pa kot negativno. Dobili smo sledeče rezultate: Razmerje napačno potrjenih $FPR = \SI{45.1}{\%}$, razmerje pravilno potrjenih $TPR = \SI{54.9}{\%}$, razmerje napačno zavrnjenih $FNR = \SI{5.5}{\%}$, razmerje pravilno zavrnjenih $TNR = \SI{94.5}{\%}$. Rezultati so prav tako prikazani s kontigenčno matriko na sliki~\ref{fig:breathtest-confusion} in krivuljo ROC ~\ref{fig:breathtest-roc}.
+\subsection{Eksperiment zaznavanja dihanja}
+Za zaznavanje dihanja, ki smo jo formulirali kot problem razvrščanja v razrede, smo uporabili standardne metrike za evaluacijo dvorazrednega problema. ``Diha'' smo označili kot pozitivno vrednost, ``ne diha'' pa kot negativno. Dobili smo sledeče rezultate: Razmerje napačno potrjenih $FPR = \SI{45.1}{\%}$, razmerje pravilno potrjenih $TPR = \SI{54.9}{\%}$, razmerje napačno zavrnjenih $FNR = \SI{5.5}{\%}$, razmerje pravilno zavrnjenih $TNR = \SI{94.5}{\%}$. Rezultati so prav tako prikazani s kontigenčno matriko na sliki~\ref{fig:breathtest-confusion} in krivuljo ROC ~\ref{fig:breathtest-roc}.
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{breathtest-confusion-sl}
-	\caption[Kontigenčna matrika za detekcijo dihanja]{Kontigenčna matrika med ciljnim in izhodnim razredom za detekcijo dihanja. Razred $1$ pomeni ``diha''. Razred $0$ pomeni ``ne diha''.}
+	\caption[Kontigenčna matrika za zaznavanje dihanja]{Kontigenčna matrika med ciljnim in izhodnim razredom za zaznavanje dihanja. Razred $1$ pomeni ``diha''. Razred $0$ pomeni ``ne diha''.}
 	\label{fig:breathtest-confusion}
 \end{figure}
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{breathtest-roc-sl}
-	\caption[Krivulja ROC za detekcijo dihanja]{Krivulja ROC za detekcijo dihanja.}
+	\caption[Krivulja ROC za zaznavanje dihanja]{Krivulja ROC za zaznavanje dihanja.}
 	\label{fig:breathtest-roc}
 \end{figure}
 
@@ -888,14 +888,14 @@ Zaključimo lahko, da je generaliziran model z uporabo prostorskega toka dokaj d
 		\tdata{stage2-field-3-tot}
 		\bottomrule
 	\end{tabular}
-	\caption[Totalna energijska poraba za protokol 3 2. terenske faze]{Totalna energijska poraba za protokol 3 2. terenske faze.}
+	\caption[Totalna poraba energije za protokol 3 2. terenske faze]{Totalna poraba energije za protokol 3 2. terenske faze.}
 	\label{tab:stage2-field-3-tot}
 \end{table}
 \end{comment}
 
 \begin{figure}[!htbp]
 	\centering
-	\includegraphics[width=0.5\columnwidth]{eetotbar-sl}
+	\includegraphics[width=0.75\columnwidth]{eetotbar-sl}
 	\caption{Totalna poraba energije $W_{tot}$ za SUBJ8 in SUBJ9 pri uporabi generaliziranega modela.}
 	\label{fig:stage2-field3-tot}
 \end{figure}

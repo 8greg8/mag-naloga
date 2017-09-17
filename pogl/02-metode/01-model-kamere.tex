@@ -12,7 +12,7 @@ Za geometrijski model kamere uporabimo perspektivni model, ki je predstavljen na
 
 \emph{Koordinatni sistem kamere} (KSK) je postavljen tako, da \emph{optična os} sovpada z $Z$ osjo. Zaradi poenostavitve KSK sovpada z globalnim koordinatnim sistemom.  Središče KSK $\vec{O}$ se imenuje projekcijsko središče, skozi katerega se točka prizora $\vec{p} = \left[ X~Y~Z \right]^\top$ projicira na slikovno ravnino~\cite{trucco1998introductory}.
 
-\emph{Slikovna ravnina} (ang. Image plane) je ravnina $\varOmega \subset \mathbb{R}^2$, ki leži na razdalji $f$ od projekcijskega središča $O$. Razdalja $f$ se imenuje goriščna razdalja (ang. Focal length)~\cite{trucco1998introductory}. Točka $\vec{c} = \left[c_x~c_y \right]^\top$ se nahaja na poziciji, kjer optična os prebada slikovno ravnino $\varOmega$. Imenuje se optično središče slikovne ravnine (ang. Principal point). Točka $\vec{q} = [x~y]^\top$ se nahaja na poziciji, kjer daljica med projekcijskim središčem $\vec{O}$ in točko prizora $\vec{p}$ prebada slikovno ravnino $\varOmega$~\cite{trucco1998introductory}. Točka je slika prizora $\vec{q} = [x~y]^\top$, kjer sta $x$ in $y$ slikovni koordinati. Kadar je $\vec{c} = \left[0~0\right]^\top$, lahko sliko $\vec{q}$ na slikovni ravnini $\varOmega$ predstavimo z enačbo~\eqref{eq:slika-delca}.
+\emph{Slikovna ravnina} (angl. Image plane) je ravnina $\varOmega \subset \mathbb{R}^2$, ki leži na razdalji $f$ od projekcijskega središča $O$. Razdalja $f$ se imenuje goriščna razdalja (angl. Focal length)~\cite{trucco1998introductory}. Točka $\vec{c} = \left[c_x~c_y \right]^\top$ se nahaja na poziciji, kjer optična os prebada slikovno ravnino $\varOmega$. Imenuje se optično središče slikovne ravnine (angl. Principal point). Točka $\vec{q} = [x~y]^\top$ se nahaja na poziciji, kjer daljica med projekcijskim središčem $\vec{O}$ in točko prizora $\vec{p}$ prebada slikovno ravnino $\varOmega$~\cite{trucco1998introductory}. Točka je slika prizora $\vec{q} = [x~y]^\top$, kjer sta $x$ in $y$ slikovni koordinati. Kadar je $\vec{c} = \left[0~0\right]^\top$, lahko sliko $\vec{q}$ na slikovni ravnini $\varOmega$ predstavimo z enačbo~\eqref{eq:slika-delca}.
 
 \begin{equation}
 	\vec{q} = f \frac{\vec{p}}{Z}.
@@ -76,7 +76,7 @@ Koordinatni sistem kamere lahko transliramo in rotiramo tako, da ne sovpada več
 
 Translacijo koordinatnega sistema kamere lahko opišemo z vektorjem $\vec{t} = \left[t_x~t_y~t_z\right]^\top$~\cite{trucco1998introductory}. 
 
-Rotacijo koordinatnega sistema kamere lahko opišemo z Eulerjevimi koti $\phi$, $\theta$ in $\psi$~\cite{bajd2011osnove}. S kotom $\phi$ rotiramo okoli $z$ osi (ang. Roll). Rotacija je predstavljena z enačbo~\eqref{eq:roll}. Kot $\theta$ predstavlja rotacijo okoli $x$ osi (ang. Pitch). Rotacija je opisana z enačbo~\eqref{eq:pitch}. Kot $\psi$ je rotacija okoli $y$ osi (ang. Yaw) in je opisana z enačbo~\eqref{eq:yaw}.
+Rotacijo koordinatnega sistema kamere lahko opišemo z Eulerjevimi koti $\phi$, $\theta$ in $\psi$~\cite{bajd2011osnove}. S kotom $\phi$ rotiramo okoli $z$ osi (angl. Roll). Rotacija je predstavljena z enačbo~\eqref{eq:roll}. Kot $\theta$ predstavlja rotacijo okoli $x$ osi (angl. Pitch). Rotacija je opisana z enačbo~\eqref{eq:pitch}. Kot $\psi$ je rotacija okoli $y$ osi (angl. Yaw) in je opisana z enačbo~\eqref{eq:yaw}.
 
 \begin{equation}
 \vec{R}_\phi = \begin{bmatrix}
