@@ -79,9 +79,9 @@ Kadar imamo na slikovni ravnini več premikajočih slikovnih elementov, vektorsk
 
 \subsection{Metode estimacije optičnega toka}\label{sec:metode-of}
 
-Metode estimacije optičnega toka $\vec{O}$ v grobem delimo na diferencialne in {ujemalne} metode~\cite{trucco1998introductory}. Z \emph{diferencialnimi metodami} računamo optični tok z uporabo parcialnih diferencialnih enačb ali minimizacijskimi metodami. Z metodami dobimo \emph{gost optični tok}, kar pomeni, da je optični tok določen za vsak slikovni element~\cite{trucco1998introductory}. Te metode zelo natačno opisujejo optični tok in ne proizvajajo vrednosti, ki lokalno odstopajo, zato je optični tok gladek~\cite{brox2011large}.  Glavni problem teh metod je, da so računsko zelo zahtevne~\cite{trucco1998introductory}.
+Metode estimacije optičnega toka $\vec{O}$ v grobem delimo na diferencialne in {ujemalne} metode~\cite{trucco1998introductory}. Z \emph{diferencialnimi metodami} računamo optični tok z uporabo parcialnih diferencialnih enačb ali z uporabo minimizacijskih metod. Z metodami dobimo \emph{gost optični tok}, kar pomeni, da je optični tok določen za vsak slikovni element~\cite{trucco1998introductory}. Te metode zelo natančno opisujejo optični tok in ne proizvajajo vrednosti, ki lokalno odstopajo, zato je optični tok gladek~\cite{brox2011large}.  Glavna težava teh metod je, da so računsko zelo zahtevne~\cite{trucco1998introductory}.
 
-Pri \emph{ujemalnih metodah} računamo optični tok le na značilnih točkah~\cite{trucco1998introductory}. Zaradi uporabe značilk so te metode lahko bolj efektivne, saj ne potrebujemo določevanja korespondenc za vse piksle. Prav tako se lahko uporabijo za računanje optičnega toka v realnem času, saj niso računsko zahtevne. Po~\cite{trucco1998introductory} je največja težava teh metod, da računajo \emph{redek optični tok}, saj je ta določen le za slikovne elemente, ki predstavljajo značilne točke. Prav tako delujejo dobro le pri majhnih premikih, ker temeljijo na Taylorjevi aproksimaciji enačbe~\eqref{eq:opticni-tok}~\cite{wedel2011stereo}. 
+Pri \emph{ujemalnih metodah} računamo optični tok le na značilnih točkah~\cite{trucco1998introductory}. Zaradi uporabe značilk so lahko te metode bolj efektivne, saj ne potrebujemo določevanja korespondenc za vse piksle. Prav tako se lahko uporabijo za računanje optičnega toka v realnem času, saj niso računsko zahtevne. Po~\cite{trucco1998introductory} je njihova največja težava, da računajo \emph{redek optični tok}, ki je določen le za slikovne elemente, ki predstavljajo značilne točke. Prav tako delujejo dobro le pri majhnih premikih, ker temeljijo na Taylorjevi aproksimaciji enačbe~\eqref{eq:opticni-tok}~\cite{wedel2011stereo}. 
 
 V nadaljevanju predstavljamo diferencialno metodo Farneb{\"a}ck.
 
@@ -92,7 +92,7 @@ Algoritem temelji na estimaciji premika z razčlenjevanjem polinoma  po enačbi~
 	f(\vec{x}) \sim \vec{x}^\top \vec{A} \vec{x} + \vec{b}^\top \vec{x} + c
 \end{equation}
 
-Ideja temelji na tem, da aproksimiramo okolico piksla s kvadratičnim polinomom, pri čemer želimo najti premik piksla na poziciji $\vec{x}$ z minimizacijo enačbe~\eqref{eq:polinom-min} in omejitvijo~\eqref{eq:omejitev-polinoma}. $\vec{A}_1(\vec{x})$ in $\vec{b}_1(\vec{x})$ sta razčlenitvena koeficienta za prvo sliko, $\vec{A}_2(\vec{x})$ in $\vec{b}_2(\vec{x})$ koeficienta za drugo sliko in $w(\Delta\vec{x})$ je utežna funkcija za sosedne točke.
+Ideja temelji na tem, da aproksimiramo okolico piksla s kvadratičnim polinomom, pri čemer želimo najti premik piksla na poziciji $\vec{x}$ z minimizacijo enačbe~\eqref{eq:polinom-min} in omejitvijo~\eqref{eq:omejitev-polinoma}. $\vec{A}_1(\vec{x})$ in $\vec{b}_1(\vec{x})$ sta razčlenitvena koeficienta za prvo sliko, $\vec{A}_2(\vec{x})$ in $\vec{b}_2(\vec{x})$ sta koeficienta za drugo sliko in $w(\Delta\vec{x})$ je utežna funkcija za sosednje točke.
 
 \begin{align}
 \vec{A}(\vec{x}) = & \frac{\vec{A}_1(\vec{x} + \vec{A}_2(\vec{x}))}{2} \\

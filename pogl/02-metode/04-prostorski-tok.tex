@@ -11,7 +11,7 @@ Za namen razlage upoštevamo enake omejitve kamere, masnega delca in osvetlitve,
 \begin{figure}[htb]
 \centering
 \input{./Slike/scene-flow.tikz}
-\caption[Vizualni prikaz vektorja prostorskega toka $\vec{w}$]{Vizualni prikaz vektorja prostorskega toka $\vec{w}$. V prostoru imamo površino $f$, na kateri leži gibajoči točkovni delec $\vec{p}$~\cite{vedula1999three}. Na slikovni ravnini $\varOmega$ imamo sliko delca $\vec{q}$ s prostorskim tokom $\vec{w}$.}
+\caption[Vizualni prikaz vektorja prostorskega toka $\vec{w}$]{Vizualni prikaz vektorja prostorskega toka $\vec{w}$. V prostoru imamo površino $f$, na kateri leži gibajoči se točkovni delec $\vec{p}$~\cite{vedula1999three}. Na slikovni ravnini $\varOmega$ imamo sliko delca $\vec{q}$ s prostorskim tokom $\vec{w}$.}
 \label{fig:scene-flow}
 \end{figure}
 
@@ -74,7 +74,7 @@ V nadaljevanju predstavljamo globalno variacijsko metodo PD-Flow.
 
 
 \subsubsection{Algoritem PD-Flow}\label{sec:pd-flow}
-Algoritem spada pod globalne variacijske metode~\cite{jaimez2015primal}. Za cenilko $\Psi$ v~\eqref{eq:konstantna-osvetljenost} in~\eqref{eq:konsistentnost-globine} avtorji uporabljajo $L_1$ normo. Za utež $\alpha$ v enačbi~\eqref{eq:podatkovni-del} uporabljajo funkcijo 
+Algoritem spada pod globalne variacijske metode~\cite{jaimez2015primal}. Za cenilko $\Psi$ v~\eqref{eq:konstantna-osvetljenost} in~\eqref{eq:konsistentnost-globine} avtorji uporabljajo normo $L_1$. Za utež $\alpha$ v enačbi~\eqref{eq:podatkovni-del} uporabljajo funkcijo 
 
 \begin{equation}\label{eq:utez}
  \alpha(x,y) = \frac{\mu_0}{1 + k_\mu \left( \frac{\partial Z^2}{\partial x} + \frac{\partial Z^2}{\partial y} + \frac{\partial Z^2}{\partial t} \right)},
@@ -96,7 +96,7 @@ E_R = \sum_\Omega \Psi\left( (\nabla w_x)^\top \vec{r} \right) + \Psi\left( (\na
 \end{bmatrix}^\top
 \end{equation}
 
-Evaluacija PD-Flow algoritma je prikazana v tabeli~\ref{tab:pdflow}. V tabeli so zapisani še rezultati RGB-D flow algoritma, ki za cenilko $\Psi$ ravno tako uporablja $L_1$ normo~\cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največje izboljšanje vidimo pri času izvajanja algoritma.
+Evaluacija algoritma PD-Flow je prikazana v tabeli~\ref{tab:pdflow}. V tabeli so zapisani še rezultati algoritma RGB-D flow, ki za cenilko $\Psi$ ravno tako uporablja normo $L_1$ o~\cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največje izboljšanje vidimo pri času izvajanja algoritma.
 
 \begin{table}[htb]
 	\centering
@@ -108,6 +108,6 @@ Evaluacija PD-Flow algoritma je prikazana v tabeli~\ref{tab:pdflow}. V tabeli so
     RGB-D flow & 0.096 & 15.58 & 119.1 & 0.111 \\
     \bottomrule
     \end{tabular}
-    \caption[Evaluacija PD-Flow algoritma]{Evaluacija PD-Flow algoritma in primerjava z algoritmom RGB-D flow, ki uporablja enako cenilko $\Psi$~\cite{jaimez2015primal}. Za metrike se uporabljata povprečna kotna napaka (AAE) in normaliziran koren srednje kvadratične napake magnitude hitrosti (NRMS-V), kjer se največja magnituda (MAX-V) uporablja za normalizacijo~\cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma. Odebeljene vrednosti predstavljajo najboljšo vrednost.}
+    \caption[Evaluacija algoritma PD-Flow]{Evaluacija algoritma PD-Flow in primerjava z algoritmom RGB-D flow, ki uporablja enako cenilko $\Psi$~\cite{jaimez2015primal}. Za metrike se uporabljata povprečna kotna napaka (AAE) in normaliziran koren srednje kvadratične napake magnitude hitrosti (NRMS-V), kjer se največja magnituda (MAX-V) uporablja za normalizacijo~\cite{jaimez2015primal}. Opazimo lahko, da se PD-Flow po metrikah bolje odnese. Največji izboljšanje vidimo pri času izvajanja algoritma. Odebeljene vrednosti predstavljajo najboljšo vrednost.}
     \label{tab:pdflow}
 \end{table}

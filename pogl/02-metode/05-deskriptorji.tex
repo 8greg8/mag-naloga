@@ -5,9 +5,9 @@
 Klasične metode optičnega toka so občutljive na šum, diskontinuitete gibanja in spremembe v osvetljenosti objekta~\cite{brox2011large}. Pri novejših metodah še vedno obstaja problem pravilne ocene amplitude gibanja zaradi \emph{pojava paralakse}~\cite{xu2012scale} -- objekti, ki so bolj oddaljeni od kamere imajo manjšo jakost optičnega toka. 
 
 
-Ker je prostorski tok projekcija optičnega toka v prostor, ima podobne probleme kot optični tok~\cite{yan2016scene}. Večja natančnost algoritma zahteva večjo \emph{računsko zahtevnost}, kar vodi v manjšo učinkovitost. \emph{Okluzija}, ki se lahko pogostokrat pojavi, krši konsistentnost podatkov skozi čas, in lahko vodi v napačno določitev korespondenc~\cite{yan2016scene}. Pri \emph{hitrem gibanju} večina algoritmov ne deluje, saj temeljijo na predpostavki kratkih premikov na časovno enoto. Zaradi \emph{sprememb osvetlitve} prizora postane ocena prostorskega toka neuporabna~\cite{yan2016scene}. Prav tako lahko pride do problemov, ko imamo \emph{pomanjkanje teksture}, saj težje izračunamo gradient.
+Ker je prostorski tok projekcija optičnega toka v prostor, ima podobne probleme kot optični tok~\cite{yan2016scene}. Večja natančnost algoritma zahteva večjo \emph{računsko zahtevnost}, kar vodi v manjšo učinkovitost. \emph{Okluzija}, ki se lahko pogosto pojavi, krši konsistentnost podatkov skozi čas in lahko vodi v napačno določitev korespondenc~\cite{yan2016scene}. Pri \emph{hitrem gibanju} večina algoritmov ne deluje, saj temeljijo na predpostavki kratkih premikov na časovno enoto. Zaradi \emph{sprememb osvetlitve} prizora postane ocena prostorskega toka neuporabna~\cite{yan2016scene}. Prav tako lahko pride do problemov, ko imamo \emph{pomanjkanje teksture}, saj težje izračunamo gradient.
 
-Surova optični in prostorski tok zaradi vrste problemov nista primerna za opis gibanja, čeprav predstavljata najbolj naravno metodo oceno energijske porabe. Tudi če zagotovimo idealno okolje (kontinuiteta gibanja, konstantna osvetljenost, počasno gibanje in dobra tekstura), imamo še vedno problem šuma zaradi CCD senzorja~\cite{wedel2011stereo}. Ravno tako se ne moremo znebiti paralakse ali zagotoviti neodvisnosti od smeri po $X$ osi koordinatnega sistema kamere~\cite{chaudhry2009histograms}. Pri tem moramo tudi opozoriti, da se število slikovnih elementov, ki predstavljajo merjenca, spreminja skozi čas. Vsa dejstva stremijo k temu, da moramo za pravilno merjenje energijske porabe uporabiti deskriptorje, ki izboljšajo robustnost optičnega in prostorskega toka~\cite{chaudhry2009histograms}. 
+Surova optični in prostorski tok zaradi vrste problemov nista primerna za opis gibanja, čeprav predstavljata najbolj naravno metodo ocene energijske porabe. Tudi če zagotovimo idealno okolje (kontinuiteta gibanja, konstantna osvetljenost, počasno gibanje in dobra tekstura), imamo še vedno težavo s šumom zaradi senzorja CCD~\cite{wedel2011stereo}. Ravno tako se ne moremo znebiti paralakse ali zagotoviti neodvisnosti od smeri po $X$ osi koordinatnega sistema kamere~\cite{chaudhry2009histograms}. Pri tem moramo opozoriti, da se število slikovnih elementov, ki predstavljajo merjenca, spreminja skozi čas. Vsa dejstva stremijo k tem, da moramo za pravilno merjenje energijske porabe uporabiti deskriptorje, ki izboljšajo robustnost optičnega in prostorskega toka~\cite{chaudhry2009histograms}. 
 
 
 
@@ -20,9 +20,9 @@ Surova optični in prostorski tok zaradi vrste problemov nista primerna za opis 
 % Kako smo jih mi uporabili
 % Težave teh deskriptorjev
 % Dodali nove deskriptorje
-Ko se človek premika, se optični tok temporalno spreminja. Lahko rečemo, da se spreminja karakteristični profil optičnega toka~\cite{chaudhry2009histograms}. Prva ideja za deskriptor bi bila distribucija optičnega toka. Ker pa se profil spreminja zaradi paralakse, potrebujemo deskriptor, ki je invarianten na skalo in smer gibanja~\cite{chaudhry2009histograms}.
+Ko se človek premika, se optični tok temporalno spreminja. Lahko rečemo, da se spreminja karakteristični profil optičnega toka~\cite{chaudhry2009histograms}. Prva ideja za deskriptor bi bila distribucija optičnega toka. Ker se profil spreminja zaradi paralakse, potrebujemo deskriptor, ki je invarianten na skalo in smer gibanja~\cite{chaudhry2009histograms}.
 
-Chaudhry et al.~\cite{chaudhry2009histograms} predlaga uporabo histogramov orientiranega optičnega toka (HOOF), kjer vsak vektor optičnega toka zložimo v stolpec, glede na njegov kot in ga utežimo z njegovo velikostjo.
+Chaudhry et al.~\cite{chaudhry2009histograms} predlaga uporabo histogramov orientiranega optičnega toka (HOOF), kjer vsak vektor optičnega toka zložimo v stolpec glede na njegov kot, in ga utežimo z njegovo velikostjo.
 
 Vektorju optičnega toka $\vec{w} = [w_x~w_y]^\top$ določimo smer~\eqref{eq:smer} in amplitudo~\eqref{eq:amplituda}~\cite{chaudhry2009histograms}. Interval smeri $\Theta$ je določen z~\eqref{eq:interval}. 
 
@@ -37,7 +37,7 @@ Vektorju optičnega toka $\vec{w} = [w_x~w_y]^\top$ določimo smer~\eqref{eq:sme
 \end{equation}
 
 
-Interval smeri~\eqref{eq:interval} pomeni, da vektorju $\vec{w}$ določimo stolpec $b$, za katerega velja $1 \leq b \leq N_{HOOF}$, pri čemer je $N_{HOOF}$ celotno število stolpcev histograma, na podlagi smeri $\Theta$~\cite{chaudhry2009histograms}. Pri tem moramo za smer $\Theta$ upoštevati najmanjši predznačen kot med vektorjem $\vec{w}$ in koordinatno osjo $x$ koordinatnega sistema slikovne ravnine $\varOmega$. Torej upoštevamo samo kote na intervalu~\eqref{eq:interval-kot}, kote na intervalu~\eqref{eq:interval-kot2} pa preslikamo na interval~\eqref{eq:interval-kot}. Interval~\eqref{eq:interval-kot} razdelimo na $N_{HOOF}$ podintervalov, ki predstavljajo stolpce histograma. 
+Interval smeri~\eqref{eq:interval} pomeni, da vektorju $\vec{w}$ določimo stolpec $b$, za katerega velja $1 \leq b \leq N_{HOOF}$, pri čemer je $N_{HOOF}$ celotno število stolpcev histograma, na podlagi smeri $\Theta$~\cite{chaudhry2009histograms}. Pri tem moramo za smer $\Theta$ upoštevati najmanjši predznačen kot med vektorjem $\vec{w}$ in koordinatno osjo $x$ koordinatnega sistema slikovne ravnine $\varOmega$. Torej upoštevamo samo kote na intervalu~\eqref{eq:interval-kot}, kote na intervalu~\eqref{eq:interval-kot2} pa preslikamo na interval~\eqref{eq:interval-kot}. Interval~\eqref{eq:interval-kot} razdelimo na $N_{HOOF}$ podintervale, ki predstavljajo stolpce histograma. 
 
 \begin{equation}\label{eq:interval-kot}
 	\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]
@@ -47,7 +47,7 @@ Interval smeri~\eqref{eq:interval} pomeni, da vektorju $\vec{w}$ določimo stolp
 	\left(\frac{\pi}{2},\frac{3\pi}{2}\right)
 \end{equation}
 
-Vsak vektor $\vec{w}$, ki leži v podintervalu ali stolpcu $b$, bo prispeval svojo velikost $\|\vec{w} \|$ k njegovi vsoti~\cite{chaudhry2009histograms}. Dobljeni histogram še normaliziramo, tako da je njegova vsota enaka $1$.
+Vsak vektor $\vec{w}$, ki leži v podintervalu ali stolpcu $b$, bo prispeval svojo velikost $\|\vec{w} \|$ k njegovi vsoti~\cite{chaudhry2009histograms}. Dobljeni histogram še normaliziramo tako, da je njegova vsota enaka $1$.
 
 
 
@@ -56,16 +56,16 @@ Vsak vektor $\vec{w}$, ki leži v podintervalu ali stolpcu $b$, bo prispeval svo
 \begin{figure}[htb]
 \centering
 \resizebox{0.5\columnwidth}{!}{\input{./Slike/hoof.tikz}}
-\caption[Prikaz določitve HOOF histograma glede na kot vektorja]{Prikaz določitve HOOF histograma glede na kot vektorja optičnega toka $\vec{w}$. Slika prikazuje določitev za $6$ stolpcev.}
+\caption[Prikaz določitve histograma HOOF glede na kot vektorja]{Prikaz določitve HOOF histograma glede na kot vektorja optičnega toka $\vec{w}$. Slika prikazuje določitev za $6$ stolpcev.}
 \label{fig:hoof-histogram}
 \end{figure}
 
 
 
 
-Preslikava intervala~\eqref{eq:interval-kot2} v interval~\eqref{eq:interval-kot} omogoča neodvisnost histograma vzdolž $x$ osi~\cite{chaudhry2009histograms}. Z normiranjem histograma dobimo invariantnost na skalo~\cite{chaudhry2009histograms}. Ker je vsak prispevek vektorja sorazmeren njegovi amplitudi, šumni vektorji nimajo vpliva na obliko histograma~\cite{chaudhry2009histograms}. Posledično lahko določimo histogram za celotno sliko in zato ne potrebujemo segmentacije ali subtrakcije gibajoče osebe iz ozadja. 
+Preslikava intervala~\eqref{eq:interval-kot2} v interval~\eqref{eq:interval-kot} omogoča neodvisnost histograma vzdolž $x$ osi~\cite{chaudhry2009histograms}. Z normiranjem histograma dobimo invariantnost na skalo~\cite{chaudhry2009histograms}. Ker je vsak prispevek vektorja sorazmeren njegovi amplitudi, šumni vektorji nimajo vpliva na obliko histograma~\cite{chaudhry2009histograms}. Posledično lahko določimo histogram za celotno sliko in zato ne potrebujemo segmentacije ali subtrakcije gibajoče se osebe iz ozadja. 
 
-Edini parameter, ki ga moramo določiti za HOOF značilke je število stolpcev histograma $N_{HOOF}$. Chaudry et al.~\cite{chaudhry2009histograms} pravi, da moramo za dobro delovanje določiti najmanj $30$ stolpcev. 
+Edini parameter, ki ga moramo določiti za značilke HOOF, je število stolpcev histograma $N_{HOOF}$. Chaudry et al.~\cite{chaudhry2009histograms} pravi, da moramo za dobro delovanje določiti najmanj $30$ stolpcev. 
 
 
 
@@ -76,7 +76,7 @@ Edini parameter, ki ga moramo določiti za HOOF značilke je število stolpcev h
 \subsection{Histogrami absolutnih tokovnih amplitud}\label{sec:hafa}
 % Opis dodatnih deskriptorjev
 % Kako uporabili nove deskriptorje
-HOOF deskriptor modelira samo smer gibanja, zato vsebuje le del informacije, ki jo potrebujemo za esetimacijo energijske porabe. Ostalo informacijo vsebuje amplituda gibanja, ki jo dobimo z amplitudo vektorja optičnega toka. Idejo deskriptorja za modeliranje amplitude gibanja smo dobili v delu~\cite{pers2010histograms}, kjer so avtorji za opis gibanja uporabili histograme optičnega toka (HOF). Gre za histograme v dveh dimenzijah, ki posebej kvantizirata amplitudo in smer optičnega toka v podregijah slike. 
+Deskriptor HOOF modelira smer gibanja, zato vsebuje le del informacije, ki jo potrebujemo za esetimacijo porabe energije. Ostalo informacijo vsebuje amplituda gibanja, ki jo dobimo z amplitudo vektorja optičnega toka. Idejo deskriptorja za modeliranje amplitude gibanja smo dobili v delu~\cite{pers2010histograms}, kjer so avtorji za opis gibanja uporabili histograme optičnega toka (HOF). Gre za histograme v dveh dimenzijah, ki posebej kvantizirata amplitudo in smer optičnega toka v podregijah slike. 
 
 Vektor optičnega toka $\vec{w}$, ki je opredeljen v poglavju~\ref{sec:hoof}, ima amplitudo določeno na intervalu~\eqref{eq:interval-amp1}. 
 
@@ -85,7 +85,7 @@ Vektor optičnega toka $\vec{w}$, ki je opredeljen v poglavju~\ref{sec:hoof}, im
 \end{equation}
 
 
-Interval~\eqref{eq:interval-amp1} lahko kvantiziramo po enačbi~\eqref{eq:interval-amp2}. Ta pomeni, da vektorju $\vec{w}$ določimo stolpec $b$, za katerega velja $1 \leq b \leq N_{HAFA}$, pri čemer je $N_{HAFA}$ celotno število stolpcev histograma na podlagi amplitude $\| \vec{w} \|$. S tako kvantizacijo omejimo zgornjo mejo intervala~\eqref{eq:interval-amp1} na parameter histograma $N_{HAFA}$. Ko tak histogram normiramo, ga imenujemo histogram absolutnih tokovnih amplitud (HAFA). Določitev HAFA histograma je prikazana na sliki~\ref{fig:hafa-histogram}.
+Interval~\eqref{eq:interval-amp1} lahko kvantiziramo po enačbi~\eqref{eq:interval-amp2}. Ta pomeni, da vektorju $\vec{w}$ določimo stolpec $b$, za katerega velja $1 \leq b \leq N_{HAFA}$, pri čemer je $N_{HAFA}$ celotno število stolpcev histograma na podlagi amplitude $\| \vec{w} \|$. S tako kvantizacijo omejimo zgornjo mejo intervala~\eqref{eq:interval-amp1} na parameter histograma $N_{HAFA}$. Ko tak histogram normiramo, ga imenujemo histogram absolutnih tokovnih amplitud (HAFA). Določitev histograma HAFA je prikazana na sliki~\ref{fig:hafa-histogram}.
 
 \begin{equation}\label{eq:interval-amp2}
 	\frac{b-1}{N_{HAFA}} \leq \norm{\vec{w}} < \frac{b}{N_{HAFA}}
@@ -97,14 +97,14 @@ Interval~\eqref{eq:interval-amp1} lahko kvantiziramo po enačbi~\eqref{eq:interv
 \begin{figure}[!htb]
 \centering
 \resizebox{0.5\columnwidth}{!}{\input{./Slike/hafa.tikz}}
-\caption[Prikaz določitve HAFA histograma glede na velikost vektorja]{Prikaz določitve HAFA histograma glede na velikost vektorja optičnega toka $\vec{w}$. Slika prikazuje določitev za $3$ stolpce.}
+\caption[Prikaz določitve histograma HAFA glede na velikost vektorja]{Prikaz določitve histograma HAFA glede na velikost vektorja optičnega toka $\vec{w}$. Slika prikazuje določitev za $3$ stolpce.}
 \label{fig:hafa-histogram}
 \end{figure}
 
 
 
 \subsection{Razširitev histogramov za uporabo s prostorskim tokom}
-HOOF in HAFA histograme lahko uporabimo tudi za tridimenzionalni prostorski tok $\vec{\mu}$. Enačbo amplitude~\eqref{eq:amplituda} lahko zamenjamo z enačbo amplitude~\eqref{eq:amplituda-3d} za prostorski tok $\vec{\mu} = \left[\mu_x~\mu_y~\mu_z \right]^\top$.
+Histograma HOOF in HAFA lahko uporabimo tudi za tridimenzionalni prostorski tok $\vec{\mu}$. Enačbo amplitude~\eqref{eq:amplituda} lahko zamenjamo z enačbo amplitude~\eqref{eq:amplituda-3d} za prostorski tok $\vec{\mu} = \left[\mu_x~\mu_y~\mu_z \right]^\top$.
 
 \begin{equation}
 \norm{\vec{\mu}} = \sqrt{\mu_x^2 + \mu_y^2 + \mu_z^2} 
@@ -128,4 +128,4 @@ Enačbe temeljijo na obrazcih za prehod iz kartezičnih koordinat $(x, ~y, ~z)$ 
 	\label{fig:sphere}
 \end{figure}
 
-S tako uporabljenimi enačbami za histograme izgubimo informacijo o smeri v HOOF histogramu, saj kota $\phi$ ne upoštevamo. To je sprejemljivo, saj nam mora histogram omogočati neodvisnost v smeri premikanja od leve proti desni~\cite{chaudhry2009histograms}. To pa je ravno kot $\phi$. Po preslikavi prostorskega kota $\vec{\mu}$ na slikovno ravnino je določitev histogramov trivialna. 
+S tako uporabljenimi enačbami za histograme izgubimo informacijo o smeri v histogramu HOOF, saj kota $\phi$ ne upoštevamo. To je sprejemljivo, saj nam mora histogram omogočati neodvisnost v smeri premikanja od leve proti desni~\cite{chaudhry2009histograms}. To pa je ravno kot $\phi$. Po preslikavi prostorskega kota $\vec{\mu}$ na slikovno ravnino je določitev histogramov trivialna. 

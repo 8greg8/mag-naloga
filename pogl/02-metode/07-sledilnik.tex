@@ -18,9 +18,9 @@ Sledilnike delimo na dva pristopa: generativne in diskriminativne metode~\cite{d
 
 Položaja subjektov, ki jih opazujemo, ni mogoče omejiti zunaj skrbno urejene laboratorijske postavitve, saj uporabljamo tokovna polja brez kakršnekoli predpostavke o postavitvi skeleta in brez kakršnihkoli dodatnih omejitev. V takem primeru bi bila prevladujoča komponenta histogramov šum. Zato moramo uvesti algoritem za sledenje, da lokaliziramo položaj opazovanega subjekta v koordinatnem sistemu slike.
 
-Z uporabo sledilnika dobimo realnejšo sliko meritve, saj se znebimo šuma iz ozadja (premikanja slikovnih elementov, ki niso del tarče). Izognemo se napaki merjenja zaradi šuma CCD senzorja in premikanja drugih objektov. To so lahko razni predmeti (žoge, loparji, itd.) ali druge osebe. Brezkontaktnemu merilnemu instrumentu dodamo širšo uporabno vrednost, saj ga drugače ne bi mogli uporabljati pri ekipnih športih in športih z žogo. 
+Z uporabo sledilnika dobimo realnejšo sliko meritve, saj se znebimo šuma iz ozadja (premikanja slikovnih elementov, ki niso del tarče). Izognemo se napaki merjenja zaradi šuma senzorja CCD in premikanja drugih objektov. To so lahko razni predmeti (žoge, loparji, itd.) ali druge osebe. Brezkontaktnemu merilnemu instrumentu dodamo širšo uporabno vrednost, saj ga drugače ne bi mogli uporabljati pri ekipnih športih in športih z žogo. 
 
-Zaradi uporabe optičnega in prostorskega toka pri določevanju modela gibanja nam merilno napako povzroča tudi premikanje kamere. S premikanjem kamere povzročimo relativno premikanje objektov glede na koordinatni sistem kamere, četudi so ti, glede na referenčni koordinatni sistem, v prostoru pri miru. Tega problema se lahko znebimo z uporabo sledilnika. 
+Zaradi uporabe optičnega in prostorskega toka pri določanju modela gibanja nam merilno napako povzroča tudi premikanje kamere. S premikanjem kamere povzročimo relativno premikanje objektov glede na koordinatni sistem kamere, četudi so ti, glede na referenčni koordinatni sistem, v prostoru pri miru. Tega problema se lahko znebimo z uporabo sledilnika. 
 
 Predpostavimo, da imamo idealni sledilnik in enako definicijo ter omejitve kamere, masnega delca, slike delca in osvetlitve kot v poglavju~\ref{sec:opticni-tok}. Idealni sledilnik v vsaki sliki zaporedja najde sliko delca $\vec{q}$ in posamezno sliko v zaporedju obreže tako, da je težišče tarče vedno v centru obrezane slike. Ne glede na gibanje kamere, bo pozicija slike delca $\vec{q}$ vedno v centru slikovne ravnine. Gibanje kamere zato ne bo vplivalo na optični tok $\mathcal{O}$.
 
@@ -32,13 +32,13 @@ Sledilnik temelji na delu~\cite{danelljan2014adaptive}, kjer izboljšajo origina
 \begin{figure}[htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-kcf.tikz}}
-	\caption[Diagram KCF sledilnika]{Diagram KCF sledilnika.}
+	\caption[Diagram sledilnika KCF]{Diagram sledilnika KCF.}
 	\label{fig:diagram-kcf}
 \end{figure}
 
 
 \paragraph{Korak učenja.}
-Na področju tarče $x$ velikosti $M \times N$ vsakemu slikovnemu elementu pripada vrednost Gaussove funkcije $y$. Ob času $p$ poznamo \hbox{$\mathcal{X}^p = \{x^j: j=1,\ldots,p\}$} področij tarče. Razvrščevalnik učimo z minimizacijo funkcije~\eqref{eq:classifier-function}, ki predstavlja uteženo srednjo kvadratično napako čez področja $\mathcal{X}^p$, pri čemer je vsako področje uteženo s konstanto $\beta_j \geq 0$. $\phi$ predstavlja neliearno preslikavo v več razsežni prostor, za katero lahko uporabimo implicitno preslikavo ali funkcijo jedra $K$. V sledilniku KCF se uporablja Gaussovo jedro~\eqref{eq:kcf-gauss} RBF. Konstanta $\lambda \geq 0$ je regularizacijski parameter.
+Na področju tarče $x$ velikosti $M \times N$ vsakemu slikovnemu elementu pripada vrednost Gaussove funkcije $y$. Ob času $p$ poznamo \hbox{$\mathcal{X}^p = \{x^j: j=1,\ldots,p\}$} področij tarče. Razvrščevalnik učimo z minimizacijo funkcije~\eqref{eq:classifier-function}, ki predstavlja uteženo srednjo kvadratično napako čez področja $\mathcal{X}^p$, pri čemer je vsako področje uteženo s konstanto $\beta_j \geq 0$. $\phi$ predstavlja neliearno preslikavo v večrazsežni prostor, za katero lahko uporabimo implicitno preslikavo ali funkcijo jedra $K$. V sledilniku KCF se uporablja Gaussovo jedro~\eqref{eq:kcf-gauss} RBF. Konstanta $\lambda \geq 0$ je regularizacijski parameter.
 
 \begin{equation}
 \begin{aligned}
@@ -103,17 +103,17 @@ Jedro sledilnika temelji na sledilniku KCF za optični tok iz dela~\cite{henriqu
 \begin{figure}[htb]
 	\centering
 	\input{./Slike/diagram-dskcf.tikz}
-	\caption[Diagram DS-KCF sledilnika]{Diagram DS-KCF sledilnika. Diagram je povzet po~\cite{hannuna2016ds}.}
+	\caption[Diagram sledilnika DS-KCF]{Diagram sledilnika DS-KCF. Diagram je povzet po~\cite{hannuna2016ds}.}
 	\label{fig:diagram-dskcf}
 \end{figure}
 
 V sledilniku DS-KCF najprej segmentirajo globinsko sliko na področja podobne globine s pomočjo rojenja~\cite{hannuna2016ds}. S tem pridobijo relevantne značilke globinske porazdelitve. 
 
-S pomočjo globinske porazdelitve izračunajo spremembe v skali, glede na začetno srednjo vrednost globine tarče, in jih uporabijo za posodobitev modela tarče. Posodobitev poteka, ko dobijo novo oceno pozicije tarče. Pri tem uporabljajo interpolacijo ali decimacijo v frekvenčnem prostoru~\cite{hannuna2016ds}.
+S pomočjo globinske porazdelitve izračunajo spremembe v skali, glede na začetno srednjo vrednost globine tarče, in jih uporabijo za posodobitev modela tarče. Ta poteka, ko dobijo novo oceno pozicije tarče. Pri tem uporabljajo interpolacijo ali decimacijo v frekvenčnem prostoru~\cite{hannuna2016ds}.
 
-V istem času, ko sledilnik računa spremembe v skali, se globinska porazdelitev uporabi tudi za detekcijo okluzij. Kadar sledilnik zazna, da je prišlo do okluzije, se model tarče ne posodobi~\cite{hannuna2016ds}. Pri določevanju okluzije sledilnik uporablja Kalmanov filter, s katerim sledi centru tarče in objekta, ki povzroča okluzijo. V~\cite{hannuna2016ds} uporabljajo linearni model konstantne hitrosti.  
+V istem času, ko sledilnik računa spremembe v skali, se globinska porazdelitev uporabi tudi za detekcijo okluzij. Kadar sledilnik zazna, da je prišlo do okluzije, se model tarče ne posodobi~\cite{hannuna2016ds}. Pri določanju okluzije sledilnik uporablja Kalmanov filter, s katerim sledi centru tarče in objekta, ki povzroča okluzijo. V~\cite{hannuna2016ds} uporabljajo linearni model konstantne hitrosti.  
 
-Na koncu sledijo popravki zaradi sprememb oblike objekta. Popravki temeljijo na razmerju stranic začetnega pravokotnika modela tarče~\cite{hannuna2016ds}. Sledilnik model tarče popravi vedno tako, da razmerje stranic ostaja konstantno.
+Na koncu sledijo popravki zaradi sprememb oblike objekta. Popravki temeljijo na razmerju stranic začetnega pravokotnika modela tarče~\cite{hannuna2016ds}. Sledilnik vedno popravi model tarče tako, da razmerje stranic ostaja konstantno.
 
 
 

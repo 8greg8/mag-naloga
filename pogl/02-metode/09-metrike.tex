@@ -8,7 +8,7 @@ V predstavljenih enačbah je $N$ število vzorcev, $\hat{y}_i~ \forall i=1,\ldot
 
 
 \subsection{Koren srednje kvadratične napake}
-Koren srednje kvadratične napake (ang. Root Mean Square Error) (\rmse) opišemo z enačbo~\eqref{eq:rmse}~\cite{witten2005data}.
+Koren srednje kvadratične napake (angl. Root Mean Square Error) (\rmse) opišemo z enačbo~\eqref{eq:rmse}~\cite{witten2005data}.
 \begin{equation}
 e_{RMS} = \sqrt{\frac{1}{N} \sum_{i=1}^{N}\left( \hat{y}_i - y_i \right)^2}
 \label{eq:rmse}
@@ -17,7 +17,7 @@ e_{RMS} = \sqrt{\frac{1}{N} \sum_{i=1}^{N}\left( \hat{y}_i - y_i \right)^2}
 Rezultati se gibljejo na intervalu $e_{RMS} \in [0, \infty)$. Manjša vrednost pomeni boljši rezultat~\cite{witten2005data}.
 
 \subsection{Koren relativne kvadratične napake}
-Koren relativne kvadratične napake (ang. Relative Root Squared Error) (\rrse) opišemo z enačbo~\eqref{eq:rmse}~\cite{witten2005data}. $\overline{y}$ je srednja vrednost pravih vrednosti, ki jo izračunamo po enačbi~\eqref{eq:mean}.
+Koren relativne kvadratične napake (angl. Relative Root Squared Error) (\rrse) opišemo z enačbo~\eqref{eq:rmse}~\cite{witten2005data}. $\overline{y}$ je srednja vrednost pravih vrednosti, ki jo izračunamo po enačbi~\eqref{eq:mean}.
 
 \begin{equation}
 e_{RRS} = \sqrt{\frac{\sum_{i=1}^{N} \left ( \hat{y}_i - y_i \right )^2}{\sum_{i=0}^{N} \left( \overline{y} - y_i \right)^2}}
@@ -29,7 +29,7 @@ Rezultati se gibljejo na intervalu $e_{RRS} \in [0, \infty)$. Manjša vrednost p
 Enačbo si lahko razlagamo kot \rmse matematičnega modela, ki je normaliziran na \rmse najenostavnejšega matematičnega modela ali prediktorja~\cite{witten2005data}. Najenostavnejši prediktor je tisti, ki nam na izhodu daje srednjo vrednost $\overline{y}$. 
 
 \subsection{Relativna absolutna napaka}
-Relativno absolutno napako (ang. Relative Absolute Error) (\rae) opišemo z enačbo~\eqref{eq:rmse}~\cite{trucco1998introductory}.
+Relativno absolutno napako (angl. Relative Absolute Error) (\rae) opišemo z enačbo~\eqref{eq:rmse}~\cite{trucco1998introductory}.
 
 \begin{equation}
 e_{RA} = \frac{\sum_{i=1}^{N} \left | \hat{y}_i - y_i \right |}{\sum_{i=1}^{N} \left| \overline{y} - y_i \right|}
@@ -55,7 +55,7 @@ Rezultati se gibljejo na intervalu $e_{RAE} \in [-1, 1]$~\cite{witten2005data}. 
 
 
 \subsection{Razmerje signal in šum}
-Razmerje signal - šum (ang. Signal to Noise Ratio) (SNR) je določeno z enačbo~\eqref{eq:snr}, kjer je $P_s$ moč signala $y$ in $P_n$ moč šuma $n$~\cite{gonzalez2006digital}. Signal z nizko vsebnostjo šuma ima visok SNR, medtem ko nizek SNR pomeni veliko šuma v signalu.
+Razmerje signal - šum (angl. Signal to Noise Ratio) (SNR) je določeno z enačbo~\eqref{eq:snr}, kjer je $P_s$ moč signala $y$ in $P_n$ moč šuma $n$~\cite{gonzalez2006digital}. Signal z nizko vsebnostjo šuma ima visok SNR, medtem ko nizek SNR pomeni veliko šuma v signalu.
 
 \begin{subequations}
 \begin{align}
@@ -69,7 +69,7 @@ P_n &= \frac{1}{N} \sum_{i=1}^{N} n_i^2
 
 
 \subsection{Mera prekrivanja področja}
-Mera prekrivanja področja (ang. Region Overlap), ki je predstavljena z enačbo~\ref{eq:region-overlap}, se večinoma uporablja za sledilnike~\cite{vcehovin2016visual}. $\Lambda$ predstavlja opis tarče, $R_t$ je področje tarče ob času $t$, $N$ je število slik v zaporedju, $G$ predstavlja referenco in $T$ tarčo.
+Mera prekrivanja področja (angl. Region Overlap), ki je predstavljena z enačbo~\ref{eq:region-overlap}, se večinoma uporablja za sledilnike~\cite{vcehovin2016visual}. $\Lambda$ predstavlja opis tarče, $R_t$ je področje tarče ob času $t$, $N$ je število slik v zaporedju, $G$ predstavlja referenco in $T$ tarčo.
 
 \begin{subequations}
 \begin{align}
@@ -81,7 +81,7 @@ Mera prekrivanja področja (ang. Region Overlap), ki je predstavljena z enačbo~
 \end{subequations}
 
 
-S prekrivanjem področja dobimo rezultate na intervalu $\left[0,1\right]$. Višja vrednost predstavlja boljši rezultat.
+S prekrivanjem področja dobimo rezultate na intervalu $\left[0,1\right]$. Višja vrednost pomeni boljši rezultat.
 
 
 

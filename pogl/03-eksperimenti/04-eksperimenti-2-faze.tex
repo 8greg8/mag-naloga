@@ -4,17 +4,17 @@
 Za statistično bolj oprijemljive rezultate smo v laboratorijskih in terenskih eksperimentih 2. faze uporabili 7 različnih merjencev  (srednja vrednost $\pm$ SD: starost \SI{16.29 \pm 2.29}{let}, velikost \SI{175.37 \pm 11.60}{\cm}, teža \SI{59.36 \pm 12.08}{\kg}, spol moški, $hr_{max}$ \SI{203.71 \pm 2.29}{bpm}, \vomax \SI{3144 \pm 629.27}{\ml\per\min} ). Oznake, ki jih uporabljamo za posameznega merjenca skozi preostanek dela, so: SUBJ1, SUBJ2, SUBJ4, SUBJ7, SUBJ8, SUBJ9, SUBJ10. Merjenca SUBJ4 smo uporabili samo v laboratorijskih eksperimentih, ker pri terenskih eksperimentih ni bil prisoten. Namesto njega smo v terenskih eksperimentih uporabili SUBJ10. Med laboratorijskimi in terenskimi eksperimenti je za merjenca SUBJ1 in SUBJ2 preteklo 43 dni, za merjenca SUBJ4 42 dni in za ostale 1 dan.  
 
 \subsection{Mrežno iskanje \texorpdfstring{$\nu$}{nu}-RBF}
-Med evaluacijo eksperimentov 1. faze smo ugotovili, da z regresijo \esvr pogosto dobimo preobremenjene (ang. Overfitted) modele. Pri takih modelih je število podpornih vektorjev zelo visoko. Lahko se zgodi, da postanejo vsi vektorji značilk podporni vektorji. Preobremenjeni modeli lahko dajejo solidne rezultate, vendar pa so ti nerealistični. Takoj, ko bi v tak model vnesli rahlo spremenjene podatke, ne bi več delovali.
+Med evaluacijo eksperimentov 1. faze smo ugotovili, da z regresijo \esvr pogosto dobimo preobremenjene (angl. Overfitted) modele. Pri takih modelih je število podpornih vektorjev zelo visoko. Lahko se zgodi, da postanejo vsi vektorji značilk podporni vektorji. Preobremenjeni modeli lahko dajejo solidne rezultate, vendar pa so ti nerealistični. Takoj, ko bi v tak model vnesli rahlo spremenjene podatke, ne bi več delovali.
 
-Zaradi tovrstnih problemov smo v našem postopku regresijo \esvr zamenjali z \nusvr. Izkazalo se je, da tudi ta ne deluje, čeprav pri njej uporabljamo dodatni parameter $\nu$, s katerim v teoriji kontroliramo razmerje števila podpornih vektorjev, kot je opisano v poglavju~\ref{sec:regresija-nusvr}. Chang et. al nam v delu~\cite{chang2002training} parameter $\nu$ bolj natančno opiše kot spodnjo mejo razmerja števila podpornih vektorjev. Parameter $\nu$ tako v resnici ne predstavlja omejitve, s katero bi kaznovali prekomerno učenje modela. V ta namen smo razvili mrežno iskanje \nurbf, ki je predstavljeno v poglavju~\ref{sec:nurbf}. 
+Zaradi tovrstnih problemov smo v našem postopku regresijo \esvr zamenjali z \nusvr. Izkazalo se je, da tudi ta ne deluje, čeprav pri njej uporabljamo dodatni parameter $\nu$, s katerim v teoriji kontroliramo razmerje števila podpornih vektorjev, kot je opisano v poglavju~\ref{sec:regresija-nusvr}. Chang et al. nam v delu~\cite{chang2002training} parameter $\nu$ bolj natančno opiše kot spodnjo mejo razmerja števila podpornih vektorjev. Parameter $\nu$ v resnici ne predstavlja omejitve, s katero bi kaznovali prekomerno učenje modela. V ta namen smo razvili mrežno iskanje \nurbf, ki je predstavljeno v poglavju~\ref{sec:nurbf}. 
 
 Razvito mrežno iskanje uporablja regresijo \nusvr in jedro RBF, zato smo ju uporabljali tudi za učenje modelov. Celoten postopek krajše imenujemo \nurbf.
 
 
 \paragraph{Optimizacija parametrov}
-Najprej smo optimizirali parameter $\numax$. Slednji predstavlja različico parametra $\numax$, s katerim določimo dejansko število podpornih vektorjev. Za tovrstno optimizacijo smo ponovno naučili \textit{mixed} modele iz 1. faze, pri čemer smo za mrežno iskanje uporabili nov postopek. Modele smo nato uporabili za testiranje na učnih podatkih terenskih eksperimentov 1. faze. S takim postopkom smo izluščili slabe \textit{squash} modele, ki bi oteževali pravilno evaluacijo rezultatov pri optimizaciji.
+Najprej smo optimizirali parameter $\numax$. Predstavlja različico parametra $\numax$, s katerim določimo dejansko število podpornih vektorjev. Za tovrstno optimizacijo smo ponovno naučili modele \textit{mixed} iz 1. faze, pri čemer smo za mrežno iskanje uporabili nov postopek. Modele smo nato uporabili za testiranje na učnih podatkih terenskih eksperimentov 1. faze. S takim postopkom smo izluščili slabe \textit{squash} modele, ki bi oteževali pravilno evaluacijo rezultatov pri optimizaciji.
 
-Za optimizacijo smo uporabili HOOF-HAFA deskriptor in naslednje vrednosti parametrov: začetna vrednost $\nu=\num{0.1}$, skaliranje značilk na intervalu $[-1,~1]$ in standardni odklon za Gaussov filter $\sigma=5$. Za $\numax$ smo uporabili \num{0.2}, \num{0.5} in \num{0.8}. Pri evaluaciji smo uporabili rezultate verifikacije in ne validacije, kot običajno. Pri validaciji smo dobili slabe rezultate, iz katerih nismo mogli sklepati o izbiri optimalnega parametra.
+Za optimizacijo smo uporabili deskriptor HOOF-HAFA in naslednje vrednosti parametrov: začetna vrednost $\nu=\num{0.1}$, skaliranje značilk na intervalu $[-1,~1]$ in standardni odklon za Gaussov filter $\sigma=5$. Za $\numax$ smo uporabili \num{0.2}, \num{0.5} in \num{0.8}. Pri evaluaciji smo uporabili rezultate verifikacije in ne validacije, kot običajno. Pri validaciji smo dobili slabe rezultate, iz katerih nismo mogli sklepati o izbiri optimalnega parametra.
 
 \paragraph{Primerjava z elementarnim postopkom 1. faze}
 Z optimiziranim parametrom $\numax=\num{0.5}$ smo \nurbf preizkusili še na elementarnih modelih, pri čemer nismo upoštevali izrezovanja slik. Ostali parametri so enaki kot pri optimizaciji.
@@ -22,9 +22,9 @@ Z optimiziranim parametrom $\numax=\num{0.5}$ smo \nurbf preizkusili še na elem
 
 
 \subsection{Optimizacija Gaussovega filtra}
-Pri optimizaciji Gaussovega filtra smo določili optimalni standardni odklon $\sigma$ z uporabo dveh metrik, in sicer: koren srednje kvadratične napake (RMSE) in razmerje med signalom ter šumom (SNR). Pri RMSE metriki smo določili napako med učnimi vzorci in njihovo predikcijo. Pri SNR metriki smo za signal uporabili referenčne učne vzorce. Za šum smo uporabili rezidualni ali preostali šum. Tega smo dobili z odštevanjem filtriranih vzorcev od referenčnih. SNR metrika določa uspešnost izločevanja šuma, RMSE metrika pa pravilnost določitve, kateri podatki spadajo v signal in kateri v šum.
+Pri optimizaciji Gaussovega filtra smo določili optimalni standardni odklon $\sigma$ z uporabo dveh metrik, in sicer: koren srednje kvadratične napake (RMSE) in razmerje med signalom ter šumom (SNR). Pri metriki RMSE smo določili napako med učnimi vzorci in njihovo predikcijo. Pri metriki SNR smo za signal uporabili referenčne učne vzorce. Za šum smo uporabili rezidualni ali preostali šum. Dobili smo ga z odštevanjem filtriranih vzorcev od referenčnih. Metrika SNR določa uspešnost izločevanja šuma, metrika RMSE pa pravilnost določitve, kateri podatki spadajo v signal in kateri v šum.
 
-Teste smo izvajali na elementarnih eksperimentih 1. faze, brez upoštevanja izrezovanja slik, pri čemer smo uporabili HOOF-HAFA deskriptor. Značilke smo skalirali na intervalu $[0,~1]$, ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za postopek učenja smo izbrali \nurbf z \hbox{$\numax=\num{0.5}$} in \hbox{$\sigma=1$}. Testirali smo naslednje standardne odklone Gaussovega filtra: $1, 3, 5, 11, 21, 31$ in $51$. 
+Teste smo izvajali na elementarnih eksperimentih 1. faze, brez upoštevanja izrezovanja slik, pri čemer smo uporabili deskriptor HOOF-HAFA. Značilke smo skalirali na intervalu $[0,~1]$, ker smo pri uporabi intervala $[-1,~1]$ dobili opozorila, naj raje uporabimo prvega. Za postopek učenja smo izbrali \nurbf z \hbox{$\numax=\num{0.5}$} in \hbox{$\sigma=1$}. Testirali smo naslednje standardne odklone Gaussovega filtra: $1, 3, 5, 11, 21, 31$ in $51$. 
 
 
 \begin{comment}
@@ -42,17 +42,17 @@ Pri postopku smo uporabili $\numax=0.5$ in $\sigma=5$. Rezultate smo filtrirali 
 \end{comment}
 
 
-\subsection{Normalizacija HAFA deskriptorjev}
-V praksi se pokaže, da prvotni HAFA histogram ne deluje zadovoljivo pri uporabi sledilnika. Področje tarče skozi čas spreminja svojo velikost, to pa vpliva na vrednosti stolpcev HAFA histograma. Ker te dobimo s preštevanjem slikovnih elementov z enako amplitudo hitrosti, bo manjše področje posledično zmanjšalo celoten histogram. Pri HOOF histogramih tega problema nimamo, saj ima majhen vpliv. Razlog tiči v računanju vrednosti stolpcev HOOF histograma. Njihove vrednosti dobimo s seštevanjem amplitud in ne njihovim preštevanjem. Te so zato pred normiranjem praviloma večje.
+\subsection{Normalizacija deskriptorjev HAFA}
+V praksi se pokaže, da prvotni histogram HAFA ne deluje zadovoljivo pri uporabi sledilnika. Področje tarče skozi čas spreminja svojo velikost, to pa vpliva na vrednosti stolpcev histograma HAFA. Ker te dobimo s preštevanjem slikovnih elementov z enako amplitudo hitrosti, bo manjše področje posledično zmanjšalo celoten histogram. Pri histogramih HOOF tega problema nimamo, saj ima majhen vpliv. Razlog tiči v računanju vrednosti stolpcev histograma HOOF. Njihove vrednosti dobimo s seštevanjem amplitud in ne njihovim preštevanjem. Te so zato pred normiranjem praviloma večje.
 
-Probleme sledilnika smo poskušali kompenzirati z uvedbo amplitudnega faktorja $f_A$. Amplitudni faktor je razmerje med velikostjo področja igralca na terenskih testih in velikostjo področja tarče. Ta je bila v našem primeru velikost merjenca na tekalni stezi. Razmerje dobimo z razmerjem diagonal področij po enačbi~\eqref{eq:diag}, kjer sota $w_l$ in $h_l$ širina ter dolžina področja na tekalni stezi, $w_s$ in $h_s$ pa predstavljata širino in dolžino področja na terenskih testih.
+Probleme sledilnika smo poskušali kompenzirati z uvedbo amplitudnega faktorja $f_A$. Gre za razmerje med velikostjo področja igralca na terenskih testih in velikostjo področja tarče. Ta je bila v našem primeru velikost merjenca na tekalni stezi. Razmerje dobimo z razmerjem diagonal področij po enačbi~\eqref{eq:diag}, kjer sota $w_l$ in $h_l$ širina ter dolžina področja na tekalni stezi, $w_s$ in $h_s$ pa predstavljata širino in dolžino področja na terenskih testih.
 
 \begin{equation}
 f_A = \frac{\sqrt{w_l^2 + h_l^2}}{\sqrt{w_s^2 + h_s^2}}
 \label{eq:diag}
 \end{equation}
 
-Velikost diagonale na laboratorijskih testih uporabljamo kot referenco, ker je na teh posnetkih stabilna, saj se le malo spreminja. Koncept amplitudnega faktorja smo preizkusili na enakem postopku, kot pri optimizaciji parametra mrežnega iskanja \nurbf. S takim postopkom smo izluščili slabe \textit{squash} modele, ki bi oteževali pravilno evaluacijo rezultatov pri optimizaciji. Naučili smo modele \textit{diag}, kjer smo uporabili amplitudni faktor in referenčne modele \textit{normal} brez uporabe faktorja za primerjavo. Diagonalo na tekalni stezi smo določili po sliki~\ref{fig:diag-bbox}, kjer smo za zgornji levi kot $P_0$ in spodnji desni kot $P_1$ izbrali vrednosti v tabeli~\ref{tab:diag}. 
+Velikost diagonale na laboratorijskih testih uporabljamo kot referenco, ker je na teh posnetkih stabilna, saj se le malo spreminja. Koncept amplitudnega faktorja smo preizkusili na enakem postopku, kot pri optimizaciji parametra mrežnega iskanja \nurbf. S takim postopkom smo izluščili slabe modele \textit{squash}, ki bi oteževali pravilno evaluacijo rezultatov pri optimizaciji. Naučili smo modele \textit{diag}, kjer smo uporabili amplitudni faktor in referenčne modele \textit{normal} brez uporabe faktorja za primerjavo. Diagonalo na tekalni stezi smo določili po sliki~\ref{fig:diag-bbox}, kjer smo za zgornji levi kot $P_0$ in spodnji desni kot $P_1$ izbrali vrednosti v tabeli~\ref{tab:diag}. 
 
 
 \begin{figure}[!htb]
@@ -104,7 +104,7 @@ Merjenci so opravili obremenilni test po protokolu Nowatzky. To je stopnjevani t
 Obremenilni test smo izvajali s pomočjo sistema za direktno ergospirometrijo tipa ``breath  by breath'' Cosmed K4B2 na tekalni stezi HP Cosmos. Z obremenilnim testom smo pridobili podatke energijske porabe šestih različnih merjencev (SUBJ1, SUBJ2, SUBJ4, SUBJ7 SUBJ8 in SUBJ9). Vzorčili smo s frekvenco \SI{0.2}{\hertz}.
 
 \paragraph{Video in globinski posnetki.}
-Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Kameri sta bili časovno sinhronizirani s pomočjo protokola NTP. Pri uporabi več Kinect senzorjev njihove frekvence vzorčenja niso striktno enake, zato smo shranjevali tudi časovne štampiljke vsake posamezne slike. Primer hrbtnega in stranskega posnetka je prikazan na sliki~\ref{fig:primer-posnetka-stage2}.
+Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stranski del. Kameri sta bili časovno sinhronizirani s pomočjo protokola NTP. Pri uporabi več senzorjev Kinect njihove frekvence vzorčenja niso striktno enake, zato smo shranjevali tudi časovne štampiljke vsake posamezne slike. Primer hrbtnega in stranskega posnetka je prikazan na sliki~\ref{fig:primer-posnetka-stage2}.
 
 \begin{figure}[!htb]
 	\centering
@@ -117,11 +117,11 @@ Tekalno stezo smo snemali iz dveh različnih zornih kotov: hrbtni del in stransk
 		\includegraphics[width=\columnwidth]{stage2-lab-bv-tracked.png}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
-	\caption[Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju]{Stranski in hrbtni posnetek iz Kinect kamere v laboratoriju. Sliki sta bili registrirani na korespondečni globinski sliki~\ref{fig:stage2-lab-of-depth}. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta. Zelen okvir je rezultat sledenja s  sledilnikom KCF.}
+	\caption[Stranski in hrbtni posnetek iz kamere Kinect v laboratoriju]{Stranski in hrbtni posnetek iz kamere Kinect v laboratoriju. Sliki sta bili registrirani na korespondečni globinski sliki~\ref{fig:stage2-lab-of-depth}. Črni slikovni elementi predstavljajo točke, kjer globina ni bila pravilno zajeta. Zelen okvir je rezultat sledenja s sledilnikom KCF.}
 	\label{fig:primer-posnetka-stage2}
 \end{figure}
 
-Snemali smo z dvema kamerama Microsoft Kinect za Windows V2 s pomočjo knjižnice libfreenect2 0.2~\cite{lingzhu2016libfreenect2}. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}. Od tal sta bili dvignjeni za približno \SI{1.5}{m}. Postavitev kamer je prikazana na sliki~\ref{fig:lab-postavitev-kamer}. Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Frekvenca zajema slik je znašala \SI{30} slik na sekundo.
+Snemali smo z dvema kamerama Microsoft Kinect za Windows V2 s pomočjo knjižnice libfreenect2 0.2~\cite{lingzhu2016libfreenect2}. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}. Od tal sta bili dvignjeni za približno \SI{1.5}{m}. Postavitev kamer je prikazana na sliki~\ref{fig:lab-postavitev-kamer}. Pridobili smo barvne slike RGB in globinske slike DEPTH. Snemali smo v ločljivosti $512 \times 424$. Frekvenca zajema slik je znašala \SI{30} slik na sekundo.
 
 \begin{figure}[!htb]
 	\centering
@@ -134,7 +134,7 @@ Snemali smo z dvema kamerama Microsoft Kinect za Windows V2 s pomočjo knjižnic
 		\includegraphics[width=\columnwidth]{lab-posnetek-zadaj-corrected.jpg}
 		\caption{Hrbtni pogled.}
 	\end{subfigure}
-	\caption[Stranski in hrbtni pogled izvajanja lab. testov 2. faze]{Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze. Na sliki sta vidna podstavka, na katerih so postavljene Kinect kamere. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}.}
+	\caption[Stranski in hrbtni pogled izvajanja lab. testov 2. faze]{Stranski in hrbtni pogled postavitve kamer za laboratorijske teste 2. faze. Na sliki sta vidna podstavka, na katerih sta postavljeni kameri Kinect. Kameri sta bili od tekalne steze oddaljeni približno \SI{2}{m}.}
 	\label{fig:lab-postavitev-kamer}
 \end{figure}
 
@@ -152,14 +152,14 @@ Snemali smo z dvema kamerama Microsoft Kinect za Windows V2 s pomočjo knjižnic
 		\includegraphics[width=1.2\columnwidth]{stage2-lab-bv-depth-sl}
 		\caption{Hrbtna slika.}
 	\end{subfigure}
-	\caption[Stranska in hrbtna globinska slika laboratorijskih eksperimentov]{Stranska in hrbtna globinska slika laboratorijskih eksperimentov. Globinski sliki sta korespondečni RGB slikam~\ref{fig:primer-posnetka-stage2}. Barvna skala prikazuje globino v metrih. Črni slikovni elementi predstavljajo točke, kjer globina ni bila zajeta.}
+	\caption[Stranska in hrbtna globinska slika laboratorijskih eksperimentov]{Stranska in hrbtna globinska slika laboratorijskih eksperimentov. Globinski sliki sta korespondečni slikam RGB ~\ref{fig:primer-posnetka-stage2}. Barvna skala prikazuje globino v metrih. Črni slikovni elementi predstavljajo točke, kjer globina ni bila zajeta.}
 	\label{fig:stage2-lab-of-depth}
 \end{figure}
 
 
 
 \paragraph{Protokol meritve.}
-Test smo pričeli z eno minutnim mirovanjem na tekalni stezi. Sledilo je tri minutno ogrevanje, s hitrostjo teka \SI{5}{\km\per\hour}, pri naklonu preproge \SI{0}{\%}. Nadaljevali smo s tri minutnim tekom, s hitrostjo \SI{6}{\km\per\hour}. Po treh minutah smo naklon tekoče preproge dvignili za \SI{2}{\%} in ga nismo več spreminjali. Po zadnji minuti, na tretji stopnji (hitrost \SI{6}{\km\per\hour}, naklon \SI{2}{\%}), se je hitrost teka vsaki dve minuti povečevala za \SI{1}{\km\per\hour}. Test smo izvajali brez prekinitve do pojava objektivnih oz. subjektivnih razlogov za prekinitev testa, ki jih je določil zdravnik, ki je spremljal parametre merjencev. 
+Test smo pričeli z minutnim mirovanjem na tekalni stezi. Sledilo je tri minutno ogrevanje, s hitrostjo teka \SI{5}{\km\per\hour}, pri naklonu preproge \SI{0}{\%}. Nadaljevali smo s tri minutnim tekom, s hitrostjo \SI{6}{\km\per\hour}. Po treh minutah smo naklon tekoče preproge dvignili za \SI{2}{\%} in ga nismo več spreminjali. Po zadnji minuti, na tretji stopnji (hitrost \SI{6}{\km\per\hour}, naklon \SI{2}{\%}), se je hitrost teka vsaki dve minuti povečala za \SI{1}{\km\per\hour}. Test smo izvajali brez prekinitve do pojava objektivnih oz. subjektivnih razlogov za prekinitev testa, ki jih je določil zdravnik, ki je spremljal parametre merjencev. 
 %Po koncu testiranja je sledilo še \SI{5}{min} hoje pri  hitrosti \SI{2}{\km\per\hour} ter \SI{0}{\%} naklonu. 
  
 
@@ -169,12 +169,12 @@ Fiziološke parametre smo interpolirali z linearno interpolacijo. Modele smo uč
 \begin{figure}[!htb]
 	\centering
 	\resizebox{\columnwidth}{!}{\input{./Slike/diagram-procesiranja-of-stage2.tikz}}
-	\caption[P2OF predikcijska shema]{P2OF predikcijska shema. Uporabljamo jo za testiranje modelov z optičnim tokom v 2. fazi.}
+	\caption[Predikcijska shema P2OF]{Predikcijska shema P2OF. Uporabljamo jo za testiranje modelov z optičnim tokom v 2. fazi.}
 	\label{fig:diagram-procesiranja-of-stage2}
 \end{figure}
 
 
-Merjencem smo v P2OF sledili s sledilnikom KCF, ki smo ga nadzorovano reinicializirali vsako minuto. Za izbrano področje slike smo izračunali optični tok. Primer dobljenega optičnega toka je prikazan na sliki~\ref{fig:opticni-tok-stage2}. Sledilo je generiranje HOOF-HAFA deskriptorjev s parametri $N_{HOOF} = 60$ in $N_{HAFA} = 60$. HAFA deskriptorje smo normalizirali z vrednostmi amplitudnih faktorjev $f_A$. %, ki so zbrani v tabeli~\ref{tab:fa-merjenci}.
+Merjencem smo v P2OF sledili s sledilnikom KCF, ki smo ga nadzorovano reinicializirali vsako minuto. Za izbrano področje slike smo izračunali optični tok. Primer dobljenega optičnega toka je prikazan na sliki~\ref{fig:opticni-tok-stage2}. Sledilo je generiranje deskriptorjev HOOF-HAFA s parametri $N_{HOOF} = 60$ in $N_{HAFA} = 60$. Deskriptorje HAFA smo normalizirali z vrednostmi amplitudnih faktorjev $f_A$. %, ki so zbrani v tabeli~\ref{tab:fa-merjenci}.
 
 
 
@@ -203,7 +203,7 @@ Merjencem smo v P2OF sledili s sledilnikom KCF, ki smo ga nadzorovano reiniciali
 		\includegraphics[width=\columnwidth]{stage2-lab-bv-of-hist-sl}
 		\caption{Histogram hrbtne slike.}
 	\end{subfigure}
-    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Sliki \subref{fig:stage2-lab-of-sv-flo}) in \subref{fig:stage2-lab-of-bv-flo}) sta optična toka detekcije merjencev na sliki~\ref{fig:primer-posnetka-stage2}. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na sliki  \subref{fig:stage2-lab-of-sv-flo}) znašala \SI{6}{ppf} in na \subref{fig:stage2-lab-of-bv-flo}) \SI{6}{ppf}. Optičnima tokoma pripadata izračunana HOOF-HAFA histograma.}
+    \caption[Stranski in hrbtni optični tok ter pripadajoča deskriptorja]{Stranski in hrbtni optični tok ter pripadajoča deskriptorja. Sliki \subref{fig:stage2-lab-of-sv-flo}) in \subref{fig:stage2-lab-of-bv-flo}) sta optična toka detekcije merjencev na sliki~\ref{fig:primer-posnetka-stage2}. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda optičnega toka je na sliki  \subref{fig:stage2-lab-of-sv-flo}) znašala \SI{6}{ppf} in na \subref{fig:stage2-lab-of-bv-flo}) \SI{6}{ppf}. Optičnima tokoma pripadata izračunana histograma HOOF-HAFA.}
 	\label{fig:opticni-tok-stage2}
 \end{figure}
 
@@ -241,7 +241,7 @@ Procesiranje s prostorskim tokom je bilo podobno, postopek označujemo kot P2SF.
 	\label{fig:diagram-procesiranja-sf-stage2}
 \end{figure}
 
-Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinicializirali vsako minuto. Izbranim področjem smo izračunali prostorski tok. Primer dobljenega toka je prikazan na sliki~\ref{fig:prostorski-tok-stage2}. Sledilo je generiranje HOOF-HAFA deskriptorjev po postopku P2OF, le da HAFA deskriptorjev nismo normalizirali. Zaradi narave prostorskega toka je ta že v metričnih enotah.
+Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinicializirali vsako minuto. Izbranim področjem smo izračunali prostorski tok. Primer dobljenega toka je prikazan na sliki~\ref{fig:prostorski-tok-stage2}. Sledilo je generiranje deskriptorjev HOOF-HAFA po postopku P2OF, le da deskriptorjev HAFA nismo normalizirali. Zaradi narave prostorskega toka je ta že v metričnih enotah.
 
 \begin{figure}[!htb]
 	\centering
@@ -262,7 +262,7 @@ Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinici
 	%	\input{./Slike/rgb-cube.tikz}
 	%	\caption{Hrbtna slika.}
 	%\end{subfigure}
-	\caption[Prostorski tok za sliki~\ref{fig:primer-posnetka-stage2}]{Prostorski tok za sliki~\ref{fig:primer-posnetka-stage2}. Slike smo pridobili s programom \texttt{Scene-Flow-Impair}, avtorja~\cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2. Sliki sta 8-bitni RGB sliki. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$, kanal G $\mu_y$, ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
+	\caption[Prostorski tok za sliki~\ref{fig:primer-posnetka-stage2}]{Prostorski tok za sliki~\ref{fig:primer-posnetka-stage2}. Slike smo pridobili s programom \texttt{Scene-Flow-Impair}, avtorja~\cite{jaimez2015primal}, ki smo ga prilagodili za Kinect V2. Sliki sta 8-bitni sliki RGB. Amplitude hitrosti v posameznih oseh so normirane in normalizirane na intervalu $[0,255]$. Kanal B predstavlja komponento $\mu_x$, kanal G $\mu_y$, ter kanal R $\mu_z$ prostorskega toka $\vec{\mu}$. Beli slikovni elementi so neveljavni (ne vsebujejo podatka o globini).}
 	\label{fig:stage2-lab-sf-pd}
 \end{figure}
 
@@ -291,7 +291,7 @@ Merjencem smo v P2SF sledili s sledilnikom DS-KCF, ki smo ga nadzorovano reinici
 		\includegraphics[width=\columnwidth]{stage2-lab-bv-sf-hist-sl}
 		\caption{Histogram hrbtne slike.}
 	\end{subfigure}
-	\caption[Projekcije prostorskih tokov na slikovno ravnino]{Projekcija prostorskih tokov na slikovno ravnino. Gre za prostorska toka detekcije merjencev na sliki~\ref{fig:primer-posnetka-stage2}. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{10.4}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo}) \SI{9.4}{\m\per\s}. Projekcijama prostorskega toka pripadata izračunana HOOF-HAFA histograma.}
+	\caption[Projekcije prostorskih tokov na slikovno ravnino]{Projekcija prostorskih tokov na slikovno ravnino. Gre za prostorska toka detekcije merjencev na sliki~\ref{fig:primer-posnetka-stage2}. V spodnjem levem kotu posamezne slike sta legendi barvnega kodiranja. Na sliki uporabljamo standardno barvno kodiranje, povzeto po~\cite{baker2011database}. Maksimalna amplituda prostorskega toka je na sliki  \subref{fig:stage2-lab-sf-sv-flo}) znašala \SI{10.4}{\m\per\s} in na \subref{fig:stage2-lab-sf-bv-flo}) \SI{9.4}{\m\per\s}. Projekcijama prostorskega toka pripadata izračunana histograma HOOF-HAFA.}
 	\label{fig:prostorski-tok-stage2}
 \end{figure}
 
@@ -370,7 +370,7 @@ Na podlagi slik~\ref{fig:lag-estimation-stage2}, smo zakasnitev za posamezno mer
 
 
 \subsection{Terenski eksperimenti}
-Šest igralcev je odigralo igralo tri tekme squasha, po dva niza na tekmo. Tekme so trajale \SI{16}{\min}, \SI{14}{\min} in \SI{11}{\min}. Uporabili smo procesiranje P2OF in P2SF  z nadzorovano reinicializacijo sledilnikov vsake \SI{2}{\s}. Delovanje sledilnikov lahko vidimo na sliki~\ref{fig:stage2-field-tracked}. Pripadajoči optični in prostorski tok sta prikazana na sliki~\ref{fig:stage2-field-sfof}. Na sliki~\ref{fig:stage2-field-hist} sta prikazana pripadajoča histograma.
+Šest igralcev je  igralo tri tekme squash-a, po dva niza na tekmo. Tekme so trajale \SI{16}{\min}, \SI{14}{\min} in \SI{11}{\min}. Uporabili smo procesiranje P2OF in P2SF  z nadzorovano reinicializacijo sledilnikov vsake \SI{2}{\s}. Delovanje sledilnikov lahko vidimo na sliki~\ref{fig:stage2-field-tracked}. Pripadajoči optični in prostorski tok sta prikazana na sliki~\ref{fig:stage2-field-sfof}. Na sliki~\ref{fig:stage2-field-hist} sta prikazana pripadajoča histograma.
 
 \begin{figure}[!htb]
 	\centering
@@ -470,12 +470,12 @@ Igrišče smo snemali z dvema kamerama Microsoft Xbox Kinect V2, ki sta bili odd
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.6\columnwidth]{squash-postavitev-corrected.jpg}	
-	\caption[Postavitev kamer Kinect V2 pri terenskih testih 2. faze]{Postavitev Kinect kamer pri terenskih testih 2. faze.}
+	\caption[Postavitev kamer Kinect V2 pri terenskih testih 2. faze]{Postavitev kamer Kinect pri terenskih testih 2. faze.}
 	\label{fig:field-postavitev-kamer}
 \end{figure}
 
 
-Pridobili smo barvne RGB in globinske DEPTH slike. Snemali smo v ločljivosti $512 \times 424$. Frekvenca zajema slik je znašala \SI{30} slik na sekundo. Kameri smo časovno sinhronizirali s pomočjo protokola NTP.
+Pridobili smo barvne slike RGB in globinske slike DEPTH. Snemali smo v ločljivosti $512 \times 424$. Frekvenca zajema slik je znašala \SI{30} slik na sekundo. Kameri smo časovno sinhronizirali s pomočjo protokola NTP.
 
 
 

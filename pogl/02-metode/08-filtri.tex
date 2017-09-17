@@ -1,6 +1,6 @@
 \section{Filtriranje in glajenje}\label{sec:filtri}
 %Filtri so zelo pomembni pri procesiranju signalov~\cite{smith1997scientist}. V našem delu jih uporabljamo za izločitev šuma izhodnih podatkov razvrščevalnika. 
-Vhodne podatke obdelujemo bodisi z izračunom optičnega toka, bodisi s izračunom prostorskega toka za vsako sliko zaporedja slik, oziroma par slik. Ocena energijske porabe ni nikakor omejena med posameznimi slikami, zato vsebuje veliko šuma. Smiselno je, da zagotovimo časovno kontinuiteto ali s filtriranjem ali z glajenjem rezultatov porabe energije.
+Vhodne podatke obdelujemo bodisi z izračunom optičnega toka bodisi z izračunom prostorskega toka za vsako sliko zaporedja slik, oziroma par slik. Ocena porabe energije ni nikakor omejena med posameznimi slikami, zato vsebuje veliko šuma. Smiselno je, da zagotovimo časovno kontinuiteto ali s filtriranjem ali z glajenjem rezultatov porabe energije.
 
 Izbrani filtri izhajajo iz družine filtrov tekočega povprečja, saj so ti najbolj optimalni za zmanjševanje šuma~\cite{smith1997scientist}. Splošna enačba filtra tekočega povprečja je~\eqref{eq:filter-tekocega-povprecja}, kjer je $x(i)$ i-ti vzorec vhodnega signala, $y(i)$ i-ti vzorec izhodnega signala in $M$ število vzorcev, ki jih uporabimo za filtriranje ali drugače, širina jedra filtra~\cite{smith1997scientist}.
 
@@ -156,7 +156,7 @@ Primer filtra s standardnim odklonim $\sigma = 5$ je prikazan na sliki~\ref{fig:
 \end{figure}
 
 
-Gaussov filter je vrsta filtra tekočega povprečja, ki je zelo primeren za izločevanje odvečnega šuma~\cite{smith1997scientist}. Ker je karakteriziran z impulznim odzivom, ki je simetričen okoli ničelnega vzorca, gre za vrsto filtra z ničelno fazo. To pomeni, da je faza v frekvenčnem prostoru vedno $0$~\cite{smith1997scientist}. Ker imamo pri takih filtrih negativne indekse, ga težje uporabljamo. 
+Gaussov filter je vrsta filtra tekočega povprečja, ki je zelo primeren za izločanje odvečnega šuma~\cite{smith1997scientist}. Ker je karakteriziran z impulznim odzivom, ki je simetričen okoli ničelnega vzorca, gre za vrsto filtra z ničelno fazo. To pomeni, da je faza v frekvenčnem prostoru vedno $0$~\cite{smith1997scientist}. Ker imamo pri takih filtrih negativne indekse, ga težje uporabljamo. 
 
 Običajno filtre uporabljamo v rekurzivni obliki, saj je računanje hitrejše. Impulzni odziv rekurzivnega filtra ni simetričen, zato ima nelinearno fazo~\cite{smith1997scientist}. To pomanjkljivost lahko odpravimo z uporabo dvosmernega filtriranja.
 
